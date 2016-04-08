@@ -1,0 +1,39 @@
+.body>.top{
+    font-size: 0;
+}
+
+.body>.top>img{
+    width: 100%;
+}
+.body>.content>div{
+	width:100%;
+    font-size: 0;
+}
+
+.body>.content>div>div{
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+}
+.body>.content>div>div>img{
+    width: 100%;
+}
+.body>.content>div>div>.text{
+    font-size: 20px;
+    width: 100%;
+}
+.body>.content>div>div>.text>.top,.body>.content>div>div>.text>.bottom{
+    text-align: center;
+    margin-top: 30px;
+}
+.body>.content>div>div>.text>.middle{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+     text-indent:2em;
+     word-wrap: break-word;
+     word-break: normal;
+}
+.body>.content>div>.left{
+	margin-left:5%;
+}

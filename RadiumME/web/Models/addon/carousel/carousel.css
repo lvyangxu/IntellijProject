@@ -1,0 +1,65 @@
+.addon-carousel {
+    font-size: 12px;
+    width: 100%;
+}
+
+/*.addon-carousel>.content>div{
+    float: left;
+}*/
+
+
+
+.addon-carousel>.pagination-div {
+	display: inline-block;
+	position: absolute;
+	top: 80%;
+	text-align: center;
+	z-index: 5;
+}
+
+.addon-carousel>.pagination-div>div {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background-color: rgba(0, 0, 0, 1);
+	border-radius: 5px;
+	cursor: pointer;
+	margin-left: 20px;
+	z-index: 20;
+}
+
+.addon-carousel>.pagination-div>div:first-child {
+	margin-left: 0px;
+}
+
+.addon-carousel>.pagination-div>div:hover {
+	background-color: rgba(40, 44, 52, 1);
+}
+
+.addon-carousel>.pagination-div>div.active {
+	background-color: rgba(255, 255, 255, 1);
+}
+
+
+/*.addon-carousel>div {
+	display: inline-block;
+
+	overflow: hidden;
+}*/
+
+/*.addon-carousel>div>img {
+	width: 100%;
+}
+
+.addon-carousel>.display>div {
+	height: 100%;
+	width: 100%;
+}
+
+
+@
+keyframes left {
+	from {background: red;}
+to {
+	background: yellow;
+}}*/

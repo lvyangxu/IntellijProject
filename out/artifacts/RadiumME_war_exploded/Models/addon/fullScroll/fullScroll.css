@@ -1,0 +1,35 @@
+.addon-fullScroll {
+	display: inline-block;
+}
+
+.addon-fullScroll>div {
+	display: none;
+}
+
+.addon-fullScroll>div.close {
+	animation: fullScrollClose 3s linear;
+}
+
+.addon-fullScroll>div.open {
+	animation: fullScrollOpen 3s linear;
+}
+
+@
+keyframes fullScrollClose {
+	from {height: 100%
+}
+
+to {
+	height: 0%
+}
+
+}
+@
+keyframes fullScrollOpen {
+	from {height: 0%
+}
+
+to {
+	height: 100%
+}
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/IntellijProject.iml" filepath="$PROJECT_DIR$/.idea/IntellijProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyJavaLibrary/MyJavaLibrary.iml" filepath="$PROJECT_DIR$/MyJavaLibrary/MyJavaLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MySpringMVC/MySpringMVC.iml" filepath="$PROJECT_DIR$/MySpringMVC/MySpringMVC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RadiumME/RadiumME.iml" filepath="$PROJECT_DIR$/RadiumME/RadiumME.iml" />
+    </modules>
+  </component>
+</project>

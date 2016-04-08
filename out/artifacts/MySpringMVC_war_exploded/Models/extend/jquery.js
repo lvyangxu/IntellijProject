@@ -1,0 +1,57 @@
+/**
+*
+*/
+(function($) {
+	$.fn.toArray = function(options) {
+		var result = [];
+		for(var i=0;i<$(this).length;i++){
+			result.push($($(this)[i]));
+		}
+		return result;
+	};
+	$.fn.fit = function(callback) {
+		callback();
+		$(window).resize(function(){
+			callback();
+		});
+		return $(this);
+	};
+	$.fn.fullFit = function(delH){
+		var x = $(this).width();
+		var y = $(this).height();
+        $(this).parent().css({
+			"overflow":"hidden"
+		});
+		var element = $(this);
+		$(this).fit(function(){
+			var w = $(window).width();
+			var h = $(window).height();
+			element.parent().css({
+				"height":h-delH+"px"
+			},2000);
+
+			var offsetX, offsetY,scale;
+			if ((x / y) > (w / h)) {
+				//too wide,scale<1
+				var shouldW = x / y * h;
+				scale = (shouldW / w);
+				offsetX = (w - shouldW) / 2;
+				offsetY = 0;
+			} else {
+				//too high
+				var shouldH = y / x * w;
+				scale = 1;
+				offsetX = 0;
+				offsetY = (h - shouldH) / 8;
+			}
+
+			element.css({
+				"margin-left":offsetX+"px",
+				"margin-top":offsetY+"px",
+				"width":(scale) * 100 + "%"
+			},2000);
+		});
+
+		return $(this);
+	}
+})(jQuery);

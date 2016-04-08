@@ -1,0 +1,52 @@
+.body>.top{
+    font-size: 0;
+}
+
+.body>.top>img{
+    width: 100%;
+}
+.body>.content>div{
+	width:100%;
+    font-size: 0;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.body>.content>div>div{
+    display: inline-block;
+    vertical-align: top;
+}
+.body>.content>div>.left{
+	margin-left:10%;
+    width: 35%;
+    margin-right: 10%;
+}
+.body>.content>div>.right{
+	width: 35%;
+}
+.body>.content>div>div>img{
+    width: 100%;
+}
+.body>.content>div>div>.text{
+    font-size: 20px;
+    width: 100%;
+}
+.body>.content>div>div>.text>button{
+    width: 100%;
+    background-color: inherit;
+    border: 2px solid black;
+    height: 50px;
+}
+
+.body>.content>div>div>.text>.top,.body>.content>div>div>.text>.bottom{
+    text-align: center;
+    margin-top: 30px;
+}
+.body>.content>div>div>.text>.middle{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+     text-indent:2em;
+     word-wrap: break-word;
+     word-break: normal;
+}

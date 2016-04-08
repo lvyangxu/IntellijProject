@@ -1,0 +1,86 @@
+/***************head***************/
+.head>.content {
+	margin-right: 10px;
+}
+
+.head>.icon {
+	margin-left: 10px;
+}
+
+.head>.content>.list {
+	display: inline-block;
+	color: black;
+	font-size: 2em;
+}
+
+.head>.content>.list>.fa-times {
+	display: none;
+}
+
+.head>.content>.list>i {
+	width: 100px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.head>.content>.menu {
+	display: none;
+	position: absolute;
+	left: 0px;
+	width: 100%;
+	background-color: #ebebeb;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	box-shadow: 2px 2px 5px;
+}
+
+.head>.content>.menu>ul>li {
+	list-style-type: none;
+	font-size: 10px;
+	font-weight: bold;
+	display: inline-block;
+	width: 45%;
+	height: 40px;
+	font-size: 16px;
+}
+
+/*search*/
+.head>.content>.menu>ul>li>.search {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.head>.content>.menu>ul>li>.search>input {
+	color: white;
+	border: 2px solid rgba(198, 155, 110, 1);
+	background-color: rgba(29, 27, 34, 1);
+	height: 20px;
+	line-height: 20px;
+	width: 100px;
+}
+
+.head>.content>.menu>ul>li>.search>img {
+	cursor: pointer;
+	margin-left: 5px;
+	height: 20px;
+}
+
+/*language*/
+.head>.content>.menu>ul>li>.language {
+	display: inline-block;
+}
+
+.head>.content>.menu>ul>li>.language>div {
+	display: inline-block;
+	color: white;
+	margin-left: 5px;
+	font-size: 12px;
+}
+
+.head>.content>.menu>ul>li>.language>div.lang {
+	cursor: pointer;
+}
+
+.head>.content>.menu>ul>li>.language>div:first-child {
+	margin-left: 20px;
+}
