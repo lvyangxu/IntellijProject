@@ -1,0 +1,133 @@
+
+
+/*overlay*/
+.body>.top>.overlay {
+	position: absolute;
+	background-color: rgba(27, 26, 24, 0.5);
+	width: 100%;
+	z-index: 4;
+	text-align: center;
+	color: white;
+	font-size: 20px;
+margin-top: auto;
+margin-bottom: auto;
+
+}
+
+.body>.top>.overlay>.contain {
+
+}
+
+.body>.top>.overlay>.contain>.line {
+	width: 10%;
+	margin-left: 45%;
+	background-color: rgba(198, 155, 110, 1);
+	height: 2px;
+}
+
+
+.body>.top>.overlay>.contain>.footer {
+	font-size: 15px;
+}
+
+/*about_us*/
+.body>.about_us {
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
+	background-color: white;
+	padding-top: 70px;
+	padding-bottom: 70px;
+	text-indent: 2em;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+.body>.about_us>h2 {
+	text-align: center;
+	font-weight: bolder;
+}
+
+.body>.about_us>div {
+	text-align: center;
+}
+
+.body>.about_us>div>button {
+	background-color: rgba(55, 55, 55, 1);
+	color: white;
+	border: none;
+	height: 50px;
+	width: 250px
+}
+
+/*our_games*/
+.body>.our_games {
+	background-image: url("../image/karl.jpg");
+	text-align: center;
+	color: white;
+	height: 100%;
+	width: 100%;
+}
+
+.body>.our_games>img {
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.body>.our_games>h2 {
+	padding-top: 50px;
+	font-weight: bolder;
+}
+
+.body>.our_games>div>button {
+	background-color: rgba(55, 55, 55, 1);
+	color: white;
+	border: none;
+	height: 50px;
+	width: 250px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+/*developers*/
+.body>.developers {
+	padding-top: 50px;
+	text-align: center;
+	color: rgba(197, 153, 108, 1);
+}
+
+.body>.developers>div {
+	margin-top: 25px;
+}
+
+.body>.developers>h2 {
+	color: black;
+	font-weight: bolder;
+}
+
+.body>.developers>div>div>img {
+	height: 100px;
+	width: 100px;
+}
+
+.body>.developers>.first>.second {
+	margin-left: 100px;
+	margin-right: 100px;
+}
+
+.body>.developers>.second>.first {
+	margin-right: 50px;
+}
+
+.body>.developers>.second>.second {
+	margin-left: 50px;
+}
+
+.body>.developers>.second {
+	margin-bottom: 50px;
+}
+
+.body>.developers>div>div>span {
+	display: block;
+}

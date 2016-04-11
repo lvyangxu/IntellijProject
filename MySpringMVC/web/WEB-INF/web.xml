@@ -23,11 +23,10 @@
     <!--不拦截对web前端资源的访问-->
     <servlet-mapping>
         <servlet-name>default</servlet-name>
-        <!--view的后面不能带*,否则html会被当做文本解析-->
-        <url-pattern>/Views/*</url-pattern>
-        <url-pattern>/Content/*</url-pattern>
-        <url-pattern>/ApplicationData/*</url-pattern>
-        <url-pattern>/Upload/*</url-pattern>
+        <url-pattern>/Modules/*</url-pattern>
+        <url-pattern>/Images/*</url-pattern>
+        <url-pattern>/Framework/*</url-pattern>
+        <url-pattern>/Data/*</url-pattern>
     </servlet-mapping>
 
     <session-config>
@@ -46,8 +45,8 @@
         </listener-class>
     </listener>
     <context-param>
-        <param-name>webRootKey</param-name>
-        <param-value>webRoot</param-value>
+        <param-name>WebRootKey</param-name>
+        <param-value>WebRoot</param-value>
     </context-param>
 
 </web-app>

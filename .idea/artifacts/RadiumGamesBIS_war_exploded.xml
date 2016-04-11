@@ -1,0 +1,30 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="RadiumGamesBIS:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/RadiumGamesBIS_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="RadiumGamesBIS/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="RadiumGamesBIS" />
+          <element id="module-output" name="MyJavaLibrary" />
+          <element id="module-output" name="MySpringMVC" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="application" name="dom4j" />
+          <element id="library" level="application" name="jackson" />
+          <element id="library" level="application" name="json" />
+          <element id="library" level="application" name="log4j" />
+          <element id="library" level="application" name="log4j2" />
+          <element id="library" level="application" name="mongodb" />
+          <element id="library" level="application" name="mysql" />
+          <element id="library" level="application" name="poi" />
+          <element id="library" level="application" name="appache-common-io" />
+          <element id="library" level="project" name="Spring MVC-4.2.5.RELEASE" />
+          <element id="library" level="project" name="Spring-4.2.5.RELEASE" />
+          <element id="library" level="application" name="tomcat" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="MySpringMVC/web/Web" />
+    </root>
+  </artifact>
+</component>

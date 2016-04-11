@@ -23,10 +23,9 @@
     <!--不拦截对web前端资源的访问-->
     <servlet-mapping>
         <servlet-name>default</servlet-name>
-        <url-pattern>/Views/*</url-pattern>
+        <url-pattern>/Modules/*</url-pattern>
         <url-pattern>/Images/*</url-pattern>
-        <url-pattern>/Controllers/*</url-pattern>
-        <url-pattern>/Models/*</url-pattern>
+        <url-pattern>/Framework/*</url-pattern>
         <url-pattern>/Data/*</url-pattern>
     </servlet-mapping>
 

@@ -7,6 +7,7 @@
         <element id="directory" name="classes">
           <element id="module-output" name="RadiumME" />
           <element id="module-output" name="MyJavaLibrary" />
+          <element id="module-output" name="MySpringMVC" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="application" name="appache-common-io" />
@@ -23,6 +24,7 @@
           <element id="library" level="application" name="tomcat" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="MySpringMVC/web/Web" />
     </root>
   </artifact>
 </component>

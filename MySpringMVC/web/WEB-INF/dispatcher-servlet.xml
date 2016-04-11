@@ -13,7 +13,7 @@
     <context:component-scan base-package="Routers"/>
     <mvc:annotation-driven/>
     <!--默认地址跳转到指定页面-->
-    <mvc:view-controller path="/" view-name="home/index"/>
+    <mvc:view-controller path="/" view-name="login/index"/>
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 
@@ -34,19 +34,19 @@
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="Views/"
+          p:prefix="/Modules/"
           p:suffix=".html" />
 
 
 
     <!--当Spring容器启动完成后执行下面的这个Bean,模拟Global的功能 -->
-    <bean id="Global" class="Init.Init"/>
+    <bean id="Init" class="Init.Init"/>
 
     <!--支持文件上传-->
-    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
-        <!--<property name="defaultEncoding" value="utf-8"></property>-->
-        <!--<property name="maxUploadSize" value="10485760000"></property>-->
-        <!--<property name="maxInMemorySize" value="40960"></property>-->
-    <!--</bean>-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"></property>
+        <property name="maxUploadSize" value="10485760000"></property>
+        <property name="maxInMemorySize" value="40960"></property>
+    </bean>
 
 </beans>
