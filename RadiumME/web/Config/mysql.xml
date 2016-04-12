@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <!--mysql主机地址-->
+    <ip>127.0.0.1</ip>
+    <!--mysql主机端口-->
+    <port>3306</port>
+    <!--mysql连接的数据库名称-->
+    <database>RadiumME</database>
+    <!--mysql用户名-->
+    <user>root</user>
+    <!--mysql密码-->
+    <password>root</password>    
+</root>

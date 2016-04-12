@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <!--登录用户名存储的cookie名称-->
+    <usernameCookieName>MySringMVCUsername</usernameCookieName>
+    <!--登录密码存储的cookie名称-->
+    <passwordCookieName>MySringMVCPassword</passwordCookieName>
+</root>

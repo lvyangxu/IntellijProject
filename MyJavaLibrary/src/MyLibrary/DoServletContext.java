@@ -27,7 +27,7 @@ public class DoServletContext extends HttpServlet{
      * @param replyString Ҫ�ظ����ַ�������
      * @return �ɹ�����null,ʧ�ܷ���String���͵��쳣��Ϣ
      */
-    public String replyStringToClientWithDefaultContentType(HttpServletResponse HttpServletResponse1, String replyString) {
+    public static String replyStringToClientWithDefaultContentType(HttpServletResponse HttpServletResponse1, String replyString) {
         String result = null;
         HttpServletResponse1.setContentType("text/html;charset=UTF-8");
         try {
@@ -88,18 +88,12 @@ public class DoServletContext extends HttpServlet{
         }
     }
     
-    public String setSession(HttpServletRequest request, String sessionName,String sessionValue) {
-        String result = null;
+    public static void setSession(HttpServletRequest request, String sessionName,String sessionValue) throws Exception{
         HttpSession session = request.getSession();
-        try {
-            session.setAttribute(sessionName, sessionValue);
-        } catch (Exception e) {
-            result = e.getMessage();
-        }
-        return result;
+        session.setAttribute(sessionName, sessionValue);
     } 
     
-    public String getCookie(HttpServletRequest request, String cookieName) {
+    public static String getCookie(HttpServletRequest request, String cookieName) throws Exception{
         String result = "";
         Cookie[] CookiesArr = request.getCookies();
         for (Cookie Cookie1 : CookiesArr) {
@@ -127,7 +121,7 @@ public class DoServletContext extends HttpServlet{
         HttpSession1.setMaxInactiveInterval(21600);
     }
     
-    public boolean reLogin(HttpServletRequest request, String serverAccount, String serverPassword) {
+    public boolean reLogin(HttpServletRequest request, String serverAccount, String serverPassword) throws Exception{
         String account = getCookie(request, "account");
         String password = getCookie(request, "password");
         account = Str.decode(account,"base64");

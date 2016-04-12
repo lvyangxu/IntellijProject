@@ -1,6 +1,3 @@
-/**
- *
- */
 
  //vertical menu bar
  $(".head").children(".content").children(".list").children(".fa").delegate("", "click", function () {
