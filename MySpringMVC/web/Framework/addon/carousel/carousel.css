@@ -1,11 +1,10 @@
 .addon-carousel {
     font-size: 12px;
-    width: 100%;
 }
 
-/*.addon-carousel>.content>div{
+.addon-carousel>div{
     float: left;
-}*/
+}
 
 
 
@@ -14,7 +13,7 @@
 	position: absolute;
 	top: 80%;
 	text-align: center;
-	z-index: 5;
+	z-index: 15;
 }
 
 .addon-carousel>.pagination-div>div {
@@ -25,7 +24,7 @@
 	border-radius: 5px;
 	cursor: pointer;
 	margin-left: 20px;
-	z-index: 20;
+	z-index: 49;
 }
 
 .addon-carousel>.pagination-div>div:first-child {

@@ -1,17 +1,8 @@
 package Models;
 
-import Init.*;
-import MyLibrary.DoDataTranslation;
-import MyLibrary.DoServletContext;
-import MyLibrary.DoXml;
-import MyLibrary.Str;
-import jdk.nashorn.internal.objects.Global;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.util.List;
 
 /**
  * Created by karl on 2016/4/12.
@@ -25,15 +16,14 @@ public class Account {
      * @param password
      * @return 成功返回null,失败
      */
-    @Init.Global(name="55",group = "44")
     public static String doLogin(HttpServletRequest request, String username, String password) throws Exception{
-        Class clazz = Class.forName("Init.Init");
-
-        Annotation[] annotations = clazz.getAnnotations();
-        for (Annotation annotation : annotations) {
-            Init.Global testA = (Init.Global) annotation;
-            System.out.println("id= " + testA.group() + "; name= " + testA.name() + "; gid = " + testA.name());
-        }
+//        Class clazz = Class.forName("Init");
+//
+//        Annotation[] annotations = clazz.getAnnotations();
+//        for (Annotation annotation : annotations) {
+//            Init.Global testA = (Init.Global) annotation;
+//            System.out.println("id= " + testA.group() + "; name= " + testA.name() + "; gid = " + testA.name());
+//        }
         return "";
 //        //查询user表
 //        String sqlCommand = "select username,password from user";

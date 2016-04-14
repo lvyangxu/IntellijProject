@@ -1,26 +1,22 @@
-/***************head***************/
-.head>.content{
-    margin-right: 80px;
+/***************navbar***************/
+.navbar>div>.content{
+    /*margin-right: 80px;*/
 }
-.head>.icon{
-    margin-left: 80px;
+.navbar>div>.icon{
+    /*margin-left: 80px;*/
 }
 
-.head>.content>.list{
+.navbar>div>.content>.list{
     display: none;
 }
+.navbar>div>.content>.menu>div>a:hover{
+    color:#999;
+}
 
-.head>.content>.menu>ul>li{
-    display: inline-block;
-    text-align: center;
+.navbar>div>.content>.menu>.language>div:first-child{
     margin-left: 20px;
 }
-.head>.content>.menu>ul>li>a:hover{
-    color:rgba(197,154,109,1);
+.navbar>div>.content>.menu>.language>.lang:hover{
+    color:#999;
 }
-.head>.content>.menu>ul>li>a.active{
-    color:rgba(197,154,109,1);
-}
-.head>.content>.menu>ul>.language>div:first-child{
-    margin-left: 20px;
-}
+

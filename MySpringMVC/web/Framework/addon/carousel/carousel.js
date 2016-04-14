@@ -14,6 +14,8 @@
         if (!element.data("init")) {
             (function () {
 
+                element.addClass("addon-carousel");
+
                 // build pagination html
                 element.append(function () {
                     var innerHtml = "<span class='pagination-div'>";
@@ -28,12 +30,17 @@
                 });
                 //
 
-                var n = element.children(".content").children("div").length;
-                var w = element.children(".content").children("div").width();
-                element.children(".content").css({"width":(n+2)*w})
+                var n = element.children("div").length;
+                var w = element.children("div").width();
+                element.css({
+                    "width":n*w
+                });
+                console.log(element.parent().width());
 
+                element.parent().css({"overflow":"hidden"});
 
-                element.children("div").delegate("","click",function(){
+                element.children("pagination-div").children("div").delegate("","click",function(){
+                    alert(2);
                     // $(this).parent().animate({"margin-left":-arrX[1]});
                 });
 
@@ -75,6 +82,7 @@
 
                 //switch to another div
                 element.children(".pagination-div").children("div").delegate("", "click", function (event) {
+                    console.log(2);
                     var currentIndex = $(this).attr("index");
                     var lastIndex = element.data("currentIndex");
                     if (currentIndex == lastIndex) {

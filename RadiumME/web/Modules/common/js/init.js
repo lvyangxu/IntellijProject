@@ -54,6 +54,7 @@ refernceString = refernceString+refernce("js/",myJsPathArr);
 var addOnArr = ["carousel","fullScroll","loadingAnimate"];
 refernceString = refernceString+loadAddon(addOnArr);
 
+refernceString = refernceString+refernce("addon/unslider/",["unslider.min.js"]);
 refernceString = refernceString+refernce("addon/slick/",["slick.css","slick-theme.css","slick.min.js"]);
 refernceString = refernceString+refernce("addon/owl.carousel/",["owl.carousel.min.css","owl.theme.default.min.css","owl.carousel.min.js"]);
 

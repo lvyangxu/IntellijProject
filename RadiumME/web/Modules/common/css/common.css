@@ -1,183 +1,258 @@
-/***************head***************/
-.head{
-    padding-top: 0px;
-    height:70px;
+
+
+.navbar {
+    height: 70px;
     position: fixed;
-    z-index:10;
+    z-index: 50;
     width: 100%;
-    background-color:#ebebeb;
+    background-color:white;
+    color:#313132;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    box-shadow: 2px 2px 5px;
-}
-.head>div{
-    display: inline-block;
-    margin-top:10px;
-    margin-bottom:10px;
-    height:50px;
-
+    font-size: 18px;
 }
 
+.navbar > div {
+    width: 1330px;
+    margin: auto;
+}
 
-.head>.icon>a>img{
+.navbar > div > .icon > a > img {
+    float: left;
+    height: 40px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.navbar > div > .content {
+    float: right;
+}
+
+.navbar > div > .content > .menu{
+    height: 70px;
+    line-height: 70px;
+    vertical-align: middle;
+}
+
+.navbar > div > .content > .menu >div> a {
+    margin-right: 24px;
+    text-decoration: none;
+    color:#313132;
+    letter-spacing: 0.5px;
+    font-weight: bolder;
+    height: 70px;
+    line-height: 70px;
+    display: block;
+}
+
+.navbar > div > .content > .menu > .search > input {
+    border: 1px solid #999;
+    width: 100px;
+    height: 100%;
+    vertical-align: middle;
+    outline:none;
+}
+
+.navbar > div > .content > .menu > .search > input:hover{
+    border: 1px solid #313132;
+}
+
+.navbar > div > .content > .menu > .search > img {
+    cursor: pointer;
+    margin-left: 10px;
+    vertical-align: middle;
+    height:21px;
+}
+
+.navbar > div > .content > .menu  > div {
+    float: left;
+}
+.navbar > div > .content > .menu > .language{
+    margin-left: 20px;
+}
+
+.navbar > div > .content > .menu > .language>.line{
+    width: 1px;
+    height: 10px;
+    background-color: #313132;
+    margin-top: 30px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.navbar > div > .content > .menu  > .language > div {
+    float: left;
+    font-size:15px;
+    cursor: pointer;
     height: 100%;
 }
-.head>.content{
-    float: right;
 
-}
-.head>.content>.menu{
-    display: inline-block;
-
-}
-.head>.content>.menu>ul>li>a{
-    color:black;
-    text-decoration:none;
-
-}
-.head>.content>.menu>ul>.search>input{
-    border: 2px solid rgba(198,155,110,1);
-    width: 100px;
-height:25px;
-}
-.head>.content>.menu>ul>.search>img{
-    cursor: pointer;
-    margin-left: 5px;
-    vertical-align:middle;
-}
-.head>.content>.menu>ul>li>div{
-    display: inline-block;
-    margin-left: 3px;
-    font-size: 0.9em;
-}
-.head>.content>.menu>ul>.language>div.lang{
-    cursor: pointer;
+.body, .footer {
+    width: 1330px;
+    margin: auto;
 }
 
-.footer{
-    width: 90%;
-    padding-left: 5%;
-    padding-right: 5%;
-    background-color: rgba(66,66,66,1);
-    margin-bottom: 0px;
-}
-.footer>div{
-    background-color:rgba(66,66,66,1);
-    margin-top:30px;
-    font-size:0;
-}
-.footer>div:first-child{
-    margin-top:0px;
-}
-.footer>div>div{
-    color:rgba(155,153,153,1);
-    font-size:20px;
-    font-weight: bolder;
-}
-.footer>div>.left{
-    color:white;
-    margin-top:30px;
-    display:inline-block;
-    width:50%;
-}
-.footer>div>.left>.email_input{
-    margin-top:10px;
-}
-.footer>div>.left>.email_input>input{
-    background-color: rgba(53, 52, 51, 1);
-    color: white;
-    padding-left: 25px;
-    height: 50px;
-    font-size:20px;
-}
-.footer>div>.left>div>button {
-    background-color: rgba(130, 130, 130, 1);
-    border: none;
-    height: 50px;
-    font-size:20px;
-}
-.footer>div>.right{
-    height: 60px;
-    width:50%;
-
-    text-align:right;
-}
-.footer>div>.right>div{
-    font-size:20px;
-    line-height:50px;
-    height:50px;
-    display:inline-block;
-}
-.footer>div>.right>img{
-    height:100%;
-    margin-left:20px;
-    vertical-align:middle;
-}
-
-.footer>.footer_line {
-    height: 2px;
-    background-color: rgba(128, 128, 128, 1);
-
-}
-
-.footer>.footer_text {
-    color: white;
-    font-weight: bolder;
-    text-align: center;
-    height: 50px;
-
-}
-
-.footer>.footer_text>div{
-    vertical-align:middle;
-}
-
-.footer>.footer_text>img {
-    vertical-align:middle;
-    height: 50%;
-    margin-left:5px;
-    margin-right:5px;
-}
-
-.body{
-    padding-top: 70px;
-}
-
-.body>.top{
-    font-size: 0;
+.top {
     position: relative;
     text-align: center;
     width: 100%;
+    padding-top: 70px;
 }
-.body>.top>.text{
+
+.top > .text {
     position: absolute;
     color: white;
     font-size: 20px;
     font-weight: bolder;
-    top:60%;
+    top: 60%;
     width: 100%;
 }
-.body>.top>.text>button{
-    border: 2px solid rgba(171,161,69,1);
+
+.top > .text > button {
+    border: 2px solid rgba(171, 161, 69, 1);
     background-color: inherit;
-    color: rgba(171,161,69,1);
+    color: rgba(171, 161, 69, 1);
     height: 50px;
     padding-left: 20px;
     padding-right: 20px;
     font-weight: bolder;
 }
-body>.back-to-top{
+
+body > .back-to-top {
     position: fixed;
-    top:50%;
+    top: 50%;
     right: 5%;
     font-size: 5em;
     opacity: 0.5;
+    z-index: 20;
 }
-body>.back-to-top>i{
+
+body > .back-to-top > i {
     cursor: pointer;
 }
 
+button {
+    cursor: pointer;
+}
 
-button{
-        cursor: pointer;
+.footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 0px;
+}
+
+.footer > div {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-right: 5%;
+    margin-top: 30px;
+    font-size: 0;
+}
+
+.footer > div:first-child {
+    margin-top: 0px;
+}
+
+.footer > div > div {
+    color: rgba(155, 153, 153, 1);
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.footer > div > .left {
+    color: white;
+    margin-top: 30px;
+    display: inline-block;
+    width: 50%;
+}
+
+.footer > div > .left > .email_input {
+    margin-top: 10px;
+}
+
+.footer > div > .left > .email_input > input {
+    background-color: rgba(53, 52, 51, 1);
+    color: white;
+    padding-left: 25px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.footer > div > .left > div > button {
+    background-color: rgba(130, 130, 130, 1);
+    border: none;
+    height: 50px;
+    font-size: 20px;
+}
+
+.footer > div > .right {
+    height: 60px;
+    width: 50%;
+
+    text-align: right;
+}
+
+.footer > div > .right > div {
+    font-size: 20px;
+    line-height: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+.footer > div > .right > img {
+    height: 100%;
+    margin-left: 20px;
+    vertical-align: middle;
+}
+
+.footer > .footer_line {
+    height: 2px;
+    background-color: rgba(128, 128, 128, 1);
+
+}
+
+.footer > .footer_text {
+    color: white;
+    font-weight: bolder;
+    text-align: center;
+    height: 50px;
+
+}
+
+.footer > .footer_text > div {
+    vertical-align: middle;
+}
+
+.footer > .footer_text > img {
+    vertical-align: middle;
+    height: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+@font-face {
+    font-family: BEBASNEUE;
+    src: url("../font/BEBASNEUE.otf");
+}
+.BEBASNEUE{
+    font-family: BEBASNEUE;
+}
+
+@font-face {
+    font-family: NIRMALA;
+    src: url("../font/NIRMALA.TTF");
+}
+.NIRMALA{
+    font-family: NIRMALA;
+}
+
+@font-face {
+    font-family: MMRTEXT;
+    src: url("../font/MMRTEXT.TTF");
+}
+.MMRTEXT{
+    font-family: MMRTEXT;
+}
+
+.yahei{
+    font-family: "Microsoft YaHei UI";
 }
