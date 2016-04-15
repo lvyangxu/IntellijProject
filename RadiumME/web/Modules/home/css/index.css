@@ -1,8 +1,8 @@
-.top>.text{
+.top > .text {
     position: absolute;
     z-index: 19;
-    font-size:20px;
-    font-color:white;
+    font-size: 20px;
+    font-color: white;
 }
 
 /*overlay*/
@@ -14,125 +14,132 @@
     text-align: center;
     color: white;
     font-size: 20px;
-    margin-top: auto;
-    margin-bottom: auto;
-
-}
-.overlay>.text{
-    margin: auto;
 }
 
-.overlay>.text>.big{
-    font-size:100px;
+.overlay > .text {
+    line-height: 100px;
 }
-.overlay>.text>.small{
+
+.overlay > .text > .big {
+    font-size: 100px;
+}
+
+.overlay > .text > .small {
     font-size: 30px;
-}
-
-.owl-dots{
-    z-index: 100;
-    margin-top: -30px;
-    height: 50px;
+    /*margin-left:4px;*/
+    margin-top: 10px;
+    word-spacing: 8px;
 }
 
 /*about_us*/
-.body > .about_us {
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
+.about_us {
     background-color: white;
-    padding-top: 70px;
-    padding-bottom: 70px;
-    text-indent: 2em;
+    padding-bottom: 35px;
+
     word-wrap: break-word;
     word-break: break-all;
 }
 
-.body > .about_us > h2 {
+.about_us > .title {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-size: 20px;
     text-align: center;
     font-weight: bolder;
 }
 
-.body > .about_us > div {
+.about_us > .button-div {
     text-align: center;
 }
 
-.body > .about_us > div > button {
+.about_us > p {
+    text-indent: 2em;
+    text-align: center;
+}
+
+.about_us > div > button {
     background-color: rgba(55, 55, 55, 1);
     color: white;
     border: none;
-    height: 50px;
-    width: 250px
+    height: 40px;
+    width: 200px;
+    margin-top: 60px;
+    font-size: 20px;
 }
 
 /*our_games*/
-.body > .our_games {
-    background-image: url("../image/karl.jpg");
+.our_games {
+    background-color: #313132;
     text-align: center;
     color: white;
-    height: 100%;
-    width: 100%;
 }
 
-.body > .our_games > .games_pic {
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
+.our_games > div {
+    width: 1330px;
+    margin: auto;
+    text-align: center;
 }
 
-.body > .our_games > h2 {
+.our_games > h2 {
     padding-top: 50px;
     font-weight: bolder;
 }
 
-.body > .our_games > div > button {
-    background-color: rgba(55, 55, 55, 1);
-    color: white;
+.our_games > div > button {
+
+    background-color: rgba(255, 255, 255, 1);
+    color: #313132;
     border: none;
-    height: 50px;
-    width: 250px;
+    height: 40px;
+    width: 200px;
     margin-top: 20px;
     margin-bottom: 20px;
+    font-size: 20px;
 }
 
 /*developers*/
-.body > .developers {
+.developers {
     padding-top: 50px;
     text-align: center;
     color: rgba(197, 153, 108, 1);
 }
 
-.body > .developers > div {
+.developers > div {
     margin-top: 25px;
 }
 
-.body > .developers > h2 {
+.developers > h2 {
     color: black;
     font-weight: bolder;
 }
 
-.body > .developers > div > div > img {
+.developers > div > div > img {
     height: 100px;
     width: 100px;
 }
 
-.body > .developers > .first > .second {
+.developers > .first > .second {
     margin-left: 100px;
     margin-right: 100px;
 }
 
-.body > .developers > .second > .first {
+.developers > .second > .first {
     margin-right: 50px;
 }
 
-.body > .developers > .second > .second {
+.developers > .second > .second {
     margin-left: 50px;
 }
 
-.body > .developers > .second {
+.developers > .second {
     margin-bottom: 50px;
 }
 
-.body > .developers > div > div > span {
+.developers > div > div > span {
     display: block;
+}
+
+.about_us, .developers {
+    width: 1330px;
+    margin: auto;
 }

@@ -31,7 +31,6 @@
 .navbar > div > .content > .menu{
     height: 70px;
     line-height: 70px;
-    vertical-align: middle;
 }
 
 .navbar > div > .content > .menu >div> a {
@@ -87,11 +86,6 @@
     height: 100%;
 }
 
-.body, .footer {
-    width: 1330px;
-    margin: auto;
-}
-
 .top {
     position: relative;
     text-align: center;
@@ -141,10 +135,8 @@ button {
 }
 
 .footer > div {
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-right: 5%;
-    margin-top: 30px;
+    width: 1330px;
+    margin:auto;
     font-size: 0;
 }
 
@@ -207,7 +199,8 @@ button {
 .footer > .footer_line {
     height: 2px;
     background-color: rgba(128, 128, 128, 1);
-
+    margin-top:10px;
+    margin-bottom:10px;
 }
 
 .footer > .footer_text {
@@ -255,4 +248,8 @@ button {
 
 .yahei{
     font-family: "Microsoft YaHei UI";
+}
+
+.Arial{
+    font-family: Arial;
 }

@@ -21,25 +21,25 @@
 
 $(".top").children("img").fullFit(0);
 
-$(".top").children(".text").children("button").delegate("","click",function(){
-    var marginT = parseInt($(".body").children(".content").children("div").css("margin-top"));
-     $("body").animate({scrollTop:$(".body").children(".content").offset().top-marginT}, 1000);
-});
+// $(".top").children(".text").children("button").delegate("","click",function(){
+//     var marginT = parseInt($(".body").children(".content").children("div").css("margin-top"));
+//      $("body").animate({scrollTop:$(".body").children(".content").offset().top-marginT}, 1000);
+// });
 
 
  //back to top button
-$("body").children(".back-to-top").children("i").delegate("","click",function(){
-     $("body").animate({scrollTop:0}, 1000);
+$(".back-to-top").children("i").delegate("","click",function(){
+     $("html,body").animate({"scrollTop":0}, 1000);
 });
 if($(window).scrollTop()==0){
-    $("body").children(".back-to-top").fadeOut();
+    $(".back-to-top").fadeOut();
 }else{
-    $("body").children(".back-to-top").fadeIn();
+    $(".back-to-top").fadeIn();
 }
 $(window).scroll(function(){
     if($(window).scrollTop()==0){
-        $("body").children(".back-to-top").fadeOut();
+        $(".back-to-top").fadeOut();
     }else{
-        $("body").children(".back-to-top").fadeIn();
+        $(".back-to-top").fadeIn();
     }
 })
