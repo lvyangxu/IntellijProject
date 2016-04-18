@@ -1,6 +1,10 @@
+// $(".top").children(".carousel").fullFit(70);
+$("#top-carousel").carousel();
+$("#our-games-carousel").carousel({"arrow":true});
+
 $(".top_img").fullFit(70);
 
-$(".carousel").carousel();
+
 
 $(".overlay").fit(function () {
     $(document).ready(function () {
@@ -8,7 +12,6 @@ $(".overlay").fit(function () {
             "width": $(window).width(),
             "height": $(window).height() - 70
         });
-        console.log($(window).height());
         var oh = $(".overlay").height();
         var ch = $(".overlay").children(".text").height();
 

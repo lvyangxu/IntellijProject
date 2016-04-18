@@ -22,7 +22,7 @@
 
                 // build pagination html
                 element.append(function () {
-                    var innerHtml = "<span class='pagination-div'>";
+                    var innerHtml = "<span class='pagination'>";
                     var i = 0;
                     element.children("div").children("div").each(function (index) {
                         var active = (index == 0) ? "class='active'" : "";
@@ -36,48 +36,79 @@
                 element.css({"overflow": "hidden"});
                 var n = element.children("div").children("div").length;
 
+                //build arrow html
+                if(options!=undefined&&options.arrow==true){
+                    element.append(function () {
+                        var innerHtml = "<span class='arrow'>";
+                        innerHtml += "<div class='left'></div>";
+                        innerHtml += "<div class='right'></div>";
+                        innerHtml += "</span>";
+                        return innerHtml;
+                    });
+                    element.children(".arrow").css({
+                        "margin-top":(element.children("div").children("div").height()-50)/2
+                    });
+                }
+
                 //resize with window
                 element.fit(function () {
                     $(document).ready(function () {
-
-
-                    element.children("div").css({
-                        "width": n * 100 + "%"
-                    });
-                    element.children("div").children("div").css({
-                        "width": 100 / n + "%"
-                    });
-
-                    var w = element.parent().width();
-                    var h = element.children("div").children("div").height();
-                    //pagination location
-                    element.children(".pagination-div").css({
-                        // "left": element.offset().left + (w - 76) / 2 + "px",
-                        // "margin-top": (h - 10) * 0.9 + "px"
-                    });
-                    // console.log(element.children("div").children("div").height());
+                        element.children("div").css({
+                            "width": n * 100 + "%"
+                        });
+                        element.children("div").children("div").css({
+                            "width": 100 / n + "%"
+                        });
                     });
                 });
 
 
+
                 //switch to another div
                 element.data("currentIndex", 0);
-                element.children(".pagination-div").children("div").delegate("", "click", function (event) {
+                element.children(".pagination").children("div").delegate("", "click", function (event) {
                     var currentIndex = $(this).attr("index");
                     var lastIndex = element.data("currentIndex");
                     if (currentIndex == lastIndex) {
                         return;
                     }
-                    var w = element.children("div").children("div").width();
-                    var h = element.children("div").children("div").height();
                     element.children("div").animate({
                         "left": -100 * currentIndex + "%"
                     }, 1000);
-                    element.children(".pagination-div").children("div[index=" + lastIndex + "]").removeClass("active");
-                    element.children(".pagination-div").children("div[index=" + currentIndex + "]").addClass("active");
-
+                    element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass("active");
+                    element.children(".pagination").children("div[index=" + currentIndex + "]").addClass("active");
                     element.data("currentIndex", currentIndex);
+                });
 
+
+                element.children(".arrow").children("div").hover(function () {
+                    $(this).css({"opacity":"1"});
+                },function () {
+                    $(this).css({"opacity":"0.5"});
+                });
+
+                element.children(".arrow").children("div").delegate("","click",function () {
+                    var lastIndex = element.data("currentIndex");
+                    var currentIndex;
+                    if($(this).hasClass("left")){
+                        if(lastIndex==0){
+                            currentIndex = n - 1;
+                        }else{
+                            currentIndex = lastIndex - 1;
+                        }
+                    }else{
+                        if(lastIndex==n-1){
+                            currentIndex = 0;
+                        }else{
+                            currentIndex = lastIndex + 1;
+                        }
+                    }
+                    element.children("div").animate({
+                        "left": -100 * currentIndex + "%"
+                    }, 1000);
+                    element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass("active");
+                    element.children(".pagination").children("div[index=" + currentIndex + "]").addClass("active");
+                    element.data("currentIndex", currentIndex);
                 });
 
 
@@ -101,6 +132,8 @@
                 //     }
                 // }, false);
             })();
+
+
 
             //add to element data
             element.data({"init": true});

@@ -5,6 +5,7 @@
 
 .addon-carousel>div{
     position: relative;
+	/*height: 100%;*/
 }
 
 .addon-carousel>div>div{
@@ -14,16 +15,15 @@
     width: 100%;
 }
 
-.addon-carousel>.pagination-div {
+.addon-carousel>.pagination {
 	position: absolute;
 	z-index: 45;
-    margin-top:80%;
+	top:90%;
     left:0;
     right: 0;
-    /*margin: auto;*/
 }
 
-.addon-carousel>.pagination-div>div {
+.addon-carousel>.pagination>div {
 	display: inline-block;
 	width: 12px;
 	height: 12px;
@@ -34,15 +34,50 @@
 	z-index: 49;
 }
 
-.addon-carousel>.pagination-div>div:first-child {
+.addon-carousel>.pagination>div:first-child {
 	margin-left: 0px;
 }
 
-.addon-carousel>.pagination-div>div:hover {
+.addon-carousel>.pagination>div:hover {
     background-color: rgba(255, 255, 255, 0.6);
 }
 
-.addon-carousel>.pagination-div>div.active {
+.addon-carousel>.pagination>div.active {
     background-color: rgba(255, 255, 255, 1);
 }
 
+.addon-carousel>.arrow{
+	display: none;
+	position: absolute;
+	left: 0;
+	right: 0;
+	z-index: 44;
+	height: 100%;
+}
+.addon-carousel:hover>.arrow{
+
+	display: block;
+}
+.addon-carousel:hover>.arrow>div{
+	opacity: 0.5;
+}
+
+
+.addon-carousel>.arrow>div{
+	height: 50px;
+	width: 25px;
+	background-size: 100% 100%;
+	cursor: pointer;
+
+}
+
+.addon-carousel>.arrow>div.left{
+	float: left;
+	margin-left:2%;
+	background-image: url('arrow-left.png');
+}
+.addon-carousel>.arrow>div.right{
+	float: right;
+	margin-right: 2%;
+	background-image: url('arrow-right.png');
+}

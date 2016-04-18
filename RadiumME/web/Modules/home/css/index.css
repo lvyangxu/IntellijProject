@@ -34,37 +34,45 @@
 /*about_us*/
 .about_us {
     background-color: white;
-    padding-bottom: 35px;
-
     word-wrap: break-word;
     word-break: break-all;
 }
 
-.about_us > .title {
-    margin-top: 20px;
+.section{
+    width: 1330px;
+    margin: auto;
+    text-align: center;
+}
+
+.section > .title {
+    padding-top: 30px;
     margin-bottom: 30px;
     font-size: 20px;
     text-align: center;
     font-weight: bolder;
+    font-family: NIRMALA;
 }
-
-.about_us > .button-div {
+.section > p {
     text-align: center;
-}
-
-.about_us > p {
-    text-indent: 2em;
-    text-align: center;
+    font-family: Arial;
+    line-height: 30px;
 }
 
 .about_us > div > button {
+    border-radius: 5px;
+    border: 2px solid rgba(55, 55, 55, 1);
     background-color: rgba(55, 55, 55, 1);
     color: white;
-    border: none;
     height: 40px;
     width: 200px;
-    margin-top: 60px;
+    margin-top: 25px;
+    margin-bottom: 80px;
     font-size: 20px;
+}
+
+.about_us > div > button:hover {
+    background-color: transparent;
+    color: rgba(55, 55, 55, 1);
 }
 
 /*our_games*/
@@ -80,39 +88,24 @@
     text-align: center;
 }
 
-.our_games > h2 {
-    padding-top: 50px;
-    font-weight: bolder;
-}
-
-.our_games > div > button {
-
+.our_games > div > div > button {
+    border-radius: 5px;
+    border: 2px solid white;
     background-color: rgba(255, 255, 255, 1);
     color: #313132;
-    border: none;
     height: 40px;
     width: 200px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 40px;
+    margin-bottom: 80px;
     font-size: 20px;
 }
 
+.our_games > div > div > button:hover {
+    background-color: transparent;
+    color: white;
+}
+
 /*developers*/
-.developers {
-    padding-top: 50px;
-    text-align: center;
-    color: rgba(197, 153, 108, 1);
-}
-
-.developers > div {
-    margin-top: 25px;
-}
-
-.developers > h2 {
-    color: black;
-    font-weight: bolder;
-}
-
 .developers > div > div > img {
     height: 100px;
     width: 100px;
@@ -139,7 +132,4 @@
     display: block;
 }
 
-.about_us, .developers {
-    width: 1330px;
-    margin: auto;
-}
+

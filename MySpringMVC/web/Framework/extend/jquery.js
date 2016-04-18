@@ -19,13 +19,13 @@
 	$.fn.fullFit = function(delH){
 		var x = $(this).width();
 		var y = $(this).height();
-        $(this).parent().css({
-			"overflow":"hidden"
-		});
+        // $(this).parent().css({
+		// 	"overflow":"hidden"
+		// });
 		var element = $(this);
 		$(this).fit(function(){
 			var w = $(window).width();
-			var h = $(window).height();
+			var h = $(window).outerHeight(true);
 			element.parent().css({
 				"height":h-delH+"px"
 			},2000);
