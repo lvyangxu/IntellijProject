@@ -27,7 +27,7 @@
 	display: inline-block;
 	width: 12px;
 	height: 12px;
-	background-color: rgba(255, 255, 255, 0.3);
+	background-color: rgba(255, 255, 255, 0.4);
 	border-radius: 6px;
 	cursor: pointer;
 	margin-left: 20px;
@@ -39,7 +39,7 @@
 }
 
 .addon-carousel>.pagination>div:hover {
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .addon-carousel>.pagination>div.active {
@@ -55,7 +55,6 @@
 	height: 100%;
 }
 .addon-carousel:hover>.arrow{
-
 	display: block;
 }
 .addon-carousel:hover>.arrow>div{
@@ -64,20 +63,18 @@
 
 
 .addon-carousel>.arrow>div{
-	height: 50px;
-	width: 25px;
 	background-size: 100% 100%;
 	cursor: pointer;
-
+    background-repeat: no-repeat;
 }
 
 .addon-carousel>.arrow>div.left{
 	float: left;
-	margin-left:2%;
+	margin-left:10%;
 	background-image: url('arrow-left.png');
 }
 .addon-carousel>.arrow>div.right{
 	float: right;
-	margin-right: 2%;
+	margin-right: 10%;
 	background-image: url('arrow-right.png');
 }

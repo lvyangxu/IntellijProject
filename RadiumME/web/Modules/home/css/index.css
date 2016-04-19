@@ -107,13 +107,21 @@
 
 /*developers*/
 .developers > div > div > img {
-    height: 100px;
-    width: 100px;
+    height: 60px;
+    width: 60px;
+}
+
+.developers > .first{
+    margin-top:60px;
+    margin-bottom: 60px;
 }
 
 .developers > .first > .second {
     margin-left: 100px;
     margin-right: 100px;
+}
+.developers > .second{
+    margin-bottom: 60px;
 }
 
 .developers > .second > .first {
@@ -124,9 +132,7 @@
     margin-left: 50px;
 }
 
-.developers > .second {
-    margin-bottom: 50px;
-}
+
 
 .developers > div > div > span {
     display: block;

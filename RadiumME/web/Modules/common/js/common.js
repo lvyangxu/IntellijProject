@@ -26,6 +26,13 @@ $(".top").children("img").fullFit(0);
 //      $("body").animate({scrollTop:$(".body").children(".content").offset().top-marginT}, 1000);
 // });
 
+ $(".footer").children(".content").children(".left").children("input").focus(function () {
+    $(this).attr("placeholder","");
+ });
+
+ $(".footer").children(".content").children(".left").children("input").blur(function () {
+     $(this).attr("placeholder","Subscribe email to our newsletter...");
+ });
 
  //back to top button
 $(".back-to-top").children("i").delegate("","click",function(){

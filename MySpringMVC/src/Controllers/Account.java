@@ -1,7 +1,9 @@
 package Controllers;
 
+import Models.MyMvcObject;
 import MyLibrary.DoServletContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -22,6 +24,11 @@ public class Account {
     @ResponseBody
     @RequestMapping(value="/DoLogin")
     public String doLogin(HttpServletRequest request, HttpSession session) throws Exception{
+
+        MyMvcObject MyMvcObject1 = new MyMvcObject(request,session);
+//        Models.Account.doLogin()
+
+
         String result = null;
         String username = DoServletContext1.getRequestPara(request, "username");
         String password = DoServletContext1.getRequestPara(request, "password");

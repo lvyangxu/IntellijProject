@@ -10,6 +10,10 @@
     };
 
     var doCarousel = function (element, options) {
+        var setting = {
+
+        };
+
         // init
         if (!element.data("init")) {
             (function () {
@@ -21,17 +25,19 @@
                 element.html("<div>" + html + "</div>");
 
                 // build pagination html
-                element.append(function () {
-                    var innerHtml = "<span class='pagination'>";
-                    var i = 0;
-                    element.children("div").children("div").each(function (index) {
-                        var active = (index == 0) ? "class='active'" : "";
-                        innerHtml += "<div index='" + i + "' " + active + "></div>";
-                        i++;
+                if(!(options!=undefined&&options.dots==false)){
+                    element.append(function () {
+                        var innerHtml = "<span class='pagination'>";
+                        var i = 0;
+                        element.children("div").children("div").each(function (index) {
+                            var active = (index == 0) ? "class='active'" : "";
+                            innerHtml += "<div index='" + i + "' " + active + "></div>";
+                            i++;
+                        });
+                        innerHtml += "</span>";
+                        return innerHtml;
                     });
-                    innerHtml += "</span>";
-                    return innerHtml;
-                });
+                }
 
                 element.css({"overflow": "hidden"});
                 var n = element.children("div").children("div").length;
@@ -45,8 +51,9 @@
                         innerHtml += "</span>";
                         return innerHtml;
                     });
+                    var ph = element.children("div").children("div").height();
                     element.children(".arrow").css({
-                        "margin-top":(element.children("div").children("div").height()-50)/2
+                        "margin-top":ph*0.4
                     });
                 }
 
@@ -59,6 +66,11 @@
                         element.children("div").children("div").css({
                             "width": 100 / n + "%"
                         });
+                        var ph = element.children("div").children("div").height();
+                        element.children(".arrow").children("div").css({
+                            "height":ph*0.1,
+                            "width":ph*0.1*425/925
+                        })
                     });
                 });
 
@@ -80,7 +92,7 @@
                     element.data("currentIndex", currentIndex);
                 });
 
-
+                //arrow opacity
                 element.children(".arrow").children("div").hover(function () {
                     $(this).css({"opacity":"1"});
                 },function () {
@@ -111,6 +123,12 @@
                     element.data("currentIndex", currentIndex);
                 });
 
+                element.children("div").children("div").attr("draggable","true");
+
+
+                element.children("div").children("div")[0].addEventListener("ondragstart",function () {
+                    console.log(2);
+                });
 
                 //
                 // //touch event
@@ -137,8 +155,18 @@
 
             //add to element data
             element.data({"init": true});
+        };
+
+        if(options==undefined){
+            return;
         }
-        ;
+
+        if(options.fit!=undefined){
+            var ph = element.children("div").children("div").height();
+            element.children(".arrow").css({
+                "margin-top":ph*0.4
+            });
+        }
 
         return element;
     }

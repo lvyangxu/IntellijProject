@@ -7,7 +7,9 @@ import java.lang.annotation.Annotation;
 /**
  * Created by karl on 2016/4/12.
  */
-public class Account {
+public class Account{
+
+
 
     /**
      * 执行登录

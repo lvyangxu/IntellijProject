@@ -1,9 +1,15 @@
 // $(".top").children(".carousel").fullFit(70);
-$("#top-carousel").carousel();
-$("#our-games-carousel").carousel({"arrow":true});
+$("#top-carousel").carousel({
+    "dots":false,
+    "arrow":true
+});
+$("#our-games-carousel").carousel();
 
 $(".top_img").fullFit(70);
 
+$("#top-carousel").carousel({
+    "fit":true
+});
 
 
 $(".overlay").fit(function () {
