@@ -7,7 +7,7 @@
     <!--mysql连接的数据库名称-->
     <database>RadiumME</database>
     <!--mysql用户名-->
-    <user>root</user>
+    <username>root</username>
     <!--mysql密码-->
     <password>root</password>    
 </root>

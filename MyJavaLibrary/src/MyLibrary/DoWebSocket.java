@@ -56,15 +56,15 @@ public class DoWebSocket {
      * @param key ��ֵ�Ե�����
      * @return ���ظ�������Ӧ��ֵ�����Ľ��
      */
-    public String myMessageDecode(String websocketMessage,String key) {
-        try {
-            JSONObject JSONObject1 = new JSONObject(websocketMessage);
-            String value = JSONObject1.getString(key);
-            value = Str.decode(value,"base64");
-            return value;
-        } catch (Exception e) {
-            return null;
-        }
-    }
+//    public String myMessageDecode(String websocketMessage,String key) {
+//        try {
+//            JSONObject JSONObject1 = new JSONObject(websocketMessage);
+//            String value = JSONObject1.getString(key);
+//            value = Str.decode(value,"base64");
+//            return value;
+//        } catch (Exception e) {
+//            return null;
+//        }
+//    }
     
 }

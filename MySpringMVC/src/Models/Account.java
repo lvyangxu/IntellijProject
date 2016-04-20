@@ -1,82 +1,67 @@
 package Models;
 
+import Request.Parameter;
+import Util.*;
+import Util.Mysql;
+import org.dom4j.DocumentException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.lang.annotation.Annotation;
+import java.util.List;
+
+import static Init.Init.WebRoot;
+import static Init.Init.log4j;
+import static Init.Init.mysql;
 
 /**
  * Created by karl on 2016/4/12.
  */
-public class Account{
+public class Account {
+
+    public static void login(HttpServletRequest request, HttpSession session) throws MyException {
+        String result = null;
+        //get username and password in request
+        String usernameP = Parameter.get(request, "username");
+        String passwordP = Parameter.get(request, "password");
+        if(usernameP==null){
+            throw new MyException("empty username");
+        }
+        if(passwordP==null){
+            throw new MyException("empty password");
+        }
 
 
+        try {
+            usernameP = new MyString(usernameP).decode("base64").toString();
+        } catch (Exception e) {
+            throw new MyException("invalid username");
+        }
 
-    /**
-     * 执行登录
-     * @param request
-     * @param username
-     * @param password
-     * @return 成功返回null,失败
-     */
-    public static String doLogin(HttpServletRequest request, String username, String password) throws Exception{
-//        Class clazz = Class.forName("Init");
-//
-//        Annotation[] annotations = clazz.getAnnotations();
-//        for (Annotation annotation : annotations) {
-//            Init.Global testA = (Init.Global) annotation;
-//            System.out.println("id= " + testA.group() + "; name= " + testA.name() + "; gid = " + testA.name());
-//        }
-        return "";
-//        //查询user表
-//        String sqlCommand = "select username,password from user";
-//        List<List<String>> resulList = Mysql.doMysqlSelect1(sqlCommand);
-//        if(mysqlClass1.getExceptionString()!=null){
-//            return "sqlError";
-//        }
-//        boolean isValidUser = false;
-//        for(List<String> row:resulList){
-//            String usernameInSql = row.get(0);
-//            String passwordInSql = row.get(1);
-//            if(usernameInSql==null||passwordInSql==null){
-//                continue;
-//            }
-//            if (username.equals(usernameInSql) && password.equals(passwordInSql)) {
-//                isValidUser = true;
-//            }
-//        }
-//
-//        if (isValidUser) {
-//            try {
-//                DoServletContext.setSession(request, "username", username);
-//            } catch (Exception e) {
-//                Init.log4j.error().info(e.getMessage());
-//            }
-//            return null;
-//        } else {
-//            return "errorAccount";
-//        }
+        try {
+            passwordP = new MyString(passwordP).decode("base64").toString();
+        } catch (Exception e) {
+            throw new MyException("invalid password");
+        }
+        //get username and password in mysql and validate them
+        boolean isValid = false;
+        Mysql.data data1 = mysql.select("select username,password from user");
+        for (List<String> row : data1.rows()) {
+            String usernameM = row.get(0);
+            String passwordM = row.get(1);
+            if (usernameP.equals(usernameM)) {
+                if (passwordP.equals(passwordM)) {
+                    isValid = true;
+                    break;
+                } else {
+                    throw new MyException("invalid password");
+                }
+            }
+        }
+
+        if (!isValid) {
+            throw new MyException("invalid username");
+        }
+
     }
-
-    /**
-     * check session,if expired,dologin with cookie
-     * @param session HttpSession
-     * @param request HttpServletRequest
-     * @return 成功返回null,失败返回json串
-     */
-//    public static String checkLogin(HttpSession session, HttpServletRequest request) {
-//        if (session.getAttribute("username") == null) {
-//            String account = DoServletContext.getCookie(request, Global.usernameCookieNameConfig);
-//            account = UDecoder.URLDecode(account);
-//            account = Str.decode(account,"base64");
-//            String password = DoServletContext1.getCookie(request, Global.passwordCookieNameConfig);
-//            password = UDecoder.URLDecode(password);
-//            password = Str.decode(password,"base64");
-//            String loginResult = doLogin(request,account, password);
-//            if (loginResult != null) {
-//                return "{\"success\":\"false\",\"message\":\"relogin\"}";
-//            }
-//            DoServletContext1.setSession(request, "username", account);
-//        }
-//        return null;
-//    }
 }

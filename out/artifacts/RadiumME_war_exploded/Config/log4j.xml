@@ -30,7 +30,7 @@
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="[%d{yy-MM-dd HH:mm:ss}] %5p %m%n" />
         </layout>
-    </appender>      
+    </appender>
     <!--业务日志-->
     <appender name="business" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="File" value="${WebRoot}/Log/business" />
@@ -40,9 +40,9 @@
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="[%d{yy-MM-dd HH:mm:ss}] %5p %m%n" />
         </layout>
-    </appender>     
+    </appender>
     <!--表格日志-->
-    <appender name="system" class="org.apache.log4j.DailyRollingFileAppender">
+    <appender name="table" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="File" value="${WebRoot}/Log/table" />
         <param name="Threshold" value="info" />
         <param name="Append" value="true" />
@@ -52,7 +52,7 @@
         </layout>
     </appender>
     <!--上传日志-->
-    <appender name="system" class="org.apache.log4j.DailyRollingFileAppender">
+    <appender name="upload" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="File" value="${WebRoot}/Log/upload" />
         <param name="Threshold" value="info" />
         <param name="Append" value="true" />
@@ -62,7 +62,7 @@
         </layout>
     </appender>
     <!--下载日志-->
-    <appender name="system" class="org.apache.log4j.DailyRollingFileAppender">
+    <appender name="download" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="File" value="${WebRoot}/Log/download" />
         <param name="Threshold" value="info" />
         <param name="Append" value="true" />
@@ -72,7 +72,7 @@
         </layout>
     </appender>
     <!--登录日志-->
-    <appender name="system" class="org.apache.log4j.DailyRollingFileAppender">
+    <appender name="login" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="File" value="${WebRoot}/Log/login" />
         <param name="Threshold" value="info" />
         <param name="Append" value="true" />

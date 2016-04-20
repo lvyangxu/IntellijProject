@@ -1,15 +1,20 @@
 package Init;
 
-import org.apache.log4j.Logger;
+import Util.MyString;
+import Util.Mysql;
+import Util.Log4j;
+import Util.Xml;
+import org.dom4j.DocumentException;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.context.event.ContextStoppedEvent;
-import MyLibrary.*;
 
 import java.lang.annotation.*;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by 杨旭 on 2016/4/3.
@@ -23,51 +28,54 @@ public class Init implements ApplicationListener<ApplicationEvent> {
     @Override
     public void onApplicationEvent(ApplicationEvent e) {
         if (e instanceof ContextStartedEvent) {
-            applicationStartOrRefresh();
-            if (log4j.system() != null) {
-                log4j.system().info("应用已开始");
-            }
+            init();
+            log4j.system("应用已开始");
         } else if (e instanceof ContextRefreshedEvent) {
-            applicationStartOrRefresh();
-            if (log4j.system() != null) {
-                log4j.login().info("应用已刷新");
-            }
+            init();
+            log4j.system("应用已刷新");
         } else if (e instanceof ContextStoppedEvent) {
-            if (log4j.system() != null) {
-                log4j.system().info("应用已停止");
-            }
+            log4j.system("应用已停止");
         } else if (e instanceof ContextClosedEvent) {
-            if (log4j.system() != null) {
-                log4j.system().info("应用已关闭");
-            }
+            log4j.system("应用已关闭");
         }
     }
 
     public static String WebRoot;
-    public static Log4j log4j = new Log4j();
-    public static DoMysql.mysqlClass mysqlClass1;
+    public static Log4j log4j;
+    public static String usernameCookieName,passwordCookieName;
+    public static Mysql mysql;
 
-    private void applicationStartOrRefresh(){
-        //log4j
+    private void init(){
+        //web root
         WebRoot = System.getProperty("webapp.root");
         System.setProperty("WebRoot", WebRoot);
-        log4j.initLog4j(WebRoot);
 
-        //init mysql
-        DoMysql DoMysql1 = new DoMysql();
-        mysqlClass1 = DoMysql1.initMysqlByDefaultXml(WebRoot+"/Config/mysql.xml");
-        if(mysqlClass1.getExceptionString()!=null){
-            log4j.error().info("mysql init error" + mysqlClass1.getExceptionString());
+        //log4j
+        log4j = new Log4j(WebRoot+"/Config/log4j.xml");
+
+        //mysql
+        try {
+            Xml Xml1 = new Xml(WebRoot+"/Config/mysql.xml");
+            List<String> mysqlConfigList = Xml1.readFirstNodeValueByNodeName(new String[]{"ip","port","database","username","password"});
+            String ip = mysqlConfigList.get(0);
+            String port = mysqlConfigList.get(1);
+            String database = mysqlConfigList.get(2);
+            String username = mysqlConfigList.get(3);
+            String password = mysqlConfigList.get(4);
+            mysql = new Mysql(ip,port,database,username,password);
+        } catch (DocumentException e) {
+            log4j.error("init mysql failed:xml config load error:"+e.getMessage());
+        } catch (SQLException e) {
+            log4j.error("init mysql failed:mysql connect error:"+e.getMessage());
+        } catch (ClassNotFoundException e) {
+            log4j.error("init mysql failed:mysql driver not found:"+e.getMessage());
         }
+
+        //cookie name
+        MyString MyString1 = new MyString(WebRoot.replace("\\","/"));
+        String[] arr = MyString1.split("/");
+        String moduleName = arr[arr.length-2];
+        usernameCookieName = moduleName + "UserName";
+        passwordCookieName = moduleName + "Password";
     }
-
-    @Documented //文档
-    @Retention(RetentionPolicy.RUNTIME) //在运行时可以获取
-    @Target(ElementType.METHOD) //作用到类，方法，接口上等
-    public @interface Global {
-        String name();
-        String group();
-    }
-
-
 }
