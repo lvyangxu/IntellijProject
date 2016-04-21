@@ -34,7 +34,6 @@
     <orderEntry type="library" name="mysql" level="application" />
     <orderEntry type="library" name="poi" level="application" />
     <orderEntry type="library" name="tomcat" level="application" />
-    <orderEntry type="module" module-name="MyJavaLibrary" />
     <orderEntry type="module" module-name="MySpringMVC" />
   </component>
 </module>

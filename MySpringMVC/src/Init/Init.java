@@ -44,14 +44,28 @@ public class Init implements ApplicationListener<ApplicationEvent> {
     public static Log4j log4j;
     public static String usernameCookieName,passwordCookieName;
     public static Mysql mysql;
+    public static String loginRedirectUrl;
 
     private void init(){
+
         //web root
-        WebRoot = System.getProperty("webapp.root");
-        System.setProperty("WebRoot", WebRoot);
+        String webAppRootKey = WebAppRootKey.key;
+        WebRoot = System.getProperty(webAppRootKey);
+
+        //cookie name
+        usernameCookieName = webAppRootKey + "UserName";
+        passwordCookieName = webAppRootKey + "Password";
 
         //log4j
         log4j = new Log4j(WebRoot+"/Config/log4j.xml");
+
+        //login redirect url
+        try {
+            Xml Xml1 = new Xml(WebRoot+"/Config/redirect.xml");
+            loginRedirectUrl = Xml1.readFirstNodeValueByNodeName("url");
+        } catch (DocumentException e) {
+            log4j.error("get login redirect url failed:xml config load error:"+e.getMessage());
+        }
 
         //mysql
         try {
@@ -71,11 +85,6 @@ public class Init implements ApplicationListener<ApplicationEvent> {
             log4j.error("init mysql failed:mysql driver not found:"+e.getMessage());
         }
 
-        //cookie name
-        MyString MyString1 = new MyString(WebRoot.replace("\\","/"));
-        String[] arr = MyString1.split("/");
-        String moduleName = arr[arr.length-2];
-        usernameCookieName = moduleName + "UserName";
-        passwordCookieName = moduleName + "Password";
+
     }
 }

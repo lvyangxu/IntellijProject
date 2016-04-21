@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static Init.Init.loginRedirectUrl;
+
 /**
  * Created by karl on 2016/4/12.
  */
@@ -25,7 +27,7 @@ public class Account {
     public void doLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         MyMvcObject MyMvcObject1 = new MyMvcObject(request,response, session);
         try {
-            MyMvcObject1.login().success();
+            MyMvcObject1.login().success(loginRedirectUrl);
         } catch (MyException e) {
             MyMvcObject1.fail(e.getMessage());
         }

@@ -2,231 +2,214 @@
 * table css
 */
 
-/*table description*/
-.addon-table > span {
-    display: none;
-}
 
+/*table description*/
+.addon-table>span{
+	display:none;
+}
 /*text-align*/
-.addon-table > table, .addon-table > table > thead > tr > th {
+.addon-table>table,.addon-table>table>thead>tr>th{
     text-align: center;
 }
 
-.addon-table > table > thead > tr > th, .addon-table > table > tbody > tr > td {
-    vertical-align: middle;
+.addon-table>table>thead>tr>th,.addon-table>table>tbody>tr>td{
+	vertical-align:middle;
 }
 
 /*header*/
-.addon-table > div > header {
-    font-size: 2em;
-    font-weight: bolder;
+.addon-table>div>header{
+	font-size:2em;
+	font-weight:bolder;
 }
 
 /*request and filter*/
-.addon-table > .request {
-    height: 35px;
-    margin-bottom: 15px;
+.addon-table>.request{
+	height:35px;
+	margin-bottom:15px;	
+}
+.addon-table>.filter,.addon-table>.pagination{
+	margin-bottom:10px;	
+}
+.addon-table>.pagination{
+    margin-top:0px;
 }
 
-.addon-table > .filter, .addon-table > .pagination {
-    margin-bottom: 10px;
+.addon-table>.filter>.filter{
+    height:30px;
+}
+.addon-table>.filter>div{
+	margin-right:20px;
 }
 
-.addon-table > .pagination {
-    margin-top: 0px;
+.addon-table>.request>label,.addon-table>.filter>label,.addon-table>.pagination>label{
+	font-size:1.2em;
+	margin-right:20px;
 }
-
-.addon-table > .filter > .filter {
-    height: 30px;
+.addon-table>.request>button,.addon-table>.request>div{
+	margin-left:10px;
 }
-
-.addon-table > .filter > div {
-    margin-right: 20px;
-}
-
-.addon-table > .request > label, .addon-table > .filter > label, .addon-table > .pagination > label {
-    font-size: 1.2em;
-    margin-right: 20px;
-}
-
-.addon-table > .request > button, .addon-table > .request > div {
-    margin-left: 10px;
-}
-
-.addon-table > .request > div > .contain > button {
-    height: 34px;
+.addon-table>.request>div>.contain>button{
+	height:34px;
 }
 
 /*create wall and update wall*/
-.addon-table > .request > .addon-wall > .contain > .panel > div {
-    margin-top: 10px;
-    min-width: 400px;
+.addon-table>.request>.addon-wall>.contain>.panel>div{
+	margin-top:10px;
+	min-width:400px;
+}	
+.addon-table>.request>.addon-wall>.contain>.panel>.head>button{
+	margin-left:10px;
+}
+.addon-table>.request>.addon-wall>.contain>.panel>.body{
+	padding-left:10px;
+	padding-right:10px;
 }
 
-.addon-table > .request > .addon-wall > .contain > .panel > .head > button {
-    margin-left: 10px;
+.addon-table>.request>.addon-wall>.contain>.panel>.body>table{   
+    text-align:center;
+	background-color:white;
 }
 
-.addon-table > .request > .addon-wall > .contain > .panel > .body {
-    padding-left: 10px;
-    padding-right: 10px;
-}
 
-.addon-table > .request > .addon-wall > .contain > .panel > .body > table {
-    text-align: center;
-    background-color: white;
-}
-
-.addon-table > .request > .addon-wall > .contain > .panel > .body > table > thead > tr > td > div {
-    min-width: 110px;
+.addon-table>.request>.addon-wall>.contain>.panel>.body>table>thead>tr>td>div{
+    min-width:110px;
 }
 
 /*pagination*/
-.addon-table > .pagination > button, .addon-table > .pagination > span > button {
-    margin-left: 5px;
+.addon-table>.pagination>button,.addon-table>.pagination>span>button{
+	margin-left:5px;
 }
-
-.addon-table > .pagination > .double-left {
-    margin-left: 20px;
+.addon-table>.pagination>.double-left{
+	margin-left:20px;
 }
 
 /*thead*/
-.addon-table > table > thead > tr > th {
-    font-size: 1.2em;
+.addon-table>table>thead>tr>th{
+	font-size:1.2em;
 }
-
 /*thead hide*/
-.addon-table > table > thead > tr > .hide, .addon-table > table > tbody > tr > .hide {
-    display: none;
+.addon-table>table>thead>tr>.hide,.addon-table>table>tbody>tr>.hide{
+    display:none;
 }
 
 /*thead hover*/
-.addon-table > table > thead > tr > .content:hover {
-    cursor: pointer;
-    background-color: #00b1e9;
+.addon-table>table>thead>tr>.content:hover{
+    cursor:pointer;
+    background-color:#00b1e9;
 }
 
 /*checkbox column*/
-.addon-table > table > thead > tr > .pre, .addon-table > table > tbody > tr > .pre {
-    width: 40px;
+.addon-table>table>thead>tr>.pre,.addon-table>table>tbody>tr>.pre{
+	width:40px;
 }
 
 /*checkbox style*/
-.addon-table > table > thead > tr > th > input[type=checkbox], .addon-table > table > tbody > tr > .pre > input[type=checkbox] {
-    width: 20px;
-    height: 20px;
+.addon-table>table>thead>tr>th>input[type=checkbox],.addon-table>table>tbody>tr>.pre>input[type=checkbox]{
+	width:20px;
+	height:20px;
 }
+
+
 
 /*table row filter panel head*/
-.addon-table > .filter > .addon-wall > .contain > .panel > .dateFilter {
-    color: rgba(144, 144, 144, 1);
-    margin-top: 10px;
-    min-width: 400px;
+.addon-table>.filter>.addon-wall>.contain>.panel>.dateFilter{
+	color: rgba(144, 144, 144, 1);
+	margin-top:10px;
+	min-width:400px;
+}
+.addon-table>.filter>.addon-wall>.contain>.panel>.dateFilter>label{
+	margin-left:10px;
+	font-size:1.3em;	
+}
+.addon-table>.filter>.addon-wall>.contain>.panel>.dateFilter>div{
+	margin-left:10px;
 }
 
-.addon-table > .filter > .addon-wall > .contain > .panel > .dateFilter > label {
-    margin-left: 10px;
-    font-size: 1.3em;
+.addon-table>.filter>.addon-wall>.contain>.panel>.head {
+	height: 40px;
+	line-height: 40px;
+	color: rgba(144, 144, 144, 1);
+	margin-top:10px;
+	margin-bottom:10px;
+	min-width:400px;
 }
 
-.addon-table > .filter > .addon-wall > .contain > .panel > .dateFilter > div {
-    margin-left: 10px;
+.addon-table>.filter>.addon-wall>.contain>.panel>.head>button{
+	margin-left:10px;
+}
+.addon-table>.filter>.addon-wall>.contain>.panel>.body>div{
+	height:30px;
+	margin-bottom:10px;
+}
+.addon-table>.pagination>select{
+    font-size:1.2em;
+    width:50px;
+	height:30px;  	
+	margin-right:3px;
 }
 
-.addon-table > .filter > .addon-wall > .contain > .panel > .head {
-    height: 40px;
-    line-height: 40px;
-    color: rgba(144, 144, 144, 1);
-    margin-top: 10px;
-    margin-bottom: 10px;
-    min-width: 400px;
+.addon-table>.filter>.addon-wall>.contain>.panel>.body>div>select{
+    margin-left:10px;
+    width:150px;
+	height:30px;   
+}
+.addon-table>.filter>.addon-wall>.contain>.panel>.body>div>div{
+	margin-left:30px;
+	height:30px;
+}
+.addon-table>.filter>.addon-wall>.contain>.panel>.body>div>button{
+	margin-left:30px;
+	height:30px;
 }
 
-.addon-table > .filter > .addon-wall > .contain > .panel > .head > button {
-    margin-left: 10px;
+.addon-table>table>thead>tr>.content>i.fa-sort{
+	opacity:0.2;
 }
 
-.addon-table > .filter > .addon-wall > .contain > .panel > .body > div {
-    height: 30px;
-    margin-bottom: 10px;
+.addon-table>table>tbody>tr>.pre>.attachment>.contain>.panel>.head{
+	padding-left:10px;
+	padding-right:10px;
+	margin-top:10px;
+	margin-bottom:10px;
+	min-width:200px;
+	text-align:left;
+}
+.addon-table>table>tbody>tr>.pre>.attachment>.contain>.panel>.head>button,
+.addon-table>table>tbody>tr>.pre>.attachment>.contain>.panel>.head>div{
+	margin-left:10px;
+}
+.addon-table>table>tbody>tr>.pre>.attachment>.contain>.panel>.body{
+	padding-left:10px;
+	padding-right:10px;	
+}
+.addon-table>table>tbody>tr>.pre>.attachment>.contain>.panel>.body>table>thead>tr>.content{
+	min-width:200px;
 }
 
-.addon-table > .pagination > select {
-    font-size: 1.2em;
-    width: 50px;
-    height: 30px;
-    margin-right: 3px;
+.addon-table>table>tbody>tr>.pre>.attachment>.contain>.panel>.body>table>thead>tr>th>input[type=checkbox],
+.addon-table>table>tbody>tr>.pre>.attachment>.contain>.panel>.body>table>tbody>tr>td>input[type=checkbox]{
+	width:20px;
+	height:20px;
 }
 
-.addon-table > .filter > .addon-wall > .contain > .panel > .body > div > select {
-    margin-left: 10px;
-    width: 150px;
-    height: 30px;
+
+.addon-table>table>tbody>tr>.pre>.attachment>.contain>.panel>.body>table{
+	background-color:white;
+}
+.addon-table>table>tbody>tr>.pre>.attachment>.contain>.panel>.body>table>thead>tr>th,
+.addon-table>table>tbody>tr>.pre>.attachment>.contain>.panel>.body>table>tbody>tr>td{
+	vertical-align:middle;
+	text-align:center;
 }
 
-.addon-table > .filter > .addon-wall > .contain > .panel > .body > div > div {
-    margin-left: 30px;
-    height: 30px;
+
+.addon-table>table>tbody>tr>td>.animation{
+	animation:tableRefresh 3s infinite linear;
+	font-size:2em;
 }
 
-.addon-table > .filter > .addon-wall > .contain > .panel > .body > div > button {
-    margin-left: 30px;
-    height: 30px;
-}
+@keyframes tableRefresh{
+	from {transform:rotateZ(0deg)}
+	to {transform:rotateZ(360deg)}
+} 
 
-.addon-table > table > thead > tr > .content > i.fa-sort {
-    opacity: 0.2;
-}
-
-.addon-table > table > tbody > tr > .pre > .attachment > .contain > .panel > .head {
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    min-width: 200px;
-    text-align: left;
-}
-
-.addon-table > table > tbody > tr > .pre > .attachment > .contain > .panel > .head > button,
-.addon-table > table > tbody > tr > .pre > .attachment > .contain > .panel > .head > div {
-    margin-left: 10px;
-}
-
-.addon-table > table > tbody > tr > .pre > .attachment > .contain > .panel > .body {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.addon-table > table > tbody > tr > .pre > .attachment > .contain > .panel > .body > table > thead > tr > .content {
-    min-width: 200px;
-}
-
-.addon-table > table > tbody > tr > .pre > .attachment > .contain > .panel > .body > table > thead > tr > th > input[type=checkbox],
-.addon-table > table > tbody > tr > .pre > .attachment > .contain > .panel > .body > table > tbody > tr > td > input[type=checkbox] {
-    width: 20px;
-    height: 20px;
-}
-
-.addon-table > table > tbody > tr > .pre > .attachment > .contain > .panel > .body > table {
-    background-color: white;
-}
-
-.addon-table > table > tbody > tr > .pre > .attachment > .contain > .panel > .body > table > thead > tr > th,
-.addon-table > table > tbody > tr > .pre > .attachment > .contain > .panel > .body > table > tbody > tr > td {
-    vertical-align: middle;
-    text-align: center;
-}
-
-.addon-table > table > tbody > tr > td > .animation {
-    animation: tableRefresh 3s infinite linear;
-    font-size: 2em;
-}
-
-@keyframes tableRefresh {
-    from {
-        transform: rotateZ(0deg)
-    }
-    to {
-        transform: rotateZ(360deg)
-    }
-}

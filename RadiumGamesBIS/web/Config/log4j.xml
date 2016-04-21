@@ -3,7 +3,7 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
     <!--系统日志-->
     <appender name="system" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${RadiumMERoot}/Log/system" />
+        <param name="File" value="${RadiumGamesBISRoot}/Log/system" />
         <param name="Threshold" value="info" />
         <param name="Append" value="true" />
         <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
@@ -13,7 +13,7 @@
     </appender>
     <!--数据库相关日志-->
     <appender name="database" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${RadiumMERoot}/Log/database" />
+        <param name="File" value="${RadiumGamesBISRoot}/Log/database" />
         <param name="Threshold" value="info" />
         <param name="Append" value="true" />
         <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
@@ -23,7 +23,7 @@
     </appender>
     <!--错误日志-->
     <appender name="error" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${RadiumMERoot}/Log/error" />
+        <param name="File" value="${RadiumGamesBISRoot}/Log/error" />
         <param name="Threshold" value="info" />
         <param name="Append" value="true" />
         <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
@@ -33,7 +33,7 @@
     </appender>
     <!--业务日志-->
     <appender name="business" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${RadiumMERoot}/Log/business" />
+        <param name="File" value="${RadiumGamesBISRoot}/Log/business" />
         <param name="Threshold" value="info" />
         <param name="Append" value="true" />
         <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
@@ -43,7 +43,7 @@
     </appender>
     <!--表格日志-->
     <appender name="table" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${RadiumMERoot}/Log/table" />
+        <param name="File" value="${RadiumGamesBISRoot}/Log/table" />
         <param name="Threshold" value="info" />
         <param name="Append" value="true" />
         <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
@@ -53,7 +53,7 @@
     </appender>
     <!--上传日志-->
     <appender name="upload" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${RadiumMERoot}/Log/upload" />
+        <param name="File" value="${RadiumGamesBISRoot}/Log/upload" />
         <param name="Threshold" value="info" />
         <param name="Append" value="true" />
         <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
@@ -63,7 +63,7 @@
     </appender>
     <!--下载日志-->
     <appender name="download" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${RadiumMERoot}/Log/download" />
+        <param name="File" value="${RadiumGamesBISRoot}/Log/download" />
         <param name="Threshold" value="info" />
         <param name="Append" value="true" />
         <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
@@ -73,7 +73,7 @@
     </appender>
     <!--登录日志-->
     <appender name="login" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${RadiumMERoot}/Log/login" />
+        <param name="File" value="${RadiumGamesBISRoot}/Log/login" />
         <param name="Threshold" value="info" />
         <param name="Append" value="true" />
         <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />

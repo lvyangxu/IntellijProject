@@ -1,12 +1,10 @@
 package Models;
 
-import MiddleWare.Response;
-import org.springframework.ui.Model;
+import Response.Response;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 /**
  * Created by karl on 2016/4/19.
@@ -32,6 +30,10 @@ public class MyMvcObject {
 
     public void success()  {
         Response.success(this.response);
+    }
+
+    public void success(String messgae) {
+        Response.success(this.response,messgae);
     }
 
     public void fail(String messgae) {

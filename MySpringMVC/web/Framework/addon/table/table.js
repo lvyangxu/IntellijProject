@@ -567,7 +567,8 @@
 					break;
 					case "multi-select":
 					if(data("th-data")!=undefined){
-						result = "<div"+readonlyHtml+" class='addon-select'></div>";
+						defaultValue = (v==undefined)?"":" data='"+v+"'";
+						result = "<div"+readonlyHtml+" class='addon-select'"+defaultValue+"></div>";
 					}
 					break;
 					case "week":
@@ -1067,10 +1068,13 @@
 								trHtml += "</tr>";
 							}
 							node("update-body").children(".content").children("tbody").html(trHtml);
+							//set default value
+
+							
 							//set unity tr html
 							var unityHtml = "<tr>"+data("thArr").map(function(d){
 								var tdText = checkedArr[0].parent().parent().children("td[th-id="+d.id+"]").text();
-								var tdHtml = getRequestTdHtml(d,tdText);
+								var tdHtml = getRequestTdHtml(d,tdText);							
 								return tdHtml;
 							}).collect("join","")+"</tr>";
 							node("update-body").children(".unity").children("tbody").html(unityHtml);
@@ -1090,7 +1094,7 @@
 					}
 				});
 				node("update-head").children(".submit").delegate("","click",function(){
-					var trs = node("update-body").children("table").children("tbody").children("tr");
+					var trs = node("update-body").children(".content").children("tbody").children("tr");
 					if(confirm("确定要提交这"+trs.length+"行数据吗?")){
 						var requestData = data("thArr").map(function(d){
 							var requestValue = trs.toArray().map(function(d1){

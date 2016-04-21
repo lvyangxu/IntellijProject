@@ -45,8 +45,8 @@ public class Account {
         }
         //get username and password in mysql and validate them
         boolean isValid = false;
-        Mysql.data data1 = mysql.select("select username,password from user");
-        for (List<String> row : data1.rows()) {
+
+        for (List<String> row : mysql.select("select username,password from user").rows()) {
             String usernameM = row.get(0);
             String passwordM = row.get(1);
             if (usernameP.equals(usernameM)) {

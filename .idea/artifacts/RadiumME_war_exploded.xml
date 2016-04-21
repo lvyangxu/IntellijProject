@@ -2,11 +2,9 @@
   <artifact type="exploded-war" name="RadiumME:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/RadiumME_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="RadiumME/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="RadiumME" />
-          <element id="module-output" name="MyJavaLibrary" />
           <element id="module-output" name="MySpringMVC" />
         </element>
         <element id="directory" name="lib">
@@ -24,6 +22,7 @@
           <element id="library" level="application" name="tomcat" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="RadiumME/web/Web" />
       <element id="javaee-facet-resources" facet="MySpringMVC/web/Web" />
     </root>
   </artifact>

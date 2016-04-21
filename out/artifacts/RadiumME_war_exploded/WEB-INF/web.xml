@@ -45,8 +45,8 @@
         </listener-class>
     </listener>
     <context-param>
-        <param-name>WebRootKey</param-name>
-        <param-value>WebRoot</param-value>
+        <param-name>webAppRootKey</param-name>
+        <param-value>RadiumMERoot</param-value>
     </context-param>
 
 </web-app>
