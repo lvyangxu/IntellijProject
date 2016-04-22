@@ -27,16 +27,6 @@ Array.prototype.distinct = function(callback){
 	return result;
 }
 
-//map
-Array.prototype.map = function(callback){
-	var result = new Array();
-	for(var i=0;i<this.length;i++){
-		var element = this[i];
-		result.push(callback(element));
-	}
-	return result;
-}
-
 //collect
 Array.prototype.collect = function(type,arg){
 	var result = "";

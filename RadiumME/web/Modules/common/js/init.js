@@ -46,6 +46,8 @@ refernceString = refernceString+refernce("fontawesome/css/",["font-awesome.min.c
 //加载css
 refernceString = refernceString+refernce("css/",["common.css"]);
 
+//加载traceur
+// refernceString = refernceString+refernce("traceur/",["traceur.js","bootstrap.js"]);
 
 var myJsPathArr = ["data-model.js", "image-model.js", "communication-model.js"];
 refernceString = refernceString+refernce("js/",myJsPathArr);
