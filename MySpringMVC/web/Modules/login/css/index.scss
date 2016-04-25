@@ -1,0 +1,24 @@
+body {
+    background-color: plum;
+    .frame {
+        position: fixed;
+        background-color: rebeccapurple;
+        padding: 50px 50px 50px 50px;
+        border: 2px solid;
+        border-radius: 20px;
+        box-shadow: 10px 10px 5px #888888;
+        .login {
+            text-align: center;
+            width: 200px;
+            button {
+                width: 100%;
+            }
+        }
+    }
+    div {
+        margin-top: 20px;
+    }
+    div:first-child {
+        margin-top: 0px;
+    }
+}

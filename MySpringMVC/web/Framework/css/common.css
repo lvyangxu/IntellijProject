@@ -1,16 +1,12 @@
 /*display class*/
 .inline-block {
-	display: inline-block;
-}
+  display: inline-block; }
 
 .block {
-	display: block;
-}
+  display: block; }
 
 /*body no margin*/
 body {
-	margin-top: 0px;
-	margin-left: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-}
+  margin: 0px; }
+
+/*# sourceMappingURL=common.css.map */
