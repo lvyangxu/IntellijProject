@@ -10,7 +10,6 @@
     } else {
         factory(jQuery);
     }
-  
 }(function ($) {
     'use strict';
     $.fn.section = function(options){

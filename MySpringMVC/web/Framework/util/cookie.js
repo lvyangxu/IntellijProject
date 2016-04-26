@@ -8,7 +8,7 @@ class cookie{
      * get cookie
      * @param cookieName
      * @returns {string}
-     */
+     */ 
     static get(cookieName) {
         let result = "";
         if (document.cookie.length > 0) {
@@ -24,9 +24,9 @@ class cookie{
             }
         }
         return result;
-    }
+    } 
 
-    /** 
+    /**
      * set cookie
      * @param cookieName
      * @param cookieValue

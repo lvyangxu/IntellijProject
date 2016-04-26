@@ -39,10 +39,10 @@ class http {
      */
     static request(url,requestParaData){
         var promise = new Promise(function(resolve,reject){
-            doAjaxInJquery(url,"post",30,requestParaData, function(result){
+            http.doAjaxInJquery(url,"post",30,requestParaData, function(result){
                 try{
                     result = result.toJson();
-                }catch(e){
+                }catch(e){ 
                     reject("Server Internal Error");
                 }
                 if(result.success!=undefined&&result.success=="true"){
