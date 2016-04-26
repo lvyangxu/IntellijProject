@@ -1,7 +1,17 @@
 /**
 * scroll js
 */
-(function($) {
+(function (factory) {
+	'use strict';
+	if (typeof define === 'function' && define.amd) {
+		define(['jquery'], factory);
+	} else if (typeof exports !== 'undefined') {
+		module.exports = factory(require('jquery'));
+	} else {
+		factory(jQuery);
+	}
+
+}(function ($) {
 	"use strict";
 	$.fn.loadingAnimate = function(options) {
 		return this.each(function() {
@@ -32,7 +42,7 @@
 		if(options==undefined){
 			return;
 		}
-
+ 
 		// set data
 		if(options.data!=undefined){
 
@@ -41,4 +51,4 @@
 		return element;
 	}
 
-})(jQuery);
+}));

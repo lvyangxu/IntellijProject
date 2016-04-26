@@ -1,7 +1,63 @@
 $height: 70px;
-.addon-nav{
-    height: $height;
-    span,div{
-        float: left;
+$width: 1000px;
+$back-color: rgba(55,64,74,1);
+$padding: 10px;
+$line-height:$height - $padding*2;
+$font-size:16px;
+
+.addon-nav {
+
+    @mixin menu() {
+        div {
+            float: left;
+            margin-left: 200px;
+            height: $line-height;
+            line-height: $line-height;
+            cursor:pointer;
+        }
+        div:first-child{
+            margin-left: 50px;
+        }
+
+        div:hover{
+            color:rgba(25,209,209,0.6);
+        }
+        div.active{
+            color:rgba(25,209,209,1);
+        }
     }
+
+    height: $height;
+    font-size: $font-size;
+    font-weight: 600;
+    color:white;
+
+    .container {
+        z-index: 50;
+        position: fixed;
+        background-color: $back-color;
+        padding-top: $padding;
+        padding-bottom: $padding;
+        height: $height;
+        width: 100%;
+        box-shadow: 1px 1px 1px;
+
+        span{
+            margin-left: 100px;
+            float: left;
+            img{
+                height: $line-height;
+            }
+        }
+        .left {
+            margin: auto;
+            width: $width;
+            @include menu();
+        }
+        .right {
+            float: right;
+            @include menu();
+        }
+    }
+
 }

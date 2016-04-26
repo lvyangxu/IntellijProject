@@ -1,6 +1,50 @@
 .addon-nav {
-  height: 70px; }
-  .addon-nav span, .addon-nav div {
-    float: left; }
+  height: 70px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white; }
+  .addon-nav .container {
+    z-index: 50;
+    position: fixed;
+    background-color: #37404a;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 70px;
+    width: 100%;
+    box-shadow: 1px 1px 1px; }
+    .addon-nav .container span {
+      margin-left: 100px;
+      float: left; }
+      .addon-nav .container span img {
+        height: 50px; }
+    .addon-nav .container .left {
+      margin: auto;
+      width: 1000px; }
+      .addon-nav .container .left div {
+        float: left;
+        margin-left: 200px;
+        height: 50px;
+        line-height: 50px;
+        cursor: pointer; }
+      .addon-nav .container .left div:first-child {
+        margin-left: 50px; }
+      .addon-nav .container .left div:hover {
+        color: rgba(25, 209, 209, 0.6); }
+      .addon-nav .container .left div.active {
+        color: #19d1d1; }
+    .addon-nav .container .right {
+      float: right; }
+      .addon-nav .container .right div {
+        float: left;
+        margin-left: 200px;
+        height: 50px;
+        line-height: 50px;
+        cursor: pointer; }
+      .addon-nav .container .right div:first-child {
+        margin-left: 50px; }
+      .addon-nav .container .right div:hover {
+        color: rgba(25, 209, 209, 0.6); }
+      .addon-nav .container .right div.active {
+        color: #19d1d1; }
 
 /*# sourceMappingURL=nav.css.map */

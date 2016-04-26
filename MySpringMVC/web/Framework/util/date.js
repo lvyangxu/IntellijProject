@@ -108,7 +108,7 @@ class date {
             return year + "-" + Number.parseInt(month - 1);
         }
     }
-
+  
     /**
      * convert yyyy-MM to it's addNum month string
      * @param dateStr

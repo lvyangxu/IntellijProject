@@ -1,7 +1,17 @@
 /**
 * datepicker js
 */
-(function($){
+(function (factory) {
+	'use strict';
+	if (typeof define === 'function' && define.amd) {
+		define(['jquery'], factory);
+	} else if (typeof exports !== 'undefined') {
+		module.exports = factory(require('jquery'));
+	} else {
+		factory(jQuery);
+	}
+
+}(function ($) {
 	"use strict";
 	$.fn.datepicker = function (options) {
 		return this.each(function () {
@@ -51,15 +61,15 @@
 				var str = "";
 				switch (type) {
 				case "month":
-					str = getLocalDay(0).substr(0, 7);
-					str = getMonth(str, addNum);
+					str = date.getLocalDay(0).substr(0, 7);
+					str = date.addMonth(str, addNum);
 					break;
 				case "day":
-					str = getLocalDay(parseInt(addNum));
+					str = date.getLocalDay(parseInt(addNum));
 					break;
 				case "week":
-					str = getLocalDay(parseInt(addNum));
-					str = toMonday(str);
+					str = date.getLocalDay(parseInt(addNum));
+					str = date.toMonday(str);
 					break;
 				}
 				element.data("data", str);
@@ -484,7 +494,7 @@
 					element.data("data",element.data("lastData"));
 				}				
 			});			
-			
+			 
 			//prevent click event bubbling
 			element.delegate(".contain","click",function(event){
 				event.stopPropagation();
@@ -497,4 +507,4 @@
 
 
 
-})(jQuery);
+}));

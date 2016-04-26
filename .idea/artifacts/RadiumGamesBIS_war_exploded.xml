@@ -21,7 +21,7 @@
           <element id="library" level="application" name="mongodb" />
           <element id="library" level="application" name="mysql" />
           <element id="library" level="application" name="poi" />
-          <element id="library" level="application" name="tomcat" />
+          <element id="library" level="application" name="tomcat-websocket" />
         </element>
       </element>
     </root>

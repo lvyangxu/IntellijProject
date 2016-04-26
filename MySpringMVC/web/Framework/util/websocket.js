@@ -13,7 +13,7 @@ class websocket{
         let baseUrl = window.location.href;
         baseUrl = baseUrl.replace(/http:/g, "ws:");
         let arr = baseUrl.split('/');
-        arr[arr.length - 1] = "";
+        arr[arr.length - 1] = ""; 
         arr[arr.length - 2] = "";
         let websocketUrl = "";
         for (var i = 0; i < arr.length - 2; i++) {

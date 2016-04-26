@@ -11,68 +11,59 @@ import java.util.regex.Pattern;
 public class MyString {
 
     private String value;
-    public MyString(String value){
+
+    public MyString(String value) {
         this.value = value;
     }
 
     /**
      * regex,remain the empty end string of value
+     *
      * @param value
      * @param regex
      * @return
      */
-    public String[] split(String regex){
+    public String[] split(String regex) {
         Pattern Pattern1 = Pattern.compile(regex);
         Matcher Matcher1 = Pattern1.matcher(this.value);
         int count = 1;
-        while(Matcher1.find()){
+        while (Matcher1.find()) {
             count++;
         }
-        String[] result = this.value.split(regex,count);
+        String[] result = this.value.split(regex, count);
         return result;
     }
 
     /**
-     * encode
-     * @param type
+     * base64 encode
+     *
      * @return
      */
-    public MyString encode(String type){
+    public MyString base64Encode() {
         try {
-            switch (type) {
-                case "base64":
-                    this.value = Base64.getEncoder().encodeToString(this.value.getBytes("utf-8"));
-                    break;
-                default:
-                    break;
-            }
+            this.value = Base64.getEncoder().encodeToString(this.value.getBytes("utf-8"));
         } catch (UnsupportedEncodingException e) {
         }
         return this;
     }
 
     /**
-     * decode
-     * @param type
+     * base64 decode
+     *
      * @return
      */
-    public MyString decode(String type) throws Exception {
-        switch (type) {
-            case "base64":
-                byte[] asBytes = Base64.getDecoder().decode(this.value);
-                this.value = new String(asBytes, "utf-8");
-                break;
-            default:
-                break;
-        }
+    public MyString base64Decode() throws Exception {
+        byte[] asBytes = Base64.getDecoder().decode(this.value);
+        this.value = new String(asBytes, "utf-8");
         return this;
     }
 
     /**
      * get string value
+     *
      * @return
      */
-    public String toString(){
+    public String toString() {
         return this.value;
     }
 }

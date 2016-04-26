@@ -33,7 +33,8 @@
     <orderEntry type="library" name="mongodb" level="application" />
     <orderEntry type="library" name="mysql" level="application" />
     <orderEntry type="library" name="poi" level="application" />
-    <orderEntry type="library" name="tomcat" level="application" />
+    <orderEntry type="library" name="tomcat-websocket" level="application" />
     <orderEntry type="module" module-name="MySpringMVC" />
+    <orderEntry type="library" name="Tomcat 8.0.30" level="application_server_libraries" />
   </component>
 </module>

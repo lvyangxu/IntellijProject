@@ -12,9 +12,9 @@ body {
       width: 200px; }
       body .frame .login button {
         width: 100%; }
-  body div {
-    margin-top: 20px; }
-  body div:first-child {
-    margin-top: 0px; }
+    body .frame div {
+      margin-top: 20px; }
+    body .frame div:first-child {
+      margin-top: 0px; }
 
 /*# sourceMappingURL=index.css.map */

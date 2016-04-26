@@ -17,7 +17,7 @@ class myString {
         } catch (e) {
             throw "string is not json";
         }
-    }
+    } 
 
     /**
      * utf8 encode

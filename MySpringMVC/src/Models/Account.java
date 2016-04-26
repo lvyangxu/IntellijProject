@@ -31,21 +31,25 @@ public class Account {
             throw new MyException("empty password");
         }
 
-
         try {
-            usernameP = new MyString(usernameP).decode("base64").toString();
+            usernameP = new MyString(usernameP).base64Decode().toString();
         } catch (Exception e) {
             throw new MyException("invalid username");
         }
 
         try {
-            passwordP = new MyString(passwordP).decode("base64").toString();
+            passwordP = new MyString(passwordP).base64Decode().toString();
         } catch (Exception e) {
             throw new MyException("invalid password");
         }
+
+        authenticate(usernameP,passwordP);
+
+    }
+
+    public static void authenticate(String usernameP,String passwordP) throws MyException {
         //get username and password in mysql and validate them
         boolean isValid = false;
-
         for (List<String> row : mysql.select("select username,password from user").rows()) {
             String usernameM = row.get(0);
             String passwordM = row.get(1);
@@ -54,14 +58,13 @@ public class Account {
                     isValid = true;
                     break;
                 } else {
-                    throw new MyException("invalid password");
+                    throw new MyException("relogin:invalid password");
                 }
             }
         }
 
         if (!isValid) {
-            throw new MyException("invalid username");
+            throw new MyException("relogin:invalid username");
         }
-
     }
 }

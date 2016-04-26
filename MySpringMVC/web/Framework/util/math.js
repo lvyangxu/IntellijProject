@@ -12,4 +12,4 @@ class math {
         let random = Math.round(Math.random() * max);
         return random;
     }
-}
+} 

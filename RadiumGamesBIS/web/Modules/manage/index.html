@@ -9,8 +9,6 @@
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
     <title>Business Information System</title>
-    <script data-main="../Framework/require/main" src="../Framework/require/require.js"></script>
-
     <link rel="icon" href="../Images/favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="../Images/favicon.ico" type="image/x-icon"/>
     <script src="../Modules/manage/js/init.js"></script>
@@ -18,59 +16,18 @@
 </head>
 <body>
 
-<div class="navbar">
-    <div class="brand"></div>
-    <div>11</div>
-    <div>22</div>
+<div class="nav">
+    <div class="container">
+        <span><img src="../Modules/manage/image/icon.png"></span>
+        <div class="left">
+            <div section="Business">Business</div>
+            <div section="Finance">Finance</div>
+        </div>
+    </div>
 </div>
 
-<mylayout
-        id="mylayout"
-        head="RadiumGamesBIS"
-        head-icon="html5"
-        li="Operation,Business,Finance"
->
-</mylayout>
-<div ng-show="lis[0].isActive" ng-controller="OperationController"
-     ng-init="loadTableData('init')">
-    <section class="header">
-        <button ng-repeat="area in areas" ng-click="checkToggle($index)"
-                ng-class="{true: 'button-info', false: 'button-danger'}[area.isChecked]">
-            <i style="width: 20px"
-               ng-class="{true: 'fa fa-check', false: 'fa fa-times'}[area.isChecked]"></i>{{area.name}}
-        </button>
-        <div id="startTime" class="addon-datepicker" type="day" add-num="-14"></div>
-        <div id="endTime" class="addon-datepicker" type="day" add-num="0"></div>
-        <label>EUR/USD:</label>
-        <input class="exchangeRate" min="0" step="0.01"
-               ng-model="exchangeRate" type="number">
-        <button class="button-info" ng-click="setExchangeRate()">set
-            rate
-        </button>
-        <button class="button-info" ng-click="loadTableData()">
-            <i class="fa fa-refresh"></i> update
-        </button>
-    </section>
-    <myverticalmenu id="operation"
-                    name="运营数据,DAU,DNU,EDAU,ARPU,ARPPU,PayRate,PurchaseUser,Purchase,虚拟货币人均存量,虚拟货币付费用户人均存量,当日付费用户登录,revenue"></myverticalmenu>
-    <section ng-show="operationUrl=='运营数据'">
-        <mytable id="totalTable" title="运营数据"
-                 th-id="areaDisplay,s_daytime,s_dau,s_dnu,s_edau,s_arpu,s_arppu,s_dailypaidrate,s_dailypaidusers,s_dailypaidtimes,s_dauag,s_dapuag,s_dailypaidloginusers,s_dailyincome"
-                 th-name="Version,Date,DAU,DNU,EDAU,ARPU,ARPPU,PayRate,PurchaseUser,Purchase,虚拟货币人均存量,虚拟货币付费用户人均存量,当日付费用户登录,revenue">
-        </mytable>
-    </section>
-    <section ng-show="operationUrl==section.title"
-             ng-repeat="section in sections">
-        <mylinechart id="{{section.id}}" title="{{section.title}}"
-                     height="500" width="800" margin-left="50" margin-right="10"
-                     margin-top="10" margin-bottom="20"></mylinechart>
-    </section>
-</div>
-
-<div ng-show="lis[1].isActive" ng-controller="BusinessController">
-    <myverticalmenu id="business" name="渠道信息,渠道历史修改记录,渠道周报管理,周报/kpi统计,kpi设置"></myverticalmenu>
-    <section ng-show="businessUrl=='渠道信息'">
-        <!--渠道信息-->
+<div id="Business">
+    <div section="渠道信息">
         <div id="channelinfo" title="渠道信息" class="addon-table" relate="channeldetail" attachment>
             <span th-id="name" type="text" key>渠道名称</span>
             <span th-id="type1" type="single-select">计费类型</span>
@@ -91,20 +48,16 @@
             <span th-id="lastcpi" hide type="float" readonly>上一次的cpi</span>
             <span th-id="updatetime" hide type="text" readonly>更新时间</span>
         </div>
-    </section>
-
-    <!--渠道历史修改记录-->
-    <section ng-show="businessUrl=='渠道历史修改记录'">
+    </div>
+    <div section="渠道历史修改记录">
         <div id="channelhistory" title="渠道历史修改记录" class="addon-table" curd="r">
             <span th-id="name">渠道名称</span>
             <span th-id="type">操作类型</span>
             <span th-id="time">时间</span>
             <span th-id="user">修改人</span>
         </div>
-    </section>
-
-    <!--渠道周报管理-->
-    <section ng-show="businessUrl=='渠道周报管理'" ng-controller="ChannelWeeklyReportController">
+    </div>
+    <div section="渠道周报管理">
         <div style="margin-top:20px;margin-bottom:20px">
             <button id="excelModel" class="btn btn-warning"><i class="fa fa-download"></i>周报录入excel模版</button>
             <div style="margin-left:10px" class="addon-upload" url="../DataExchange/AddWeeklyReportByExcel"
@@ -138,52 +91,39 @@
             <span th-id="createtime" type="text" readonly>创建时间</span>
             <span th-id="updatetime" type="text" readonly>更新时间</span>
         </div>
-
-    </section>
-
-    <!--周报统计-->
-    <div ng-show="businessUrl=='周报/kpi统计'">
-        <section>
-            <select style="height:25px;width:150px" ng-options="tableType for tableType in ['周报统计','KPI统计']"
-                    ng-model='tableType' ng-init="tableType='周报统计'"></select>
-        </section>
-        <section ng-show="tableType=='周报统计'" ng-controller="WeeklyStatisticsController">
-            <div id="weeklystatistics" title="周报统计" class="addon-table" curd="r" date-filter-type="week"
-                 column-date-key="time" request-filter-key="app" request-filter-name="app">
-                <span th-id="time">时间</span>
-                <span th-id="app">APP</span>
-                <span th-id="revenue">收入</span>
-                <span th-id="cost">花费</span>
-                <span th-id="setup">安装</span>
-                <span th-id="dnu">DNU</span>
-                <span th-id="dau">DAU</span>
-                <span th-id="profit">毛利</span>
-                <span th-id="profitrate">毛利率</span>
-            </div>
-        </section>
-        <!--月报统计-->
-        <section ng-show="tableType=='KPI统计'" ng-controller="MonthlyStatisticsController">
-            <div id="monthlystatistics" title="KPI统计" class="addon-table" curd="r" date-filter-type="month"
-                 column-date-key="time" request-filter-key="app" request-filter-name="app">
-                <span th-id="time">时间</span>
-                <span th-id="app">APP</span>
-                <span th-id="revenue">收入</span>
-                <span th-id="cost">花费</span>
-                <span th-id="setup">安装</span>
-                <span th-id="dnu">DNU</span>
-                <span th-id="dau">DAU</span>
-                <span th-id="profit">毛利</span>
-                <span th-id="profitrate">毛利率</span>
-                <span th-id="kpirevenue">KPI完成度-收入</span>
-                <span th-id="kpicost">KPI完成度-花费</span>
-                <span th-id="kpisetup">KPI完成度-安装</span>
-                <span th-id="kpidnu">KPI完成度-DNU</span>
-                <span th-id="kpidau">KPI完成度-DAU</span>
-            </div>
-        </section>
     </div>
-    <!--KPI设置-->
-    <section ng-show="businessUrl=='kpi设置'">
+    <div section="周报/kpi统计">
+        <div id="weeklystatistics" title="周报统计" class="addon-table" curd="r" date-filter-type="week"
+             column-date-key="time" request-filter-key="app" request-filter-name="app">
+            <span th-id="time">时间</span>
+            <span th-id="app">APP</span>
+            <span th-id="revenue">收入</span>
+            <span th-id="cost">花费</span>
+            <span th-id="setup">安装</span>
+            <span th-id="dnu">DNU</span>
+            <span th-id="dau">DAU</span>
+            <span th-id="profit">毛利</span>
+            <span th-id="profitrate">毛利率</span>
+        </div>
+        <div id="monthlystatistics" title="KPI统计" class="addon-table" curd="r" date-filter-type="month"
+             column-date-key="time" request-filter-key="app" request-filter-name="app">
+            <span th-id="time">时间</span>
+            <span th-id="app">APP</span>
+            <span th-id="revenue">收入</span>
+            <span th-id="cost">花费</span>
+            <span th-id="setup">安装</span>
+            <span th-id="dnu">DNU</span>
+            <span th-id="dau">DAU</span>
+            <span th-id="profit">毛利</span>
+            <span th-id="profitrate">毛利率</span>
+            <span th-id="kpirevenue">KPI完成度-收入</span>
+            <span th-id="kpicost">KPI完成度-花费</span>
+            <span th-id="kpisetup">KPI完成度-安装</span>
+            <span th-id="kpidnu">KPI完成度-DNU</span>
+            <span th-id="kpidau">KPI完成度-DAU</span>
+        </div>
+    </div>
+    <div section="kpi设置">
         <div id="kpi" title="KPI设置" class="addon-table" curd="curd" column-date-key="time">
             <span th-id="time" type="month" key>时间</span>
             <span th-id="app" type="single-select" key>APP</span>
@@ -193,13 +133,10 @@
             <span th-id="dnu" type="int">DNU</span>
             <span th-id="dau" type="int">DAU</span>
         </div>
-    </section>
+    </div>
 </div>
-</div>
-<div ng-show="lis[2].isActive" ng-controller="FinanceController">
-    <myverticalmenu id="finance" name="Invoice列表"></myverticalmenu>
-    <section ng-show="financeUrl=='Invoice列表'">
-        <!--Invoice-->
+<div id="Finance">
+    <div section="invoice列表">
         <div id="invoice" title="Invoice列表" class="addon-table" relate="invoicedetail" curd="r" relateCreate
              attachmentBatchDownload>
             <span th-id="name" key>渠道名称</span>
@@ -228,11 +165,9 @@
             <span th-id="createtime" type="text" readonly>创建时间</span>
             <span th-id="updatetime" type="text" readonly>更新时间</span>
         </div>
-    </section>
-
-
+    </div>
+    <div section="invoice详细记录"></div>
 </div>
-
 
 <script src="../Modules/manage/js/index.js"></script>
 </body>

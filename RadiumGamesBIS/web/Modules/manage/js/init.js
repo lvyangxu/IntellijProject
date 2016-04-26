@@ -11,9 +11,9 @@
      * @param filePathArr
      * @returns {string}
      */
-    let refernce =(folderPath, filePathArr)=> {
+    let refernce = (folderPath, filePathArr)=> {
         var result = "";
-        for(let filePath of filePathArr){
+        for (let filePath of filePathArr) {
             if (filePath.endsWith(".css")) {
                 result += "<link rel=\"stylesheet\" href=\"" + relativePath + folderPath + filePath + "\">";
             } else {
@@ -60,6 +60,19 @@
      */
     let utilArr = ["cookie.js", "date.js", "http.js", "math.js", "myString.js", "websocket.js"];
     refernceString += refernce("util/", utilArr);
+
+    /**
+     * load addon
+     */
+    let loadAddon = (nameArr)=> {
+        let result = "";
+        for(let name of nameArr){
+            let addonArr = [name + "/" + name + ".js", name + "/" + name + ".css"];
+            result += refernce("addon/", addonArr);
+        }
+        return result;
+    }
+    refernceString += loadAddon(["nav","section","table","select","wall","datepicker","upload"]);
 
     /**
      * output all reference

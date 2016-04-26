@@ -14,11 +14,12 @@ body {
                 width: 100%;
             }
         }
+        div {
+            margin-top: 20px;
+        }
+        div:first-child {
+            margin-top: 0px;
+        }
     }
-    div {
-        margin-top: 20px;
-    }
-    div:first-child {
-        margin-top: 0px;
-    }
+
 }

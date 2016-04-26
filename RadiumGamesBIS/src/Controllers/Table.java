@@ -3,6 +3,7 @@ package Controllers;
 import Models.MyException;
 import Models.MyMvcObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -11,26 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by karl on 2016/4/12.
+ * Created by karl on 2016/4/26.
  */
 @Controller
 @SessionAttributes("session")
-@RequestMapping(value = "/Account")
-public class Account {
+@RequestMapping(value = "/Table")
+public class Table {
 
-    @RequestMapping(value = "/DoLogin")
-    public void doLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+    @RequestMapping(value = "/{name}/{type}")
+    public void table(HttpServletRequest request, HttpServletResponse response, HttpSession session, @PathVariable String name,@PathVariable String type){
         MyMvcObject MyMvcObject1 = new MyMvcObject(request,response, session);
         try {
-            MyMvcObject1.login().success();
+            MyMvcObject1.authenticate().read(name,type).success();
         } catch (MyException e) {
             MyMvcObject1.fail(e.getMessage());
         }
     }
 
-    @RequestMapping(value = "/DoLogout")
-    public String doLogout(HttpSession session) {
-        session.setAttribute("username", null);
-        return "/login";
-    }
 }

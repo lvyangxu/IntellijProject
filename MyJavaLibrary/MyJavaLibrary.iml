@@ -30,6 +30,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.0.30" level="application_server_libraries" />
     <orderEntry type="library" name="Spring MVC-4.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Spring-4.2.5.RELEASE" level="project" />
-    <orderEntry type="library" name="tomcat" level="application" />
+    <orderEntry type="library" name="tomcat-websocket" level="application" />
   </component>
 </module>

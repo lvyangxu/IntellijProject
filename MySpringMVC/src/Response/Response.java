@@ -27,12 +27,11 @@ public class Response {
         PrintWriter1.close();
     }
 
-    public static void success(HttpServletResponse response) {
-        String message = "{\"success\":\"true\",\"message\":\"\"}";
-        response(response,message);
-    }
-
-    public static void success(HttpServletResponse response,String message) {
+    public static void success(HttpServletResponse response,String ...responseMessage) {
+        String message = "";
+        if(responseMessage.length!=0){
+            message = responseMessage[0];
+        }
         message = "{\"success\":\"true\",\"message\":\""+message+"\"}";
         response(response,message);
     }

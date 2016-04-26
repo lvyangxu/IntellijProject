@@ -19,7 +19,7 @@
           <element id="library" level="application" name="mysql" />
           <element id="library" level="application" name="mongodb" />
           <element id="library" level="application" name="log4j2" />
-          <element id="library" level="application" name="tomcat" />
+          <element id="library" level="application" name="tomcat-websocket" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="RadiumME/web/Web" />

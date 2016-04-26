@@ -26,7 +26,7 @@ class cookie{
         return result;
     }
 
-    /**
+    /** 
      * set cookie
      * @param cookieName
      * @param cookieValue

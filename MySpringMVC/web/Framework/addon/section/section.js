@@ -10,24 +10,24 @@
     } else {
         factory(jQuery);
     }
-
+  
 }(function ($) {
     'use strict';
-    $.fn.nav = function(options){
+    $.fn.section = function(options){
         return this.each(()=> {
-            nav($(this), options);
+            section($(this), options);
         });
     };
 
-    let nav = (element, options)=> {
+    let section = (element, options)=> {
         let defaults = element.data("setting") || {};
         let settings = $.extend(defaults, options);
 
-        element.addonInit("nav");
+        element.addonInit("section");
 
         element.children(".container").children("div").children("div").each(function (index) {
             if(index==0){
-               $(this).addClass("active");
+                $(this).addClass("active");
             }else {
                 let sectionId = $(this).attr("section");
                 $("#"+sectionId).hide();

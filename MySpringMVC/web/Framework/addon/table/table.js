@@ -1,7 +1,17 @@
 /**
 * table js
 */
-(function($) {
+(function (factory) {
+	'use strict';
+	if (typeof define === 'function' && define.amd) {
+		define(['jquery'], factory);
+	} else if (typeof exports !== 'undefined') {
+		module.exports = factory(require('jquery'));
+	} else {
+		factory(jQuery);
+	}
+
+}(function ($) {
 	"use strict";
 	$.fn.table = function(options) {
 		return this.each(function() {
@@ -233,12 +243,17 @@
 				}
 
 				requestUrl = (requestUrl==undefined||requestUrl=="")?url:requestUrl;
-				doHttp(requestUrl+"Read",requestData).then(function(result){
+				http.request(requestUrl+"Read",requestData).then(function(result){
 					data("setData")(result);
 					data("pageIndex",0);
 					data("refreshDisplay")();
 				},function(result){
-					data("fail")();
+					if(result.startsWith("relogin:")){
+						window.location.href="../login/";
+					}else{
+						data("fail")();
+					}
+
 				});
 			});
 			//refresh attachment
@@ -256,7 +271,7 @@
 				var currentKey = columnKeyValueArr.map(function(d){
 					return d.split("=")[1];
 				}).collect("join","_");
-				doHttp(url+"AttachmentList","key="+currentKey).then(function(result){
+				http.request(url+"AttachmentList","key="+currentKey).then(function(result){
 					var attachmentReadBodyHtml = (result.length==0)?"<tr><td colspan='5'>no attachment</td></tr>":(result.map(function(d){
 						var size = (d.size>1024*1024)?((d.size/1024/1024).toFixed(2)+"M"):((d.size/1024).toFixed(2)+"KB");
 						d = "<tr><td><input type='checkbox'></td><td class='name'>"+d.name+"</td><td>"+size+"</td><td><i class='fa fa-download'></i></td><td><i class='fa fa-eye'></i></td></tr>";
@@ -374,7 +389,7 @@
 						}
 
 						if(confirm("你确定要删除勾选的"+deleteNameArr.length+"个附件吗？")){
-							doHttp(url+"AttachmentDelete","key="+columnKeyValueArr.map(function(d){
+							http.request(url+"AttachmentDelete","key="+columnKeyValueArr.map(function(d){
 								return d.split("=")[1];
 							}).collect("join","_")+"&name="+deleteNameArr.map(function(d){
 								return d.encode("base64").encode("url");
@@ -840,7 +855,7 @@
 							d = d.id + "=" + requestValue;
 							return d;
 						}).collect("join","&");
-						doHttp(url+"Create",requestData).then(function(result){
+						http.request(url+"Create",requestData).then(function(result){
 							node("request").children(".create").children(".contain").children(".switch").click();
 							data("Read")(url);
 							node("create-body").children("table").children("tbody").children("tr").remove();
@@ -991,7 +1006,7 @@
 								d = d.id + "=" + requestValue;
 								return d;
 							}).collect("join","&");
-							doHttp(url+"Create",requestData).then(function(result){
+							http.request(url+"Create",requestData).then(function(result){
 								$("#"+setting.related).children(".request").children(".create").children(".contain").children(".switch").click();
 								data("Read")(url);
 								node("relate-create-body").children("table").children("tbody").children("tr").remove();
@@ -1104,7 +1119,7 @@
 							d = d.id + "=" + requestValue;
 							return d;
 						}).collect("join","&");
-						doHttp(url+"Update",requestData).then(function(result){
+						http.request(url+"Update",requestData).then(function(result){
 							node("request").children(".update").children(".contain").children(".panel").hide();
 							data("Read")(url);
 						},function(result){
@@ -1125,7 +1140,7 @@
 							return d;
 						}).collect("join","");
 						
-						doHttp(url+"AttachmentBatchDownload",requestData).then(function(result){
+						http.request(url+"AttachmentBatchDownload",requestData).then(function(result){
 
 						},function(result){
 							alert("download data failed："+result);
@@ -1261,7 +1276,7 @@
 					var titleSource = title;
 					var requestDataSource = requestData;
 					var requestData = "title="+title.encode("base64").encode("url")+"&data="+requestData.encode("base64").encode("url");
-					doHttp(url+"Download",requestData).then(function(result){
+					http.request(url+"Download",requestData).then(function(result){
 						window.location.href="../ApplicationData/excel/"+result+"/"+titleSource+".xlsx";
 					},function(result){
 						alert("download data failed");
@@ -1289,7 +1304,7 @@
 							return requestStr;
 						}).collect("join","&");
 						data("loading")();
-						doHttp(url+"Delete",requestData).then(function(result){
+						http.request(url+"Delete",requestData).then(function(result){
 							data("Read")(url);
 						},function(result){
 							alert("delete data failed");
@@ -1488,7 +1503,7 @@
 				$("#"+relate).data("parentRelatedData",parentRelatedData);
 			}
 		}
-
+  
 		if(options.beforeCreateOpenCallback!=undefined){
 			node("request").children(".create").wall({"beforeOpenCallback":options.beforeCreateOpenCallback});
 			if(setting.related!=""&&$("#"+setting.related).attr("relateCreate")!=undefined){
@@ -1502,4 +1517,4 @@
 		return element;
 	}
 
-})(jQuery);
+}));

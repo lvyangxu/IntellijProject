@@ -30,7 +30,7 @@ class http {
         });
         return request;
     };
-
+ 
     /**
      * do http with self defined result,only 'success = true' will resolve
      * @param url

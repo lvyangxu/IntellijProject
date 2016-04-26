@@ -4,8 +4,8 @@ $(".frame").fit(function () {
     var w1 = $(".frame").outerWidth();
     var h1 = $(".frame").outerHeight();
     $(".frame").css({
-        "margin-left": (w - w1) / 2 + "px",
-        "margin-top": (h - h1) / 2 + "px"
+        "left": (w - w1) / 2 + "px",
+        "top": (h - h1) / 2 + "px"
     });
 });
 
