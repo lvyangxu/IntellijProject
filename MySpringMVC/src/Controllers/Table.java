@@ -23,7 +23,11 @@ public class Table {
     public void table(HttpServletRequest request, HttpServletResponse response, HttpSession session, @PathVariable String name,@PathVariable String type){
         MyMvcObject MyMvcObject1 = new MyMvcObject(request,response, session);
         try {
-            MyMvcObject1.authenticate().read(name,type).success();
+            switch (type){
+                case "Read":
+                    MyMvcObject1.authenticate().readMap(name).read(name).success();
+                    break;
+            }
         } catch (MyException e) {
             MyMvcObject1.fail(e.getMessage());
         }

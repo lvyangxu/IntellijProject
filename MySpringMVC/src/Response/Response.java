@@ -13,32 +13,37 @@ import static Init.Init.log4j;
  */
 public class Response {
 
-    private static void response(HttpServletResponse response, String message)  {
+    private static void response(HttpServletResponse response, String message) {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter PrintWriter1 = null;
         try {
             PrintWriter1 = response.getWriter();
         } catch (IOException e) {
-            log4j.error("response client failed:"+e.getMessage());
+            log4j.error("response client failed:" + e.getMessage());
         }
         PrintWriter1.print(message);
         PrintWriter1.flush();
         PrintWriter1.close();
     }
 
-    public static void success(HttpServletResponse response,String ...responseMessage) {
+    public static void success(HttpServletResponse response, String... responseMessage) {
         String message = "";
-        if(responseMessage.length!=0){
+        if (responseMessage.length != 0) {
             message = responseMessage[0];
         }
-        message = "{\"success\":\"true\",\"message\":\""+message+"\"}";
-        response(response,message);
+        if ((message.startsWith("{") && message.endsWith("}"))||(message.startsWith("[") && message.endsWith("]"))) {
+            message = "{\"success\":\"true\",\"message\":" + message + "}";
+        } else {
+            message = "{\"success\":\"true\",\"message\":\"" + message + "\"}";
+        }
+
+        response(response, message);
     }
 
-    public static void fail(HttpServletResponse response,String message)  {
-        message = "{\"success\":\"false\",\"message\":\""+message+"\"}";
-        response(response,message);
+    public static void fail(HttpServletResponse response, String message) {
+        message = "{\"success\":\"false\",\"message\":\"" + message + "\"}";
+        response(response, message);
     }
 
 }

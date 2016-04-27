@@ -2,16 +2,11 @@ package Models;
 
 import Request.Parameter;
 import Util.*;
-import Util.Mysql;
-import org.dom4j.DocumentException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.lang.annotation.Annotation;
 import java.util.List;
 
-import static Init.Init.WebRoot;
-import static Init.Init.log4j;
 import static Init.Init.mysql;
 
 /**
@@ -19,6 +14,12 @@ import static Init.Init.mysql;
  */
 public class Account {
 
+    /**
+     * login
+     * @param request
+     * @param session
+     * @throws MyException
+     */
     public static void login(HttpServletRequest request, HttpSession session) throws MyException {
         String result = null;
         //get username and password in request
@@ -47,6 +48,12 @@ public class Account {
 
     }
 
+    /**
+     * check session
+     * @param usernameP
+     * @param passwordP
+     * @throws MyException
+     */
     public static void authenticate(String usernameP,String passwordP) throws MyException {
         //get username and password in mysql and validate them
         boolean isValid = false;

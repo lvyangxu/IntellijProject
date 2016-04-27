@@ -43,12 +43,7 @@
      * load common css
      */
     refernceString += refernce("css/", ["common.css"]);
-
-    /**
-     * load traceur
-     */
-    refernceString += refernce("traceur/", ["traceur.js", "bootstrap.js"]);
-
+    
     /**
      * load extend
      */

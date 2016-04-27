@@ -1,29 +1,47 @@
-$(".frame").fit(function () {
-    var w = $(window).width();
-    var h = $(window).height();
-    var w1 = $(".frame").outerWidth();
-    var h1 = $(".frame").outerHeight();
-    $(".frame").css({
-        "left": (w - w1) / 2 + "px",
-        "top": (h - h1) / 2 + "px"
-    });
-});
+{
+    let usernameCookieName,passwordCookieName;
 
-$(".frame").children(".login").children("button").delegate("", "click", function () {
-    var username = $(".username").children("input").val();
-    username = username.encode("base64").encode("url");
-    var password = $(".password").children("input").val();
-    password = password.encode("base64").encode("url");
-    var requestData = "username=" + username + "&password=" + password;
-    doHttp("../Account/DoLogin", requestData).then(function (result) {
-        //set cookie
-        setCookie("username", username, 30);
-        setCookie("password", password, 30);
-
-        //redirect to another page
-        window.location.href = result;
-        
-    }).catch(function (result) {
-        alert("login failed:" + result);
+    //auto set input with cookie
+    http.request("../Account/GetCookieName").then(result=>{
+        usernameCookieName = result.username;
+        let username = cookie.get(usernameCookieName);
+        $(".username").children("input").val(username);
+        passwordCookieName = result.password;
+        let password = cookie.get(passwordCookieName);
+        $(".password").children("input").val(password);
+    }).catch(result=>{
+        console.log("get cookie name failed:"+result);
     });
-});
+
+    //responsive
+    $(".frame").fit(()=> {
+        let w = $(window).width();
+        let h = $(window).height();
+        let w1 = $(".frame").outerWidth();
+        let h1 = $(".frame").outerHeight();
+        $(".frame").css({
+            "left": (w - w1) / 2 + "px",
+            "top": (h - h1) / 2 + "px"
+        });
+    });
+
+    //do login
+    $(".frame").children(".login").children("button").delegate("", "click", function () {
+        let username = $(".username").children("input").val();
+        let usernameEncode = new myString(username).base64Encode().urlEncode().value;
+        let password = $(".password").children("input").val();
+        let passwordEncode = new myString(password).base64Encode().urlEncode().value;
+        let requestData = "username=" + usernameEncode + "&password=" + passwordEncode;
+        http.request("../Account/DoLogin", requestData).then((result)=> {
+            //set cookie
+            cookie.set(usernameCookieName, username, 30);
+            cookie.set(passwordCookieName, password, 30);
+
+            //redirect to another page
+            window.location.href = result;
+
+        }).catch((result)=> {
+            alert("login failed:" + result);
+        });
+    });
+}

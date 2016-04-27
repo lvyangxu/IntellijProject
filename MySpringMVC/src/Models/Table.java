@@ -1,10 +1,5 @@
 package Models;
 
-import Util.*;
-import Util.Mysql;
-
-import java.util.Optional;
-
 import static Init.Init.mysql;
 
 /**
@@ -20,8 +15,7 @@ public class Table {
 
     }
 
-    public static String read(String table, String ...overRidSqlCommand) throws MyException {
-        String sqlCommand = (overRidSqlCommand.length==0)?"select * from "+table:overRidSqlCommand[0];
+    public static String read(String table, String sqlCommand) throws MyException {
         return mysql.select(sqlCommand).toJson();
     }
 

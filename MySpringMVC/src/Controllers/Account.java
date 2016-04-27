@@ -33,4 +33,10 @@ public class Account {
         session.setAttribute("username", null);
         return "/login";
     }
+
+    @RequestMapping(value="/GetCookieName")
+    public void getCookieName(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+        MyMvcObject MyMvcObject1 = new MyMvcObject(request,response, session);
+        MyMvcObject1.getCookieName().success();
+    }
 }

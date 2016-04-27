@@ -16,6 +16,21 @@
         }
     };
 
+    //get attr
+    $.fn.property = function (name,defaultValue) {
+        let result = $(this).attr(name);
+        if(defaultValue!=undefined&&result==undefined){
+            result = defaultValue;
+        }
+        return result;
+    };
+
+    //whether element has attr
+    $.fn.has = function (name) {
+        let result = ($(this).attr(name)!=undefined);
+        return result;
+    }
+
     $.fn.toArray = function (options) {
         var result = [];
         for (var i = 0; i < $(this).length; i++) {

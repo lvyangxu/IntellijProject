@@ -21,6 +21,7 @@
     let section = (element, options)=> {
         let defaults = element.data("setting") || {};
         let settings = $.extend(defaults, options);
+        element.data("setting",settings);
 
         element.addonInit("section");
 

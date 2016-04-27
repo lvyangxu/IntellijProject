@@ -1,4 +1,4 @@
-package Util;
+package Dao;
 
 import Models.MyException;
 import org.json.JSONArray;
@@ -50,6 +50,10 @@ public class Mysql {
                 JSONArray1.put(JSONObject1);
             }
             this.json = JSONArray1.toString();
+            //no data,then return
+            if(this.rows.size()==0){
+                return;
+            }
             for(int i=0;i<this.rows.get(0).size();i++){
                 List<String> columnList = new ArrayList<>();
                 for(int j=0;j<this.rows.size();j++){

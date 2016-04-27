@@ -1,6 +1,10 @@
 package Util;
 
+import Models.MyException;
+
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -52,9 +56,33 @@ public class MyString {
      *
      * @return
      */
-    public MyString base64Decode() throws Exception {
-        byte[] asBytes = Base64.getDecoder().decode(this.value);
-        this.value = new String(asBytes, "utf-8");
+    public MyString base64Decode() throws MyException{
+        try {
+            byte[] asBytes = Base64.getDecoder().decode(this.value);
+            this.value = new String(asBytes, "utf-8");
+        }catch (Exception e){
+            throw new MyException("base64 decode error");
+        }
+        return this;
+    }
+
+    /**
+     * url encode
+     * @return
+     * @throws Exception
+     */
+    public MyString urlEncode() throws Exception{
+        this.value = URLEncoder.encode(this.value,"utf-8");
+        return this;
+    }
+
+    /**
+     * url encode
+     * @return
+     * @throws Exception
+     */
+    public MyString urlDecode() throws Exception{
+        this.value = URLDecoder.decode(this.value,"utf-8");
         return this;
     }
 

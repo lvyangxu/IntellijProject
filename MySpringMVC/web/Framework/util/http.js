@@ -39,11 +39,12 @@ class http {
      */
     static request(url,requestParaData){
         var promise = new Promise(function(resolve,reject){
+            requestParaData = (requestParaData==undefined)?"":requestParaData;
             http.doAjaxInJquery(url,"post",30,requestParaData, function(result){
                 try{
-                    result = result.toJson();
+                    result = new myString(result).toJson();
                 }catch(e){ 
-                    reject("Server Internal Error");
+                    reject("Invalid json format");
                 }
                 if(result.success!=undefined&&result.success=="true"){
                     resolve(result.message);

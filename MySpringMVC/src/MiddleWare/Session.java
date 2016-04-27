@@ -22,13 +22,13 @@ public class Session {
                String account = Cookie.get(request, usernameCookieName);
               //all cookie save with base64 encode
               try {
-                  account = new MyString(account).base64Decode().toString();
+                  account = new MyString(account).urlDecode().base64Decode().toString();
               } catch (Exception e) {
                   throw new MyException("invalid account cookie:"+account);
               }
                String password = Cookie.get(request, passwordCookieName);
               try {
-                  password = new MyString(password).base64Decode().toString();
+                  password = new MyString(password).urlDecode().base64Decode().toString();
               } catch (Exception e) {
                   throw new MyException("invalid password cookie:"+password);
               }

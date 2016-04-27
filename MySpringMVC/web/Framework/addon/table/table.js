@@ -15,11 +15,11 @@
 	"use strict";
 	$.fn.table = function(options) {
 		return this.each(function() {
-			doTable($(this),options);
+			table($(this),options);
 		});
 	};
 
-	var doTable = function(element,options){
+	let table = function(element,options){
 		//get element attr
 		var attr = function(name,defaultValue){
 			var result = element.attr(name);
@@ -223,7 +223,7 @@
 						d = selectId +"="+ $(d).data("data").filter(function(d1){
 							return d1.checked;
 						}).map(function(d1){
-							return d1.name.encode("base64").encode("url");
+							return new myString(d1.name).base64UrlEncode().value;
 						}).collect("join",",");
 						return d;
 					}).collect("join","&");
@@ -235,7 +235,7 @@
 						var v = data("parentRelatedData")[key].filter(function(d){
 							return d.checked;
 						}).map(function(d){
-							return d.name.encode("base64").encode("url");
+							return new myString(d1.name).base64UrlEncode().value;
 						}).collect("join",",");
 						requestData += key + "=" + v + "&";
 					}
@@ -300,7 +300,7 @@
 				var sourceData = [];
 				for(var i=0;i<d.length;i++){
 					sourceData.push(d[i]);
-				}				
+				}
 				data("sourceData",sourceData);
 				data("filterColumnData",d);
 			});
@@ -344,7 +344,7 @@
 					var columnKeyValueArr = data("thArr").filter(function(d){
 						return d.key;
 					}).map(function(d){
-						d = d.id+"="+thisAttachmentIcon.parent().parent().children("td[th-id="+d.id+"]").text().encode("base64").encode("url");
+						d = d.id+"="+new myString(thisAttachmentIcon.parent().parent().children("td[th-id="+d.id+"]").text()).base64UrlEncode().value;
 						return d;
 					});
 
@@ -392,7 +392,7 @@
 							http.request(url+"AttachmentDelete","key="+columnKeyValueArr.map(function(d){
 								return d.split("=")[1];
 							}).collect("join","_")+"&name="+deleteNameArr.map(function(d){
-								return d.encode("base64").encode("url");
+								return new myString(d).base64UrlEncode().value;
 							}).collect("join",",")).then(function(result){
 								data("refreshAttachment")(attachmentTbody,columnKeyValueArr);
 							},function(result){
@@ -418,7 +418,7 @@
 										var relatedData = data("thArr").filter(function(d){
 											return d.key;
 										}).map(function(d){
-											d = d.id+"="+relateIcon.parent().parent().children(".content[th-id="+d.id+"]").text().encode("base64").encode("url");
+											d = d.id+"="+new myString(relateIcon.parent().parent().children(".content[th-id="+d.id+"]").text()).base64UrlEncode().value;
 											return d;
 										}).collect("join","&");
 										$(this).table({
@@ -502,26 +502,26 @@
 						var va = isNaN(parseFloat(a[sortId]))?a[sortId]:parseFloat(a[sortId]);
 						var vb = isNaN(parseFloat(b[sortId]))?b[sortId]:parseFloat(b[sortId]);
 						return va<vb?1:-1;
-					});			
+					});
 					thisElement.children("i").removeClass("fa fa-sort-desc");
 					thisElement.children("i").addClass("fa fa-sort-asc");
 				}else{
 					//set other th no sort
 					thisElement.parent().children(".content").children("i").attr("class","fa fa-sort");
-					
+
 					//no sort to desc
 					data("data").sort(function(a,b){
 						var va = isNaN(parseFloat(a[sortId]))?a[sortId]:parseFloat(a[sortId]);
 						var vb = isNaN(parseFloat(b[sortId]))?b[sortId]:parseFloat(b[sortId]);
-						return va>vb?1:-1;		
-					});	
+						return va>vb?1:-1;
+					});
 					thisElement.children("i").removeClass("fa fa-sort");
 					thisElement.children("i").addClass("fa fa-sort-desc");
 				}
 
 				data("refreshDisplay")();
 			});
-			
+
 			//get request td data by td type
 			var getRequestTdData = function(td,type){
 				var result = "";
@@ -672,7 +672,7 @@
 					if(setting.attachmentBatchDownload){
 						requestHtml += "<button class='attachmentBatchDownload btn btn-warning'><i class='fa fa-paperclip'></i></button>";
 					}
-					
+
 					requestHtml += "</div>";
 					var filters = "<div class='column-filter addon-select' title='列'></div>";
 					filters += "<div class='row-filter addon-wall' title='行'></div>";
@@ -850,7 +850,7 @@
 						}).map(function(d){
 							var requestValue = trs.toArray().map(function(d1){
 								var tdValue = getRequestTdData(d1.children("td[th-id="+d.id+"]"),d.type);
-								return tdValue.encode("base64").encode("url");
+								return new myString(tdValue).base64UrlEncode().value;
 							}).collect("join",",");
 							d = d.id + "=" + requestValue;
 							return d;
@@ -1001,7 +1001,7 @@
 							}).map(function(d){
 								var requestValue = trs.toArray().map(function(d1){
 									var tdValue = getRequestTdData(d1.children("td[th-id="+d.id+"]"),d.type);
-									return tdValue.encode("base64").encode("url");
+									return new myString(tdValue).base64UrlEncode().value;
 								}).collect("join",",");
 								d = d.id + "=" + requestValue;
 								return d;
@@ -1016,7 +1016,7 @@
 						}
 					});
 				};
-				
+
 				//update wall
 				node("request").children(".update").wall({
 					"html":function(){
@@ -1085,11 +1085,11 @@
 							node("update-body").children(".content").children("tbody").html(trHtml);
 							//set default value
 
-							
+
 							//set unity tr html
 							var unityHtml = "<tr>"+data("thArr").map(function(d){
 								var tdText = checkedArr[0].parent().parent().children("td[th-id="+d.id+"]").text();
-								var tdHtml = getRequestTdHtml(d,tdText);							
+								var tdHtml = getRequestTdHtml(d,tdText);
 								return tdHtml;
 							}).collect("join","")+"</tr>";
 							node("update-body").children(".unity").children("tbody").html(unityHtml);
@@ -1114,7 +1114,7 @@
 						var requestData = data("thArr").map(function(d){
 							var requestValue = trs.toArray().map(function(d1){
 								var tdValue = getRequestTdData(d1.children("td[th-id="+d.id+"]"),d.type);
-								return tdValue.encode("base64").encode("url");
+								return new myString(tdValue).base64UrlEncode().value;
 							}).collect("join",",");
 							d = d.id + "=" + requestValue;
 							return d;
@@ -1135,18 +1135,18 @@
 						}).map(function(d){
 							d = selectedTr.map(function(d1){
 								var tdValue = getRequestTdData(d1.children("td[th-id="+d.id+"]"),d.type);
-								return tdValue.encode("base64").encode("url");
+								return new myString(tdValue).base64UrlEncode().value;
 							}).collect("join",",");
 							return d;
 						}).collect("join","");
-						
+
 						http.request(url+"AttachmentBatchDownload",requestData).then(function(result){
 
 						},function(result){
 							alert("download data failed："+result);
-						});						
+						});
 					}
-					
+
 				});
 
 				//pagination rows per page select change event
@@ -1192,12 +1192,12 @@
 						node("tbody-row").removeClass("info");
 					}
 				});
-				
+
 				//thead sort
                 node("thead").children("tr").children(".content").delegate("","click",function(){
                 	data("sort")($(this));
                 });
-				
+
 				//column filter
 				node("column-filter").select({"data":data("thArr"),"selectCallback":function(){
 					//hide unchecked columns
@@ -1275,7 +1275,9 @@
 
 					var titleSource = title;
 					var requestDataSource = requestData;
-					var requestData = "title="+title.encode("base64").encode("url")+"&data="+requestData.encode("base64").encode("url");
+					title = new myString(title).base64UrlEncode().value;
+					requestData = new myString(requestData).base64UrlEncode().value;
+					var requestData = "title="+title+"&data="+requestData;
 					http.request(url+"Download",requestData).then(function(result){
 						window.location.href="../ApplicationData/excel/"+result+"/"+titleSource+".xlsx";
 					},function(result){
@@ -1297,7 +1299,8 @@
 						var requestData = data("thArr").map(function(d){
 							var requestName = d.id;
 							var requestValue = selectedArr.map(function(d1){
-								d1 = data("displayData")[d1%data("rowsPerPage")][requestName].encode("base64").encode("url");
+								d1 = data("displayData")[d1%data("rowsPerPage")][requestName];
+								d1 = new myString(d1).base64UrlEncode().value;
 								return d1;
 							}).collect("join",",");
 							var requestStr = requestName+"="+requestValue;
@@ -1313,8 +1316,8 @@
 						return;
 					}
 				});
-				
-				
+
+
 
 				//filter button click event
 				element.children(".filter").delegate(".filter","click",function(event){
@@ -1503,12 +1506,12 @@
 				$("#"+relate).data("parentRelatedData",parentRelatedData);
 			}
 		}
-  
+
 		if(options.beforeCreateOpenCallback!=undefined){
 			node("request").children(".create").wall({"beforeOpenCallback":options.beforeCreateOpenCallback});
 			if(setting.related!=""&&$("#"+setting.related).attr("relateCreate")!=undefined){
 				$("#"+setting.related).children(".request").children(".relateCreate").wall({"beforeOpenCallback":options.beforeCreateOpenCallback});
-			}			
+			}
 		}
 		if(options.beforeUpdateOpenCallback!=undefined){
 			node("request").children(".update").wall({"beforeOpenCallback":options.beforeUpdateOpenCallback});
