@@ -30,7 +30,13 @@
       <option name="name" value="Babel" />
       <option name="output" value="$FileNameWithoutExtension$.js:$FileNameWithoutExtension$.js.map" />
       <option name="outputFilters">
-        <array />
+        <array>
+          <FilterInfo>
+            <option name="description" value="" />
+            <option name="name" value="Filter 1" />
+            <option name="regExp" value="$FILE_PATH$.es6" />
+          </FilterInfo>
+        </array>
       </option>
       <option name="outputFromStdout" value="false" />
       <option name="program" value="F:/babel/node_modules/.bin/babel.cmd" />

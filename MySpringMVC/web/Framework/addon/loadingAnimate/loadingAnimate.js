@@ -1,8 +1,11 @@
+'use strict';
+
 /**
 * scroll js
 */
 (function (factory) {
 	'use strict';
+
 	if (typeof define === 'function' && define.amd) {
 		define(['jquery'], factory);
 	} else if (typeof exports !== 'undefined') {
@@ -10,45 +13,44 @@
 	} else {
 		factory(jQuery);
 	}
-
-}(function ($) {
+})(function ($) {
 	"use strict";
-	$.fn.loadingAnimate = function(options) {
-		return this.each(function() {
-			doLoadingAnimate($(this),options);
+
+	$.fn.loadingAnimate = function (options) {
+		return this.each(function () {
+			doLoadingAnimate($(this), options);
 		});
 	};
 
-	var doLoadingAnimate = function(element,options){
+	var doLoadingAnimate = function doLoadingAnimate(element, options) {
 
-        switch (options.type) {
-            case "left":
-                var width = element.css("width");
-                element.addClass("loadingAnimateLeft");
+		switch (options.type) {
+			case "left":
+				var width = element.css("width");
+				element.addClass("loadingAnimateLeft");
 
-                break;
-            default:
-                break;
+				break;
+			default:
+				break;
 
-        }
+		}
 
 		// init
-		if(!element.data("init")){
+		if (!element.data("init")) {
 
 			//add to element data
-			element.data({"init":true});
+			element.data({ "init": true });
 		};
 
-		if(options==undefined){
+		if (options == undefined) {
 			return;
 		}
- 
-		// set data
-		if(options.data!=undefined){
 
-		};
+		// set data
+		if (options.data != undefined) {};
 
 		return element;
-	}
+	};
+});
 
-}));
+//# sourceMappingURL=loadingAnimate.js.map

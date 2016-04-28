@@ -1,68 +1,120 @@
+"use strict";
+
 /**
- * description 引用框架中的所有css和js
- * author lvyangxu
- * 2015-08-02
+ * load all framework
  */
+{
+    (function () {
+        var relativePath = "../Framework/";
+        var refernceString = "";
 
-//设置相对路径
-var relativePath = "../Framework/";
-var refernceString = "";
+        /**
+         * load js and css
+         * @param folderPath
+         * @param filePathArr
+         * @returns {string}
+         */
+        var refernce = function refernce(folderPath, filePathArr) {
+            var result = "";
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
 
-//引用css和js
-function refernce(folderPath, filePathArr) {
-    var result = "";
-    for (var i = 0; i < filePathArr.length; i++) {
-        var filePath = filePathArr[i];
-        if (filePath.indexOf(".css") != -1) {
-            result = result + "<link rel=\"stylesheet\" href=\"" + relativePath + folderPath + filePath + "\">";
-        } else {
-            result = result + "<script src=\"" + relativePath + folderPath + filePath + "\"></script>";
-        }
-    }
-    return result;
+            try {
+                for (var _iterator = filePathArr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var filePath = _step.value;
+
+                    if (filePath.endsWith(".css")) {
+                        result += "<link rel=\"stylesheet\" href=\"" + relativePath + folderPath + filePath + "\">";
+                    } else {
+                        result += "<script src=\"" + relativePath + folderPath + filePath + "\"></script>";
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return result;
+        };
+
+        /**
+         * load jquery
+         */
+        refernceString += refernce("jquery/", ["jquery-2.1.4.min.js"]);
+
+        /**
+         * load fontawesome
+         */
+        refernceString += refernce("fontawesome/css/", ["font-awesome.min.css"]);
+
+        /**
+         * load common css
+         */
+        refernceString += refernce("css/", ["common.css"]);
+
+        /**
+         * load extend
+         */
+        var extendArr = ["array.js", "jquery.js"];
+        refernceString += refernce("extend/", extendArr);
+
+        /**
+         * load util
+         */
+        var utilArr = ["cookie.js", "date.js", "http.js", "math.js", "myString.js", "websocket.js"];
+        refernceString += refernce("util/", utilArr);
+
+        /**
+         * load addon
+         */
+        var loadAddon = function loadAddon(nameArr) {
+            var result = "";
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = nameArr[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var name = _step2.value;
+
+                    var addonArr = [name + "/" + name + ".js", name + "/" + name + ".css"];
+                    result += refernce("addon/", addonArr);
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            return result;
+        };
+        refernceString += loadAddon(["nav", "section", "table", "select", "wall", "datepicker", "upload", "carousel"]);
+
+        /**
+         * output all reference
+         */
+        document.write(refernceString);
+    })();
 }
 
-//加载插件
-function loadAddon(nameArr){
-    var result = "";
-    for (var i = 0; i < nameArr.length; i++) {
-        var name = nameArr[i];
-        result = result + "<link rel=\"stylesheet\" href=\"" + relativePath + "addon/" + name +"/"+name+".css"+"\">";
-        result = result + "<script src=\"" + relativePath +"addon/"+ name +"/"+name+".js"+"\"></script>";
-    }
-    return result;
-}
-
-//加载jquery
-refernceString = refernceString+refernce("jquery/",["jquery-2.1.4.min.js"]);
-
-//加载bootstrap
-// var bootstrapArr = ["bootstrap.min.css", "bootstrap-theme.min.css","bootstrap.min.js"];
-// refernceString = refernceString+refernce("bootstrap/",bootstrapArr);
-//
-//加载fontawesome
-refernceString = refernceString+refernce("fontawesome/css/",["font-awesome.min.css"]);
-
-//加载css
-refernceString = refernceString+refernce("css/",["common.css"]);
-
-//加载traceur
-// refernceString = refernceString+refernce("traceur/",["traceur.js","bootstrap.js"]);
-
-var myJsPathArr = ["data-model.js", "image-model.js", "communication-model.js"];
-refernceString = refernceString+refernce("js/",myJsPathArr);
-
-//插件
-var addOnArr = ["carousel","fullScroll","loadingAnimate"];
-refernceString = refernceString+loadAddon(addOnArr);
-
-refernceString = refernceString+refernce("addon/unslider/",["unslider.min.js"]);
-refernceString = refernceString+refernce("addon/slick/",["slick.css","slick-theme.css","slick.min.js"]);
-refernceString = refernceString+refernce("addon/owl.carousel/",["owl.carousel.min.css","owl.theme.default.min.css","owl.carousel.min.js"]);
-
-//扩展
-var extendArr = ["string.js","array.js","jquery.js"];
-refernceString = refernceString+refernce("extend/",extendArr);
-
-//输出所有引用的内容
-document.write(refernceString);
+//# sourceMappingURL=init.js.map

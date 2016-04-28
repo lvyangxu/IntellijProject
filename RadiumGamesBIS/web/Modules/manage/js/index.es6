@@ -1,12 +1,15 @@
 {
 
+    $("#Business").section();
+    $("#Finance").section();
+
     $("body").delegate("", "click", function (event) {
         $(".addon-datepicker").children(".contain").children(".panel").hide();
         $(".addon-wall").children(".contain").children(".panel").hide();
         $(".addon-select").children(".contain").children(".panel").hide();
         $(".addon-upload").children(".contain").children(".panel").hide();
     });
- 
+
     $(".nav").nav();
     $(".addon-datepicker").datepicker();
     $(".addon-table").table();

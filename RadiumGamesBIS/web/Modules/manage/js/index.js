@@ -2,6 +2,9 @@
 
 {
 
+    $("#Business").section();
+    $("#Finance").section();
+
     $("body").delegate("", "click", function (event) {
         $(".addon-datepicker").children(".contain").children(".panel").hide();
         $(".addon-wall").children(".contain").children(".panel").hide();

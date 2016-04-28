@@ -4,7 +4,7 @@
 {
     let relativePath = "../Framework/";
     let refernceString = "";
-
+ 
     /**
      * load js and css
      * @param folderPath
@@ -12,7 +12,7 @@
      * @returns {string}
      */
     let refernce = (folderPath, filePathArr)=> {
-        var result = ""; 
+        var result = "";
         for (let filePath of filePathArr) {
             if (filePath.endsWith(".css")) {
                 result += "<link rel=\"stylesheet\" href=\"" + relativePath + folderPath + filePath + "\">";

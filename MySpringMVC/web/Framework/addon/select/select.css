@@ -2,56 +2,48 @@
 * select css
 */
 .addon-select {
-	display: inline-block;
-}
+  display: inline-block; }
 
-.addon-select>.contain {
-	position: relative;
-}
+.addon-select > .contain {
+  position: relative; }
 
 /*display input*/
-.addon-select>.contain>button {
-	height: 30px;
-}
+.addon-select > .contain > button {
+  height: 30px; }
 
 /*select panel*/
-.addon-select>.contain>.panel {
-	display: none;
-	position: absolute;
-	background-color: rgba(48, 48, 48, 1);
-	z-index: 10;
-	border: none;
-	float: none;
-	outline: none;
-}
+.addon-select > .contain > .panel {
+  display: none;
+  position: absolute;
+  background-color: #303030;
+  z-index: 10;
+  border: none;
+  float: none;
+  outline: none; }
 
 /*panel head*/
-.addon-select>.contain>.panel>.head {
-	height: 40px;
-	line-height: 40px;
-	color: rgba(144, 144, 144, 1);
-	font-size: 1.0em;
-	font-weight: bolder;
-	min-width: 150px;
-}
+.addon-select > .contain > .panel > .head {
+  height: 40px;
+  line-height: 40px;
+  color: #909090;
+  font-size: 1.0em;
+  font-weight: bolder;
+  min-width: 150px; }
 
 /*checkbox*/
-.addon-select>.contain>.panel>.body>div {
-	color: white;
-	line-height: 20px;
-	height: 20px;
-	margin-bottom: 5px;
-	white-space: nowrap;
-	margin-right: 20px;
-}
+.addon-select > .contain > .panel > .body > div {
+  color: white;
+  line-height: 20px;
+  height: 20px;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  margin-right: 20px; }
 
-.addon-select>.contain>.panel>.body>div>input[type=checkbox],
-	.addon-select>.contain>.panel>.head>input[type=checkbox] {
-	width: 20px;
-	height: 20px;
-	margin-left: 20px;
-	vertical-align: middle;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	margin-right: 5px;
-}
+.addon-select > .contain > .panel > .body > div > input[type=checkbox],
+.addon-select > .contain > .panel > .head > input[type=checkbox] {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin: 0px 5px 0px 20px; }
+
+/*# sourceMappingURL=select.css.map */

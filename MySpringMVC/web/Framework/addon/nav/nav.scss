@@ -1,36 +1,35 @@
 $height: 70px;
 $width: 1000px;
-$back-color: rgba(55,64,74,1);
+$back-color: rgba(84,189,220,1);
+$hover-color:rgba(237,159,47,1);
+$active-color:rgba(83,173,83,1);
+$font-color:black;
 $padding: 10px;
 $line-height:$height - $padding*2;
-$font-size:16px;
+$font-size:20px;
 
 .addon-nav {
 
     @mixin menu() {
         div {
             float: left;
-            margin-left: 200px;
             height: $line-height;
             line-height: $line-height;
             cursor:pointer;
         }
-        div:first-child{
-            margin-left: 50px;
-        }
 
         div:hover{
-            color:rgba(25,209,209,0.6);
+            color:$hover-color;
         }
         div.active{
-            color:rgba(25,209,209,1);
+            color:$active-color;
         }
     }
 
     height: $height;
     font-size: $font-size;
     font-weight: 600;
-    color:white;
+    color:$font-color;
 
     .container {
         z-index: 50;
