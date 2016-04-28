@@ -1,63 +1,91 @@
+"use strict";
+
 /**
  * load all framework
  */
 {
-    let relativePath = "../Framework/";
-    let refernceString = "";
+    (function () {
+        var relativePath = "../Framework/";
+        var refernceString = "";
 
-    /**
-     * load js and css
-     * @param folderPath
-     * @param filePathArr
-     * @returns {string}
-     */
-    let refernce =(folderPath, filePathArr)=> {
-        var result = "";
-        for(let filePath of filePathArr){
-            if (filePath.endsWith(".css")) {
-                result += "<link rel=\"stylesheet\" href=\"" + relativePath + folderPath + filePath + "\">";
-            } else {
-                result += "<script src=\"" + relativePath + folderPath + filePath + "\"></script>";
+        /**
+         * load js and css
+         * @param folderPath
+         * @param filePathArr
+         * @returns {string}
+         */
+        var refernce = function refernce(folderPath, filePathArr) {
+            var result = "";
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = filePathArr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var filePath = _step.value;
+
+                    if (filePath.endsWith(".css")) {
+                        result += "<link rel=\"stylesheet\" href=\"" + relativePath + folderPath + filePath + "\">";
+                    } else {
+                        result += "<script src=\"" + relativePath + folderPath + filePath + "\"></script>";
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
             }
-        }
-        return result;
-    }
 
-    /**
-     * load jquery
-     */
-    refernceString += refernce("jquery/", ["jquery-2.1.4.min.js"]);
+            return result;
+        };
 
-    /**
-     * load bootstrap
-     */
-    let bootstrapArr = ["bootstrap.min.css", "bootstrap-theme.min.css", "bootstrap.min.js"];
-    refernceString += refernce("bootstrap/", bootstrapArr);
+        /**
+         * load jquery
+         */
+        refernceString += refernce("jquery/", ["jquery-2.1.4.min.js"]);
 
-    /**
-     * load fontawesome
-     */
-    refernceString += refernce("fontawesome/css/", ["font-awesome.min.css"]);
+        /**
+         * load bootstrap
+         */
+        var bootstrapArr = ["bootstrap.min.css", "bootstrap-theme.min.css", "bootstrap.min.js"];
+        refernceString += refernce("bootstrap/", bootstrapArr);
 
-    /**
-     * load common css
-     */
-    refernceString += refernce("css/", ["common.css"]);
-    
-    /**
-     * load extend
-     */
-    let extendArr = ["array.js", "jquery.js"];
-    refernceString += refernce("extend/", extendArr);
+        /**
+         * load fontawesome
+         */
+        refernceString += refernce("fontawesome/css/", ["font-awesome.min.css"]);
 
-    /**
-     * load util
-     */
-    let utilArr = ["cookie.js", "date.js", "http.js", "math.js", "myString.js", "websocket.js"];
-    refernceString += refernce("util/", utilArr);
+        /**
+         * load common css
+         */
+        refernceString += refernce("css/", ["common.css"]);
 
-    /**
-     * output all reference
-     */
-    document.write(refernceString);
+        /**
+         * load extend
+         */
+        var extendArr = ["array.js", "jquery.js"];
+        refernceString += refernce("extend/", extendArr);
+
+        /**
+         * load util
+         */
+        var utilArr = ["cookie.js", "date.js", "http.js", "math.js", "myString.js", "websocket.js"];
+        refernceString += refernce("util/", utilArr);
+
+        /**
+         * output all reference
+         */
+        document.write(refernceString);
+    })();
 }
+
+//# sourceMappingURL=init.js.map

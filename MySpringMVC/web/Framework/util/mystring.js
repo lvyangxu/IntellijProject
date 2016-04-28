@@ -12,11 +12,7 @@ class myString {
      * string to json
      */
     toJson() {
-        try {
-            return eval('(' + this.value + ')');
-        } catch (e) {
-            throw "string is not json";
-        }
+        return eval('(' + this.value + ')');
     } 
 
     /**
@@ -279,7 +275,7 @@ class myString {
     utf8Decode(){
         let result = "";
         let i = 0;
-        let [c,c1,c2]= [0,0,0];
+        let [c,c1,c2,c3]= [0,0,0,0];
         while ( i < this.value.length) {
             c = this.value.charCodeAt(i);
             if (c < 128) {
@@ -341,4 +337,23 @@ class myString {
         return this;
     }
 
+    /**
+     * base64 and url encode
+     * @returns {myString}
+     */
+    base64UrlEncode(){
+        this.base64Encode();
+        this.urlEncode();
+        return this;
+    }
+
+    /**
+     * url and base64 decode
+     * @returns {myString}
+     */
+    urlBase64Decode(){
+        this.urlDecode();
+        this.base64Decode();
+        return this;
+    }
 }

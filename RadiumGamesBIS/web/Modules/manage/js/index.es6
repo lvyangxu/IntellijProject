@@ -1,5 +1,3 @@
-"use strict";
-
 {
 
     $("body").delegate("", "click", function (event) {
@@ -8,7 +6,7 @@
         $(".addon-select").children(".contain").children(".panel").hide();
         $(".addon-upload").children(".contain").children(".panel").hide();
     });
-
+ 
     $(".nav").nav();
     $(".addon-datepicker").datepicker();
     $(".addon-table").table();
@@ -191,5 +189,3 @@
         }
     });
 }
-
-//# sourceMappingURL=index.js.map
