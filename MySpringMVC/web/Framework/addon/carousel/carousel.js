@@ -34,7 +34,8 @@
             //init setting
             var defaultSetting = {
                 "dots": true,
-                "arrow": false
+                "arrow": false,
+                "fit": false
             };
             settings = $.extend(defaultSetting, settings);
 
@@ -65,9 +66,9 @@
                     innerHtml += "</span>";
                     return innerHtml;
                 });
-                var _ph = element.children("div").children("div").height();
+                var ph = element.children("div").children("div").height();
                 element.children(".arrow").css({
-                    "margin-top": _ph * 0.4
+                    "margin-top": ph * 0.4
                 });
             }
 
@@ -111,6 +112,34 @@
                 $(this).css({ "opacity": "0.5" });
             });
 
+            //swipe
+            var swipe = function swipe(moveX) {
+                var lastIndex = element.data("currentIndex");
+                var currentIndex = void 0;
+                if (moveX > 30) {
+                    if (lastIndex != 0) {
+                        currentIndex = lastIndex - 1;
+                        element.children("div").animate({
+                            "left": -100 * currentIndex + "%"
+                        }, 1000);
+                        element.data("currentIndex", currentIndex);
+                        element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass("active");
+                        element.children(".pagination").children("div[index=" + currentIndex + "]").addClass("active");
+                    }
+                }
+                if (moveX < -30) {
+                    if (lastIndex != n - 1) {
+                        currentIndex = lastIndex + 1;
+                        element.children("div").animate({
+                            "left": -100 * currentIndex + "%"
+                        }, 1000);
+                        element.data("currentIndex", currentIndex);
+                        element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass("active");
+                        element.children(".pagination").children("div[index=" + currentIndex + "]").addClass("active");
+                    }
+                }
+            };
+
             element.children(".arrow").children("div").delegate("", "click", function () {
                 var lastIndex = element.data("currentIndex");
                 var currentIndex;
@@ -135,59 +164,54 @@
                 element.data("currentIndex", currentIndex);
             });
 
+            //mouse event
             element.delegate("", "dragstart", function (e) {
                 e.preventDefault();
             });
-
             var isDragging = false;
-            var x = void 0;
+            var mouseStartX = void 0;
             element.delegate("", "mousedown", function (e) {
                 isDragging = true;
-                x = e.pageX;
-                console.log("down");
+                mouseStartX = e.pageX;
             });
-            element.delegate("", "mouseup", function (e) {
-                isDragging = false;
-                console.log("up");
+            element.delegate("", "click", function (e) {
+                e.preventDefault();
             });
             $(window).delegate("", "mouseup", function (e) {
-                console.log(e.target);
+                if (isDragging) {
+                    var endX = e.pageX;
+                    var mouseMoveX = endX - mouseStartX;
+                    swipe(mouseMoveX);
+                }
                 isDragging = false;
-                console.log("up");
             });
+
+            //touch event
+            var touchStartX = void 0,
+                touchEndX = void 0;
+            element[0].addEventListener("touchstart", function (e) {
+                e.preventDefault();
+                touchStartX = e.changedTouches[0].pageX;
+            }, false);
+            element[0].addEventListener("touchend", function (e) {
+                e.preventDefault();
+                var lastIndex = element.data("currentIndex");
+                var currentIndex = void 0;
+                touchEndX = e.changedTouches[0].pageX;
+                var touchMoveX = touchEndX - touchStartX;
+                swipe(touchMoveX);
+            }, false);
         });
 
-        //
-        // //touch event
-        // var touchElement = element[0];
-        // if (options != undefined && options.overlay != undefined) {
-        //     touchElement = options.overlay[0];
-        // }
-        // var startX, endX, x;
-        // touchElement.addEventListener("touchstart", function (evt) {
-        //     evt.preventDefault();
-        //     startX = evt.changedTouches[0].pageX;
-        //     x = startX;
-        // }, false);
-        // touchElement.addEventListener("touchend", function (evt) {
-        //     evt.preventDefault();
-        //     x = evt.changedTouches[0].pageX;
-        //     if (Math.abs(x - startX) > 30) {
-        //         alert(1);
-        //     }
-        // }, false);
-
-        if (options == undefined) {
-            return;
-        }
-
-        if (options.fit != undefined) {
-            var ph = element.children("div").children("div").height();
-            element.children(".arrow").css({
-                "margin-top": ph * 0.4
+        if (settings.fit) {
+            element.children(".arrow").fit(function () {
+                var ph = element.children("div").children("div").height();
+                var ah = element.children(".arrow").children(".left").height();
+                element.children(".arrow").css({
+                    "margin-top": (ph - ah) * 0.5
+                });
             });
         }
-
         return element;
     };
 });

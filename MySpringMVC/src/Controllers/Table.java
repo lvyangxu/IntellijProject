@@ -24,8 +24,14 @@ public class Table {
         MyMvcObject MyMvcObject1 = new MyMvcObject(request,response, session);
         try {
             switch (type){
+                case "Create":
+                    break;
+                case "Update":
+                    break;
                 case "Read":
                     MyMvcObject1.authenticate().readMap(name).read(name).success();
+                    break;
+                case "Delete":
                     break;
             }
         } catch (MyException e) {

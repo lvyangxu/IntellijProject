@@ -63,7 +63,6 @@
                 scrollTopArr.push(scrollTop);
                 scrollTop += $(this).outerHeight();
             });
-            console.log(scrollTopArr);
             let i = $(this).attr("index");
             $("html,body").animate({"scrollTop":scrollTopArr[i]}, 800);
 

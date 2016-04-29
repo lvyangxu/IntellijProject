@@ -19,7 +19,6 @@
             });
             var oh = $(".overlay").height();
             var ch = $(".overlay").children(".text").height();
-            console.log(oh);
             $(".overlay").children(".text").css({"margin-top": (oh - ch) * 0.45 + "px"});
         });
     });
