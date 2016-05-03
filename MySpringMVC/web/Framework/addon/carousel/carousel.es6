@@ -32,7 +32,8 @@
             let defaultSetting = {
                 "dots": true,
                 "arrow": false,
-                "fit":false
+                "fit":false,
+                "scale":1
             };
             settings = $.extend(defaultSetting, settings);
 
@@ -199,15 +200,15 @@
             }, false);
         });
 
-        if (settings.fit) {
-            element.children(".arrow").fit(()=>{
-                let ph = element.children("div").children("div").height();
-                let ah = element.children(".arrow").children(".left").height();
-                element.children(".arrow").css({
-                    "margin-top": (ph-ah) * 0.5
-                });
+        element.children(".arrow").fit(()=>{
+            let ph = element.children("div").children("div").height();
+            let ah = element.children(".arrow").children(".left").height();
+            element.children(".arrow").css({
+                "margin-top": (ph-ah) * 0.5
             });
-        }
+        });
+
+
         return element;
     }
 

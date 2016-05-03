@@ -1,22 +1,20 @@
-"use strict";
-
 {
 
     $(".top").height($(window).height() - 70);
-    $(".top_img").fullFit(70, function () {
-        $(".top").height($(window).height() - 70);
-        $(".top").css({ "overflow": "hidden" });
+    $(".top_img").fullFit(70,function () {
+        $(".top").height($(window).height()-70);
+        $(".top").css({"overflow":"hidden"});
     });
 
-    $(".overlay").fit(function () {
+    $(".overlay").fit(()=> {
         $(document).ready(function () {
             $(".overlay").css({
                 "width": $(window).width(),
                 "height": $(window).height() - 70
             });
-            var oh = $(".overlay").height();
-            var ch = $(".overlay").children(".text").height();
-            $(".overlay").children(".text").css({ "margin-top": (oh - ch) * 0.83 + "px" });
+            let oh = $(".overlay").height();
+            let ch = $(".overlay").children(".text").height();
+            $(".overlay").children(".text").css({"margin-top": (oh - ch) * 0.83 + "px"});
         });
     });
 
@@ -35,12 +33,14 @@
         }
     });
 
-    // var mh = $(".navbar").children("div").children(".content").children(".menu").children("div").height();
-    // $(".navbar").children("div").children(".content").children(".menu").children("div").css({"margin-top":(70-mh)/2});
+// var mh = $(".navbar").children("div").children(".content").children(".menu").children("div").height();
+// $(".navbar").children("div").children(".content").children(".menu").children("div").css({"margin-top":(70-mh)/2});
+
+
 
     $(".top").children(".overlay").children(".text").children("button").delegate("", "click", function () {
         var marginT = parseInt($(".body").children(".content").children("div").css("margin-top"));
-        $("body").animate({ scrollTop: $(".body").children(".content").offset().top - marginT - 70 }, 1000);
+        $("body").animate({scrollTop: $(".body").children(".content").offset().top - marginT-70}, 1000);
     });
 
     $(".footer").children(".content").children(".left").children("input").focus(function () {
@@ -52,7 +52,7 @@
 
     //back to top button
     $(".back-to-top").children("i").delegate("", "click", function () {
-        $("html,body").animate({ "scrollTop": 0 }, 1000);
+        $("html,body").animate({"scrollTop": 0}, 1000);
     });
     if ($(window).scrollTop() == 0) {
         $(".back-to-top").fadeOut();
@@ -65,7 +65,5 @@
         } else {
             $(".back-to-top").fadeIn();
         }
-    });
+    })
 }
-
-//# sourceMappingURL=common.js.map

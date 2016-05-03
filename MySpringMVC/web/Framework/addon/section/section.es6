@@ -23,8 +23,7 @@
         let settings = element.addonSettingExtend(options);
 
         element.addonInit("section", ()=> {
-
-
+            
             //append html
             element.append(function () {
                 let menuHtml = "<div class='menu'>";

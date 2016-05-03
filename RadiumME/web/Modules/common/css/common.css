@@ -61,26 +61,36 @@
 
 .top {
   padding-top: 70px; }
+  .top .overlay {
+    position: absolute;
+    background-color: rgba(27, 26, 24, 0.6);
+    width: 100%;
+    z-index: 18;
+    text-align: center;
+    color: white;
+    font-size: 20px; }
 
 .single {
   position: relative;
   text-align: center;
   width: 100%; }
   .single .text {
-    position: absolute;
-    color: white;
-    font-size: 20px;
-    font-weight: bolder;
-    top: 60%;
-    width: 100%; }
+    font-weight: bolder; }
     .single .text button {
-      border: 2px solid #aba145;
+      font-size: 22px;
+      border-radius: 8px;
+      border: 2px solid white;
       background-color: inherit;
-      color: #aba145;
-      height: 50px;
+      color: white;
+      height: 60px;
+      font-weight: bolder;
+      font-family: NIRMALA;
       padding-left: 20px;
-      padding-right: 20px;
-      font-weight: bolder; }
+      padding-right: 20px; }
+
+.body {
+  width: 1330px;
+  margin: auto; }
 
 body .back-to-top {
   position: fixed;
@@ -127,7 +137,7 @@ button {
       .footer .content .left button {
         background-color: #828282;
         border: 1px solid #828282;
-        height: 33px;
+        height: 35px;
         font-size: 14px;
         outline: none;
         font-weight: bolder;

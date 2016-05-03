@@ -18,97 +18,64 @@
 
 	$.fn.select = function (options) {
 		return this.each(function () {
-			doSelect($(this), options);
+			select($(this), options);
 		});
 	};
 
-	var doSelect = function doSelect(element, options) {
-		//get element attr
-		var attr = function attr(name, defaultValue) {
-			var result = element.attr(name);
-			if (defaultValue != undefined && result == undefined) {
-				result = defaultValue;
-			}
-			return result;
-		};
+	var select = function select(element, options) {
 
-		//get element children element
-		var node = function node(name) {
-			var result;
-			switch (name) {
-				case "contain":
-					result = element.children(".contain");
-					break;
-				case "panel":
-					result = element.children(".contain").children(".panel");
-					break;
-				case "head":
-					result = element.children(".contain").children(".panel").children(".head");
-					break;
-				case "label":
-					result = element.children(".contain").children(".panel").children(".head").children("label");
-					break;
-				case "body":
-					result = element.children(".contain").children(".panel").children(".body");
-					break;
-			}
-			return result;
-		};
+		var settings = element.addonSettingExtend(options);
 
-		//get or set element data
-		var data = function data(name, value) {
-			var result;
-			if (value == undefined) {
-				result = element.data(name);
-			} else {
-				element.data(name, value);
-				result = element.data(name);
-			}
-			return result;
-		};
+		var contain = element.xPath(".contain");
+		var panel = element.xPath(".contain>.panel");
+		var head = element.xPath(".contain>.panel>.head");
+		var label = element.xPath(".contain>.panel>.head>label");
+		var body = element.xPath(".contain>.panel>.body");
 
-		var title = attr("title", "multi-select");
+		element.addonInit("section", function () {
 
-		// init
-		if (!element.data("init")) {
-			(function () {
-				// build html
-				element.append(function () {
-					var headHtml = "<div class='head'><input type='checkbox'><label>已选中0项</label></div>";
-					var bodyHtml = "<div class='body'></div>";
-					var innerHtml = "<div class='contain'>" + "<button class='switch btn btn-info'>" + title + "<i class='fa fa-check-square-o'></i></button>" + "<div class='panel'>" + headHtml + bodyHtml + "</div>" + "</div>";
-					return innerHtml;
-				});
+			//init setting
+			var defaultSetting = {
+				"title": element.property("title", "multi-select")
+			};
+			settings = $.extend(defaultSetting, settings);
 
-				//prevent click event bubbling
-				element.delegate(".contain", "click", function (event) {
-					event.stopPropagation();
-				});
-			})();
+			// build html
+			element.append(function () {
+				var headHtml = "<div class='head'><input type='checkbox'><label>已选中0项</label></div>";
+				var bodyHtml = "<div class='body'></div>";
+				var innerHtml = "<div class='contain'>" + "<button class='switch btn btn-info'>" + settings.title + "<i class='fa fa-check-square-o'></i></button>" + "<div class='panel'>" + headHtml + bodyHtml + "</div>" + "</div>";
+				return innerHtml;
+			});
+
+			//prevent click event bubbling
+			element.delegate(".contain", "click", function (event) {
+				event.stopPropagation();
+			});
 
 			//listen head checkbox
-			node("head").delegate("input[type=checkbox]", "click", function () {
+			head.delegate("input[type=checkbox]", "click", function () {
 				if (data("data") == undefined) {
 					return;
 				}
 
-				var checkbox = node("head").children("input[type=checkbox]");
+				var checkbox = head.children("input[type=checkbox]");
 				if (checkbox.prop("checked")) {
 					var d1 = data("data").map(function (d) {
 						d.checked = true;
 						return d;
 					});
 					data("data", d1);
-					node("label").html("已选中" + data("data").length + "项");
-					node("body").children("div").children("input").prop("checked", true);
+					label.html("已选中" + data("data").length + "项");
+					body.children("div").children("input").prop("checked", true);
 				} else {
 					var d1 = data("data").map(function (d) {
 						d.checked = false;
 						return d;
 					});
 					data("data", d1);
-					node("label").html("已选中0项");
-					node("body").children("div").children("input").prop("checked", false);
+					label.html("已选中0项");
+					body.children("div").children("input").prop("checked", false);
 				}
 
 				if (options != undefined && options.selectCallback != undefined) {
@@ -118,21 +85,14 @@
 			});
 
 			// delegate toggle panel
-			node("contain").delegate("button", "click", function () {
+			contain.delegate("button", "click", function () {
 				if ($(this).hasClass("switch")) {
-					node("panel").toggle();
+					panel.toggle();
 				} else {
-					node("panel").show();
+					panel.show();
 				}
 			});
-
-			//add to element data
-			element.data({ "init": true });
-		};
-
-		if (options == undefined) {
-			return;
-		}
+		});
 
 		// set data
 		if (options.data != undefined) {
@@ -145,23 +105,23 @@
 				var result = "<div><input type='checkbox' " + checkedHtml + ">" + (d.name == undefined ? "" : d.name) + "</div>";
 				return result;
 			}).collect("join", "");
-			node("body").html(bodyHtml);
+			body.html(bodyHtml);
 			var n = data("data").filter(function (row) {
 				return row.checked;
 			}).length;
-			node("label").html("已选中" + n + "项");
+			label.html("已选中" + n + "项");
 
 			//listen checkbox
-			node("body").children("div").delegate("input[type=checkbox]", "click", function () {
+			body.children("div").delegate("input[type=checkbox]", "click", function () {
 				var currentData = [];
-				node("body").children("div").children("input").each(function () {
+				body.children("div").children("input").each(function () {
 					currentData.push({ "name": $(this).parent().text(), "checked": $(this).prop("checked") });
 				});
 				data("data", currentData);
 				var n = data("data").filter(function (row) {
 					return row.checked;
 				}).length;
-				node("label").html("已选中" + n + "项");
+				label.html("已选中" + n + "项");
 				if (options.selectCallback != undefined) {
 					var callback = options.selectCallback;
 					callback();

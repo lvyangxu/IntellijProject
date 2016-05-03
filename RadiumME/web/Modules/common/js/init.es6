@@ -58,7 +58,7 @@
         for(let name of nameArr){
             let addonArr = [name + "/" + name + ".js", name + "/" + name + ".css"];
             result += refernce("addon/", addonArr);
-        }
+        } 
         return result;
     }
     refernceString += loadAddon(["nav","section","table","select","wall","datepicker","upload","carousel"]);

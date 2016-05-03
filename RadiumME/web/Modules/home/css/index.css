@@ -13,18 +13,14 @@
   text-align: center;
   color: white;
   font-size: 20px; }
-
-.overlay > .text {
-  line-height: 100px; }
-
-.overlay > .text > .big {
-  font-size: 100px; }
-
-.overlay > .text > .small {
-  font-size: 30px;
-  /*margin-left:4px;*/
-  margin-top: 10px;
-  word-spacing: 8px; }
+  .overlay .text {
+    line-height: 100px; }
+    .overlay .text .big {
+      font-size: 100px; }
+    .overlay .text .small {
+      font-size: 30px;
+      margin-top: 10px;
+      word-spacing: 8px; }
 
 /*about_us*/
 .about_us {

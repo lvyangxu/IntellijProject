@@ -1,9 +1,13 @@
+"use strict";
 
-// $(".body").children(".content").children("div").each(function(){
-//     var maxH = 0;
-//     $(this).children("div").each(function() {
-//         maxH = $(this).height()>maxH?$(this).height():maxH;
-//     });
-//     console.log(maxH);
-//     $(this).children("div").css({"height":maxH+"px"});
-// });
+{
+    var h = 0;
+    $(".body").children(".content").children("div").each(function () {
+        var left = $(this).children(".left").height();
+        var right = $(this).children(".right").height();
+        h += left > right ? left : right;
+    });
+    $(".body").children(".content").height(h);
+}
+
+//# sourceMappingURL=index.js.map

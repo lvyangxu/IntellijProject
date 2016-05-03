@@ -1,80 +1,60 @@
 .addon-carousel {
-    font-size: 12px;
-    position: relative;
-}
-
-.addon-carousel>div{
-    position: relative;
-	/*height: 100%;*/
-}
-
-.addon-carousel>div>div{
-    float: left;
-}
-.addon-carousel>div>div>img{
-    width: 100%;
-}
-
-.addon-carousel>.pagination {
-	position: absolute;
-	z-index: 45;
-	top:90%;
-    left:0;
+  font-size: 12px;
+  position: relative; }
+  .addon-carousel .pagination {
+    text-align: center;
+    position: absolute;
+    z-index: 45;
+    top: 90%;
+    left: 0;
+    right: 0; }
+    .addon-carousel .pagination div {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background-color: rgba(255, 255, 255, 0.4);
+      border-radius: 6px;
+      cursor: pointer;
+      margin-left: 20px;
+      z-index: 49; }
+    .addon-carousel .pagination div:first-child {
+      margin-left: 0px; }
+    .addon-carousel .pagination div:hover {
+      background-color: rgba(255, 255, 255, 0.7); }
+    .addon-carousel .pagination div.active {
+      background-color: white; }
+  .addon-carousel .arrow {
+    display: none;
+    position: absolute;
+    left: 0;
     right: 0;
-}
+    z-index: 44;
+    height: 100%; }
+    .addon-carousel .arrow div {
+      background-size: 100% 100%;
+      cursor: pointer;
+      background-repeat: no-repeat; }
+    .addon-carousel .arrow div.left {
+      float: left;
+      margin-left: 10%;
+      background-image: url("arrow-left.png"); }
+    .addon-carousel .arrow div.right {
+      float: right;
+      margin-right: 10%;
+      background-image: url("arrow-right.png"); }
 
-.addon-carousel>.pagination>div {
-	display: inline-block;
-	width: 12px;
-	height: 12px;
-	background-color: rgba(255, 255, 255, 0.4);
-	border-radius: 6px;
-	cursor: pointer;
-	margin-left: 20px;
-	z-index: 49;
-}
+.addon-carousel:hover .arrow {
+  display: block; }
+  .addon-carousel:hover .arrow div {
+    opacity: 0.5; }
 
-.addon-carousel>.pagination>div:first-child {
-	margin-left: 0px;
-}
+.addon-carousel > div {
+  position: relative; }
 
-.addon-carousel>.pagination>div:hover {
-    background-color: rgba(255, 255, 255, 0.7);
-}
+.addon-carousel > div > div {
+  float: left; }
 
-.addon-carousel>.pagination>div.active {
-    background-color: rgba(255, 255, 255, 1);
-}
+.addon-carousel > div > div > img {
+  width: 100%; }
 
-.addon-carousel>.arrow{
-	display: none;
-	position: absolute;
-	left: 0;
-	right: 0;
-	z-index: 44;
-	height: 100%;
-}
-.addon-carousel:hover>.arrow{
-	display: block;
-}
-.addon-carousel:hover>.arrow>div{
-	opacity: 0.5;
-}
-
-
-.addon-carousel>.arrow>div{
-	background-size: 100% 100%;
-	cursor: pointer;
-    background-repeat: no-repeat;
-}
-
-.addon-carousel>.arrow>div.left{
-	float: left;
-	margin-left:10%;
-	background-image: url('arrow-left.png');
-}
-.addon-carousel>.arrow>div.right{
-	float: right;
-	margin-right: 10%;
-	background-image: url('arrow-right.png');
-}
+/*# sourceMappingURL=carousel.css.map */
