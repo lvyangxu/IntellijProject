@@ -23,6 +23,12 @@
       background-color: rgba(255, 255, 255, 0.7); }
     .addon-carousel .pagination div.active {
       background-color: white; }
+    .addon-carousel .pagination div.outer {
+      background-color: #999; }
+    .addon-carousel .pagination div.outer-hover {
+      background-color: #313132; }
+    .addon-carousel .pagination div.outer-active {
+      background-color: #313132; }
   .addon-carousel .arrow {
     display: none;
     position: absolute;

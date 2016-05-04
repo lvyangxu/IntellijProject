@@ -1,34 +1,37 @@
 
-
 .body {
     .content {
         .title {
-            text-align: center;
-            font-size: 20px;
-            font-weight: bolder;
-            margin-top: 20px;
-            margin-bottom: 20px;
+
         }
         .introduction {
-            text-indent: 2em;
-            word-wrap: break-word;
-            word-break: break-all;
-            margin-bottom: 20px;
+
         }
     }
 
     .carousel {
+
         .small {
-            width: 20%;
+            line-height: 26px;
+            font-size: 14px;
+            width: 18%;
+            margin-left: 1%;
+            margin-right: 1%;
             float: left;
+            color: white;
+            font-family: Arial;
         }
         .big {
+            font-size: 0;
             width: 80%;
             float: left;
             img {
                 width: 100%;
             }
         }
+    }
+    .carousel>div>div{
+        background-color: #313132;
     }
 
     .position {

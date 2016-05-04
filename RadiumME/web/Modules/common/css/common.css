@@ -90,7 +90,8 @@
 
 .body {
   width: 1330px;
-  margin: auto; }
+  margin: auto;
+  font-family: NIRMALA; }
 
 body .back-to-top {
   position: fixed;
@@ -101,6 +102,22 @@ body .back-to-top {
   z-index: 60; }
   body .back-to-top i {
     cursor: pointer; }
+
+.section {
+  margin-left: 130px;
+  margin-right: 130px;
+  text-align: center; }
+  .section .title {
+    padding-top: 30px;
+    margin-bottom: 30px;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bolder;
+    font-family: NIRMALA; }
+  .section p {
+    text-align: center;
+    font-family: Arial;
+    line-height: 30px; }
 
 button {
   cursor: pointer; }

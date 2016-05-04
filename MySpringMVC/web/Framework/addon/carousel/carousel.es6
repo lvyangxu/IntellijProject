@@ -33,9 +33,12 @@
                 "dots": true,
                 "arrow": false,
                 "fit":false,
-                "scale":1
+                "scale":1,
+                "outerDots":false
             };
             settings = $.extend(defaultSetting, settings);
+
+            let activeClass = (settings.outerDots)?"outer-active":"active";
 
             // build pagination html
             if (settings.dots) {
@@ -43,7 +46,7 @@
                     let innerHtml = "<span class='pagination'>";
                     let i = 0;
                     element.children("div").children("div").each(function (index) {
-                        let active = (index == 0) ? "class='active'" : "";
+                        let active = (index == 0) ? "class='"+activeClass+"'" : "";
                         innerHtml += "<div index='" + i + "' " + active + "></div>";
                         i++;
                     });
@@ -98,8 +101,10 @@
                 element.children("div").animate({
                     "left": -100 * currentIndex + "%"
                 }, 1000);
-                element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass("active");
-                element.children(".pagination").children("div[index=" + currentIndex + "]").addClass("active");
+
+
+                element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass(activeClass);
+                element.children(".pagination").children("div[index=" + currentIndex + "]").addClass(activeClass);
                 element.data("currentIndex", currentIndex);
             });
 
@@ -121,8 +126,8 @@
                             "left": -100 * currentIndex + "%"
                         }, 1000);
                         element.data("currentIndex", currentIndex);
-                        element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass("active");
-                        element.children(".pagination").children("div[index=" + currentIndex + "]").addClass("active");
+                        element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass(activeClass);
+                        element.children(".pagination").children("div[index=" + currentIndex + "]").addClass(activeClass);
                     }
                 }
                 if (moveX < -30) {
@@ -132,8 +137,8 @@
                             "left": -100 * currentIndex + "%"
                         }, 1000);
                         element.data("currentIndex", currentIndex);
-                        element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass("active");
-                        element.children(".pagination").children("div[index=" + currentIndex + "]").addClass("active");
+                        element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass(activeClass);
+                        element.children(".pagination").children("div[index=" + currentIndex + "]").addClass(activeClass);
                     }
                 }
             }
@@ -157,8 +162,8 @@
                 element.children("div").animate({
                     "left": -100 * currentIndex + "%"
                 }, 1000);
-                element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass("active");
-                element.children(".pagination").children("div[index=" + currentIndex + "]").addClass("active");
+                element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass(activeClass);
+                element.children(".pagination").children("div[index=" + currentIndex + "]").addClass(activeClass);
                 element.data("currentIndex", currentIndex);
             });
 
@@ -207,6 +212,23 @@
                 "margin-top": (ph-ah) * 0.5
             });
         });
+        
+        if(settings.outerDots){
+            let m = (element.width()-76)/2;
+            element.children(".pagination").css({
+                "position":"inherit",
+                "margin-left":m+"px",
+                "line-height":"80px"
+            });
+            element.children(".pagination").children("div").addClass("outer");
+            element.children(".pagination").children("div").hover(function () {
+                $(this).addClass("outer-hover");
+            },function(){
+                $(this).removeClass("outer-hover");
+            });
+
+
+        }
 
 
         return element;
