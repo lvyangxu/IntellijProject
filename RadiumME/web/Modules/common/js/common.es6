@@ -1,9 +1,9 @@
 {
 
-    $(".top").height($(window).height() - 70);
+
     $(".top_img").fullFit(70,function () {
-        $(".top").height($(window).height()-70);
         $(".top").css({"overflow":"hidden"});
+        $(".top").height($(window).height()-70);
     });
 
     $(".overlay").fit(()=> {

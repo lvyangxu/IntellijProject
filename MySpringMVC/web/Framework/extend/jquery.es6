@@ -3,30 +3,34 @@
  */
 {
     //addon init
-    $.fn.addonInit = function (name,callback) {
+    $.fn.addonInit = function (name, callback) {
         if (!$(this).data("init")) {
             //add class
-            if (!$(this).hasClass("addon-"+name)) {
-                $(this).addClass("addon-"+name);
+            if (!$(this).hasClass("addon-" + name)) {
+                $(this).addClass("addon-" + name);
             }
-            if(callback!=undefined){
+
+            if (callback != undefined) {
                 callback($(this));
             }
             $(this).data({"init": true});
         }
     };
 
-    $.fn.addonSettingExtend = function (options) {
+    $.fn.addonSettingExtend = function (options, defaultSetting) {
         let currentSetting = $(this).data("setting") || {};
         let settings = $.extend(currentSetting, options);
-        $(this).data("setting",settings);
+        $(this).data("setting", settings);
+        if (!$(this).data("init") && defaultSetting != undefined) {
+            settings = $.extend(defaultSetting, settings);
+        }
         return settings;
     }
 
     //get attr
-    $.fn.property = function (name,defaultValue) {
+    $.fn.property = function (name, defaultValue) {
         let result = $(this).attr(name);
-        if(defaultValue!=undefined&&result==undefined){
+        if (defaultValue != undefined && result == undefined) {
             result = defaultValue;
         }
         return result;
@@ -34,7 +38,7 @@
 
     //whether element has attr
     $.fn.has = function (name) {
-        let result = ($(this).attr(name)!=undefined);
+        let result = ($(this).attr(name) != undefined);
         return result;
     }
 
@@ -52,11 +56,11 @@
         });
         return $(this);
     };
-    $.fn.fullFit = function (delH,callback) {
-        let [x,y] = [$(this).width(),$(this).height()]
+    $.fn.fullFit = function (delH, callback) {
+        let [x,y] = [$(this).width(), $(this).height()]
         let element = $(this);
-        $(this).fit(()=>{
-            let [w,h] = [$(window).width(),$(window).outerHeight(true)];
+        $(this).fit(()=> {
+            let [w,h] = [$(window).width(), $(window).outerHeight(true)];
             element.parent().css({
                 "height": h - delH + "px"
             }, 2000);
@@ -82,17 +86,17 @@
                 "width": (scale) * 100 + "%"
             }, 2000);
 
-            if(callback!=undefined){
+            if (callback != undefined) {
                 callback();
             }
         });
 
         return $(this);
-    } 
+    }
 
     $.fn.xPath = function (xPath) {
         let element = $(this);
-        for(let node of xPath.split(">")){
+        for (let node of xPath.split(">")) {
             element = element.children(node);
         }
         return element;

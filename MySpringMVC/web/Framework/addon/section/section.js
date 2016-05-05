@@ -26,10 +26,11 @@
 
     var section = function section(element, options) {
 
-        var settings = element.addonSettingExtend(options);
+        var settings = element.addonSettingExtend(options, {
+            "minHeight": null
+        });
 
         element.addonInit("section", function () {
-
             //append html
             element.append(function () {
                 var menuHtml = "<div class='menu'>";
@@ -41,6 +42,12 @@
                 menuHtml += "</div>";
                 return menuHtml;
             });
+
+            if (settings.minHeight != null) {
+                element.children("div[section]").css({
+                    "min-height": settings.minHeight
+                });
+            }
         });
 
         element.children(".menu").children("div").each(function (index) {

@@ -20,21 +20,28 @@
 
     let section = (element, options)=> {
 
-        let settings = element.addonSettingExtend(options);
+        let settings = element.addonSettingExtend(options, {
+            "minHeight": null
+        });
 
         element.addonInit("section", ()=> {
-            
             //append html
             element.append(function () {
                 let menuHtml = "<div class='menu'>";
-                let i=0;
+                let i = 0;
                 element.children("div[section]").each(function () {
-                    menuHtml += "<div class='li' index='"+i+"'>" + $(this).attr("section") + "</div>";
+                    menuHtml += "<div class='li' index='" + i + "'>" + $(this).attr("section") + "</div>";
                     i++;
                 });
                 menuHtml += "</div>";
                 return menuHtml;
             });
+
+            if (settings.minHeight != null) {
+                element.children("div[section]").css({
+                    "min-height": settings.minHeight
+                })
+            }
         });
 
 
@@ -63,9 +70,7 @@
                 scrollTop += $(this).outerHeight();
             });
             let i = $(this).attr("index");
-            $("html,body").animate({"scrollTop":scrollTopArr[i]}, 800);
-
-
+            $("html,body").animate({"scrollTop": scrollTopArr[i]}, 800);
         });
 
 

@@ -21,24 +21,20 @@
 
     let carousel = function (element, options) {
 
-        let settings = element.addonSettingExtend(options);
+        let settings = element.addonSettingExtend(options, {
+            "dots": true,
+            "arrow": false,
+            "fit": false,
+            "scale": 1,
+            "outerDots": false
+        });
 
         element.addonInit("carousel", function () {
 
             let html = element.prop("innerHTML");
             element.html("<div>" + html + "</div>");
 
-            //init setting
-            let defaultSetting = {
-                "dots": true,
-                "arrow": false,
-                "fit":false,
-                "scale":1,
-                "outerDots":false
-            };
-            settings = $.extend(defaultSetting, settings);
-
-            let activeClass = (settings.outerDots)?"outer-active":"active";
+            let activeClass = (settings.outerDots) ? "outer-active" : "active";
 
             // build pagination html
             if (settings.dots) {
@@ -46,7 +42,7 @@
                     let innerHtml = "<span class='pagination'>";
                     let i = 0;
                     element.children("div").children("div").each(function (index) {
-                        let active = (index == 0) ? "class='"+activeClass+"'" : "";
+                        let active = (index == 0) ? "class='" + activeClass + "'" : "";
                         innerHtml += "<div index='" + i + "' " + active + "></div>";
                         i++;
                     });
@@ -116,7 +112,7 @@
             });
 
             //swipe
-            let swipe = (moveX)=>{
+            let swipe = (moveX)=> {
                 let lastIndex = element.data("currentIndex");
                 let currentIndex;
                 if (moveX > 30) {
@@ -205,29 +201,31 @@
             }, false);
         });
 
-        element.children(".arrow").fit(()=>{
+        element.children(".arrow").fit(()=> {
             let ph = element.children("div").children("div").height();
             let ah = element.children(".arrow").children(".left").height();
             element.children(".arrow").css({
-                "margin-top": (ph-ah) * 0.5
+                "margin-top": (ph - ah) * 0.5
             });
         });
-        
-        if(settings.outerDots){
-            let m = (element.width()-76)/2;
+
+        if (settings.outerDots) {
+            let m = (element.width() - 76) / 2;
             element.children(".pagination").css({
-                "position":"inherit",
-                "margin-left":m+"px",
-                "line-height":"80px"
+                "position": "inherit",
+                "margin-left": m + "px",
+                "line-height": "80px"
             });
             element.children(".pagination").children("div").addClass("outer");
             element.children(".pagination").children("div").hover(function () {
                 $(this).addClass("outer-hover");
-            },function(){
+            }, function () {
                 $(this).removeClass("outer-hover");
             });
+        }
 
-
+        if(settings.callback){
+            settings.callback();
         }
 
 

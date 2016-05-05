@@ -24,7 +24,11 @@
 
     var select = function select(element, options) {
 
-        var settings = element.addonSettingExtend(options);
+        var settings = element.addonSettingExtend(options, {
+            "title": element.property("title", "multi-select"),
+            "data": null,
+            "selectCallback": null
+        });
 
         var contain = element.xPath(".contain");
         var panel = element.xPath(".contain>.panel");
@@ -33,14 +37,6 @@
         var body = element.xPath(".contain>.panel>.body");
 
         element.addonInit("select", function () {
-
-            //init setting
-            var defaultSetting = {
-                "title": element.property("title", "multi-select"),
-                "data": null,
-                "selectCallback": null
-            };
-            settings = $.extend(defaultSetting, settings);
 
             // build html
             element.append(function () {

@@ -20,6 +20,8 @@
             float: left;
             color: white;
             font-family: Arial;
+            text-align: justify;
+            word-break:break-all;
         }
         .big {
             font-size: 0;
@@ -38,10 +40,12 @@
         .a, .b {
             width: 25%;
             float: left;
+            height: 100%;
         }
         .c {
             width: 50%;
             float: left;
+            height: 100%;
         }
         img {
             width: 100%;

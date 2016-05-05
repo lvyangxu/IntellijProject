@@ -153,9 +153,10 @@ body {
         font-family: NIRMALA;
     }
     p{
-        text-align: center;
+        text-align: justify;
         font-family: Arial;
         line-height: 30px;
+        word-break:break-all;
     }
 }
 

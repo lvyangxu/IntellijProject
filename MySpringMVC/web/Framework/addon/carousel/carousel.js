@@ -24,22 +24,18 @@
 
     var carousel = function carousel(element, options) {
 
-        var settings = element.addonSettingExtend(options);
+        var settings = element.addonSettingExtend(options, {
+            "dots": true,
+            "arrow": false,
+            "fit": false,
+            "scale": 1,
+            "outerDots": false
+        });
 
         element.addonInit("carousel", function () {
 
             var html = element.prop("innerHTML");
             element.html("<div>" + html + "</div>");
-
-            //init setting
-            var defaultSetting = {
-                "dots": true,
-                "arrow": false,
-                "fit": false,
-                "scale": 1,
-                "outerDots": false
-            };
-            settings = $.extend(defaultSetting, settings);
 
             var activeClass = settings.outerDots ? "outer-active" : "active";
 
@@ -229,6 +225,10 @@
             }, function () {
                 $(this).removeClass("outer-hover");
             });
+        }
+
+        if (settings.callback) {
+            settings.callback();
         }
 
         return element;

@@ -11,6 +11,7 @@
             if (!$(this).hasClass("addon-" + name)) {
                 $(this).addClass("addon-" + name);
             }
+
             if (callback != undefined) {
                 callback($(this));
             }
@@ -18,10 +19,13 @@
         }
     };
 
-    $.fn.addonSettingExtend = function (options) {
+    $.fn.addonSettingExtend = function (options, defaultSetting) {
         var currentSetting = $(this).data("setting") || {};
         var settings = $.extend(currentSetting, options);
         $(this).data("setting", settings);
+        if (!$(this).data("init") && defaultSetting != undefined) {
+            settings = $.extend(defaultSetting, settings);
+        }
         return settings;
     };
 
