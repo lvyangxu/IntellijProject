@@ -8,7 +8,12 @@
   color: white;
   font-family: Arial;
   text-align: justify;
-  word-break: break-all; }
+  word-break: break-all;
+  position: relative;
+  height: 488px; }
+  .body .carousel .small p {
+    position: absolute;
+    bottom: 0px; }
 .body .carousel .big {
   font-size: 0;
   width: 80%;
@@ -17,16 +22,18 @@
     width: 100%; }
 .body .carousel > div > div {
   background-color: #313132; }
-.body .position .a, .body .position .b {
-  width: 25%;
-  float: left;
-  height: 100%; }
-.body .position .c {
-  width: 50%;
-  float: left;
-  height: 100%; }
-.body .position img {
-  width: 100%;
-  height: 100%; }
+.body .position {
+  height: 336px; }
+  .body .position .a, .body .position .b {
+    width: 25%;
+    float: left;
+    height: 100%; }
+  .body .position .c {
+    width: 50%;
+    float: left;
+    height: 100%; }
+  .body .position img {
+    width: 100%;
+    height: 100%; }
 
 /*# sourceMappingURL=index.css.map */

@@ -21,178 +21,103 @@
 
     let table = function (element, options) {
 
-        let settings = element.addonSettingExtend(options, {
-            "id":element.attr("id"),
-            "title": element.property("title", ""),
-            "columnDateKey": element.property("column-date-key", ""),
-            "dateFilterType":element.attr("date-filter-type"),
-            "dataStartAddNum":element.property("date-start-add-num",(element.attr("month")=="month") ? 0 : -14),
-            "dateEndAddNum":element.property("date-end-add-num",0),
-            "url":element.property("url","../Table/" + element.attr("id") + "/"),
-            "curd":element.property("curd","curd"),
-            "attachment":element.has("attachment"),
-            "requestFilterKey":""
-        });
-
-        element.addonInit("section", ()=> {
-
-        });
-
-        var relate = attr("relate", "");
-        var requestFilterKey = attr("request-filter-key", "");
-        var requestFilterKeyArr = requestFilterKey.split(",");
-        var requestFilterName = attr("request-filter-name", "");
-        var requestFilterNameArr = requestFilterName.split(",");
-        var requestFilter = [];
+        let requestFilterKeyArr = element.property("request-filter-key", "").split(",");
+        let requestFilterNameArr = element.property("request-filter-name", "").split(",");
+        let requestFilter = [];
         for (var i = 0; i < requestFilterKeyArr.length; i++) {
             if (requestFilterKeyArr[i] != "") {
                 requestFilter.push([requestFilterKeyArr[i], requestFilterNameArr[i]]);
             }
         }
-
-        var setting = {
-            related: attr("related", ""),
-            createWithAttachment: (attr("createWithAttachment") != undefined),
-            relateCreate: (attr("relateCreate") != undefined),
-            attachmentBatchDownload: (attr("attachmentBatchDownload") != undefined)
-        };
+        let settings = element.addonSettingExtend(options, {
+            "id": element.attr("id"),
+            "title": element.property("title", ""),
+            "columnDateKey": element.property("column-date-key", ""),
+            "dateFilterType": element.attr("date-filter-type"),
+            "dataStartAddNum": element.property("date-start-add-num", (element.attr("month") == "month") ? 0 : -14),
+            "dateEndAddNum": element.property("date-end-add-num", 0),
+            "url": element.property("url", "../Table/" + element.attr("id") + "/"),
+            "curd": element.property("curd", "curd"),
+            "attachment": element.has("attachment"),
+            "attachmentBatchDownload": element.has("attachmentBatchDownload"),
+            "createWithAttachment": element.has("createWithAttachment"),
+            "relateCreate": element.has("relateCreate"),
+            "relate": element.property("relate", ""),
+            "related": element.property("related", ""),
+            "requestFilterKey": requestFilter
+        });
 
         //colspan add num
-        var colspanAddNum = 1;
+        let colspanAddNum = 1;
         colspanAddNum = relate ? (colspanAddNum + 1) : colspanAddNum;
         colspanAddNum = attachment ? (colspanAddNum + 1) : colspanAddNum;
 
-        //get element children element
-        var node = function (name) {
-            var result;
-            switch (name) {
-                case "table":
-                    result = element.children("table");
-                    break;
-                case "content":
-                    result = element.children("table").children("thead,tbody").children("tr").children(".content");
-                    break;
-                case "thead":
-                    result = element.children("table").children("thead");
-                    break;
-                case "thead-content":
-                    result = element.children("table").children("thead").children("tr").children(".content");
-                    break;
-                case "tbody":
-                    result = element.children("table").children("tbody");
-                    break;
-                case "tbody-row":
-                    result = element.children("table").children("tbody").children("tr");
-                    break;
-                case "thead-checkbox":
-                    result = element.children("table").children("thead").children("tr").children(".pre").children("input[type=checkbox]");
-                    break;
-                case "tbody-checkbox":
-                    result = element.children("table").children("tbody").children("tr").children(".pre").children("input[type=checkbox]");
-                    break;
-                case "init-span":
-                    result = element.children("span");
-                    break;
-                case "column-filter":
-                    result = element.children(".filter").children(".column-filter");
-                    break;
-                case "row-filter":
-                    result = element.children(".filter").children(".row-filter");
-                    break;
-                case "row-filter-body-div":
-                    result = element.children(".filter").children(".row-filter").children(".contain").children(".panel").children(".body").children("div");
-                    break;
-                case "row-filter-head":
-                    result = element.children(".filter").children(".row-filter").children(".contain").children(".panel").children(".head");
-                    break;
-                case "row-filter-body":
-                    result = element.children(".filter").children(".row-filter").children(".contain").children(".panel").children(".body");
-                    break;
-                case "create-head":
-                    result = element.children(".request").children(".create").children(".contain").children(".panel").children(".head");
-                    break;
-                case "create-body":
-                    result = element.children(".request").children(".create").children(".contain").children(".panel").children(".body");
-                    break;
-                case "update-head":
-                    result = element.children(".request").children(".update").children(".contain").children(".panel").children(".head");
-                    break;
-                case "update-body":
-                    result = element.children(".request").children(".update").children(".contain").children(".panel").children(".body");
-                    break;
-                case "relate-create-head":
-                    result = $("#" + setting.related).children(".request").children(".relateCreate").children(".contain").children(".panel").children(".head");
-                    break;
-                case "relate-create-body":
-                    result = $("#" + setting.related).children(".request").children(".relateCreate").children(".contain").children(".panel").children(".body");
-                    break;
-                case "filter":
-                    result = element.children(".filter");
-                    break;
-                case "request":
-                    result = element.children(".request");
-                    break;
-                case "pagination":
-                    result = element.children(".pagination");
-                    break;
-            }
-            return result;
-        }
+        let node = {
+            "table": element.children("table"),
+            "content": element.xPath("table>thead,tbody>tr>.content"),
+            "thead": element.xPath("table>thead"),
+            "theadContent": element.xPath("table>thead>tr>.content"),
+            "tbody": element.xPath("table>tbody"),
+            "tbodyRow": element.xPath("table>tbody>tr"),
+            "theadCheckbox": element.xPath("table>thead>tr>.pre>input[type=checkbox]"),
+            "tbodyCheckbox": element.xPath("table>tbody>tr>.pre>input[type=checkbox]"),
+            "initSpan": element.children("span"),
+            "columnFilter": element.xPath(".filter>.column-filter"),
+            "rowFilter": element.xPath(".filter>.row-filter"),
+            "rowFilterBodyDiv":element.xPath(".filter>.row-filter>.contain>.panel>.body>div"),
+            "rowFilterHead":element.xPath(".filter>.row-filter>.contain>.panel>.head"),
+            "rowFilterBody":element.xPath(".filter>.row-filter>.contain>.panel>.body"),
+            "createHead":element.xPath(".request>.create>.contain>.panel>.head"),
+            "createBody":element.xPath(".request>.create>.contain>.panel>.body"),
+            "updateHead":element.xPath(".request>.update>.contain>.panel>.head"),
+            "updateBody":element.xPath(".request>.update>.contain>.panel>.body"),
+            "relateCreateHead":$("#" + settings.related).xPath(".request>.relateCreate>.contain>.panel>.head"),
+            "relateCreateBody":$("#" + settings.related).xPath(".request>.relateCreate>.contain>.panel>.body"),
+            "filter":element.children(".filter"),
+            "request":element.children(".request"),
+            "pagination":element.children(".pagination")
+        };
 
-        //get or set element data
-        var data = function (name, value) {
-            var result;
-            if (value == undefined) {
-                result = element.data(name);
-            } else {
-                element.data(name, value);
-                result = element.data(name);
-            }
-            return result;
-        }
-
-        //init
-        if (!data("init")) {
-            //functions
-            //loading
-            data("loading", function () {
-                if (node("column-filter").data("data") != undefined) {
-                    var l = node("column-filter").data("data").filter(function (d) {
+        let func = {
+            loading(){
+                let columnFilterData = node.columnFilter.data("data");
+                if (columnFilterData != undefined) {
+                    let l = columnFilterData.filter((d)=> {
                         return d.checked;
                     }).length;
-                    var currentColumnLength = l + colspanAddNum;
-                    node("tbody").html("<tr><td colspan='" + currentColumnLength + "'><i class='animation fa fa-refresh'></i></td></tr>");
+                    let currentColumnLength = l + colspanAddNum;
+                    node.tbody.html("<tr><td colspan='" + currentColumnLength + "'><i class='animation fa fa-refresh'></i></td></tr>");
                 }
-            });
-            //no matches data
-            data("noData", function () {
-                if (node("column-filter").data("data") != undefined) {
-                    var l = node("column-filter").data("data").filter(function (d) {
+            },
+            noData(){
+                let columnFilterData = node.columnFilter.data("data");
+                if (columnFilterData != undefined) {
+                    let l = columnFilterData.filter((d)=> {
                         return d.checked;
                     }).length;
-                    var currentColumnLength = l + colspanAddNum;
-                    node("tbody").html("<tr><td colspan='" + currentColumnLength + "'>There is not any matched data for last request</i></td></tr>");
+                    let currentColumnLength = l + colspanAddNum;
+                    node.tbody.html("<tr><td colspan='" + currentColumnLength + "'>There is not any matched data for last request</i></td></tr>");
                 }
-            });
-            //fail
-            data("fail", function (result) {
-                if (node("column-filter").data("data") != undefined) {
-                    var l = node("column-filter").data("data").filter(function (d) {
+            },
+            fail(message){
+                let columnFilterData = node.columnFilter.data("data");
+                if (columnFilterData != undefined) {
+                    let l = columnFilterData.filter((d)=> {
                         return d.checked;
                     }).length;
-                    var currentColumnLength = l + colspanAddNum;
-                    node("tbody").html("<tr><td colspan='" + currentColumnLength + "'>Request Failed: " + result + "</td></tr>");
+                    let currentColumnLength = l + colspanAddNum;
+                    node.tbody.html("<tr><td colspan='" + currentColumnLength + "'>Request Failed: " + message + "</td></tr>");
                 }
-            });
-            //read
-            data("Read", function (requestUrl, requestData) {
-                data("loading")();
+            },
+            read(requestUrl, requestData){
+                this.loading();
                 //refresh parent related data
-                if (relate != "") {
-                    node("request").children(".request-filter").each(function () {
-                        var thisSelect = $(this);
-                        var selectId = requestFilter.filter(function (d) {
-                            return (d[1] == thisSelect.attr("title"));
+                if (settings.relate != "") {
+                    node.request.children(".request-filter").each(function () {
+                        let thisSelect = $(this);
+                        let selectId = requestFilter.filter(function (d) {
+                            d = (d[1] == thisSelect.attr("title"));
+                            return d;
                         }).map(function (d) {
                             return d[0];
                         }).collect("join", "");
@@ -203,7 +128,6 @@
                         $("#" + relate).data("parentRelatedData", oldData);
                     });
                 }
-
                 //add relatedData to requestParam
                 var relatedRequestData = (setting.related != "") ? data("relatedData") : "";
                 requestData = (requestData == undefined) ? relatedRequestData : (requestData + "&" + relatedRequestData);
@@ -254,7 +178,18 @@
                     }
 
                 });
-            });
+            }
+        }
+
+        element.addonInit("table", ()=> {
+
+        });
+
+
+
+        //init
+        if (!data("init")) {
+
             //refresh attachment
             data("refreshAttachment", function (attachmentTbody, columnKeyValueArr) {
                 var requestData = data("thArr").filter(function (d) {

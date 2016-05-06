@@ -13,8 +13,14 @@
                 "height": $(window).height() - 70
             });
             let oh = $(".overlay").height();
-            let ch = $(".overlay").children(".text").height();
-            $(".overlay").children(".text").css({"margin-top": (oh - ch) * 0.83 + "px"});
+            let th = $(".overlay").children(".text").height();
+            let bh = $(".overlay").children(".text").children(".big").height();
+            let sh = $(".overlay").children(".text").children(".small").height();
+            let buttonH = $(".overlay").children(".text").children("button").height();
+            let space = oh - bh - sh - buttonH;
+            $(".overlay").children(".text").css({"margin-top": space * 0.5 + "px"});
+            $(".overlay").children(".text").children(".small").css({"margin-top":space*0.05+"px"});
+            $(".overlay").children(".text").children("button").css({"margin-top":space*0.25+"px"});
         });
     });
 

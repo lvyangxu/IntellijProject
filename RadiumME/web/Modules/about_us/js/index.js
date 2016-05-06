@@ -17,18 +17,7 @@
     };
 
     $(".carousel").carousel({
-        "outerDots": true,
-        "callback": function callback() {
-            $(".carousel").xPath("div>div").each(function () {
-                var h = $(this).height();
-                var ph = $(this).children(".small").children("p").outerHeight(true);
-                $(this).children(".small").children("p").css({ "margin-top": h - ph + "px" });
-            });
-        }
-    });
-
-    $(document).ready(function () {
-        $(".position").height($(".c").height());
+        "outerDots": true
     });
 }
 

@@ -22,6 +22,12 @@
             font-family: Arial;
             text-align: justify;
             word-break:break-all;
+            position: relative;
+            height: 488px;
+            p{
+                position: absolute;
+                bottom: 0px;
+            }
         }
         .big {
             font-size: 0;
@@ -37,6 +43,7 @@
     }
 
     .position {
+        height: 336px;
         .a, .b {
             width: 25%;
             float: left;
