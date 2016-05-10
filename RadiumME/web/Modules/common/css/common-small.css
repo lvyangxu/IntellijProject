@@ -1,86 +1,29 @@
-/***************navbar***************/
-.navbar>div>.content {
-	margin-right: 10px;
-}
+.navbar .container .icon {
+  margin-left: 20px; }
+.navbar .container .content .list {
+  display: block; }
+.navbar .container .content .menu {
+  display: none;
+  position: absolute;
+  top: 70px;
+  right: 0;
+  width: 100px;
+  background-color: #ebebeb;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: 2px 2px 5px; }
+  .navbar .container .content .menu div {
+    width: 100%; }
+    .navbar .container .content .menu div a {
+      height: 30px;
+      line-height: 30px;
+      font-size: 12px;
+      margin-right: 10px;
+      text-align: justify;
+      width: 100px; }
+    .navbar .container .content .menu div input {
+      width: 60px; }
+  .navbar .container .content .menu .language .line {
+    margin-top: 2.5px; }
 
-.navbar>div>.icon {
-	margin-left: 10px;
-}
-
-.navbar>div>.content>.list {
-	display: inline-block;
-	color: black;
-	font-size: 2em;
-}
-
-.navbar>div>.content>.list>.fa-times {
-	display: none;
-}
-
-.navbar>div>.content>.list>i {
-	width: 100px;
-	text-align: center;
-	cursor: pointer;
-}
-
-.navbar>div>.content>.menu {
-	display: none;
-	position: absolute;
-	left: 0px;
-	width: 100%;
-	background-color: #ebebeb;
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
-	box-shadow: 2px 2px 5px;
-}
-
-.navbar>div>.content>.menu>ul>li {
-	list-style-type: none;
-	font-size: 10px;
-	font-weight: bold;
-	display: inline-block;
-	width: 45%;
-	height: 40px;
-	font-size: 16px;
-}
-
-/*search*/
-.navbar>div>.content>.menu>ul>li>.search {
-	display: inline-block;
-	margin-left: 10px;
-}
-
-.navbar>div>.content>.menu>ul>li>.search>input {
-	color: white;
-	border: 2px solid rgba(198, 155, 110, 1);
-	background-color: rgba(29, 27, 34, 1);
-	height: 20px;
-	line-height: 20px;
-	width: 100px;
-}
-
-.navbar>div>.content>.menu>ul>li>.search>img {
-	cursor: pointer;
-	margin-left: 5px;
-	height: 20px;
-}
-
-/*language*/
-.navbar>div>.content>.menu>ul>li>.language {
-	display: inline-block;
-}
-
-.navbar>div>.content>.menu>ul>li>.language>div {
-	display: inline-block;
-	color: white;
-	margin-left: 5px;
-	font-size: 12px;
-}
-
-.navbar>div>.content>.menu>ul>li>.language>div.lang {
-	cursor: pointer;
-}
-
-.navbar>div>.content>.menu>ul>li>.language>div:first-child {
-	margin-left: 20px;
-}
+/*# sourceMappingURL=common-small.css.map */

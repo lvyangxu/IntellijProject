@@ -1,0 +1,108 @@
+
+.body {
+    $game-img-space: 10px;
+    $address-img-space: 50px;
+    $img-margin: 50px;
+    $game-height: 383.06px;
+    $game-title-top:62px;
+    $game-title-bottom:25px;
+    .title {
+        margin-left: $img-margin;
+        text-align: left;
+        font-size: 26px;
+        font-weight: bolder;
+        font-family: NIRMALA;
+        padding-top: $game-title-top;
+        margin-bottom: $game-title-bottom;
+    }
+    .games-div {
+
+        background-color: #F4F4F4;
+        height: $game-height+35+$game-title-top+$game-title-bottom;
+        padding-bottom: $game-title-top+7;
+        border-bottom: 1px solid #f9f9f9;
+
+        .games {
+            position: relative;
+            float: left;
+            margin-left: $game-img-space;
+            width: (1330-$game-img-space*3-$img-margin*2)/4;
+            height: $game-height;
+            .overlay-panel {
+                display: none;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                z-index: 2;
+                img {
+                    width: 20%;
+                    margin-left: 40%;
+                    margin-top: 10%;
+                }
+                .name {
+                    font-size: 24px;
+                    margin-top: 50%;
+                    color: white;
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+            img {
+                width: 100%;
+            }
+            .text {
+                font-size: 16px;
+                color: #666;
+                font-family: Arial;
+                line-height: 30px;
+                word-break: break-all;
+                font-weight: bolder;
+            }
+        }
+        .first {
+            margin-left: $img-margin;
+        }
+        .games:hover {
+            .overlay-panel {
+                display: block;
+            }
+        }
+    }
+
+    .address {
+        border-top: 1px solid #dbdbdb;
+        background-color: #e8e8e8;
+        height: 600px;
+
+        .left, .right {
+            padding-top: 0px;
+            width: (1330-$img-margin*2-$address-img-space)/2;
+            float: left;
+            img {
+                width: 100%;
+                margin-bottom: 25px;
+            }
+            .button {
+                font-size: 18px;
+                font-weight: bolder;
+                font-family: NIRMALA;
+                text-align: left;
+                height: 50px;
+                line-height: 50px;
+            }
+        }
+        .left {
+            padding-left: $img-margin;
+        }
+
+        .right {
+            padding-left: $address-img-space;
+            padding-right: $img-margin;
+        }
+
+    }
+
+}
+
+

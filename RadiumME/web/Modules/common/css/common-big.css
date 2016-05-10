@@ -1,22 +1,15 @@
-/***************navbar***************/
-.navbar>div>.content{
-    /*margin-right: 80px;*/
-}
-.navbar>div>.icon{
-    /*margin-left: 80px;*/
-}
+.navbar .container .content .list {
+  display: none; }
+.navbar .container .content .menu {
+  height: 70px;
+  line-height: 70px; }
+  .navbar .container .content .menu a:hover {
+    color: #999; }
+  .navbar .container .content .menu .language .lang:hover {
+    color: #999; }
+  .navbar .container .content .menu .language .en {
+    margin-left: 20px; }
+  .navbar .container .content .menu .search input {
+    width: 100px; }
 
-.navbar>div>.content>.list{
-    display: none;
-}
-.navbar>div>.content>.menu>div>a:hover{
-    color:#999;
-}
-
-.navbar>div>.content>.menu>.language>div:first-child{
-    margin-left: 20px;
-}
-.navbar>div>.content>.menu>.language>.lang:hover{
-    color:#999;
-}
-
+/*# sourceMappingURL=common-big.css.map */

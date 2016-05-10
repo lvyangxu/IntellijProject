@@ -1,0 +1,53 @@
+.body {
+    $section-height:170px;
+    $right-width:1330-130-130-267-10-10px;
+    .section {
+        margin-left: 130px;
+        margin-right: 130px;
+        margin-bottom:40px;
+        height: $section-height;
+        p{
+            line-height: 25px;
+        }
+
+        .left {
+            float: left;
+            font-size: 0;
+        }
+        .right {
+            width: $right-width;
+            position: relative;
+            height: $section-height;
+            float: left;
+            margin-left: 10px;
+            margin-right: 10px;
+            .title{
+                text-align: left;
+                margin-bottom: 0;
+                padding-top:0;
+            }
+
+            .paragraph{
+                font-size: 16px;
+
+                color: #666;
+            }
+
+            .bottom{
+                color:#e9a500;
+                position: absolute;
+                bottom: 0px;
+                margin-bottom: 0px;
+            }
+
+            .bottom:hover{
+                color: #f6dfa6;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .section:first-child{
+        margin-top:40px;
+    }
+}

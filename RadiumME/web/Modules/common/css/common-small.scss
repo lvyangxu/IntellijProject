@@ -1,0 +1,42 @@
+.navbar{
+	.container{
+		.icon{
+			margin-left: 20px;
+		}
+		.content{
+			.list {
+				display: block;
+			}
+			.menu {
+				display: none;
+				position: absolute;
+				top:70px;
+				right: 0;
+				width: 100px;
+				background-color: #ebebeb;
+				border-bottom-left-radius: 5px;
+				border-bottom-right-radius: 5px;
+				box-shadow: 2px 2px 5px;
+				div{
+					width: 100%;
+					a{
+						height: 30px;
+						line-height: 30px;
+						font-size: 12px;
+						margin-right: 10px;
+						text-align: justify;
+						width: 100px;
+					}
+					input{
+						width: 60px;
+					}
+				}
+				.language{
+					.line{
+						margin-top: 2.5px;
+					}
+				}
+			}
+		}
+	}
+}

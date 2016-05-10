@@ -1,12 +1,13 @@
 "use strict";
 
 {
-
+    //top img auto fit full sreen
     $(".top_img").fullFit(70, function () {
         $(".top").css({ "overflow": "hidden" });
         $(".top").height($(window).height() - 70);
     });
 
+    //top img overlay auto fit full screen
     $(".overlay").fit(function () {
         $(document).ready(function () {
             $(".overlay").css({
@@ -25,29 +26,35 @@
         });
     });
 
+    //menu fit
+    $(".navbar").fit(function () {
+        if ($(window).width >= 1100) {
+            $(".navbar").children(".container").children(".content").children(".menu").show();
+        }
+    });
+
     //vertical menu bar
-    $(".navbar").children(".content").children(".list").children(".fa").delegate("", "click", function () {
+    $(".navbar").children(".container").children(".content").children(".list").children(".fa").delegate("", "click", function () {
         if ($(this).hasClass("fa-list")) {
             $(this).slideUp("fast", function () {
                 $(this).parent().children(".fa-times").slideDown("fast");
-                $(".head").children(".content").children(".menu").slideDown("fast");
+                $(".navbar").children(".container").children(".content").children(".menu").slideDown("fast");
             });
         } else {
             $(this).slideUp("fast", function () {
                 $(this).parent().children(".fa-list").slideDown("fast");
-                $(".head").children(".content").children(".menu").slideUp("fast");
+                $(".navbar").children(".container").children(".content").children(".menu").slideUp("fast");
             });
         }
     });
 
-    // var mh = $(".navbar").children("div").children(".content").children(".menu").children("div").height();
-    // $(".navbar").children("div").children(".content").children(".menu").children("div").css({"margin-top":(70-mh)/2});
-
+    //top button scroll
     $(".top").children(".overlay").children(".text").children("button").delegate("", "click", function () {
         var marginT = parseInt($(".body").children(".content").children("div").css("margin-top"));
         $("body").animate({ scrollTop: $(".body").children(".content").offset().top - marginT - 70 }, 1000);
     });
 
+    //footer
     $(".footer").children(".content").children(".left").children("input").focus(function () {
         $(this).attr("placeholder", "");
     });

@@ -1,0 +1,31 @@
+.navbar{
+    .container{
+        .content{
+            .list{
+                display: none;
+            }
+            .menu{
+                height: 70px;
+                line-height: 70px;
+                a:hover{
+                    color:#999;
+                }
+                .language{
+                    .lang:hover{
+                        color:#999;
+                    }
+                    .en{
+                        margin-left: 20px;
+                    }
+                }
+                .search{
+                    input{
+                        width: 100px;
+                    }
+                }
+            }
+
+        }
+    }
+}
+

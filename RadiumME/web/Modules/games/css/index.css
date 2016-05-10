@@ -34,7 +34,7 @@
           width: 30%;
           margin-left: 40%; }
       .body .content .section .left .text .bottom .button:hover, .body .content .section .right .text .bottom .button:hover {
-        background: url("../image/buttonshape.png") no-repeat center center;
+        background: url("../../common/image/buttonshape.png") no-repeat center center;
         background-size: 50px 20px; }
       .body .content .section .left .text .bottom .button:hover span, .body .content .section .right .text .bottom .button:hover span {
         display: none; }
