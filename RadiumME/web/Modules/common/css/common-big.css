@@ -9,7 +9,10 @@
     color: #999; }
   .navbar .container .content .menu .language .en {
     margin-left: 20px; }
-  .navbar .container .content .menu .search input {
-    width: 100px; }
+  .navbar .container .content .menu .search {
+    line-height: 50px; }
+    .navbar .container .content .menu .search input {
+      width: 180px;
+      font-size: 18px; }
 
 /*# sourceMappingURL=common-big.css.map */

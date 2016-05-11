@@ -57,60 +57,106 @@
         colspanAddNum = settings.attachment ? colspanAddNum + 1 : colspanAddNum;
 
         var node = {
-            "table": element.children("table"),
-            "content": element.xPath("table>thead,tbody>tr>.content"),
-            "thead": element.xPath("table>thead"),
-            "theadContent": element.xPath("table>thead>tr>.content"),
-            "tbody": element.xPath("table>tbody"),
-            "tbodyRow": element.xPath("table>tbody>tr"),
-            "theadCheckbox": element.xPath("table>thead>tr>.pre>input[type=checkbox]"),
-            "tbodyCheckbox": element.xPath("table>tbody>tr>.pre>input[type=checkbox]"),
-            "initSpan": element.children("span"),
-            "columnFilter": element.xPath(".filter>.column-filter"),
-            "rowFilter": element.xPath(".filter>.row-filter"),
-            "rowFilterBodyDiv": element.xPath(".filter>.row-filter>.contain>.panel>.body>div"),
-            "rowFilterHead": element.xPath(".filter>.row-filter>.contain>.panel>.head"),
-            "rowFilterBody": element.xPath(".filter>.row-filter>.contain>.panel>.body"),
-            "createHead": element.xPath(".request>.create>.contain>.panel>.head"),
-            "createBody": element.xPath(".request>.create>.contain>.panel>.body"),
-            "updateHead": element.xPath(".request>.update>.contain>.panel>.head"),
-            "updateBody": element.xPath(".request>.update>.contain>.panel>.body"),
-            "relateCreateHead": $("#" + settings.related).xPath(".request>.relateCreate>.contain>.panel>.head"),
-            "relateCreateBody": $("#" + settings.related).xPath(".request>.relateCreate>.contain>.panel>.body"),
-            "filter": element.children(".filter"),
-            "request": element.children(".request"),
-            "pagination": element.children(".pagination")
+            table: function table() {
+                return element.children("table");
+            },
+            content: function content() {
+                return element.xPath("table>thead,tbody>tr>.content");
+            },
+            thead: function thead() {
+                return element.xPath("table>thead");
+            },
+            theadContent: function theadContent() {
+                return element.xPath("table>thead>tr>.content");
+            },
+            tbody: function tbody() {
+                return element.xPath("table>tbody");
+            },
+            tbodyRow: function tbodyRow() {
+                return element.xPath("table>tbody>tr");
+            },
+            theadCheckbox: function theadCheckbox() {
+                return element.xPath("table>thead>tr>.pre>input[type=checkbox]");
+            },
+            tbodyCheckbox: function tbodyCheckbox() {
+                return element.xPath("table>tbody>tr>.pre>input[type=checkbox]");
+            },
+            initSpan: function initSpan() {
+                return element.children("span");
+            },
+            columnFilter: function columnFilter() {
+                return element.xPath(".filter>.column-filter");
+            },
+            rowFilter: function rowFilter() {
+                return element.xPath(".filter>.row-filter");
+            },
+            rowFilterBodyDiv: function rowFilterBodyDiv() {
+                return element.xPath(".filter>.row-filter>.contain>.panel>.body>div");
+            },
+            rowFilterHead: function rowFilterHead() {
+                return element.xPath(".filter>.row-filter>.contain>.panel>.head");
+            },
+            rowFilterBody: function rowFilterBody() {
+                return element.xPath(".filter>.row-filter>.contain>.panel>.body");
+            },
+            createHead: function createHead() {
+                return element.xPath(".request>.create>.contain>.panel>.head");
+            },
+            createBody: function createBody() {
+                return element.xPath(".request>.create>.contain>.panel>.body");
+            },
+            updateHead: function updateHead() {
+                return element.xPath(".request>.update>.contain>.panel>.head");
+            },
+            updateBody: function updateBody() {
+                return element.xPath(".request>.update>.contain>.panel>.body");
+            },
+            relateCreateHead: function relateCreateHead() {
+                return $("#" + settings.related).xPath(".request>.relateCreate>.contain>.panel>.head");
+            },
+            relateCreateBody: function relateCreateBody() {
+                return $("#" + settings.related).xPath(".request>.relateCreate>.contain>.panel>.body");
+            },
+            filter: function filter() {
+                return element.children(".filter");
+            },
+            request: function request() {
+                return element.children(".request");
+            },
+            pagination: function pagination() {
+                return element.children(".pagination");
+            }
         };
 
         var func = {
             loading: function loading() {
-                var columnFilterData = node.columnFilter.data("data");
+                var columnFilterData = node.columnFilter().data("data");
                 if (columnFilterData != undefined) {
                     var l = columnFilterData.filter(function (d) {
                         return d.checked;
                     }).length;
                     var currentColumnLength = l + colspanAddNum;
-                    node.tbody.html("<tr><td colspan='" + currentColumnLength + "'><i class='animation fa fa-refresh'></i></td></tr>");
+                    node.tbody().html("<tr><td colspan='" + currentColumnLength + "'><i class='animation fa fa-refresh'></i></td></tr>");
                 }
             },
             noData: function noData() {
-                var columnFilterData = node.columnFilter.data("data");
+                var columnFilterData = node.columnFilter().data("data");
                 if (columnFilterData != undefined) {
                     var l = columnFilterData.filter(function (d) {
                         return d.checked;
                     }).length;
                     var currentColumnLength = l + colspanAddNum;
-                    node.tbody.html("<tr><td colspan='" + currentColumnLength + "'>There is not any matched data for last request</i></td></tr>");
+                    node.tbody().html("<tr><td colspan='" + currentColumnLength + "'>There is not any matched data for last request</i></td></tr>");
                 }
             },
             fail: function fail(message) {
-                var columnFilterData = node.columnFilter.data("data");
+                var columnFilterData = node.columnFilter().data("data");
                 if (columnFilterData != undefined) {
                     var l = columnFilterData.filter(function (d) {
                         return d.checked;
                     }).length;
                     var currentColumnLength = l + colspanAddNum;
-                    node.tbody.html("<tr><td colspan='" + currentColumnLength + "'>Request Failed: " + message + "</td></tr>");
+                    node.tbody().html("<tr><td colspan='" + currentColumnLength + "'>Request Failed: " + message + "</td></tr>");
                 }
             },
             read: function read(requestUrl, requestData) {
@@ -119,7 +165,7 @@
                 func.loading();
                 //refresh parent related data
                 if (settings.relate != "") {
-                    node.request.children(".request-filter").each(function () {
+                    node.request().children(".request-filter").each(function () {
                         var thisSelect = $(this);
                         var selectId = requestFilter.filter(function (d) {
                             d = d[1] == thisSelect.attr("title");
@@ -140,7 +186,7 @@
                 requestData = requestData == undefined ? relatedRequestData : requestData + "&" + relatedRequestData;
                 if (requestFilter.length > 0) {
                     requestData += requestData == "" ? "" : "&";
-                    requestData += Array.from(node.request.children(".request-filter")).map(function (d) {
+                    requestData += Array.from(node.request().children(".request-filter")).map(function (d) {
                         if ($(d).data("data") == undefined) {
                             return "";
                         }
@@ -189,7 +235,7 @@
             refreshAttachment: function refreshAttachment(attachmentTbody, columnKeyValueArr) {
                 var _this2 = this;
 
-                var requestData = data("thArr").filter(function (d) {
+                var requestData = element.data("thArr").filter(function (d) {
                     return d.key;
                 }).map(function (d) {
                     d = d.id + "=" + columnKeyValueArr.filter(function (d1) {
@@ -237,17 +283,17 @@
                 if (element.data("filterColumnData") == undefined) {
                     return;
                 }
-                var startPageIndex = data("pageIndex") * data("rowsPerPage");
-                var endPageIndex = (data("pageIndex") + 1) * data("rowsPerPage");
+                var startPageIndex = element.data("pageIndex") * element.data("rowsPerPage");
+                var endPageIndex = (element.data("pageIndex") + 1) * element.data("rowsPerPage");
                 var rowIndex = 0;
-                var displayHtmlArr = data("filterColumnData").map(function (d) {
+                var displayHtmlArr = element.data("filterColumnData").map(function (d) {
                     var result = "<tr row-index='" + rowIndex + "'>";
                     result += "<td class='pre'><input type='checkbox'></td>";
-                    var attachmentHtml = attachment != "" ? "<td class='pre'><div class='attachment addon-wall' icon='paperclip' iconOnly></td>" : "";
+                    var attachmentHtml = settings.attachment != "" ? "<td class='pre'><div class='attachment addon-wall' icon='paperclip' iconOnly></td>" : "";
                     result += attachmentHtml;
-                    var relateHtml = relate != "" ? "<td class='pre'><i class='relate fa fa-plus'></i></td>" : "";
+                    var relateHtml = settings.relate != "" ? "<td class='pre'><i class='relate fa fa-plus'></i></td>" : "";
                     result += relateHtml;
-                    result += data("thArr").map(function (d1) {
+                    result += element.data("thArr").map(function (d1) {
                         var value = "";
                         if (d[d1.id] != undefined) {
                             value = d[d1.id];
@@ -260,16 +306,16 @@
                     rowIndex++;
                     return result;
                 }).slice(startPageIndex, endPageIndex);
-                var displayData = data("filterColumnData").slice(startPageIndex, endPageIndex);
-                data("displayData", displayData);
+                var displayData = element.data("filterColumnData").slice(startPageIndex, endPageIndex);
+                element.data("displayData", displayData);
                 var tbodyHtml = displayHtmlArr.collect("join", "");
-                data("displayHtmlArr", displayHtmlArr);
-                node("tbody").html(tbodyHtml);
+                element.data("displayHtmlArr", displayHtmlArr);
+                node.tbody().html(tbodyHtml);
                 $(".addon-wall").wall();
                 //attachment click callback
-                node("tbody").children("tr").children(".pre").children(".attachment").children(".contain").children(".switch").delegate("", "click", function () {
+                node.tbody().children("tr").children(".pre").children(".attachment").children(".contain").children(".switch").delegate("", "click", function () {
                     var thisAttachmentIcon = $(this).parent().parent();
-                    var columnKeyValueArr = data("thArr").filter(function (d) {
+                    var columnKeyValueArr = element.data("thArr").filter(function (d) {
                         return d.key;
                     }).map(function (d) {
                         d = d.id + "=" + new myString(thisAttachmentIcon.parent().parent().children("td[th-id=" + d.id + "]").text()).base64UrlEncode().value;
@@ -278,7 +324,7 @@
 
                     var attachmentWallHtml = "<div class='head'>";
                     attachmentWallHtml += "<button class='refresh btn btn-warning'><i class='fa fa-refresh'></i></button>";
-                    attachmentWallHtml += "<div class='addon-upload' title='upload attachment' url='../Table/" + id + "/AttachmentUpload' postData='key=" + columnKeyValueArr.map(function (d) {
+                    attachmentWallHtml += "<div class='addon-upload' title='upload attachment' url='../Table/" + settings.id + "/AttachmentUpload' postData='key=" + columnKeyValueArr.map(function (d) {
                         return d.split("=")[1];
                     }).collect("join", "_") + "'></div>";
                     attachmentWallHtml += "<button class='delete btn btn-danger'><i class='fa fa-times'></i></button>";
@@ -333,12 +379,12 @@
                 });
 
                 //relate click callback
-                node.tbody.children("tr").children(".pre").children(".relate").delegate("", "click", function () {
+                node.tbody().children("tr").children(".pre").children(".relate").delegate("", "click", function () {
                     $(this).parent().parent().siblings().fadeToggle("slow");
                     var relateIcon = $(this);
-                    node.pagination.fadeToggle("fast", function () {
-                        node.filter.fadeToggle("fast", function () {
-                            node.request.fadeToggle("fast", function () {
+                    node.pagination().fadeToggle("fast", function () {
+                        node.filter().fadeToggle("fast", function () {
+                            node.request().fadeToggle("fast", function () {
                                 if (relateIcon.hasClass("fa-plus")) {
                                     relateIcon.addClass("fa-minus");
                                     relateIcon.removeClass("fa-plus");
@@ -374,9 +420,9 @@
                     this.noData();
                     return;
                 }
-                var pageLength = parseInt((data("filterColumnData").length - 1) / data("rowsPerPage"));
+                var pageLength = parseInt((element.data("filterColumnData").length - 1) / element.data("rowsPerPage"));
                 var start = void 0;
-                if (data("pageIndex") <= 2) {
+                if (element.data("pageIndex") <= 2) {
                     start = 0;
                 } else if (data("pageIndex") >= pageLength - 2) {
                     start = pageLength - 4;
@@ -394,28 +440,28 @@
                     arr.push(_i2);
                 }
                 var paginationButtonHtml = arr.map(function (d) {
-                    var btnClass = d == data("pageIndex") ? "btn-success" : "btn-info";
+                    var btnClass = d == element.data("pageIndex") ? "btn-success" : "btn-info";
                     d = "<button class='btn " + btnClass + "'>" + (d + 1) + "</button>";
                     return d;
                 }).collect("join", "");
-                node.pagination.children("span").html(paginationButtonHtml);
+                node.pagination().children("span").html(paginationButtonHtml);
 
                 //pagination button click event
-                node.pagination.children("span").children("button").delegate("", "click", function () {
-                    node.theadCheckbox.prop("checked", false);
+                node.pagination().children("span").children("button").delegate("", "click", function () {
+                    node.theadCheckbox().prop("checked", false);
                     element.data("pageIndex", parseInt($(_this3).text()) - 1);
                     _this3.refreshDisplay();
                 });
 
                 //listen tbody checkbox
-                node.tbodyCheckbox.delegate("", "click", function () {
+                node.tbodyCheckbox().delegate("", "click", function () {
                     if ($(this).prop("checked")) {
                         $(this).parent(".pre").parent("tr").addClass("info");
                     } else {
                         $(this).parent(".pre").parent("tr").removeClass("info");
                     }
                 });
-                node.rowFilterBody.html("");
+                node.rowFilterBody().html("");
             },
             sort: function sort(thisElement) {
                 var sortId = thisElement.attr("th-id");
@@ -539,7 +585,7 @@
         element.addonInit("table", function () {
             //get init data
             var thArr = [];
-            node.initSpan.each(function () {
+            node.initSpan().each(function () {
                 var thId = $(this).attr("th-id");
                 var thName = $(this).text();
                 var checked = $(this).attr("hide") != "";
@@ -638,10 +684,10 @@
             }
 
             //request filter select init
-            node.request.children(".request-filter").select();
+            node.request().children(".request-filter").select();
 
             //create wall
-            node.request.children(".create").wall({
+            node.request().children(".create").wall({
                 "html": function html() {
                     var createHtml = "<div class='head'>";
                     createHtml += "<button class='add btn btn-info'><i class='fa fa-plus'></i></button>";
@@ -696,14 +742,14 @@
             });
 
             //create wall head
-            node.createHead.children(".add").delegate("", "click", function () {
+            node.createHead().children(".add").delegate("", "click", function () {
                 var createHtml = "<tr>";
                 if (settings.createWithAttachment) {
-                    var trIndex = node.createBody.children("table").children("tbody").children("tr").length;
+                    var trIndex = node.createBody().children("table").children("tbody").children("tr").length;
                     createHtml += "<td><div class='addon-upload' title='upload attachment' url='../Table/" + id + "temp/AttachmentTempUpload' postData='index=" + element.data("AttachmentTempIndex") + "&trIndex=" + trIndex + "'></div></td>";
                 }
                 //filter readonly
-                createHtml += data("thArr").filter(function (d) {
+                createHtml += element.data("thArr").filter(function (d) {
                     return !d.readonly;
                 }).filter(function (d) {
                     return !d.noCreate;
@@ -712,8 +758,8 @@
                     return d;
                 }).collect("join", "");
                 createHtml += "</tr>";
-                node.createBody.children("table").children("tbody").append(createHtml);
-                var newSelect = node.createBody.children("table").children("tbody").children("tr:last").children("td").children(".addon-select");
+                node.createBody().children("table").children("tbody").append(createHtml);
+                var newSelect = node.createBody().children("table").children("tbody").children("tr:last").children("td").children(".addon-select");
                 if (element.data("th-data") != undefined) {
                     newSelect.each(function () {
                         var d = element.data("th-data")[$(this).parent().attr("th-id")];
@@ -729,14 +775,14 @@
                 $(".addon-datepicker").datepicker();
                 $(".addon-upload").upload();
             });
-            node.createHead.children(".minus").delegate("", "click", function () {
-                node.createBody.children("table").children("tbody").children("tr:last").remove();
+            node.createHead().children(".minus").delegate("", "click", function () {
+                node.createBody().children("table").children("tbody").children("tr:last").remove();
             });
-            node.createHead.children(".remove").delegate("", "click", function () {
-                node.createBody.children("table").children("tbody").children("tr").remove();
+            node.createHead().children(".remove").delegate("", "click", function () {
+                node.createBody().children("table").children("tbody").children("tr").remove();
             });
-            node.createHead.children(".submit").delegate("", "click", function () {
-                var trs = node.createBody.children("table").children("tbody").children("tr");
+            node.createHead().children(".submit").delegate("", "click", function () {
+                var trs = node.createBody().children("table").children("tbody").children("tr");
                 if (trs.length == 0) {
                     alert("请至少添加一行数据");
                     return;
@@ -747,7 +793,7 @@
 
                     var _loop = function _loop(_i4) {
                         element.data("thArr").relateCallback($(trs[_i4]).children("td"), function (e1, e2) {
-                            var value = getRequestTdData($(e2), e1.type);
+                            var value = func.getRequestTdData($(e2), e1.type);
                             if (value == null) {
                                 alert("unknown column type");
                                 isValid = false;
@@ -790,9 +836,9 @@
                         return d;
                     }).collect("join", "&");
                     http.request(settings.url + "Create", requestData).then(function (result) {
-                        node.request.children(".create").children(".contain").children(".switch").click();
+                        node.request().children(".create").children(".contain").children(".switch").click();
                         func.read(settings.url);
-                        node.createBody.children("table").children("tbody").children("tr").remove();
+                        node.createBody().children("table").children("tbody").children("tr").remove();
                     }, function (result) {
                         alert("create data failed：" + result);
                     });
@@ -854,10 +900,10 @@
                         return createHtml;
                     }
                 });
-                node.relateCreateHead.children(".add").delegate("", "click", function () {
+                node.relateCreateHead().children(".add").delegate("", "click", function () {
                     var createHtml = "<tr>";
                     if (settings.createWithAttachment) {
-                        var trIndex = node.relateCreateBody.children("table").children("tbody").children("tr").length;
+                        var trIndex = node.relateCreateBody().children("table").children("tbody").children("tr").length;
                         createHtml += "<td><div class='addon-upload' title='upload attachment' url='../Table/" + id + "temp/AttachmentTempUpload' postData='index=" + element.data("AttachmentTempIndex") + "&trIndex=" + trIndex + "'></div></td>";
                     }
                     //filter readonly
@@ -870,8 +916,8 @@
                         return d;
                     }).collect("join", "");
                     createHtml += "</tr>";
-                    node.relateCreateBody.children("table").children("tbody").append(createHtml);
-                    var newSelect = node.relateCreateBody.children("table").children("tbody").children("tr:last").children("td").children(".addon-select");
+                    node.relateCreateBody().children("table").children("tbody").append(createHtml);
+                    var newSelect = node.relateCreateBody().children("table").children("tbody").children("tr:last").children("td").children(".addon-select");
                     if (element.data("th-data") != undefined) {
                         newSelect.each(function () {
                             var d = element.data("th-data")[$(this).parent().attr("th-id")];
@@ -887,14 +933,14 @@
                     $(".addon-datepicker").datepicker();
                     $(".addon-upload").upload();
                 });
-                node.relateCreateHead.children(".minus").delegate("", "click", function () {
-                    node.relateCreateBody.children("table").children("tbody").children("tr:last").remove();
+                node.relateCreateHead().children(".minus").delegate("", "click", function () {
+                    node.relateCreateBody().children("table").children("tbody").children("tr:last").remove();
                 });
-                node.relateCreateHead.children(".remove").delegate("", "click", function () {
-                    node.relateCreateBody.children("table").children("tbody").children("tr").remove();
+                node.relateCreateHead().children(".remove").delegate("", "click", function () {
+                    node.relateCreateBody().children("table").children("tbody").children("tr").remove();
                 });
-                node.relateCreateHead.children(".submit").delegate("", "click", function () {
-                    var trs = node.relateCreateBody.children("table").children("tbody").children("tr");
+                node.relateCreateHead().children(".submit").delegate("", "click", function () {
+                    var trs = node.relateCreateBody().children("table").children("tbody").children("tr");
                     if (trs.length == 0) {
                         alert("请至少添加一行数据");
                         return;
@@ -905,7 +951,7 @@
 
                         var _loop2 = function _loop2(_i5) {
                             element.data("thArr").relateCallback($(trs[_i5]).children("td"), function (e1, e2) {
-                                var value = getRequestTdData($(e2), e1.type);
+                                var value = func.getRequestTdData($(e2), e1.type);
                                 if (value == null) {
                                     alert("unknown column type");
                                     isValid = false;
@@ -941,7 +987,7 @@
                             return !(d.readonly || d.noCreate);
                         }).map(function (d) {
                             var requestValue = trs.toArray().map(function (d1) {
-                                var tdValue = getRequestTdData(d1.children("td[th-id=" + d.id + "]"), d.type);
+                                var tdValue = func.getRequestTdData(d1.children("td[th-id=" + d.id + "]"), d.type);
                                 return new myString(tdValue).base64UrlEncode().value;
                             }).collect("join", ",");
                             d = d.id + "=" + requestValue;
@@ -950,7 +996,7 @@
                         http.request(settings.url + "Create", requestData).then(function (result) {
                             $("#" + settings.related).children(".request").children(".create").children(".contain").children(".switch").click();
                             func.read(settings.url);
-                            node.relateCreateBody.children("table").children("tbody").children("tr").remove();
+                            node.relateCreateBody().children("table").children("tbody").children("tr").remove();
                         }, function (result) {
                             alert("create data failed：" + result);
                         });
@@ -959,7 +1005,7 @@
             }
 
             //update wall
-            node.request.children(".update").wall({
+            node.request().children(".update").wall({
                 "html": function html() {
                     var updateHtml = "<div class='head'><button class='submit btn btn-warning'>submit</button></div><div class='body'>";
                     //content table
@@ -969,7 +1015,7 @@
                         return d;
                     }).collect("join", "");
                     updateHtml += "</tr><tr>";
-                    updateHtml += data("thArr").map(function (d) {
+                    updateHtml += element.data("thArr").map(function (d) {
                         switch (d.type) {
                             case "float":
                             case "int":
@@ -991,7 +1037,7 @@
                         d = "<td><div>" + d.name + "</div></td>";
                         return d;
                     }).collect("join", "");
-                    updateHtml += "</tr><tr class='danger'><td colspan='" + data("thArr").length + "'>you can set a column value of the table above uniformity</td></tr></thead>";
+                    updateHtml += "</tr><tr class='danger'><td colspan='" + element.data("thArr").length + "'>you can set a column value of the table above uniformity</td></tr></thead>";
                     updateHtml += "<tbody><tr class='danger'>";
                     var unityTrHtml = element.data("thArr").map(function (d) {
                         var tdHtml = func.getRequestTdHtml(d);
@@ -1004,7 +1050,7 @@
                 },
                 "openCallback": function openCallback() {
                     var checkedArr = [];
-                    node.tbodyCheckbox.each(function () {
+                    node.tbodyCheckbox().each(function () {
                         if ($(this).prop("checked")) {
                             checkedArr.push($(this));
                         }
@@ -1019,7 +1065,7 @@
                             trHtml += "<tr>";
                             trHtml += element.data("thArr").map(function (d) {
                                 var tdText = checkedArr[_i6].parent().parent().children("td[th-id=" + d.id + "]").text();
-                                var tdHtml = getRequestTdHtml(d, tdText);
+                                var tdHtml = func.getRequestTdHtml(d, tdText);
                                 return tdHtml;
                             }).collect("join", "");
                             trHtml += "</tr>";
@@ -1028,7 +1074,7 @@
                         for (var _i6 = 0; _i6 < checkedArr.length; _i6++) {
                             _loop3(_i6);
                         }
-                        node.updateBody.children(".content").children("tbody").html(trHtml);
+                        node.updateBody().children(".content").children("tbody").html(trHtml);
                         //set default value
 
                         //set unity tr html
@@ -1037,9 +1083,9 @@
                             var tdHtml = func.getRequestTdHtml(d, tdText);
                             return tdHtml;
                         }).collect("join", "") + "</tr>";
-                        node.updateBody.children(".unity").children("tbody").html(unityHtml);
+                        node.updateBody().children(".unity").children("tbody").html(unityHtml);
                         //listen unity tr changed
-                        node.updateBody.children(".unity").children("tbody").children("tr").children("td").children("input,select").delegate("", "change", function () {
+                        node.updateBody().children(".unity").children("tbody").children("tr").children("td").children("input,select").delegate("", "change", function () {
                             var unityChangeThId = $(_this4).parent().attr("th-id");
                             var unityChangeThValue = $(_this4).val();
                             var needChangeElement = $(_this4).parent().parent().parent().parent().parent().children(".content").children("tbody").children("tr").children("td[th-id=" + unityChangeThId + "]");
@@ -1052,19 +1098,19 @@
                     }
                 }
             });
-            node.updateHead.children(".submit").delegate("", "click", function () {
-                var trs = node.updateBody.children(".content").children("tbody").children("tr");
+            node.updateHead().children(".submit").delegate("", "click", function () {
+                var trs = node.updateBody().children(".content").children("tbody").children("tr");
                 if (confirm("确定要提交这" + trs.length + "行数据吗?")) {
                     var requestData = element.data("thArr").map(function (d) {
                         var requestValue = Array.from(trs).map(function (d1) {
-                            var tdValue = func.getRequestTdData(d1.children("td[th-id=" + d.id + "]"), d.type);
+                            var tdValue = func.getRequestTdData($(d1).children("td[th-id=" + d.id + "]"), d.type);
                             return new myString(tdValue).base64UrlEncode().value;
                         }).collect("join", ",");
                         d = d.id + "=" + requestValue;
                         return d;
                     }).collect("join", "&");
                     http.request(settings.url + "Update", requestData).then(function (result) {
-                        node.request.children(".update").children(".contain").children(".panel").hide();
+                        node.request().children(".update").children(".contain").children(".panel").hide();
                         func.read(settings.url);
                     }, function (result) {
                         alert("update data failed：" + result);
@@ -1072,7 +1118,8 @@
                 }
             });
 
-            node.request.children(".attachmentBatchDownload").delegate("", "click", function () {
+            //attachment batch download
+            node.request().children(".attachmentBatchDownload").delegate("", "click", function () {
                 if (confirm("你确定要下载勾选的" + n + "行数据的所有附件吗？")) {
                     var requestData = "batchkey=" + element.data("thArr").filter(function (d) {
                         return d.key;
@@ -1092,7 +1139,7 @@
 
             //pagination rows per page select change event
             element.data("rowsPerPage", 10);
-            node.pagination.children("select").delegate("", "change", function () {
+            node.pagination().children("select").delegate("", "change", function () {
                 var rowsPerPage = $(this).find("option:selected").text();
                 element.data("rowsPerPage", rowsPerPage);
                 element.data("pageIndex", 0);
@@ -1100,11 +1147,11 @@
             });
 
             //pagination button click event
-            node.pagination.children("button").delegate("", "click", function () {
+            node.pagination().children("button").delegate("", "click", function () {
                 if (element.data("filterColumnData") == undefined) {
                     return;
                 }
-                node.theadCheckbox.prop("checked", false);
+                node.theadCheckbox().prop("checked", false);
                 var pageLength = parseInt((element.data("filterColumnData").length - 1) / element.data("rowsPerPage"));
                 if ($(this).hasClass("double-left")) {
                     element.data("pageIndex", 0);
@@ -1124,34 +1171,35 @@
             });
 
             //thead checkbox click event
-            node.theadCheckbox.delegate("", "click", function () {
+            node.theadCheckbox().delegate("", "click", function () {
                 if ($(this).prop("checked")) {
-                    node.tbodyCheckbox.prop({ "checked": true });
-                    node.tbodyRow.addClass("info");
+                    node.tbodyCheckbox().prop({ "checked": true });
+                    node.tbodyRow().addClass("info");
                 } else {
-                    node.tbodyCheckbox.prop({ "checked": false });
-                    node.tbodyRow.removeClass("info");
+                    node.tbodyCheckbox().prop({ "checked": false });
+                    node.tbodyRow().removeClass("info");
                 }
             });
 
             //thead sort
-            node.thead.children("tr").children(".content").delegate("", "click", function () {
+            node.thead().children("tr").children(".content").delegate("", "click", function () {
                 func.sort($(this));
             });
 
             //column filter
-            node.columnFilter.select({
+            node.columnFilter().select({
                 "data": element.data("thArr"), "selectCallback": function selectCallback() {
+                    console.log(1);
                     //hide unchecked columns
-                    var currentData = node.columnFilter.data("data");
-                    currentData.relateCallback(node.theadContent, function (e1, e2) {
+                    var currentData = node.columnFilter().data("data");
+                    currentData.relateCallback(node.theadContent(), function (e1, e2) {
                         e1["id"] = $(e2).attr("th-id");
                     }, function (d) {
                         return d.name;
                     }, function (d) {
                         return $(d).text();
                     });
-                    currentData.relateCallback(node.content, function (e1, e2) {
+                    currentData.relateCallback(node.content(), function (e1, e2) {
                         if (e1.checked) {
                             $(e2).removeClass("hide");
                         } else {
@@ -1179,7 +1227,7 @@
                 dateFilterHtml += "<label>From</label><div id='" + settings.id + "Start' class='addon-datepicker' type='" + settings.dateFilterType + "' add-num='" + settings.dateStartAddNum + "'></div>";
                 dateFilterHtml += "<label>To</label><div id='" + settings.id + "End' class='addon-datepicker' type='" + settings.dateFilterType + "' add-num='" + settings.dateEndAddNum + "'></div>";
             }
-            node.rowFilter.wall({
+            node.rowFilter().wall({
                 "html": function html() {
                     var d = "<div class='dateFilter'>" + dateFilterHtml + "</div>";
                     d += "<div class='head'><button class='btn btn-success'><i class='fa fa-plus'></i>add new filter</button></div>";
@@ -1191,10 +1239,10 @@
             element.data("row-length", 0);
 
             //delegate request buttons
-            node.request.delegate(".refresh", "click", function () {
+            node.request().delegate(".refresh", "click", function () {
                 func.read(settings.url);
             });
-            node.request.delegate(".download", "click", function () {
+            node.request().delegate(".download", "click", function () {
                 //thead data
                 var checkedArr = element.data("thArr").filter(function (d) {
                     return d.checked;
@@ -1218,9 +1266,9 @@
                     }).collect("join", "\n");
                 }
 
-                var titleSource = title;
+                var titleSource = settings.title;
                 var requestDataSource = requestData;
-                title = new myString(title).base64UrlEncode().value;
+                var title = new myString(settings.title).base64UrlEncode().value;
                 requestData = new myString(requestData).base64UrlEncode().value;
                 requestData = "title=" + title + "&data=" + requestData;
                 http.request(settings.url + "Download", requestData).then(function (result) {
@@ -1229,9 +1277,9 @@
                     alert("download data failed");
                 });
             });
-            node.request.children(".delete").delegate("", "click", function () {
+            node.request().children(".delete").delegate("", "click", function () {
                 var selectedArr = [];
-                node.tbodyCheckbox.each(function () {
+                node.tbodyCheckbox().each(function () {
                     if ($(this).prop("checked")) {
                         selectedArr.push($(this).parent().parent().attr("row-index"));
                     }
@@ -1244,7 +1292,7 @@
                     var requestData = element.data("thArr").map(function (d) {
                         var requestName = d.id;
                         var requestValue = selectedArr.map(function (d1) {
-                            d1 = element.data("displayData")[d1 % data("rowsPerPage")][requestName];
+                            d1 = element.data("displayData")[d1 % element.data("rowsPerPage")][requestName];
                             d1 = new myString(d1).base64UrlEncode().value;
                             return d1;
                         }).collect("join", ",");
@@ -1255,6 +1303,7 @@
                     http.request(settings.url + "Delete", requestData).then(function (result) {
                         func.read(settings.url);
                     }, function (result) {
+                        func.refreshDisplay();
                         alert("delete data failed");
                     });
                 } else {
@@ -1268,26 +1317,26 @@
                     return;
                 }
                 var filterColumnData = element.data("data").filter(function (d) {
-                    if (columnDateKey != undefined) {
-                        var startTime = $("#" + id + "Start").data("data");
-                        var endTime = $("#" + id + "End").data("data");
+                    if (settings.columnDateKey != undefined) {
+                        var startTime = $("#" + settings.id + "Start").data("data");
+                        var endTime = $("#" + settings.id + "End").data("data");
                         if (startTime.split("-").length == 2) {
                             startTime = startTime + "-01";
                         }
                         if (endTime.split("-").length == 2) {
                             endTime = endTime + "-01";
                         }
-                        if (!(d[columnDateKey] == later(startTime, d[columnDateKey]) && endTime == later(endTime, d[columnDateKey]))) {
+                        if (!(d[settings.columnDateKey] == date.later(startTime, d[settings.columnDateKey]) && endTime == date.later(endTime, d[settings.columnDateKey]))) {
                             return false;
                         }
                     }
 
                     var isValid = true;
-                    node.rowFilterBodyDiv.each(function () {
+                    node.rowFilterBodyDiv().each(function () {
                         var values = $(this).children(".addon-select").data("data");
                         //find id by name
                         var name = $(this).children("select").find("option:selected").text();
-                        var colunmId = data("thArr").filter(function (d1) {
+                        var colunmId = element.data("thArr").filter(function (d1) {
                             if (d1.name == name) {
                                 return true;
                             } else {
@@ -1325,7 +1374,7 @@
                 func.setCurrentPageHtml();
 
                 //tbody checkbox click event
-                node.tbody.children("tr").children(".pre").delegate("input", "click", function () {
+                node.tbody().children("tr").children(".pre").delegate("input", "click", function () {
                     if ($(this).prop("checked")) {
                         $(this).parent(".pre").parent("tr").addClass("info");
                     } else {
@@ -1335,7 +1384,7 @@
             });
 
             //row filter add button click event
-            node.rowFilterHead.delegate("button", "click", function () {
+            node.rowFilterHead().delegate("button", "click", function () {
                 //element select
                 var row = "<select>";
                 row += element.data("thArr").map(function (d) {
@@ -1349,10 +1398,10 @@
                 row += "<button class='btn btn-danger'><i class='fa fa-times'></i></button>";
                 //build row html
                 var rowId = element.data("row-length");
-                node.rowFilterBody.append("<div row-id='" + rowId + "'>" + row + "</div>");
+                node.rowFilterBody().append("<div row-id='" + rowId + "'>" + row + "</div>");
                 element.data("row-length", rowId + 1);
                 //init value filter select
-                var rowValueSelect = node("row-filter-body").children("div[row-id=" + rowId + "]").children(".addon-select");
+                var rowValueSelect = node.rowFilterBody().children("div[row-id=" + rowId + "]").children(".addon-select");
                 rowValueSelect.select();
                 //when open a filter select,close other filter select
                 rowValueSelect.children(".contain").children(".switch").delegate("", "click", function () {
@@ -1390,13 +1439,13 @@
                     rowSelect.parent().children("div").select({ "data": d });
                 };
                 //set values when select init or change
-                setSelectValues(node.rowFilterBody.children("div[row-id=" + rowId + "]").children("select"));
+                setSelectValues(node.rowFilterBody().children("div[row-id=" + rowId + "]").children("select"));
                 $(_this4).parent().parent().children(".body").children("div").delegate("select", "change", function () {
                     setSelectValues($(this));
                 });
 
                 //button remove click event
-                node.rowFilterBodyDiv.delegate(".btn-danger", "click", function (event) {
+                node.rowFilterBodyDiv().delegate(".btn-danger", "click", function (event) {
                     $(_this4).parent().remove();
                     event.stopPropagation();
                 });
@@ -1423,7 +1472,7 @@
 
         //request filter select data
         if (settings.requestFilterData != undefined) {
-            node.request.children(".request-filter").each(function () {
+            node.request().children(".request-filter").each(function () {
                 var thisSelect = $(this);
                 var selectId = requestFilter.filter(function (d) {
                     return d[1] == thisSelect.attr("title");
@@ -1442,13 +1491,13 @@
         }
 
         if (settings.beforeCreateOpenCallback != undefined) {
-            node.request.children(".create").wall({ "beforeOpenCallback": settings.beforeCreateOpenCallback });
+            node.request().children(".create").wall({ "beforeOpenCallback": settings.beforeCreateOpenCallback });
             if (setting.related != "" && $("#" + setting.related).attr("relateCreate") != undefined) {
                 $("#" + setting.related).children(".request").children(".relateCreate").wall({ "beforeOpenCallback": settings.beforeCreateOpenCallback });
             }
         }
         if (settings.beforeUpdateOpenCallback != undefined) {
-            node.request.children(".update").wall({ "beforeOpenCallback": settings.beforeUpdateOpenCallback });
+            node.request().children(".update").wall({ "beforeOpenCallback": settings.beforeUpdateOpenCallback });
         }
 
         return element;

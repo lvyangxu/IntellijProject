@@ -76,8 +76,8 @@
                     body.children("div").children("input").prop("checked", false);
                 }
 
-                if (options != undefined && options.selectCallback != undefined) {
-                    var callback = options.selectCallback;
+                if (settings.selectCallback != undefined) {
+                    var callback = settings.selectCallback;
                     callback();
                 }
             });

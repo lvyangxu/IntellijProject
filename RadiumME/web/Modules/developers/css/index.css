@@ -1,51 +1,58 @@
-.body>.top>img {
-	width: 100%;
-}
+.body .content {
+  font-size: 0;
+  margin-bottom: 30px; }
+  .body .content .content-title {
+    font-size: 26px;
+    font-weight: bolder;
+    font-family: NIRMALA;
+    margin-top: 62px;
+    margin-bottom: 25px; }
+  .body .content .section {
+    display: inline-block;
+    width: 33.33%; }
+    .body .content .section .container {
+      position: relative; }
+      .body .content .section .container img {
+        width: 100%; }
+      .body .content .section .container .overlay-panel {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 2; }
+      .body .content .section .container .title {
+        padding-top: 0;
+        top: 48%;
+        position: absolute;
+        text-align: center;
+        font-size: 30px;
+        width: 100%;
+        z-index: 3;
+        color: white; }
+      .body .content .section .container .panel1 {
+        background-color: black;
+        opacity: 0.9; }
+      .body .content .section .container .panel2 {
+        background-color: black;
+        opacity: 0.85; }
+      .body .content .section .container .panel3 {
+        background-color: black;
+        opacity: 0.8; }
+      .body .content .section .container .panel4 {
+        background-color: black;
+        opacity: 0.75; }
+      .body .content .section .container .panel5 {
+        background-color: black;
+        opacity: 0.8; }
+    .body .content .section .container:hover .overlay-panel {
+      display: none; }
+    .body .content .section .container:hover .title {
+      display: none; }
+    .body .content .section .text {
+      font-size: 18px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      text-align: justify;
+      margin-right: 80px;
+      letter-spacing: -0.1px; }
 
-.body>.content>div {
-	width: 100%;
-	font-size: 0;
-	margin-top: 20px;
-}
-
-.body>.content>div>div {
-	width: 45%;
-	display: inline-block;
-	vertical-align: top;
-}
-
-.body>.content>div>div>img {
-	width: 50%;
-	margin-left: 25%;
-}
-
-.body>.content>div>div>img+div {
-	font-size: 20px;
-	color: rgba(198, 155, 110, 1);
-	text-align: center;
-	font-weight: bolder;
-}
-
-.body>.content>div>div>.text {
-	font-size: 20px;
-	width: 100%;
-}
-
-.body>.content>div>div>.text>.top, .body>.content>div>div>.text>.bottom
-	{
-	text-align: center;
-	margin-top: 30px;
-}
-
-.body>.content>div>div>.text>.middle {
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-top: 10px;
-	text-indent: 2em;
-	word-wrap: break-word;
-	word-break: break-all;
-}
-
-.body>.content>div>.left {
-	margin-left: 5%;
-}
+/*# sourceMappingURL=index.css.map */

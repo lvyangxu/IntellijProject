@@ -35,6 +35,10 @@ var myString = function () {
         key: 'utf8Encode',
         value: function utf8Encode() {
             var result = "";
+            if (this.value == undefined) {
+                this.value = "";
+                return this;
+            }
             this.value = this.value.replace(/\r\n/g, "\n");
             for (var n = 0; n < this.value.length; n++) {
                 var c = this.value.charCodeAt(n);

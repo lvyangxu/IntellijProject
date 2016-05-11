@@ -1,0 +1,65 @@
+.body {
+    .content {
+        font-size: 0;
+        margin-bottom: 30px;
+        .content-title{
+            font-size: 26px;
+            font-weight: bolder;
+            font-family: NIRMALA;
+            margin-top:62px;
+            margin-bottom:25px;
+        }
+
+        .section {
+            display: inline-block;
+            width: 33.33%;
+            .container {
+                position: relative;
+                img {
+                    width: 100%;
+                }
+                .overlay-panel {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 2;
+                }
+                .title {
+                    padding-top: 0;
+                    top: 48%;
+                    position: absolute;
+                    text-align: center;
+                    font-size: 30px;
+                    width: 100%;
+                    z-index: 3;
+                    color: white;
+                }
+                $panel-color: (black, black, black, black, black);
+                $panel-opacity: (0.9, 0.85, 0.8, 0.75, 0.8);
+                @for $i from 1 through 5 {
+                    .panel#{$i} {
+                        background-color: nth($panel-color, $i);
+                        opacity: nth($panel-opacity, $i);
+                    }
+                }
+            }
+            .container:hover {
+                .overlay-panel {
+                    display: none;
+                }
+                .title {
+                    display: none;
+                }
+            }
+
+            .text {
+                font-size: 18px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                text-align: justify;
+                margin-right: 80px;
+                letter-spacing: -0.1px;
+            }
+        }
+    }
+}

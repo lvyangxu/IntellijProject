@@ -27,7 +27,7 @@
                 div {
                     float: left;
                     a {
-                        font-size: 16px;
+                        font-size: 18px;
                         margin-right: 30px;
                         text-decoration: none;
                         color: #313132;
@@ -40,12 +40,14 @@
                 }
                 .search {
                     input {
-                        border: 1px solid #999;
-                        height: 100%;
+                        border: none;
+                        border-bottom: 2px solid #cdcdcd;
+                        height: 30px;
                         outline: none;
                     }
                     input:hover {
-                        border: 1px solid #313132;
+                        border: none;
+                        border-bottom: 2px solid #b5b5b5;
                     }
                     img {
                         cursor: pointer;
@@ -65,7 +67,7 @@
                         margin-right: 3px;
                     }
                     span {
-                        float: left;
+                        display: inline-block;
                         font-size: 13px;
                         cursor: pointer;
                         height: 100%;

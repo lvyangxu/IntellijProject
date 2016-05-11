@@ -21,6 +21,10 @@ class myString {
      */
     utf8Encode(){
         let result = "";
+        if(this.value==undefined){
+            this.value = "";
+            return this;
+        }
         this.value = this.value.replace(/\r\n/g, "\n");
         for (let n = 0; n < this.value.length; n++) {
             let c = this.value.charCodeAt(n);

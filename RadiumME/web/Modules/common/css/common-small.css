@@ -3,12 +3,14 @@
 .navbar .container .content .list {
   display: block; }
 .navbar .container .content .menu {
+  background-color: rgba(48, 48, 48, 0.9);
+  padding-top: 10px;
+  padding-right: 10px;
   display: none;
   position: absolute;
   top: 70px;
   right: 0;
   width: 100px;
-  background-color: #ebebeb;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   box-shadow: 2px 2px 5px; }
@@ -19,11 +21,17 @@
       line-height: 30px;
       font-size: 12px;
       margin-right: 10px;
-      text-align: justify;
+      text-align: right;
       width: 100px; }
     .navbar .container .content .menu div input {
-      width: 60px; }
-  .navbar .container .content .menu .language .line {
-    margin-top: 2.5px; }
+      width: 80px;
+      float: right; }
+  .navbar .container .content .menu .language {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    text-align: right; }
+    .navbar .container .content .menu .language .line {
+      margin-top: 2.5px; }
 
 /*# sourceMappingURL=common-small.css.map */

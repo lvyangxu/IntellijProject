@@ -1,7 +1,10 @@
 package Models;
 
 import MiddleWare.*;
+import Request.Parameter;
 import Response.Response;
+import Util.MyString;
+import Util.Poi;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,6 +64,23 @@ public class MyMvcObject {
 
     public MyMvcObject read(String table) throws MyException {
         this.responseMessage = Table.read(table,this.sqlCommand);
+        return this;
+    }
+
+    public MyMvcObject export() throws MyException {
+        //get request data
+        String fileName = Parameter.get(this.request,"title");
+        String data = Parameter.get(this.request,"data");
+        MyString MyString1 = new MyString("data");
+        data = MyString1.base64Decode().toString();
+
+        //save data in excel
+
+        String filePath = "";
+        String title = fileName;
+        StringBuilder StringBuilder1 = new StringBuilder();
+        Poi.creatExcel(filePath, title,StringBuilder1);
+        Response.file(this.response,filePath,fileName);
         return this;
     }
 

@@ -33,6 +33,9 @@ public class Table {
                     break;
                 case "Delete":
                     break;
+                case "Export":
+                    MyMvcObject1.authenticate();
+                    break;
             }
         } catch (MyException e) {
             MyMvcObject1.fail(e.getMessage());

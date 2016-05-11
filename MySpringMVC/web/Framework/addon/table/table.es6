@@ -53,67 +53,113 @@
         colspanAddNum = settings.attachment ? (colspanAddNum + 1) : colspanAddNum;
 
         let node = {
-            "table": element.children("table"),
-            "content": element.xPath("table>thead,tbody>tr>.content"),
-            "thead": element.xPath("table>thead"),
-            "theadContent": element.xPath("table>thead>tr>.content"),
-            "tbody": element.xPath("table>tbody"),
-            "tbodyRow": element.xPath("table>tbody>tr"),
-            "theadCheckbox": element.xPath("table>thead>tr>.pre>input[type=checkbox]"),
-            "tbodyCheckbox": element.xPath("table>tbody>tr>.pre>input[type=checkbox]"),
-            "initSpan": element.children("span"),
-            "columnFilter": element.xPath(".filter>.column-filter"),
-            "rowFilter": element.xPath(".filter>.row-filter"),
-            "rowFilterBodyDiv": element.xPath(".filter>.row-filter>.contain>.panel>.body>div"),
-            "rowFilterHead": element.xPath(".filter>.row-filter>.contain>.panel>.head"),
-            "rowFilterBody": element.xPath(".filter>.row-filter>.contain>.panel>.body"),
-            "createHead": element.xPath(".request>.create>.contain>.panel>.head"),
-            "createBody": element.xPath(".request>.create>.contain>.panel>.body"),
-            "updateHead": element.xPath(".request>.update>.contain>.panel>.head"),
-            "updateBody": element.xPath(".request>.update>.contain>.panel>.body"),
-            "relateCreateHead": $("#" + settings.related).xPath(".request>.relateCreate>.contain>.panel>.head"),
-            "relateCreateBody": $("#" + settings.related).xPath(".request>.relateCreate>.contain>.panel>.body"),
-            "filter": element.children(".filter"),
-            "request": element.children(".request"),
-            "pagination": element.children(".pagination")
+            table(){
+                return element.children("table");
+            },
+            content(){
+                return element.xPath("table>thead,tbody>tr>.content");
+            },
+            thead(){
+                return element.xPath("table>thead");
+            },
+            theadContent(){
+                return element.xPath("table>thead>tr>.content");
+            },
+            tbody(){
+                return element.xPath("table>tbody");
+            },
+            tbodyRow(){
+                return element.xPath("table>tbody>tr");
+            },
+            theadCheckbox(){
+                return element.xPath("table>thead>tr>.pre>input[type=checkbox]");
+            },
+            tbodyCheckbox(){
+                return element.xPath("table>tbody>tr>.pre>input[type=checkbox]");
+            },
+            initSpan(){
+                return element.children("span");
+            },
+            columnFilter(){
+                return element.xPath(".filter>.column-filter");
+            },
+            rowFilter(){
+                return element.xPath(".filter>.row-filter");
+            },
+            rowFilterBodyDiv(){
+                return element.xPath(".filter>.row-filter>.contain>.panel>.body>div");
+            },
+            rowFilterHead(){
+                return element.xPath(".filter>.row-filter>.contain>.panel>.head");
+            },
+            rowFilterBody(){
+                return element.xPath(".filter>.row-filter>.contain>.panel>.body");
+            },
+            createHead(){
+                return element.xPath(".request>.create>.contain>.panel>.head");
+            },
+            createBody(){
+                return element.xPath(".request>.create>.contain>.panel>.body");
+            },
+            updateHead(){
+                return element.xPath(".request>.update>.contain>.panel>.head");
+            },
+            updateBody(){
+                return element.xPath(".request>.update>.contain>.panel>.body");
+            },
+            relateCreateHead(){
+                return $("#" + settings.related).xPath(".request>.relateCreate>.contain>.panel>.head");
+            },
+            relateCreateBody(){
+                return $("#" + settings.related).xPath(".request>.relateCreate>.contain>.panel>.body");
+            },
+            filter(){
+                return element.children(".filter");
+            },
+            request(){
+                return element.children(".request");
+            },
+            pagination(){
+                return element.children(".pagination")
+            }
         };
 
         let func = {
             loading(){
-                let columnFilterData = node.columnFilter.data("data");
+                let columnFilterData = node.columnFilter().data("data");
                 if (columnFilterData != undefined) {
                     let l = columnFilterData.filter((d)=> {
                         return d.checked;
                     }).length;
                     let currentColumnLength = l + colspanAddNum;
-                    node.tbody.html("<tr><td colspan='" + currentColumnLength + "'><i class='animation fa fa-refresh'></i></td></tr>");
+                    node.tbody().html("<tr><td colspan='" + currentColumnLength + "'><i class='animation fa fa-refresh'></i></td></tr>");
                 }
             },
             noData(){
-                let columnFilterData = node.columnFilter.data("data");
+                let columnFilterData = node.columnFilter().data("data");
                 if (columnFilterData != undefined) {
                     let l = columnFilterData.filter((d)=> {
                         return d.checked;
                     }).length;
                     let currentColumnLength = l + colspanAddNum;
-                    node.tbody.html("<tr><td colspan='" + currentColumnLength + "'>There is not any matched data for last request</i></td></tr>");
+                    node.tbody().html("<tr><td colspan='" + currentColumnLength + "'>There is not any matched data for last request</i></td></tr>");
                 }
             },
             fail(message){
-                let columnFilterData = node.columnFilter.data("data");
+                let columnFilterData = node.columnFilter().data("data");
                 if (columnFilterData != undefined) {
                     let l = columnFilterData.filter((d)=> {
                         return d.checked;
                     }).length;
                     let currentColumnLength = l + colspanAddNum;
-                    node.tbody.html("<tr><td colspan='" + currentColumnLength + "'>Request Failed: " + message + "</td></tr>");
+                    node.tbody().html("<tr><td colspan='" + currentColumnLength + "'>Request Failed: " + message + "</td></tr>");
                 }
             },
             read(requestUrl, requestData){
                 func.loading();
                 //refresh parent related data
                 if (settings.relate != "") {
-                    node.request.children(".request-filter").each(function () {
+                    node.request().children(".request-filter").each(function () {
                         let thisSelect = $(this);
                         let selectId = requestFilter.filter((d)=> {
                             d = (d[1] == thisSelect.attr("title"));
@@ -134,7 +180,7 @@
                 requestData = (requestData == undefined) ? relatedRequestData : (requestData + "&" + relatedRequestData);
                 if (requestFilter.length > 0) {
                     requestData += (requestData == "") ? "" : "&";
-                    requestData += Array.from(node.request.children(".request-filter")).map((d)=> {
+                    requestData += Array.from(node.request().children(".request-filter")).map((d)=> {
                         if ($(d).data("data") == undefined) {
                             return "";
                         }
@@ -181,7 +227,7 @@
                 });
             },
             refreshAttachment(attachmentTbody, columnKeyValueArr){
-                let requestData = data("thArr").filter((d)=> {
+                let requestData = element.data("thArr").filter((d)=> {
                     return d.key;
                 }).map((d)=> {
                     d = d.id + "=" + columnKeyValueArr.filter((d1)=> {
@@ -229,17 +275,17 @@
                 if (element.data("filterColumnData") == undefined) {
                     return;
                 }
-                let startPageIndex = data("pageIndex") * data("rowsPerPage");
-                let endPageIndex = (data("pageIndex") + 1) * data("rowsPerPage");
+                let startPageIndex = element.data("pageIndex") * element.data("rowsPerPage");
+                let endPageIndex = (element.data("pageIndex") + 1) * element.data("rowsPerPage");
                 let rowIndex = 0;
-                let displayHtmlArr = data("filterColumnData").map((d)=> {
+                let displayHtmlArr = element.data("filterColumnData").map((d)=> {
                     let result = "<tr row-index='" + rowIndex + "'>";
                     result += "<td class='pre'><input type='checkbox'></td>";
-                    let attachmentHtml = (attachment != "") ? "<td class='pre'><div class='attachment addon-wall' icon='paperclip' iconOnly></td>" : "";
+                    let attachmentHtml = (settings.attachment != "") ? "<td class='pre'><div class='attachment addon-wall' icon='paperclip' iconOnly></td>" : "";
                     result += attachmentHtml;
-                    let relateHtml = (relate != "") ? "<td class='pre'><i class='relate fa fa-plus'></i></td>" : "";
+                    let relateHtml = (settings.relate != "") ? "<td class='pre'><i class='relate fa fa-plus'></i></td>" : "";
                     result += relateHtml;
-                    result += data("thArr").map((d1)=> {
+                    result += element.data("thArr").map((d1)=> {
                         let value = "";
                         if (d[d1.id] != undefined) {
                             value = d[d1.id];
@@ -252,16 +298,16 @@
                     rowIndex++;
                     return result;
                 }).slice(startPageIndex, endPageIndex);
-                let displayData = data("filterColumnData").slice(startPageIndex, endPageIndex);
-                data("displayData", displayData);
+                let displayData = element.data("filterColumnData").slice(startPageIndex, endPageIndex);
+                element.data("displayData", displayData);
                 let tbodyHtml = displayHtmlArr.collect("join", "");
-                data("displayHtmlArr", displayHtmlArr);
-                node("tbody").html(tbodyHtml);
+                element.data("displayHtmlArr", displayHtmlArr);
+                node.tbody().html(tbodyHtml);
                 $(".addon-wall").wall();
                 //attachment click callback
-                node("tbody").children("tr").children(".pre").children(".attachment").children(".contain").children(".switch").delegate("", "click", function () {
+                node.tbody().children("tr").children(".pre").children(".attachment").children(".contain").children(".switch").delegate("", "click", function () {
                     let thisAttachmentIcon = $(this).parent().parent();
-                    let columnKeyValueArr = data("thArr").filter(function (d) {
+                    let columnKeyValueArr = element.data("thArr").filter(function (d) {
                         return d.key;
                     }).map((d)=> {
                         d = d.id + "=" + new myString(thisAttachmentIcon.parent().parent().children("td[th-id=" + d.id + "]").text()).base64UrlEncode().value;
@@ -270,7 +316,7 @@
 
                     let attachmentWallHtml = "<div class='head'>";
                     attachmentWallHtml += "<button class='refresh btn btn-warning'><i class='fa fa-refresh'></i></button>";
-                    attachmentWallHtml += "<div class='addon-upload' title='upload attachment' url='../Table/" + id + "/AttachmentUpload' postData='key=" + columnKeyValueArr.map(function (d) {
+                    attachmentWallHtml += "<div class='addon-upload' title='upload attachment' url='../Table/" + settings.id + "/AttachmentUpload' postData='key=" + columnKeyValueArr.map((d)=> {
                             return d.split("=")[1];
                         }).collect("join", "_") + "'></div>";
                     attachmentWallHtml += "<button class='delete btn btn-danger'><i class='fa fa-times'></i></button>";
@@ -327,12 +373,12 @@
                 });
 
                 //relate click callback
-                node.tbody.children("tr").children(".pre").children(".relate").delegate("", "click", function () {
+                node.tbody().children("tr").children(".pre").children(".relate").delegate("", "click", function () {
                     $(this).parent().parent().siblings().fadeToggle("slow");
                     let relateIcon = $(this);
-                    node.pagination.fadeToggle("fast", ()=> {
-                        node.filter.fadeToggle("fast", ()=> {
-                            node.request.fadeToggle("fast", ()=> {
+                    node.pagination().fadeToggle("fast", ()=> {
+                        node.filter().fadeToggle("fast", ()=> {
+                            node.request().fadeToggle("fast", ()=> {
                                 if (relateIcon.hasClass("fa-plus")) {
                                     relateIcon.addClass("fa-minus");
                                     relateIcon.removeClass("fa-plus");
@@ -366,9 +412,9 @@
                     this.noData();
                     return;
                 }
-                let pageLength = parseInt((data("filterColumnData").length - 1) / data("rowsPerPage"));
+                let pageLength = parseInt((element.data("filterColumnData").length - 1) / element.data("rowsPerPage"));
                 let start;
-                if (data("pageIndex") <= 2) {
+                if (element.data("pageIndex") <= 2) {
                     start = 0;
                 } else if (data("pageIndex") >= pageLength - 2) {
                     start = pageLength - 4;
@@ -386,28 +432,28 @@
                     arr.push(i);
                 }
                 let paginationButtonHtml = arr.map((d)=> {
-                    let btnClass = (d == data("pageIndex")) ? "btn-success" : "btn-info";
+                    let btnClass = (d == element.data("pageIndex")) ? "btn-success" : "btn-info";
                     d = "<button class='btn " + btnClass + "'>" + (d + 1) + "</button>";
                     return d;
                 }).collect("join", "");
-                node.pagination.children("span").html(paginationButtonHtml);
+                node.pagination().children("span").html(paginationButtonHtml);
 
                 //pagination button click event
-                node.pagination.children("span").children("button").delegate("", "click", ()=> {
-                    node.theadCheckbox.prop("checked", false);
+                node.pagination().children("span").children("button").delegate("", "click", ()=> {
+                    node.theadCheckbox().prop("checked", false);
                     element.data("pageIndex", parseInt($(this).text()) - 1);
                     this.refreshDisplay();
                 });
 
                 //listen tbody checkbox
-                node.tbodyCheckbox.delegate("", "click", function () {
+                node.tbodyCheckbox().delegate("", "click", function () {
                     if ($(this).prop("checked")) {
                         $(this).parent(".pre").parent("tr").addClass("info");
                     } else {
                         $(this).parent(".pre").parent("tr").removeClass("info");
                     }
                 });
-                node.rowFilterBody.html("");
+                node.rowFilterBody().html("");
             },
             sort(thisElement){
                 let sortId = thisElement.attr("th-id");
@@ -531,7 +577,7 @@
         element.addonInit("table", ()=> {
             //get init data
             let thArr = [];
-            node.initSpan.each(function () {
+            node.initSpan().each(function () {
                 let thId = $(this).attr("th-id");
                 let thName = $(this).text();
                 let checked = ($(this).attr("hide") != "");
@@ -630,10 +676,10 @@
             }
 
             //request filter select init
-            node.request.children(".request-filter").select();
+            node.request().children(".request-filter").select();
 
             //create wall
-            node.request.children(".create").wall({
+            node.request().children(".create").wall({
                 "html": ()=> {
                     let createHtml = "<div class='head'>";
                     createHtml += "<button class='add btn btn-info'><i class='fa fa-plus'></i></button>";
@@ -688,14 +734,14 @@
             });
 
             //create wall head
-            node.createHead.children(".add").delegate("", "click", ()=> {
+            node.createHead().children(".add").delegate("", "click", ()=> {
                 let createHtml = "<tr>";
                 if (settings.createWithAttachment) {
-                    let trIndex = node.createBody.children("table").children("tbody").children("tr").length;
+                    let trIndex = node.createBody().children("table").children("tbody").children("tr").length;
                     createHtml += "<td><div class='addon-upload' title='upload attachment' url='../Table/" + id + "temp/AttachmentTempUpload' postData='index=" + element.data("AttachmentTempIndex") + "&trIndex=" + trIndex + "'></div></td>";
                 }
                 //filter readonly
-                createHtml += data("thArr").filter((d)=> {
+                createHtml += element.data("thArr").filter((d)=> {
                     return !d.readonly;
                 }).filter((d)=> {
                     return !d.noCreate;
@@ -704,8 +750,8 @@
                     return d;
                 }).collect("join", "");
                 createHtml += "</tr>";
-                node.createBody.children("table").children("tbody").append(createHtml);
-                let newSelect = node.createBody.children("table").children("tbody").children("tr:last").children("td").children(".addon-select");
+                node.createBody().children("table").children("tbody").append(createHtml);
+                let newSelect = node.createBody().children("table").children("tbody").children("tr:last").children("td").children(".addon-select");
                 if (element.data("th-data") != undefined) {
                     newSelect.each(function () {
                         let d = element.data("th-data")[$(this).parent().attr("th-id")];
@@ -721,14 +767,14 @@
                 $(".addon-datepicker").datepicker();
                 $(".addon-upload").upload();
             });
-            node.createHead.children(".minus").delegate("", "click", ()=> {
-                node.createBody.children("table").children("tbody").children("tr:last").remove();
+            node.createHead().children(".minus").delegate("", "click", ()=> {
+                node.createBody().children("table").children("tbody").children("tr:last").remove();
             });
-            node.createHead.children(".remove").delegate("", "click", ()=> {
-                node.createBody.children("table").children("tbody").children("tr").remove();
+            node.createHead().children(".remove").delegate("", "click", ()=> {
+                node.createBody().children("table").children("tbody").children("tr").remove();
             });
-            node.createHead.children(".submit").delegate("", "click", ()=> {
-                let trs = node.createBody.children("table").children("tbody").children("tr");
+            node.createHead().children(".submit").delegate("", "click", ()=> {
+                let trs = node.createBody().children("table").children("tbody").children("tr");
                 if (trs.length == 0) {
                     alert("请至少添加一行数据");
                     return;
@@ -738,7 +784,7 @@
                     let isValid = true;
                     for (let i = 0; i < trs.length; i++) {
                         element.data("thArr").relateCallback($(trs[i]).children("td"), function (e1, e2) {
-                            let value = getRequestTdData($(e2), e1.type);
+                            let value = func.getRequestTdData($(e2), e1.type);
                             if (value == null) {
                                 alert("unknown column type");
                                 isValid = false;
@@ -777,9 +823,9 @@
                         return d;
                     }).collect("join", "&");
                     http.request(settings.url + "Create", requestData).then((result)=> {
-                        node.request.children(".create").children(".contain").children(".switch").click();
+                        node.request().children(".create").children(".contain").children(".switch").click();
                         func.read(settings.url);
-                        node.createBody.children("table").children("tbody").children("tr").remove();
+                        node.createBody().children("table").children("tbody").children("tr").remove();
                     }, (result)=> {
                         alert("create data failed：" + result);
                     });
@@ -841,10 +887,10 @@
                         return createHtml;
                     }
                 });
-                node.relateCreateHead.children(".add").delegate("", "click", ()=> {
+                node.relateCreateHead().children(".add").delegate("", "click", ()=> {
                     let createHtml = "<tr>";
                     if (settings.createWithAttachment) {
-                        let trIndex = node.relateCreateBody.children("table").children("tbody").children("tr").length;
+                        let trIndex = node.relateCreateBody().children("table").children("tbody").children("tr").length;
                         createHtml += "<td><div class='addon-upload' title='upload attachment' url='../Table/" + id + "temp/AttachmentTempUpload' postData='index=" + element.data("AttachmentTempIndex") + "&trIndex=" + trIndex + "'></div></td>";
                     }
                     //filter readonly
@@ -857,8 +903,8 @@
                         return d;
                     }).collect("join", "");
                     createHtml += "</tr>";
-                    node.relateCreateBody.children("table").children("tbody").append(createHtml);
-                    let newSelect = node.relateCreateBody.children("table").children("tbody").children("tr:last").children("td").children(".addon-select");
+                    node.relateCreateBody().children("table").children("tbody").append(createHtml);
+                    let newSelect = node.relateCreateBody().children("table").children("tbody").children("tr:last").children("td").children(".addon-select");
                     if (element.data("th-data") != undefined) {
                         newSelect.each(function () {
                             let d = element.data("th-data")[$(this).parent().attr("th-id")];
@@ -874,14 +920,14 @@
                     $(".addon-datepicker").datepicker();
                     $(".addon-upload").upload();
                 });
-                node.relateCreateHead.children(".minus").delegate("", "click", ()=> {
-                    node.relateCreateBody.children("table").children("tbody").children("tr:last").remove();
+                node.relateCreateHead().children(".minus").delegate("", "click", ()=> {
+                    node.relateCreateBody().children("table").children("tbody").children("tr:last").remove();
                 });
-                node.relateCreateHead.children(".remove").delegate("", "click", ()=> {
-                    node.relateCreateBody.children("table").children("tbody").children("tr").remove();
+                node.relateCreateHead().children(".remove").delegate("", "click", ()=> {
+                    node.relateCreateBody().children("table").children("tbody").children("tr").remove();
                 });
-                node.relateCreateHead.children(".submit").delegate("", "click", ()=> {
-                    let trs = node.relateCreateBody.children("table").children("tbody").children("tr");
+                node.relateCreateHead().children(".submit").delegate("", "click", ()=> {
+                    let trs = node.relateCreateBody().children("table").children("tbody").children("tr");
                     if (trs.length == 0) {
                         alert("请至少添加一行数据");
                         return;
@@ -891,7 +937,7 @@
                         let isValid = true;
                         for (let i = 0; i < trs.length; i++) {
                             element.data("thArr").relateCallback($(trs[i]).children("td"), function (e1, e2) {
-                                let value = getRequestTdData($(e2), e1.type);
+                                let value = func.getRequestTdData($(e2), e1.type);
                                 if (value == null) {
                                     alert("unknown column type");
                                     isValid = false;
@@ -923,7 +969,7 @@
                             return !(d.readonly || d.noCreate);
                         }).map((d)=> {
                             let requestValue = trs.toArray().map(function (d1) {
-                                let tdValue = getRequestTdData(d1.children("td[th-id=" + d.id + "]"), d.type);
+                                let tdValue = func.getRequestTdData(d1.children("td[th-id=" + d.id + "]"), d.type);
                                 return new myString(tdValue).base64UrlEncode().value;
                             }).collect("join", ",");
                             d = d.id + "=" + requestValue;
@@ -932,7 +978,7 @@
                         http.request(settings.url + "Create", requestData).then((result)=> {
                             $("#" + settings.related).children(".request").children(".create").children(".contain").children(".switch").click();
                             func.read(settings.url);
-                            node.relateCreateBody.children("table").children("tbody").children("tr").remove();
+                            node.relateCreateBody().children("table").children("tbody").children("tr").remove();
                         }, (result)=> {
                             alert("create data failed：" + result);
                         });
@@ -941,7 +987,7 @@
             }
 
             //update wall
-            node.request.children(".update").wall({
+            node.request().children(".update").wall({
                 "html": ()=> {
                     let updateHtml = "<div class='head'><button class='submit btn btn-warning'>submit</button></div><div class='body'>";
                     //content table
@@ -951,7 +997,7 @@
                         return d;
                     }).collect("join", "");
                     updateHtml += "</tr><tr>";
-                    updateHtml += data("thArr").map((d)=> {
+                    updateHtml += element.data("thArr").map((d)=> {
                         switch (d.type) {
                             case "float":
                             case "int":
@@ -973,7 +1019,7 @@
                         d = "<td><div>" + d.name + "</div></td>";
                         return d;
                     }).collect("join", "");
-                    updateHtml += "</tr><tr class='danger'><td colspan='" + data("thArr").length + "'>you can set a column value of the table above uniformity</td></tr></thead>";
+                    updateHtml += "</tr><tr class='danger'><td colspan='" + element.data("thArr").length + "'>you can set a column value of the table above uniformity</td></tr></thead>";
                     updateHtml += "<tbody><tr class='danger'>";
                     let unityTrHtml = element.data("thArr").map((d)=> {
                         let tdHtml = func.getRequestTdHtml(d);
@@ -986,7 +1032,7 @@
                 },
                 "openCallback": ()=> {
                     let checkedArr = [];
-                    node.tbodyCheckbox.each(function () {
+                    node.tbodyCheckbox().each(function () {
                         if ($(this).prop("checked")) {
                             checkedArr.push($(this));
                         }
@@ -1000,12 +1046,12 @@
                             trHtml += "<tr>";
                             trHtml += element.data("thArr").map((d)=> {
                                 let tdText = checkedArr[i].parent().parent().children("td[th-id=" + d.id + "]").text();
-                                let tdHtml = getRequestTdHtml(d, tdText);
+                                let tdHtml = func.getRequestTdHtml(d, tdText);
                                 return tdHtml;
                             }).collect("join", "");
                             trHtml += "</tr>";
                         }
-                        node.updateBody.children(".content").children("tbody").html(trHtml);
+                        node.updateBody().children(".content").children("tbody").html(trHtml);
                         //set default value
 
 
@@ -1015,9 +1061,9 @@
                                 let tdHtml = func.getRequestTdHtml(d, tdText);
                                 return tdHtml;
                             }).collect("join", "") + "</tr>";
-                        node.updateBody.children(".unity").children("tbody").html(unityHtml);
+                        node.updateBody().children(".unity").children("tbody").html(unityHtml);
                         //listen unity tr changed
-                        node.updateBody.children(".unity").children("tbody").children("tr").children("td").children("input,select").delegate("", "change", ()=> {
+                        node.updateBody().children(".unity").children("tbody").children("tr").children("td").children("input,select").delegate("", "change", ()=> {
                             let unityChangeThId = $(this).parent().attr("th-id");
                             let unityChangeThValue = $(this).val();
                             let needChangeElement = $(this).parent().parent().parent().parent().parent().children(".content").children("tbody").children("tr").children("td[th-id=" + unityChangeThId + "]");
@@ -1030,19 +1076,19 @@
                     }
                 }
             });
-            node.updateHead.children(".submit").delegate("", "click", ()=> {
-                let trs = node.updateBody.children(".content").children("tbody").children("tr");
+            node.updateHead().children(".submit").delegate("", "click", ()=> {
+                let trs = node.updateBody().children(".content").children("tbody").children("tr");
                 if (confirm("确定要提交这" + trs.length + "行数据吗?")) {
                     let requestData = element.data("thArr").map((d)=> {
                         let requestValue = Array.from(trs).map((d1)=> {
-                            let tdValue = func.getRequestTdData(d1.children("td[th-id=" + d.id + "]"), d.type);
+                            let tdValue = func.getRequestTdData($(d1).children("td[th-id=" + d.id + "]"), d.type);
                             return new myString(tdValue).base64UrlEncode().value;
                         }).collect("join", ",");
                         d = d.id + "=" + requestValue;
                         return d;
                     }).collect("join", "&");
                     http.request(settings.url + "Update", requestData).then((result)=> {
-                        node.request.children(".update").children(".contain").children(".panel").hide();
+                        node.request().children(".update").children(".contain").children(".panel").hide();
                         func.read(settings.url);
                     }, (result)=> {
                         alert("update data failed：" + result);
@@ -1050,7 +1096,8 @@
                 }
             });
 
-            node.request.children(".attachmentBatchDownload").delegate("", "click", ()=> {
+            //attachment batch download
+            node.request().children(".attachmentBatchDownload").delegate("", "click", ()=> {
                 if (confirm("你确定要下载勾选的" + n + "行数据的所有附件吗？")) {
                     let requestData = "batchkey=" + element.data("thArr").filter((d)=> {
                             return d.key;
@@ -1073,7 +1120,7 @@
 
             //pagination rows per page select change event
             element.data("rowsPerPage", 10);
-            node.pagination.children("select").delegate("", "change", function () {
+            node.pagination().children("select").delegate("", "change", function () {
                 let rowsPerPage = $(this).find("option:selected").text();
                 element.data("rowsPerPage", rowsPerPage);
                 element.data("pageIndex", 0);
@@ -1081,11 +1128,11 @@
             });
 
             //pagination button click event
-            node.pagination.children("button").delegate("", "click", function () {
+            node.pagination().children("button").delegate("", "click", function () {
                 if (element.data("filterColumnData") == undefined) {
                     return;
                 }
-                node.theadCheckbox.prop("checked", false);
+                node.theadCheckbox().prop("checked", false);
                 let pageLength = parseInt((element.data("filterColumnData").length - 1) / element.data("rowsPerPage"));
                 if ($(this).hasClass("double-left")) {
                     element.data("pageIndex", 0);
@@ -1105,34 +1152,35 @@
             });
 
             //thead checkbox click event
-            node.theadCheckbox.delegate("", "click", function () {
+            node.theadCheckbox().delegate("", "click", function () {
                 if ($(this).prop("checked")) {
-                    node.tbodyCheckbox.prop({"checked": true});
-                    node.tbodyRow.addClass("info");
+                    node.tbodyCheckbox().prop({"checked": true});
+                    node.tbodyRow().addClass("info");
                 } else {
-                    node.tbodyCheckbox.prop({"checked": false});
-                    node.tbodyRow.removeClass("info");
+                    node.tbodyCheckbox().prop({"checked": false});
+                    node.tbodyRow().removeClass("info");
                 }
             });
 
             //thead sort
-            node.thead.children("tr").children(".content").delegate("", "click", function () {
+            node.thead().children("tr").children(".content").delegate("", "click", function () {
                 func.sort($(this));
             });
 
             //column filter
-            node.columnFilter.select({
+            node.columnFilter().select({
                 "data": element.data("thArr"), "selectCallback": ()=> {
+                    console.log(1);
                     //hide unchecked columns
-                    let currentData = node.columnFilter.data("data");
-                    currentData.relateCallback(node.theadContent, (e1, e2)=> {
+                    let currentData = node.columnFilter().data("data");
+                    currentData.relateCallback(node.theadContent(), (e1, e2)=> {
                         e1["id"] = $(e2).attr("th-id");
                     }, (d)=> {
                         return d.name;
                     }, (d)=> {
                         return $(d).text();
                     });
-                    currentData.relateCallback(node.content, (e1, e2)=> {
+                    currentData.relateCallback(node.content(), (e1, e2)=> {
                         if (e1.checked) {
                             $(e2).removeClass("hide");
                         } else {
@@ -1160,7 +1208,7 @@
                 dateFilterHtml += "<label>From</label><div id='" + settings.id + "Start' class='addon-datepicker' type='" + settings.dateFilterType + "' add-num='" + settings.dateStartAddNum + "'></div>";
                 dateFilterHtml += "<label>To</label><div id='" + settings.id + "End' class='addon-datepicker' type='" + settings.dateFilterType + "' add-num='" + settings.dateEndAddNum + "'></div>";
             }
-            node.rowFilter.wall({
+            node.rowFilter().wall({
                 "html": ()=> {
                     let d = "<div class='dateFilter'>" + dateFilterHtml + "</div>";
                     d += "<div class='head'><button class='btn btn-success'><i class='fa fa-plus'></i>add new filter</button></div>";
@@ -1172,10 +1220,10 @@
             element.data("row-length", 0);
 
             //delegate request buttons
-            node.request.delegate(".refresh", "click", ()=> {
+            node.request().delegate(".refresh", "click", ()=> {
                 func.read(settings.url);
             });
-            node.request.delegate(".download", "click", ()=> {
+            node.request().delegate(".download", "click", ()=> {
                 //thead data
                 let checkedArr = element.data("thArr").filter((d)=> {
                     return d.checked;
@@ -1199,9 +1247,9 @@
                     }).collect("join", "\n");
                 }
 
-                let titleSource = title;
+                let titleSource = settings.title;
                 let requestDataSource = requestData;
-                title = new myString(title).base64UrlEncode().value;
+                let title = new myString(settings.title).base64UrlEncode().value;
                 requestData = new myString(requestData).base64UrlEncode().value;
                 requestData = "title=" + title + "&data=" + requestData;
                 http.request(settings.url + "Download", requestData).then((result)=> {
@@ -1210,9 +1258,9 @@
                     alert("download data failed");
                 });
             });
-            node.request.children(".delete").delegate("", "click", ()=> {
+            node.request().children(".delete").delegate("", "click", ()=> {
                 let selectedArr = [];
-                node.tbodyCheckbox.each(function () {
+                node.tbodyCheckbox().each(function () {
                     if ($(this).prop("checked")) {
                         selectedArr.push($(this).parent().parent().attr("row-index"));
                     }
@@ -1225,7 +1273,7 @@
                     let requestData = element.data("thArr").map((d)=> {
                         let requestName = d.id;
                         let requestValue = selectedArr.map((d1)=> {
-                            d1 = element.data("displayData")[d1 % data("rowsPerPage")][requestName];
+                            d1 = element.data("displayData")[d1 % element.data("rowsPerPage")][requestName];
                             d1 = new myString(d1).base64UrlEncode().value;
                             return d1;
                         }).collect("join", ",");
@@ -1236,6 +1284,7 @@
                     http.request(settings.url + "Delete", requestData).then((result)=> {
                         func.read(settings.url);
                     }, (result)=> {
+                        func.refreshDisplay();
                         alert("delete data failed");
                     });
                 } else {
@@ -1249,26 +1298,26 @@
                     return;
                 }
                 let filterColumnData = element.data("data").filter((d)=> {
-                    if (columnDateKey != undefined) {
-                        let startTime = $("#" + id + "Start").data("data");
-                        let endTime = $("#" + id + "End").data("data");
+                    if (settings.columnDateKey != undefined) {
+                        let startTime = $("#" + settings.id + "Start").data("data");
+                        let endTime = $("#" + settings.id + "End").data("data");
                         if (startTime.split("-").length == 2) {
                             startTime = startTime + "-01";
                         }
                         if (endTime.split("-").length == 2) {
                             endTime = endTime + "-01";
                         }
-                        if (!(d[columnDateKey] == later(startTime, d[columnDateKey]) && endTime == later(endTime, d[columnDateKey]))) {
+                        if (!(d[settings.columnDateKey] == date.later(startTime, d[settings.columnDateKey]) && endTime == date.later(endTime, d[settings.columnDateKey]))) {
                             return false;
                         }
                     }
 
                     let isValid = true;
-                    node.rowFilterBodyDiv.each(function () {
+                    node.rowFilterBodyDiv().each(function () {
                         let values = $(this).children(".addon-select").data("data");
                         //find id by name
                         let name = $(this).children("select").find("option:selected").text();
-                        let colunmId = data("thArr").filter((d1)=> {
+                        let colunmId = element.data("thArr").filter((d1)=> {
                             if (d1.name == name) {
                                 return true;
                             } else {
@@ -1307,7 +1356,7 @@
 
 
                 //tbody checkbox click event
-                node.tbody.children("tr").children(".pre").delegate("input", "click", function () {
+                node.tbody().children("tr").children(".pre").delegate("input", "click", function () {
                     if ($(this).prop("checked")) {
                         $(this).parent(".pre").parent("tr").addClass("info");
                     } else {
@@ -1317,7 +1366,7 @@
             });
 
             //row filter add button click event
-            node.rowFilterHead.delegate("button", "click", ()=> {
+            node.rowFilterHead().delegate("button", "click", ()=> {
                 //element select
                 let row = "<select>";
                 row += element.data("thArr").map((d)=> {
@@ -1331,10 +1380,10 @@
                 row += "<button class='btn btn-danger'><i class='fa fa-times'></i></button>";
                 //build row html
                 let rowId = element.data("row-length");
-                node.rowFilterBody.append("<div row-id='" + rowId + "'>" + row + "</div>");
+                node.rowFilterBody().append("<div row-id='" + rowId + "'>" + row + "</div>");
                 element.data("row-length", rowId + 1);
                 //init value filter select
-                let rowValueSelect = node("row-filter-body").children("div[row-id=" + rowId + "]").children(".addon-select");
+                let rowValueSelect = node.rowFilterBody().children("div[row-id=" + rowId + "]").children(".addon-select");
                 rowValueSelect.select();
                 //when open a filter select,close other filter select
                 rowValueSelect.children(".contain").children(".switch").delegate("", "click", function () {
@@ -1372,13 +1421,13 @@
                     rowSelect.parent().children("div").select({"data": d});
                 }
                 //set values when select init or change
-                setSelectValues(node.rowFilterBody.children("div[row-id=" + rowId + "]").children("select"));
+                setSelectValues(node.rowFilterBody().children("div[row-id=" + rowId + "]").children("select"));
                 $(this).parent().parent().children(".body").children("div").delegate("select", "change", function () {
                     setSelectValues($(this));
                 });
 
                 //button remove click event
-                node.rowFilterBodyDiv.delegate(".btn-danger", "click", (event)=> {
+                node.rowFilterBodyDiv().delegate(".btn-danger", "click", (event)=> {
                     $(this).parent().remove();
                     event.stopPropagation();
                 });
@@ -1407,7 +1456,7 @@
 
         //request filter select data
         if (settings.requestFilterData != undefined) {
-            node.request.children(".request-filter").each(function () {
+            node.request().children(".request-filter").each(function () {
                 let thisSelect = $(this);
                 let selectId = requestFilter.filter((d)=> {
                     return (d[1] == thisSelect.attr("title"));
@@ -1426,16 +1475,17 @@
         }
 
         if (settings.beforeCreateOpenCallback != undefined) {
-            node.request.children(".create").wall({"beforeOpenCallback": settings.beforeCreateOpenCallback});
+            node.request().children(".create").wall({"beforeOpenCallback": settings.beforeCreateOpenCallback});
             if (setting.related != "" && $("#" + setting.related).attr("relateCreate") != undefined) {
                 $("#" + setting.related).children(".request").children(".relateCreate").wall({"beforeOpenCallback": settings.beforeCreateOpenCallback});
             }
         }
         if (settings.beforeUpdateOpenCallback != undefined) {
-            node.request.children(".update").wall({"beforeOpenCallback": settings.beforeUpdateOpenCallback});
+            node.request().children(".update").wall({"beforeOpenCallback": settings.beforeUpdateOpenCallback});
         }
 
         return element;
     }
 
-}));
+    }
+    ));
