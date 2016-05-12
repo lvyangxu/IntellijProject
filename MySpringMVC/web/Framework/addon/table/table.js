@@ -1257,7 +1257,7 @@
                         var excelRow = "";
                         for (var _i7 = 0; _i7 < checkedArr.length; _i7++) {
                             var columnId = checkedArr[_i7].id;
-                            excelRow += d[columnId];
+                            excelRow += d[columnId] == undefined ? "" : d[columnId];
                             if (_i7 != checkedArr.length - 1) {
                                 excelRow += "\t";
                             }
@@ -1271,10 +1271,10 @@
                 var title = new myString(settings.title).base64UrlEncode().value;
                 requestData = new myString(requestData).base64UrlEncode().value;
                 requestData = "title=" + title + "&data=" + requestData;
-                http.request(settings.url + "Download", requestData).then(function (result) {
-                    window.location.href = "../ApplicationData/excel/" + result + "/" + titleSource + ".xlsx";
+                http.request(settings.url + "Export", requestData).then(function (result) {
+                    window.location.href = "../Data/" + settings.id + "/" + result;
                 }, function (result) {
-                    alert("download data failed");
+                    alert("export data failed:" + result);
                 });
             });
             node.request().children(".delete").delegate("", "click", function () {

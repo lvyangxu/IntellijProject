@@ -1,6 +1,8 @@
 package Init;
 
 import Dao.Mysql;
+import Models.MyException;
+import Models.Table;
 import Util.Log4j;
 import Util.Xml;
 import org.dom4j.DocumentException;
@@ -43,6 +45,7 @@ public class Init implements ApplicationListener<ApplicationEvent> {
     public static String usernameCookieName,passwordCookieName;
     public static Mysql mysql;
     public static String loginRedirectUrl;
+    public static List<Table.TableStruct> tableStructList;
 
     private void init(){
 
@@ -81,6 +84,13 @@ public class Init implements ApplicationListener<ApplicationEvent> {
             log4j.error("init mysql failed:mysql connect error:"+e.getMessage());
         } catch (ClassNotFoundException e) {
             log4j.error("init mysql failed:mysql driver not found:"+e.getMessage());
+        }
+
+        //get table struct
+        try {
+            tableStructList = Models.Table.getDatabaseStruct();
+        } catch (MyException e) {
+            log4j.error("get table struct failed");
         }
 
 

@@ -32,7 +32,8 @@
       .navbar .container .content .menu .search input {
         border: none;
         border-bottom: 2px solid #cdcdcd;
-        height: 30px;
+        height: 20px;
+        margin-top: 20px;
         outline: none; }
       .navbar .container .content .menu .search input:hover {
         border: none;

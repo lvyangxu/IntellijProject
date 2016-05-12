@@ -25,16 +25,19 @@ public class Table {
         try {
             switch (type){
                 case "Create":
+                    MyMvcObject1.authenticate().createMap(name).redirectMap(name).create(name).success();
                     break;
                 case "Update":
+                    MyMvcObject1.authenticate().updateMap(name).redirectMap(name).update(name).success();
                     break;
                 case "Read":
-                    MyMvcObject1.authenticate().readMap(name).read(name).success();
+                    MyMvcObject1.authenticate().readMap(name).redirectMap(name).read(name).success();
                     break;
                 case "Delete":
+                    MyMvcObject1.authenticate().deleteMap(name).redirectMap(name).delete(name).success();
                     break;
                 case "Export":
-                    MyMvcObject1.authenticate();
+                    MyMvcObject1.authenticate().export(name).success();
                     break;
             }
         } catch (MyException e) {

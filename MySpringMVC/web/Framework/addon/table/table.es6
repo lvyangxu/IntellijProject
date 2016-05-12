@@ -1238,7 +1238,7 @@
                         let excelRow = "";
                         for (let i = 0; i < checkedArr.length; i++) {
                             let columnId = checkedArr[i].id;
-                            excelRow += d[columnId];
+                            excelRow += (d[columnId]==undefined)?"":d[columnId];
                             if (i != checkedArr.length - 1) {
                                 excelRow += "\t";
                             }
@@ -1252,10 +1252,10 @@
                 let title = new myString(settings.title).base64UrlEncode().value;
                 requestData = new myString(requestData).base64UrlEncode().value;
                 requestData = "title=" + title + "&data=" + requestData;
-                http.request(settings.url + "Download", requestData).then((result)=> {
-                    window.location.href = "../ApplicationData/excel/" + result + "/" + titleSource + ".xlsx";
+                http.request(settings.url + "Export", requestData).then((result)=> {
+                    window.location.href="../Data/"+settings.id+"/"+result;
                 }, (result)=> {
-                    alert("download data failed");
+                    alert("export data failed:"+result);
                 });
             });
             node.request().children(".delete").delegate("", "click", ()=> {

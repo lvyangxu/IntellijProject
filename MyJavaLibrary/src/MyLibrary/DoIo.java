@@ -134,20 +134,9 @@ public class DoIo {
      */
     public String createFolder(String folderDir){
         String result = null;
-        try {
-            File File1 = new File(folderDir);
-            if (!File1.exists()) {
-                Boolean isCreated = File1.mkdirs();
-                if (!isCreated) {
-                    result = "createDirFailed";
-                }
-            }            
-        } catch (Exception e) {
-            result = e.getMessage();
-        }
         return result;
     }
-    
+
     /**
      * 鍒犻櫎鏂囦欢鎴栫洰褰�
      * @param filePath 鏂囦欢鍏ㄨ矾寰�

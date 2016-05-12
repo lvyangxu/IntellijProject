@@ -4,11 +4,80 @@ import Models.MyException;
 import Request.Parameter;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by karl on 2016/4/27.
  */
 public class TableMap {
+
+    public static Map<String, String> createMap(HttpServletRequest request, String table) throws MyException {
+        Map<String, String> result = new HashMap<>();
+        switch (table) {
+            //write the detail map on the main project
+            case "channeldetail":
+                result.put("lastcpi", "cpi");
+                result.put("updatetime", "now()");
+                break;
+            case "channelweeklyreport":
+                result.put("finalsetup", "setup");
+                result.put("finalcost", "cost");
+                result.put("createtime", "now()");
+                result.put("updatetime", "now()");
+                break;
+            case "batchchannelweeklyreport":
+                result.put("finalsetup", "setup");
+                result.put("finalcost", "cost");
+                result.put("createtime", "now()");
+                result.put("updatetime", "now()");
+                break;
+            case "invoicedetail":
+                result.put("createtime", "now()");
+                result.put("updatetime", "now()");
+                break;
+            case "invoice":
+                result.put("createtime", "now()");
+                result.put("updatetime", "now()");
+                break;
+            default:
+                break;
+        }
+        return result;
+    }
+
+    public static Map<String, String> updateMap(HttpServletRequest request, String table) throws MyException {
+        Map<String, String> result = new HashMap<>();
+        switch (table) {
+            //write the detail map on the main project
+            case "channeldetail":
+                result.put("lastcpi", "cpi");
+                result.put("updatetime", "now()");
+                break;
+            case "channelweeklyreport":
+                result.put("finalsetup", "setup+adjustmentsetup");
+                result.put("finalcost", "cost+adjustmentcost");
+                result.put("updatetime", "now()");
+                break;
+            case "batchchannelweeklyreport":
+                result.put("finalsetup", "setup");
+                result.put("finalcost", "cost");
+                result.put("createtime", "now()");
+                result.put("updatetime", "now()");
+                break;
+            case "invoicedetail":
+                result.put("createtime", "createtime");
+                result.put("updatetime", "now()");
+                break;
+            case "invoice":
+                result.put("createtime", "createtime");
+                result.put("updatetime", "now()");
+                break;
+            default:
+                break;
+        }
+        return result;
+    }
 
     public static String readMap(HttpServletRequest request, String table) throws MyException {
         String result = "";
@@ -37,19 +106,19 @@ public class TableMap {
             case "weeklystatistics":
             case "monthlystatistics":
                 //setup and cost
-                result = (table.equals("weeklystatistics"))?
-                        "select time,'"+Parameter.getDecode(request,"app")+"' as app,'0' as revenue,round(sum(finalsetup)) as setup,convert(sum(finalcost),decimal(10,2)) as cost,'0' as dnu,'0' as dau,'0' as profit,'0' as profitrate from channelweeklyreport where " + Parameter.getArraySql(request, "app")+ " group by time":
-                        "select concat(t.month,'-01') as time,'"+Parameter.getDecode(request,"app")+"' as app,'0' as revenue,round(sum(t.setup)) as setup,convert(sum(t.cost),decimal(10,2)) as cost,'0' as dnu,'0' as dau,'0' as profit,'0' as profitrate from ("+
-                                "select concat(year(time),'-',if(length(month(time))=1,concat('0',month(time)),month(time))) as month,"+
-                                "sum((if(day(LAST_DAY(time))-DAYOFMONTH(time)+1<7,finalsetup*(day(LAST_DAY(time))-DAYOFMONTH(time)+1)/7,finalsetup))) as setup,"+
-                                "sum((if(day(LAST_DAY(time))-DAYOFMONTH(time)+1<7,finalcost*(day(LAST_DAY(time))-DAYOFMONTH(time)+1)/7,finalcost))) as cost from channelweeklyreport "+
-                                "where "+ Parameter.getArraySql(request, "app") +
-                                "group by month "+
-                                "union all "+
-                                "select concat(year(DATE_ADD(time,interval 6 day)),'-',if(length(month(DATE_ADD(time,interval 6 day)))=1,concat('0',month(DATE_ADD(time,interval 6 day))),month(DATE_ADD(time,interval 6 day)))) as month,"+
-                                "sum((if(day(DATE_ADD(time,interval 6 day))<7,finalsetup*day(DATE_ADD(time,interval 6 day))/7,finalsetup))) as setup,"+
-                                "sum((if(day(DATE_ADD(time,interval 6 day))<7,finalcost*day(DATE_ADD(time,interval 6 day))/7,finalcost))) as cost from channelweeklyreport "+
-                                "where day(DATE_ADD(time,interval 6 day))<7 and "+ Parameter.getArraySql(request, "app") +
+                result = (table.equals("weeklystatistics")) ?
+                        "select time,'" + Parameter.getDecode(request, "app") + "' as app,'0' as revenue,round(sum(finalsetup)) as setup,convert(sum(finalcost),decimal(10,2)) as cost,'0' as dnu,'0' as dau,'0' as profit,'0' as profitrate from channelweeklyreport where " + Parameter.getArraySql(request, "app") + " group by time" :
+                        "select concat(t.month,'-01') as time,'" + Parameter.getDecode(request, "app") + "' as app,'0' as revenue,round(sum(t.setup)) as setup,convert(sum(t.cost),decimal(10,2)) as cost,'0' as dnu,'0' as dau,'0' as profit,'0' as profitrate from (" +
+                                "select concat(year(time),'-',if(length(month(time))=1,concat('0',month(time)),month(time))) as month," +
+                                "sum((if(day(LAST_DAY(time))-DAYOFMONTH(time)+1<7,finalsetup*(day(LAST_DAY(time))-DAYOFMONTH(time)+1)/7,finalsetup))) as setup," +
+                                "sum((if(day(LAST_DAY(time))-DAYOFMONTH(time)+1<7,finalcost*(day(LAST_DAY(time))-DAYOFMONTH(time)+1)/7,finalcost))) as cost from channelweeklyreport " +
+                                "where " + Parameter.getArraySql(request, "app") +
+                                "group by month " +
+                                "union all " +
+                                "select concat(year(DATE_ADD(time,interval 6 day)),'-',if(length(month(DATE_ADD(time,interval 6 day)))=1,concat('0',month(DATE_ADD(time,interval 6 day))),month(DATE_ADD(time,interval 6 day)))) as month," +
+                                "sum((if(day(DATE_ADD(time,interval 6 day))<7,finalsetup*day(DATE_ADD(time,interval 6 day))/7,finalsetup))) as setup," +
+                                "sum((if(day(DATE_ADD(time,interval 6 day))<7,finalcost*day(DATE_ADD(time,interval 6 day))/7,finalcost))) as cost from channelweeklyreport " +
+                                "where day(DATE_ADD(time,interval 6 day))<7 and " + Parameter.getArraySql(request, "app") +
                                 "group by month) as t group by month";
                 break;
             case "invoice":
@@ -70,7 +139,7 @@ public class TableMap {
                 break;
             case "invoicedetail":
                 result = "select * from invoice where " + Parameter.getStringSql(request, "name")
-                        + " and "+Parameter.getStringSql(request, "time") + " and " + Parameter.getStringSql(request, "paystate");
+                        + " and " + Parameter.getStringSql(request, "time") + " and " + Parameter.getStringSql(request, "paystate");
                 break;
             default:
                 result = "select * from " + table;
@@ -79,8 +148,25 @@ public class TableMap {
         return result;
     }
 
-//    public static String updateMap(String table){
-//
-//    }
+    public static Map<String, String> deleteMap(HttpServletRequest request, String table) throws MyException {
+        Map<String, String> result = new HashMap<>();
+        switch (table) {
+            default:
+                break;
+        }
+        return result;
+    }
+
+    public static String redirectMap(String table){
+        String result = "";
+        switch (table) {
+            //write the detail map on the main project
+
+            default:
+                result = table;
+                break;
+        }
+        return result;
+    }
 
 }
