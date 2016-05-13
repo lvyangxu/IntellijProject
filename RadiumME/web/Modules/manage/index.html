@@ -30,34 +30,68 @@
             <div section="contact_us">contact us</div>
         </div>
     </div>
-    <div id="home">
+    <div id="home" class="page">
         <div section="文字">
-            <div id="home_text" class="table" title="文字" curd="curd" attachment>
-                <span th-id="name" type="text">名称</span>
-                <span th-id="ch" type="text">中文</span>
-                <span th-id="en" type="text">英文</span>
+            <div id="home-text" class="table" title="文字" curd="ur">
+                <span th-id="name" type="text" key>名称</span>
+                <span th-id="ch" type="text" min="0" max="5000">中文</span>
+                <span th-id="en" type="text" min="0" max="5000">英文</span>
+            </div>
+        </div>
+        <div section="图片">
+            <div id="home-image" class="table" title="图片" curd="ur" attachment>
+                <span th-id="name" type="text" key>名称</span>
+            </div>
+        </div>
+    </div>
+    <div id="about_us" class="page">
+        <div section="文字">
+            <div id="about-us-text" class="table" title="文字" curd="cur">
+                <span th-id="name" type="text" key>名称</span>
+                <span th-id="ch" type="text" min="0" max="5000">中文</span>
+                <span th-id="en" type="text" min="0" max="5000">英文</span>
             </div>
         </div>
         <div section="图片"></div>
     </div>
-    <div id="about_us">
-        <div section="文字"></div>
+    <div id="games" class="page">
+        <div section="文字">
+            <div id="games-text" class="table" title="文字" curd="cur">
+                <span th-id="name" type="text" key>名称</span>
+                <span th-id="ch" type="text" min="0" max="5000">中文</span>
+                <span th-id="en" type="text" min="0" max="5000">英文</span>
+            </div>
+        </div>
         <div section="图片"></div>
     </div>
-    <div id="games">
-        <div section="文字"></div>
+    <div id="developers" class="page">
+        <div section="文字">
+            <div id="developers-text" class="table" title="文字" curd="cur">
+                <span th-id="name" type="text" key>名称</span>
+                <span th-id="ch" type="text" min="0" max="5000">中文</span>
+                <span th-id="en" type="text" min="0" max="5000">英文</span>
+            </div>
+        </div>
         <div section="图片"></div>
     </div>
-    <div id="developers">
-        <div section="文字"></div>
+    <div id="blog" class="page">
+        <div section="文字">
+            <div id="blog-text" class="table" title="文字" curd="cur">
+                <span th-id="name" type="text" key>名称</span>
+                <span th-id="ch" type="text" min="0" max="5000">中文</span>
+                <span th-id="en" type="text" min="0" max="5000">英文</span>
+            </div>
+        </div>
         <div section="图片"></div>
     </div>
-    <div id="blog">
-        <div section="文字"></div>
-        <div section="图片"></div>
-    </div>
-    <div id="contact_us">
-        <div section="文字"></div>
+    <div id="contact_us" class="page">
+        <div section="文字">
+            <div id="contact-us-text" class="table" title="文字" curd="cur">
+                <span th-id="name" type="text" key>名称</span>
+                <span th-id="ch" type="text" min="0" max="5000">中文</span>
+                <span th-id="en" type="text" min="0" max="5000">英文</span>
+            </div>
+        </div>
         <div section="图片"></div>
     </div>
 

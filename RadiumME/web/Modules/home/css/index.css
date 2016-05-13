@@ -23,7 +23,7 @@
       word-spacing: 8px; }
 
 /*about_us*/
-.about_us {
+.about-us {
   background-color: white;
   word-wrap: break-word;
   word-break: break-all; }
@@ -34,7 +34,7 @@
   padding-left: 130px;
   padding-right: 130px; }
 
-.about_us > div > button {
+.about-us > div > button {
   border-radius: 5px;
   border: 2px solid #373737;
   background-color: #373737;
@@ -45,22 +45,22 @@
   margin-bottom: 80px;
   font-size: 20px; }
 
-.about_us > div > button:hover {
+.about-us > div > button:hover {
   background-color: transparent;
   color: #373737; }
 
 /*our_games*/
-.our_games {
+.our-games {
   background-color: #313132;
   text-align: center;
   color: white; }
 
-.our_games > div {
+.our-games > div {
   width: 1330px;
   margin: auto;
   text-align: center; }
 
-.our_games > div > div > button {
+.our-games > div > div > button {
   border-radius: 5px;
   border: 2px solid white;
   background-color: white;
@@ -71,7 +71,7 @@
   margin-bottom: 80px;
   font-size: 20px; }
 
-.our_games > div > div > button:hover {
+.our-games > div > div > button:hover {
   background-color: transparent;
   color: white; }
 

@@ -24,28 +24,6 @@
         });
     });
 
-    //menu fit
-    $(".navbar").fit(()=> {
-        if ($(window).width >= 1100) {
-            $(".navbar").children(".container").children(".content").children(".menu").show();
-        }
-    })
-
-    //vertical menu bar
-    $(".navbar").children(".container").children(".content").children(".list").children(".fa").delegate("", "click", function () {
-        if ($(this).hasClass("fa-list")) {
-            $(this).slideUp("fast", function () {
-                $(this).parent().children(".fa-times").slideDown("fast");
-                $(".navbar").children(".container").children(".content").children(".menu").slideDown("fast");
-            });
-        } else {
-            $(this).slideUp("fast", function () {
-                $(this).parent().children(".fa-list").slideDown("fast");
-                $(".navbar").children(".container").children(".content").children(".menu").slideUp("fast");
-            });
-        }
-    });
-
     //top button scroll
     $(".top").children(".overlay").children(".text").children("button").delegate("", "click", function () {
         var marginT = parseInt($(".body").children(".content").children("div").css("margin-top"));
@@ -76,4 +54,49 @@
             $(".back-to-top").fadeIn();
         }
     })
+}
+
+//switch language
+let currentLang = "en";
+let switchLanguage = (callback)=>{
+    $(".language").children(".lang").delegate("","click",function () {
+        if($(this).hasClass("en")){
+            currentLang = "en";
+        }else {
+            currentLang = "ch";
+        }
+        callback();
+    });
+};
+
+//load text
+let loadText = (page,selectorArr, nameArr)=> {
+    http.request("../Table/text/Read", "").then(result=> {
+        for (let i = 0; i < selectorArr.length; i++) {
+            let selector = selectorArr[i];
+            let element;
+            if(selector.includes(">")){
+                let arr = selector.split(">");
+                selector = arr[0];
+                let xPath = arr.slice(1).collect("join",">");
+                element = $(selector).xPath(xPath);
+            }else {
+                element = $(selector);
+            }
+
+            element.html(()=> {
+                let text = result.filter(d=>{
+                    return d.page == page;
+                }).filter(d=> {
+                    return d.name == nameArr[i];
+                }).map(d=> {
+                    return d[currentLang];
+                }).collect("join", "");
+                text = (text == undefined) ? "" : text;
+                return text;
+            });
+        }
+    }).catch(result=> {
+        alert("loading data error,please refresh this page");
+    });
 }

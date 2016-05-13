@@ -1,37 +1,62 @@
 .navbar .container .icon {
   margin-left: 20px; }
-.navbar .container .content .list {
-  display: block; }
+  .navbar .container .icon a img {
+    height: 24px;
+    margin-top: 23px;
+    margin-bottom: 23px; }
 .navbar .container .content .menu {
-  background-color: rgba(48, 48, 48, 0.9);
-  padding-top: 10px;
-  padding-right: 10px;
-  display: none;
-  position: absolute;
-  top: 70px;
-  right: 0;
-  width: 100px;
+  background-color: rgba(0, 0, 0, 0.5);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  box-shadow: 2px 2px 5px; }
+  box-shadow: 2px 2px 5px;
+  width: 140%; }
   .navbar .container .content .menu div {
-    width: 100%; }
+    width: 14.28%; }
     .navbar .container .content .menu div a {
+      width: 100%;
+      color: white;
       height: 30px;
       line-height: 30px;
       font-size: 12px;
-      margin-right: 10px;
-      text-align: right;
-      width: 100px; }
-    .navbar .container .content .menu div input {
-      width: 80px;
-      float: right; }
-  .navbar .container .content .menu .language {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 0px;
-    text-align: right; }
-    .navbar .container .content .menu .language .line {
-      margin-top: 2.5px; }
+      text-align: center; }
+.navbar .container .content .search {
+  position: absolute;
+  top: 5px;
+  float: right;
+  right: 100px; }
+  .navbar .container .content .search input {
+    width: 100px; }
+  .navbar .container .content .search img {
+    margin-left: 0px; }
+.navbar .container .content .language {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  text-align: right; }
+  .navbar .container .content .language .line {
+    margin-top: 2.5px; }
+
+.footer {
+  min-width: inherit; }
+  .footer .content {
+    padding-top: 20px;
+    margin-bottom: 100px;
+    width: 100%; }
+    .footer .content .left {
+      width: 80%;
+      margin-left: 10%; }
+      .footer .content .left input {
+        width: 60%;
+        padding-left: 0; }
+      .footer .content .left button {
+        width: 40%; }
+    .footer .content .right {
+      margin-top: 10px;
+      width: 100%; }
+  .footer .footer_text {
+    width: 100%; }
 
 /*# sourceMappingURL=common-small.css.map */

@@ -1,29 +1,26 @@
 .navbar{
     .container{
         .content{
-            .list{
-                display: none;
-            }
             .menu{
                 height: 70px;
                 line-height: 70px;
                 a:hover{
                     color:#999;
                 }
-                .language{
-                    .lang:hover{
-                        color:#999;
-                    }
-                    .en{
-                        margin-left: 20px;
-                    }
+            }
+            .search{
+                line-height: 50px;
+                input{
+                    width: 180px;
+                    font-size:18px;
                 }
-                .search{
-                    line-height: 50px;
-                    input{
-                        width: 180px;
-                        font-size:18px;
-                    }
+            }
+            .language{
+                .lang:hover{
+                    color:#999;
+                }
+                .en{
+                    margin-left: 20px;
                 }
             }
 

@@ -26,28 +26,6 @@
         });
     });
 
-    //menu fit
-    $(".navbar").fit(function () {
-        if ($(window).width >= 1100) {
-            $(".navbar").children(".container").children(".content").children(".menu").show();
-        }
-    });
-
-    //vertical menu bar
-    $(".navbar").children(".container").children(".content").children(".list").children(".fa").delegate("", "click", function () {
-        if ($(this).hasClass("fa-list")) {
-            $(this).slideUp("fast", function () {
-                $(this).parent().children(".fa-times").slideDown("fast");
-                $(".navbar").children(".container").children(".content").children(".menu").slideDown("fast");
-            });
-        } else {
-            $(this).slideUp("fast", function () {
-                $(this).parent().children(".fa-list").slideDown("fast");
-                $(".navbar").children(".container").children(".content").children(".menu").slideUp("fast");
-            });
-        }
-    });
-
     //top button scroll
     $(".top").children(".overlay").children(".text").children("button").delegate("", "click", function () {
         var marginT = parseInt($(".body").children(".content").children("div").css("margin-top"));
@@ -79,5 +57,54 @@
         }
     });
 }
+
+//switch language
+var currentLang = "en";
+var switchLanguage = function switchLanguage(callback) {
+    $(".language").children(".lang").delegate("", "click", function () {
+        if ($(this).hasClass("en")) {
+            currentLang = "en";
+        } else {
+            currentLang = "ch";
+        }
+        callback();
+    });
+};
+
+//load text
+var loadText = function loadText(page, selectorArr, nameArr) {
+    http.request("../Table/text/Read", "").then(function (result) {
+        var _loop = function _loop(i) {
+            var selector = selectorArr[i];
+            var element = void 0;
+            if (selector.includes(">")) {
+                var arr = selector.split(">");
+                selector = arr[0];
+                var xPath = arr.slice(1).collect("join", ">");
+                element = $(selector).xPath(xPath);
+            } else {
+                element = $(selector);
+            }
+
+            element.html(function () {
+                var text = result.filter(function (d) {
+                    return d.page == page;
+                }).filter(function (d) {
+                    return d.name == nameArr[i];
+                }).map(function (d) {
+                    return d[currentLang];
+                }).collect("join", "");
+                text = text == undefined ? "" : text;
+                return text;
+            });
+        };
+
+        for (var i = 0; i < selectorArr.length; i++) {
+            _loop(i);
+        }
+    }).catch(function (result) {
+        alert("loading data error,please refresh this page");
+    });
+};
 
 //# sourceMappingURL=common.js.map

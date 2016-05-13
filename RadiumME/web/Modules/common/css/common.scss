@@ -24,6 +24,7 @@
         .content {
             float: right;
             .menu {
+                float: left;
                 div {
                     float: left;
                     a {
@@ -38,56 +39,43 @@
                         display: block;
                     }
                 }
-                .search {
-                    input {
-                        border: none;
-                        border-bottom: 2px solid #cdcdcd;
-                        height: 20px;
-                        margin-top:20px;
-                        outline: none;
-                    }
-                    input:hover {
-                        border: none;
-                        border-bottom: 2px solid #b5b5b5;
-                    }
-                    img {
-                        cursor: pointer;
-                        margin-left: 10px;
-                        vertical-align: middle;
-                        height: 21px;
-                    }
+            }
+            .search {
+                float: left;
+                input {
+                    border: none;
+                    border-bottom: 2px solid #cdcdcd;
+                    height: 20px;
+                    margin-top:20px;
+                    outline: none;
                 }
-                .language {
-                    margin-left: 20px;
-                    .line {
-                        width: 1px;
-                        height: 10px;
-                        background-color: #313132;
-                        margin-top: 30px;
-                        margin-left: 3px;
-                        margin-right: 3px;
-                    }
-                    span {
-                        display: inline-block;
-                        font-size: 13px;
-                        cursor: pointer;
-                        height: 100%;
-                    }
+                input:hover {
+                    border: none;
+                    border-bottom: 2px solid #b5b5b5;
+                }
+                img {
+                    cursor: pointer;
+                    margin-left: 10px;
+                    vertical-align: middle;
+                    height: 21px;
                 }
             }
-            .list {
-                float: right;
-                color: black;
-                font-size: 2em;
-                .fa-times {
-                    display: none;
+            .language {
+                float: left;
+                margin-left: 20px;
+                .line {
+                    width: 1px;
+                    height: 10px;
+                    background-color: #313132;
+                    margin-top: 30px;
+                    margin-left: 3px;
+                    margin-right: 3px;
                 }
-                i {
-                    height: 70px;
-                    line-height: 70px;
-                    width: 100px;
-                    text-align: center;
+                span {
+                    display: inline-block;
+                    font-size: 13px;
                     cursor: pointer;
+                    height: 100%;
                 }
             }
         }

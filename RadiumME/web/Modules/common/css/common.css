@@ -17,58 +17,51 @@
       margin-bottom: 15px; }
     .navbar .container .content {
       float: right; }
-      .navbar .container .content .menu div {
+      .navbar .container .content .menu {
         float: left; }
-        .navbar .container .content .menu div a {
-          font-size: 18px;
-          margin-right: 30px;
-          text-decoration: none;
-          color: #313132;
-          letter-spacing: 0.5px;
-          font-weight: bolder;
-          height: 70px;
-          line-height: 75px;
-          display: block; }
-      .navbar .container .content .menu .search input {
-        border: none;
-        border-bottom: 2px solid #cdcdcd;
-        height: 20px;
-        margin-top: 20px;
-        outline: none; }
-      .navbar .container .content .menu .search input:hover {
-        border: none;
-        border-bottom: 2px solid #b5b5b5; }
-      .navbar .container .content .menu .search img {
-        cursor: pointer;
-        margin-left: 10px;
-        vertical-align: middle;
-        height: 21px; }
-      .navbar .container .content .menu .language {
+        .navbar .container .content .menu div {
+          float: left; }
+          .navbar .container .content .menu div a {
+            font-size: 18px;
+            margin-right: 30px;
+            text-decoration: none;
+            color: #313132;
+            letter-spacing: 0.5px;
+            font-weight: bolder;
+            height: 70px;
+            line-height: 75px;
+            display: block; }
+      .navbar .container .content .search {
+        float: left; }
+        .navbar .container .content .search input {
+          border: none;
+          border-bottom: 2px solid #cdcdcd;
+          height: 20px;
+          margin-top: 20px;
+          outline: none; }
+        .navbar .container .content .search input:hover {
+          border: none;
+          border-bottom: 2px solid #b5b5b5; }
+        .navbar .container .content .search img {
+          cursor: pointer;
+          margin-left: 10px;
+          vertical-align: middle;
+          height: 21px; }
+      .navbar .container .content .language {
+        float: left;
         margin-left: 20px; }
-        .navbar .container .content .menu .language .line {
+        .navbar .container .content .language .line {
           width: 1px;
           height: 10px;
           background-color: #313132;
           margin-top: 30px;
           margin-left: 3px;
           margin-right: 3px; }
-        .navbar .container .content .menu .language span {
+        .navbar .container .content .language span {
           display: inline-block;
           font-size: 13px;
           cursor: pointer;
           height: 100%; }
-      .navbar .container .content .list {
-        float: right;
-        color: black;
-        font-size: 2em; }
-        .navbar .container .content .list .fa-times {
-          display: none; }
-        .navbar .container .content .list i {
-          height: 70px;
-          line-height: 70px;
-          width: 100px;
-          text-align: center;
-          cursor: pointer; }
 
 .top {
   padding-top: 70px; }

@@ -5,27 +5,24 @@
         }
         .content{
             margin-right: 30px;
-            .list{
-                display: none;
-            }
             .menu{
                 height: 70px;
                 line-height: 70px;
                 a:hover{
                     color:#999;
                 }
-                .search{
-                    input{
-                        width: 100px;
-                    }
+            }
+            .search{
+                input{
+                    width: 100px;
                 }
-                .language{
-                    .lang:hover{
-                        color:#999;
-                    }
-                    .en{
-                        margin-left: 20px;
-                    }
+            }
+            .language{
+                .lang:hover{
+                    color:#999;
+                }
+                .en{
+                    margin-left: 20px;
                 }
             }
 

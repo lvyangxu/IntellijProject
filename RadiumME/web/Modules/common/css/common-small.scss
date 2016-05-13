@@ -1,49 +1,88 @@
 .navbar{
 	.container{
 		.icon{
+			$icon-height:24px;
 			margin-left: 20px;
+			a{
+				img{
+					height: $icon-height;
+					margin-top:(70-$icon-height)/2;
+					margin-bottom:(70-$icon-height)/2;
+				}
+			}
 		}
 		.content{
-			.list {
-				display: block;
-			}
 			.menu {
-				background-color: rgba(48,48,48,0.9);
-				padding-top:10px;
-				padding-right: 10px;
-				display: none;
-				position: absolute;
-				top:70px;
-				right: 0;
-				width: 100px;
+				background-color: rgba(0,0,0,0.5);
 				border-bottom-left-radius: 5px;
 				border-bottom-right-radius: 5px;
 				box-shadow: 2px 2px 5px;
+				width: 140%;
+				//overflow: hidden;
 				div{
-					width: 100%;
+					width: 14.28%;
 					a{
+						width: 100%;
+						color:white;
 						height: 30px;
 						line-height: 30px;
 						font-size: 12px;
-						margin-right: 10px;
-						text-align: right;
-						width: 100px;
-					}
-					input{
-						width: 80px;
-						float: right;
-					}
-				}
-				.language{
-					margin-top:10px;
-					margin-bottom:10px;
-					margin-left: 0px;
-					text-align: right;
-					.line{
-						margin-top: 2.5px;
+						text-align: center;
 					}
 				}
 			}
+			.search{
+				position: absolute;
+				top:5px;
+				float: right;
+                right: 100px;
+				input{
+					width: 100px;
+				}
+				img{
+					margin-left:0px;
+				}
+			}
+			.language{
+				position: absolute;
+				top:15px;
+				right: 10px;
+
+				margin-top:10px;
+				margin-bottom:10px;
+				margin-left: 0px;
+				text-align: right;
+				.line{
+					margin-top: 2.5px;
+				}
+			}
 		}
+	}
+}
+
+.footer {
+	min-width: inherit;
+	.content{
+		padding-top: 20px;
+		margin-bottom: 100px;
+		width: 100%;
+		.left{
+			width: 80%;
+			margin-left: 10%;
+			input{
+				width: 60%;
+				padding-left: 0;
+			}
+			button{
+				width: 40%;
+			}
+		}
+		.right{
+			margin-top:10px;
+			width: 100%;
+		}
+	}
+	.footer_text{
+		width: 100%;
 	}
 }

@@ -60,7 +60,7 @@ public class Poi {
         }
         //设置列宽
         for (Map.Entry<Integer, Integer> columnLength : columnLengthMap.entrySet()) {
-            Sheet1.setColumnWidth(columnLength.getKey(), (columnLength.getValue() + 2) * 256);
+            Sheet1.setColumnWidth(columnLength.getKey(), (columnLength.getValue() > 100 ? 100 : columnLength.getValue() + 2) * 256);
         }
 
         //冻结拆分窗口
@@ -94,7 +94,7 @@ public class Poi {
         try {
             Workbook1 = new XSSFWorkbook(filePath);
         } catch (IOException e) {
-            throw new MyException("read excel failed:"+e.getMessage());
+            throw new MyException("read excel failed:" + e.getMessage());
         }
         XSSFSheet sheet = Workbook1.getSheetAt(0);
         int rowNum = sheet.getLastRowNum();
@@ -120,7 +120,7 @@ public class Poi {
         try {
             Workbook1.close();
         } catch (IOException e) {
-            throw new MyException("close workbook failed:"+e.getMessage());
+            throw new MyException("close workbook failed:" + e.getMessage());
         }
 
         return result;

@@ -1,18 +1,16 @@
-.navbar .container .content .list {
-  display: none; }
 .navbar .container .content .menu {
   height: 70px;
   line-height: 70px; }
   .navbar .container .content .menu a:hover {
     color: #999; }
-  .navbar .container .content .menu .language .lang:hover {
-    color: #999; }
-  .navbar .container .content .menu .language .en {
-    margin-left: 20px; }
-  .navbar .container .content .menu .search {
-    line-height: 50px; }
-    .navbar .container .content .menu .search input {
-      width: 180px;
-      font-size: 18px; }
+.navbar .container .content .search {
+  line-height: 50px; }
+  .navbar .container .content .search input {
+    width: 180px;
+    font-size: 18px; }
+.navbar .container .content .language .lang:hover {
+  color: #999; }
+.navbar .container .content .language .en {
+  margin-left: 20px; }
 
 /*# sourceMappingURL=common-big.css.map */
