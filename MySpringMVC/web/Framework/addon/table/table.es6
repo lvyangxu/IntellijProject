@@ -416,10 +416,10 @@
                 let start;
                 if (element.data("pageIndex") <= 2) {
                     start = 0;
-                } else if (data("pageIndex") >= pageLength - 2) {
+                } else if (element.data("pageIndex") >= pageLength - 2) {
                     start = pageLength - 4;
                 } else {
-                    start = data("pageIndex") - 2;
+                    start = element.data("pageIndex") - 2;
                 }
                 let arr = [];
                 for (let i = start; i <= start + 4; i++) {
@@ -439,10 +439,10 @@
                 node.pagination().children("span").html(paginationButtonHtml);
 
                 //pagination button click event
-                node.pagination().children("span").children("button").delegate("", "click", ()=> {
+                node.pagination().children("span").children("button").delegate("", "click", function() {
                     node.theadCheckbox().prop("checked", false);
                     element.data("pageIndex", parseInt($(this).text()) - 1);
-                    this.refreshDisplay();
+                    func.refreshDisplay();
                 });
 
                 //listen tbody checkbox

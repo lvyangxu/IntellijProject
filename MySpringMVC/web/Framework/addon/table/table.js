@@ -23,7 +23,7 @@
     };
 
     var table = function table(element, options) {
-        var _this4 = this;
+        var _this3 = this;
 
         var requestFilterKeyArr = element.property("request-filter-key", "").split(",");
         var requestFilterNameArr = element.property("request-filter-name", "").split(",");
@@ -413,8 +413,6 @@
                 });
             },
             refreshDisplay: function refreshDisplay() {
-                var _this3 = this;
-
                 this.setCurrentPageHtml();
                 if (element.data("filterColumnData") == undefined) {
                     this.noData();
@@ -424,10 +422,10 @@
                 var start = void 0;
                 if (element.data("pageIndex") <= 2) {
                     start = 0;
-                } else if (data("pageIndex") >= pageLength - 2) {
+                } else if (element.data("pageIndex") >= pageLength - 2) {
                     start = pageLength - 4;
                 } else {
-                    start = data("pageIndex") - 2;
+                    start = element.data("pageIndex") - 2;
                 }
                 var arr = [];
                 for (var _i2 = start; _i2 <= start + 4; _i2++) {
@@ -449,8 +447,8 @@
                 //pagination button click event
                 node.pagination().children("span").children("button").delegate("", "click", function () {
                     node.theadCheckbox().prop("checked", false);
-                    element.data("pageIndex", parseInt($(_this3).text()) - 1);
-                    _this3.refreshDisplay();
+                    element.data("pageIndex", parseInt($(this).text()) - 1);
+                    func.refreshDisplay();
                 });
 
                 //listen tbody checkbox
@@ -1086,9 +1084,9 @@
                         node.updateBody().children(".unity").children("tbody").html(unityHtml);
                         //listen unity tr changed
                         node.updateBody().children(".unity").children("tbody").children("tr").children("td").children("input,select").delegate("", "change", function () {
-                            var unityChangeThId = $(_this4).parent().attr("th-id");
-                            var unityChangeThValue = $(_this4).val();
-                            var needChangeElement = $(_this4).parent().parent().parent().parent().parent().children(".content").children("tbody").children("tr").children("td[th-id=" + unityChangeThId + "]");
+                            var unityChangeThId = $(_this3).parent().attr("th-id");
+                            var unityChangeThValue = $(_this3).val();
+                            var needChangeElement = $(_this3).parent().parent().parent().parent().parent().children(".content").children("tbody").children("tr").children("td[th-id=" + unityChangeThId + "]");
                             needChangeElement.children("input,select").val(unityChangeThValue);
                         });
 
@@ -1440,13 +1438,13 @@
                 };
                 //set values when select init or change
                 setSelectValues(node.rowFilterBody().children("div[row-id=" + rowId + "]").children("select"));
-                $(_this4).parent().parent().children(".body").children("div").delegate("select", "change", function () {
+                $(_this3).parent().parent().children(".body").children("div").delegate("select", "change", function () {
                     setSelectValues($(this));
                 });
 
                 //button remove click event
                 node.rowFilterBodyDiv().delegate(".btn-danger", "click", function (event) {
-                    $(_this4).parent().remove();
+                    $(_this3).parent().remove();
                     event.stopPropagation();
                 });
             });
