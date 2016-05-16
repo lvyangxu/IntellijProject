@@ -54,15 +54,51 @@
             $(".back-to-top").fadeIn();
         }
     })
+
+    //touch event
+    let touchStartX, touchEndX, historyX = 0, currentX = 0, minX, maxX,leftX;
+    $(".navbar .menu")[0].addEventListener("touchstart", function (e) {
+
+        if ($(window).width() <= 1100) {
+            let left = $(".navbar .menu").css("margin-left");
+            left = Number.parseInt(left);
+            minX = 0 - left;
+            maxX =-$(window).width() * 0.4 - left;
+            leftX = left;
+            touchStartX = e.changedTouches[0].pageX;
+            console.log(minX+","+maxX);
+        }
+
+    }, false);
+    $(".navbar .menu")[0].addEventListener("touchmove", function (e) {
+        e.preventDefault();
+        if ($(window).width() <= 1100) {
+            let thisTouchEndX = e.changedTouches[0].pageX;
+            let touchMoveX = thisTouchEndX - touchStartX;
+            currentX = currentX + touchMoveX;
+            historyX += touchMoveX;
+            // console.log(historyX);
+            if (touchMoveX > minX) {
+                return;
+            }
+            if (touchMoveX < maxX) {
+                return;
+            }
+            setTimeout(()=> {
+                $(".navbar .menu").css({"margin-left": touchMoveX+leftX});
+            }, 1);
+        }
+    }, false);
+
 }
 
 //switch language
 let currentLang = "en";
-let switchLanguage = (callback)=>{
-    $(".language").children(".lang").delegate("","click",function () {
-        if($(this).hasClass("en")){
+let switchLanguage = (callback)=> {
+    $(".language").children(".lang").delegate("", "click", function () {
+        if ($(this).hasClass("en")) {
             currentLang = "en";
-        }else {
+        } else {
             currentLang = "ch";
         }
         callback();
@@ -70,22 +106,22 @@ let switchLanguage = (callback)=>{
 };
 
 //load text
-let loadText = (page,selectorArr, nameArr)=> {
+let loadText = (page, selectorArr, nameArr)=> {
     http.request("../Table/text/Read", "").then(result=> {
         for (let i = 0; i < selectorArr.length; i++) {
             let selector = selectorArr[i];
             let element;
-            if(selector.includes(">")){
+            if (selector.includes(">")) {
                 let arr = selector.split(">");
                 selector = arr[0];
-                let xPath = arr.slice(1).collect("join",">");
+                let xPath = arr.slice(1).collect("join", ">");
                 element = $(selector).xPath(xPath);
-            }else {
+            } else {
                 element = $(selector);
             }
 
             element.html(()=> {
-                let text = result.filter(d=>{
+                let text = result.filter(d=> {
                     return d.page == page;
                 }).filter(d=> {
                     return d.name == nameArr[i];

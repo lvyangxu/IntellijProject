@@ -1,11 +1,4 @@
-.top > .text {
-    position: absolute;
-    z-index: 19;
-    font-size: 20px;
-    font-color: white;
-}
 
-/*overlay*/
 .overlay {
     position: absolute;
     background-color: rgba(27, 26, 24, 0.6);
@@ -14,7 +7,7 @@
     text-align: center;
     color: white;
     font-size: 20px;
-    .text{
+    .text {
         line-height: 100px;
         .big {
             font-size: 100px;
@@ -27,98 +20,74 @@
     }
 }
 
-/*about_us*/
 .about-us {
-    background-color: white;
-    word-wrap: break-word;
-    word-break: break-all;
+    button {
+        border-radius: 5px;
+        border: 2px solid rgba(55, 55, 55, 1);
+        background-color: rgba(55, 55, 55, 1);
+        color: white;
+        height: 40px;
+        width: 200px;
+        margin-top: 25px;
+        margin-bottom: 80px;
+        font-size: 20px;
+    }
+    button:hover {
+        background-color: transparent;
+        color: rgba(55, 55, 55, 1);
+    }
 }
 
-.section{
-    width: 1330px;
-    margin: auto;
-    padding-left: 130px;
-    padding-right: 130px;
-}
-
-
-
-.about-us > div > button {
-    border-radius: 5px;
-    border: 2px solid rgba(55, 55, 55, 1);
-    background-color: rgba(55, 55, 55, 1);
-    color: white;
-    height: 40px;
-    width: 200px;
-    margin-top: 25px;
-    margin-bottom: 80px;
-    font-size: 20px;
-}
-
-.about-us > div > button:hover {
-    background-color: transparent;
-    color: rgba(55, 55, 55, 1);
-}
-
-/*our_games*/
 .our-games {
     background-color: #313132;
     text-align: center;
     color: white;
+    .container{
+        width: 1330px;
+        margin: auto;
+        text-align: center;
+    }
+
+    button {
+        border-radius: 5px;
+        border: 2px solid white;
+        background-color: rgba(255, 255, 255, 1);
+        color: #313132;
+        height: 40px;
+        width: 200px;
+        margin-top: 40px;
+        margin-bottom: 80px;
+        font-size: 20px;
+    }
+    button:hover {
+        background-color: transparent;
+        color: white;
+    }
 }
 
-.our-games > div {
-    width: 1330px;
-    margin: auto;
-    text-align: center;
-}
-
-.our-games > div > div > button {
-    border-radius: 5px;
-    border: 2px solid white;
-    background-color: rgba(255, 255, 255, 1);
-    color: #313132;
-    height: 40px;
-    width: 200px;
-    margin-top: 40px;
-    margin-bottom: 80px;
-    font-size: 20px;
-}
-
-.our-games > div > div > button:hover {
-    background-color: transparent;
-    color: white;
-}
-
-/*developers*/
-.developers > div > div > img {
-    height: 60px;
-    width: 60px;
-}
-
-.developers > .first{
-    margin-top:60px;
-    margin-bottom: 60px;
-}
-
-.developers > .first > .second {
-    margin-left: 100px;
-    margin-right: 100px;
-}
-.developers > .second{
-    margin-bottom: 60px;
-}
-
-.developers > .second > .first {
-    margin-right: 50px;
-}
-
-.developers > .second > .second {
-    margin-left: 50px;
-}
-
-
-
-.developers > div > div > span {
-    display: block;
+.developers {
+    img {
+        height: 60px;
+        width: 60px;
+    }
+    .first-div {
+        margin-top: 60px;
+        margin-bottom: 60px;
+        .second {
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+    }
+    .second-div {
+        margin-bottom: 60px;
+        .first {
+            margin-right: 50px;
+        }
+        .second {
+            margin-left: 50px;
+        }
+    }
+    span {
+        display: block;
+    }
 }

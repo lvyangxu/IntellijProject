@@ -1,0 +1,27 @@
+.body{
+    .carousel{
+        .big{
+            width: 100%;
+
+        }
+        .small{
+            width: 100%;
+            height: auto;
+            p{
+                position: static;
+            }
+        }
+    }
+    .position {
+
+        .a{
+            width: 50%;
+        }
+        .b{
+            width: 50%;
+        }
+        .c {
+            width: 100%;
+        }
+    }
+}

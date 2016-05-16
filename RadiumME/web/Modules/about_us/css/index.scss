@@ -37,26 +37,30 @@
                 width: 100%;
             }
         }
+        .right-big{
+            float: right;
+        }
     }
     .carousel>div>div{
         background-color: #313132;
     }
 
     .position {
-        height: 336px;
-        .a, .b {
+        font-size: 0;
+        .a {
             width: 25%;
-            float: left;
-            height: 100%;
+            display: inline-block;
+        }
+        .b{
+            width: 25%;
+            display: inline-block;
         }
         .c {
             width: 50%;
-            float: left;
-            height: 100%;
+            display: inline-block;
         }
         img {
             width: 100%;
-            height: 100%;
         }
     }
 

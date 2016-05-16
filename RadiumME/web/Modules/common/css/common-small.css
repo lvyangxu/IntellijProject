@@ -4,59 +4,84 @@
     height: 24px;
     margin-top: 23px;
     margin-bottom: 23px; }
-.navbar .container .content .menu {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  box-shadow: 2px 2px 5px;
-  width: 140%; }
-  .navbar .container .content .menu div {
-    width: 14.28%; }
-    .navbar .container .content .menu div a {
-      width: 100%;
-      color: white;
-      height: 30px;
-      line-height: 30px;
-      font-size: 12px;
-      text-align: center; }
-.navbar .container .content .search {
-  position: absolute;
-  top: 5px;
-  float: right;
-  right: 100px; }
-  .navbar .container .content .search input {
-    width: 100px; }
-  .navbar .container .content .search img {
-    margin-left: 0px; }
-.navbar .container .content .language {
-  position: absolute;
-  top: 15px;
-  right: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 0px;
-  text-align: right; }
-  .navbar .container .content .language .line {
-    margin-top: 2.5px; }
+.navbar .container .content {
+  width: 100%; }
+  .navbar .container .content .menu {
+    height: 30px;
+    line-height: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 2px 2px 5px;
+    width: 140%; }
+    .navbar .container .content .menu div {
+      width: 14.28%; }
+      .navbar .container .content .menu div a {
+        width: 100%;
+        color: white;
+        height: 30px;
+        line-height: 30px;
+        font-size: 12px;
+        text-align: center; }
+  .navbar .container .content .search {
+    position: absolute;
+    top: 5px;
+    float: right;
+    right: 90px; }
+    .navbar .container .content .search input {
+      width: 100px; }
+    .navbar .container .content .search img {
+      margin-left: 0px; }
+  .navbar .container .content .language {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    text-align: right; }
+    .navbar .container .content .language .line {
+      margin-top: 2.5px; }
 
 .footer {
   min-width: inherit; }
   .footer .content {
+    position: relative;
     padding-top: 20px;
     margin-bottom: 100px;
     width: 100%; }
     .footer .content .left {
-      width: 80%;
-      margin-left: 10%; }
+      width: 100%;
+      padding-top: 50px;
+      height: 30px; }
       .footer .content .left input {
-        width: 60%;
-        padding-left: 0; }
+        margin-left: 10%;
+        width: 40%;
+        padding-left: 0;
+        height: 28px;
+        font-size: 12px;
+        display: block; }
       .footer .content .left button {
-        width: 40%; }
+        display: block;
+        width: 40%;
+        height: 30px;
+        border: none; }
     .footer .content .right {
-      margin-top: 10px;
+      position: absolute;
       width: 100%; }
   .footer .footer_text {
     width: 100%; }
+    .footer .footer_text div span {
+      display: none; }
+
+.section {
+  width: auto;
+  margin: auto; }
+  .section p {
+    padding-left: 10px;
+    padding-right: 10px; }
+
+.body {
+  width: auto; }
 
 /*# sourceMappingURL=common-small.css.map */

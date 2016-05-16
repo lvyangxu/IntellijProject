@@ -1,0 +1,57 @@
+
+.overlay{
+    .text{
+        line-height: 60px;
+        .big{
+            font-size:50px;
+        }
+        .small{
+
+        }
+    }
+}
+
+.section{
+    width: auto;
+    padding-left: 0px;
+    padding-right: 0px;
+    p{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.our-games{
+    .container{
+        width: auto;
+    }
+}
+
+.developers {
+    img {
+        width: 60px;
+        height: 60px;
+    }
+    .first-div {
+        font-size: 10px;
+        div{
+            width: 30%;
+        }
+        margin-top: 40px;
+        margin-bottom: 40px;
+        .second {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+    }
+    .second-div {
+        font-size: 10px;
+        margin-bottom: 40px;
+        .first {
+            margin-right: 50px;
+        }
+        .second {
+            margin-left: 50px;
+        }
+    }
+}

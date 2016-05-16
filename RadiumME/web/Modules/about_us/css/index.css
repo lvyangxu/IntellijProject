@@ -20,20 +20,22 @@
   float: left; }
   .body .carousel .big img {
     width: 100%; }
+.body .carousel .right-big {
+  float: right; }
 .body .carousel > div > div {
   background-color: #313132; }
 .body .position {
-  height: 336px; }
-  .body .position .a, .body .position .b {
+  font-size: 0; }
+  .body .position .a {
     width: 25%;
-    float: left;
-    height: 100%; }
+    display: inline-block; }
+  .body .position .b {
+    width: 25%;
+    display: inline-block; }
   .body .position .c {
     width: 50%;
-    float: left;
-    height: 100%; }
+    display: inline-block; }
   .body .position img {
-    width: 100%;
-    height: 100%; }
+    width: 100%; }
 
 /*# sourceMappingURL=index.css.map */

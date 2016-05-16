@@ -12,7 +12,10 @@
 			}
 		}
 		.content{
+			width: 100%;
 			.menu {
+				height: 30px;
+				line-height: 30px;
 				background-color: rgba(0,0,0,0.5);
 				border-bottom-left-radius: 5px;
 				border-bottom-right-radius: 5px;
@@ -35,7 +38,7 @@
 				position: absolute;
 				top:5px;
 				float: right;
-                right: 100px;
+                right: 90px;
 				input{
 					width: 100px;
 				}
@@ -63,26 +66,54 @@
 .footer {
 	min-width: inherit;
 	.content{
+		position: relative;
 		padding-top: 20px;
 		margin-bottom: 100px;
 		width: 100%;
 		.left{
-			width: 80%;
-			margin-left: 10%;
+			width: 100%;
+			padding-top:50px;
+			$input-height:30px;
+			height: $input-height;
+
 			input{
-				width: 60%;
+				margin-left: 10%;
+				width: 40%;
 				padding-left: 0;
+				height: ($input-height)-2;
+				font-size: 12px;
+				display: block;
 			}
 			button{
+				display: block;
 				width: 40%;
+				height: ($input-height);
+				border: none;
 			}
 		}
 		.right{
-			margin-top:10px;
+			position: absolute;
 			width: 100%;
 		}
 	}
 	.footer_text{
 		width: 100%;
+		div span{
+            display: none;
+
+		}
 	}
+}
+
+.section {
+	width: auto;
+	margin: auto;
+	p{
+		padding-left:10px;
+		padding-right: 10px;
+	}
+}
+
+.body{
+	width: auto;
 }

@@ -89,7 +89,7 @@
             }
 
             element.css({
-                "margin-left": offsetX + "px",
+                // "margin-left": offsetX + "px",
                 "margin-top": offsetY + "px",
                 "width": scale * 100 + "%"
             }, 2000);

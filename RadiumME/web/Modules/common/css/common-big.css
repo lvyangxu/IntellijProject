@@ -13,4 +13,10 @@
 .navbar .container .content .language .en {
   margin-left: 20px; }
 
+.section {
+  width: 1330px;
+  margin: auto; }
+  .section p {
+    width: 1330px; }
+
 /*# sourceMappingURL=common-big.css.map */
