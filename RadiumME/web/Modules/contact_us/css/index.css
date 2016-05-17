@@ -8,15 +8,13 @@
   margin-bottom: 25px; }
 .body .games-div {
   background-color: #F4F4F4;
-  height: 505.06px;
   padding-bottom: 69px;
   border-bottom: 1px solid #f9f9f9; }
   .body .games-div .games {
     position: relative;
-    float: left;
+    display: inline-block;
     margin-left: 10px;
-    width: 300px;
-    height: 383.06px; }
+    width: 300px; }
     .body .games-div .games .overlay-panel {
       display: none;
       position: absolute;
@@ -50,12 +48,12 @@
 .body .address {
   border-top: 1px solid #dbdbdb;
   background-color: #e8e8e8;
-  height: 600px;
-  padding-bottom: 20px; }
+  padding-bottom: 20px;
+  font-size: 0; }
   .body .address .left, .body .address .right {
     padding-top: 0px;
     width: 590px;
-    float: left; }
+    display: inline-block; }
     .body .address .left img, .body .address .right img {
       width: 100%;
       margin-bottom: 25px; }
@@ -66,6 +64,8 @@
       text-align: left;
       height: 50px;
       line-height: 50px; }
+    .body .address .left .text, .body .address .right .text {
+      font-size: 14px; }
   .body .address .left {
     padding-left: 50px; }
   .body .address .right {

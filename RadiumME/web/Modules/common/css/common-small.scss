@@ -117,3 +117,17 @@
 .body{
 	width: auto;
 }
+
+.single{
+	.text{
+		.big{
+			font-size: 50px;
+		}
+
+		.small{
+			font-size: 16px;
+			margin-left: 10%;
+			margin-right: 10%;
+		}
+	}
+}

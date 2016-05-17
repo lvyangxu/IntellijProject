@@ -1,0 +1,36 @@
+.body{
+    .games-div{
+        font-size: 0;
+        .games{
+            width: 22.5%;
+            margin-left: 2%;
+        }
+        @media screen and (max-width: 800px){
+            .games{
+                width: 100%;
+                margin-left: 0%;
+            }
+        }
+    }
+
+    .address{
+        font-size: 0;
+        .title{
+            margin-left: 2%;
+        }
+        .left,.right{
+            width: 47%;
+            padding-left: 2%;
+            padding-right: 0;
+        }
+        @media screen and (max-width: 800px){
+            .left,.right{
+                width: 100%;
+                padding-left: 0%;
+                .button,.text{
+                    padding-left: 2%;
+                }
+            }
+        }
+    }
+}

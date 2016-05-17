@@ -3,7 +3,6 @@
     $game-img-space: 10px;
     $address-img-space: 50px;
     $img-margin: 50px;
-    $game-height: 383.06px;
     $game-title-top:62px;
     $game-title-bottom:25px;
     .title {
@@ -18,16 +17,14 @@
     .games-div {
 
         background-color: #F4F4F4;
-        height: $game-height+35+$game-title-top+$game-title-bottom;
         padding-bottom: $game-title-top+7;
         border-bottom: 1px solid #f9f9f9;
 
         .games {
             position: relative;
-            float: left;
+            display: inline-block;
             margin-left: $game-img-space;
             width: (1330-$game-img-space*3-$img-margin*2)/4;
-            height: $game-height;
             .overlay-panel {
                 display: none;
                 position: absolute;
@@ -73,13 +70,12 @@
     .address {
         border-top: 1px solid #dbdbdb;
         background-color: #e8e8e8;
-        height: 600px;
         padding-bottom: 20px;
-
+        font-size: 0;
         .left, .right {
             padding-top: 0px;
             width: (1330-$img-margin*2-$address-img-space)/2;
-            float: left;
+            display: inline-block;
             img {
                 width: 100%;
                 margin-bottom: 25px;
@@ -91,6 +87,9 @@
                 text-align: left;
                 height: 50px;
                 line-height: 50px;
+            }
+            .text{
+                font-size: 14px;
             }
         }
         .left {

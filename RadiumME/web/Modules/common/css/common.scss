@@ -11,6 +11,14 @@
     .container {
         max-width: 1330px;
         margin: auto;
+        .search-panel{
+            display: none;
+            position: absolute;
+            height: 80px;
+            width: 1330px;
+            top:70px;
+            background-color: rgba(0,0,0,0.7);
+        }
         .icon {
             a {
                 img {
@@ -42,6 +50,7 @@
             }
             .search {
                 float: left;
+
                 input {
                     border: none;
                     border-bottom: 2px solid #cdcdcd;
@@ -101,7 +110,6 @@
     text-align: center;
     width: 100%;
     .text {
-
         .big {
             font-weight: bolder;
             font-size: 70px;
@@ -111,8 +119,6 @@
             font-weight: lighter;
             font-size: 20px;
             font-family: "Microsoft YaHei UI";
-            margin-left: 500px;
-            margin-right: 500px;
             word-spacing: 2px;
         }
 
@@ -133,7 +139,6 @@
 }
 
 .body {
-    width: 1330px;
     margin: auto;
     font-family: NIRMALA;
 }

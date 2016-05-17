@@ -1,0 +1,21 @@
+.body{
+    .games-div{
+        font-size: 0;
+        .games{
+            width: 22.5%;
+            margin-left: 2%;
+        }
+    }
+
+    .address{
+        font-size: 0;
+        .title{
+            margin-left: 2%;
+        }
+        .left,.right{
+            width: 47%;
+            padding-left: 2%;
+            padding-right: 0;
+        }
+    }
+}

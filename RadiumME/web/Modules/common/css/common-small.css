@@ -84,4 +84,11 @@
 .body {
   width: auto; }
 
+.single .text .big {
+  font-size: 50px; }
+.single .text .small {
+  font-size: 16px;
+  margin-left: 10%;
+  margin-right: 10%; }
+
 /*# sourceMappingURL=common-small.css.map */

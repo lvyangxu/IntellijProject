@@ -39,3 +39,18 @@
     }
 }
 
+.single{
+    .text{
+        .small{
+            margin-left: 300px;
+            margin-right: 300px;
+        }
+    }
+}
+
+.footer{
+    min-width: inherit;
+    .footer_text{
+        width: auto;
+    }
+}

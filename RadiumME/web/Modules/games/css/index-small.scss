@@ -1,0 +1,40 @@
+.body {
+    width: auto;
+    .content {
+
+        .section {
+            .left, .right {
+                @media screen and (max-width: 799px) {
+                    width: 100%;
+                    .text {
+                        .bottom {
+                            .button {
+                                margin-bottom: 30px;
+                            }
+                        }
+                    }
+                }
+                @media screen and (min-width: 800px) {
+                    width: 50%;
+                }
+
+                .text {
+                    margin-top: 20px;
+                    .logo {
+                        margin-bottom: 0px;
+                    }
+                    .title {
+                        padding-top: 10px;
+                    }
+                    .paragraph {
+                        font-size: 14px;
+                        margin-bottom: 10px;
+                    }
+                }
+
+            }
+        }
+
+    }
+}
+

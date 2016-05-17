@@ -1,32 +1,39 @@
 .body .section {
-  margin-left: 130px;
-  margin-right: 130px;
+  width: auto;
+  padding-left: 130px;
+  padding-right: 130px;
   margin-bottom: 40px;
-  height: 170px; }
+  font-size: 0;
+  text-align: left; }
   .body .section p {
+    width: auto;
     line-height: 25px; }
   .body .section .left {
-    float: left;
-    font-size: 0; }
+    width: 30%;
+    display: inline-block; }
+    .body .section .left img {
+      width: 100%; }
   .body .section .right {
-    width: 783px;
-    position: relative;
-    height: 170px;
-    float: left;
-    margin-left: 10px;
-    margin-right: 10px; }
+    width: 70%;
+    display: inline-block;
+    vertical-align: top; }
     .body .section .right .title {
       text-align: left;
       margin-bottom: 0;
-      padding-top: 0; }
+      padding-top: 0;
+      padding-left: 10px;
+      padding-right: 10px; }
     .body .section .right .paragraph {
       font-size: 16px;
+      padding-left: 10px;
+      padding-right: 10px;
       color: #666; }
     .body .section .right .bottom {
+      font-size: 16px;
       color: #e9a500;
-      position: absolute;
-      bottom: 0px;
-      margin-bottom: 0px; }
+      margin-bottom: 0px;
+      padding-left: 10px;
+      padding-right: 10px; }
     .body .section .right .bottom:hover {
       color: #f6dfa6;
       cursor: pointer; }

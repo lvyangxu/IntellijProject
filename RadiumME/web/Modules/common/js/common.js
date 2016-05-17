@@ -4,11 +4,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 {
     (function () {
+        var noLeft = $(".top_img").hasClass("top_img1");
         //top img auto fit full sreen
         $(".top_img").fullFit(70, function () {
             $(".top").css({ "overflow": "hidden" });
             $(".top").height($(window).height() - 70);
-        });
+        }, noLeft);
 
         //top img overlay auto fit full screen
         $(".overlay").fit(function () {

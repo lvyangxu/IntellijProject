@@ -44,7 +44,8 @@
     .addon-carousel .arrow div.left {
       float: left;
       margin-left: 10%;
-      background-image: url("arrow-left.png"); }
+      background-image: url("arrow-left.png");
+      display: none; }
     .addon-carousel .arrow div.right {
       float: right;
       margin-right: 10%;

@@ -1,48 +1,52 @@
-.body .content {
-  height: 1330px; }
+.body {
+  font-size: 0; }
   .body .content .section {
-    font-size: 0;
     margin-left: 0px;
     margin-right: 0px; }
     .body .content .section .left, .body .content .section .right {
-      float: left;
+      vertical-align: top;
+      margin-top: 0;
+      font-size: 0;
+      display: inline-block;
       width: 50%; }
       .body .content .section .left .game-img, .body .content .section .right .game-img {
         width: 100%; }
       .body .content .section .left video, .body .content .section .right video {
-        width: 100%;
-        height: 665px; }
-      .body .content .section .left .text .logo, .body .content .section .right .text .logo {
-        width: 50%;
-        margin-top: 80px;
-        margin-bottom: 30px; }
-      .body .content .section .left .text .title, .body .content .section .right .text .title {
-        margin-bottom: 15px; }
-      .body .content .section .left .text .bottom .button, .body .content .section .right .text .bottom .button {
-        margin: 0 auto;
-        font-size: 18px;
-        width: 300px;
-        height: 45px;
-        line-height: 45px;
-        color: #313132;
-        font-weight: bolder;
-        font-family: NIRMALA;
-        border: 2px solid #313132;
-        border-radius: 8px;
-        cursor: pointer; }
-        .body .content .section .left .text .bottom .button img, .body .content .section .right .text .bottom .button img {
-          width: 30%;
-          margin-left: 40%; }
-      .body .content .section .left .text .bottom .button:hover, .body .content .section .right .text .bottom .button:hover {
-        background: url("../../common/image/buttonshape.png") no-repeat center center;
-        background-size: 50px 20px; }
-      .body .content .section .left .text .bottom .button:hover span, .body .content .section .right .text .bottom .button:hover span {
-        display: none; }
-      .body .content .section .left .text .paragraph, .body .content .section .right .text .paragraph {
-        font-size: 16px;
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-bottom: 60px;
-        color: #666; }
+        width: 100%; }
+      .body .content .section .left .text, .body .content .section .right .text {
+        margin-top: 80px; }
+        .body .content .section .left .text .logo, .body .content .section .right .text .logo {
+          width: 50%;
+          margin-bottom: 30px; }
+        .body .content .section .left .text .title, .body .content .section .right .text .title {
+          margin-bottom: 15px; }
+        .body .content .section .left .text .bottom .button, .body .content .section .right .text .bottom .button {
+          margin: 0 auto;
+          font-size: 18px;
+          width: 300px;
+          height: 45px;
+          line-height: 45px;
+          color: #313132;
+          font-weight: bolder;
+          font-family: NIRMALA;
+          border: 2px solid #313132;
+          border-radius: 8px;
+          cursor: pointer; }
+          .body .content .section .left .text .bottom .button img, .body .content .section .right .text .bottom .button img {
+            width: 30%;
+            margin-left: 40%; }
+        .body .content .section .left .text .bottom .button:hover, .body .content .section .right .text .bottom .button:hover {
+          background: url("../../common/image/buttonshape.png") no-repeat center center;
+          background-size: 50px 20px; }
+        .body .content .section .left .text .bottom .button:hover span, .body .content .section .right .text .bottom .button:hover span {
+          display: none; }
+        .body .content .section .left .text .paragraph, .body .content .section .right .text .paragraph {
+          font-size: 16px;
+          margin-left: 10px;
+          margin-right: 10px;
+          margin-bottom: 60px;
+          color: #666; }
+  .body .content .game2 .right {
+    float: right; }
 
 /*# sourceMappingURL=index.css.map */

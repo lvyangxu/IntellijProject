@@ -120,7 +120,18 @@
                         currentIndex = lastIndex - 1;
                         element.children("div").animate({
                             "left": -100 * currentIndex + "%"
-                        }, 1000);
+                        }, 1000, function () {
+                            if (currentIndex == 0) {
+                                element.children(".arrow").children(".left").hide();
+                            } else {
+                                element.children(".arrow").children(".left").show();
+                            }
+                            if (currentIndex == n - 1) {
+                                element.children(".arrow").children(".right").hide();
+                            } else {
+                                element.children(".arrow").children(".right").show();
+                            }
+                        });
                         element.data("currentIndex", currentIndex);
                         element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass(activeClass);
                         element.children(".pagination").children("div[index=" + currentIndex + "]").addClass(activeClass);
@@ -131,7 +142,18 @@
                         currentIndex = lastIndex + 1;
                         element.children("div").animate({
                             "left": -100 * currentIndex + "%"
-                        }, 1000);
+                        }, 1000, function () {
+                            if (currentIndex == 0) {
+                                element.children(".arrow").children(".left").hide();
+                            } else {
+                                element.children(".arrow").children(".left").show();
+                            }
+                            if (currentIndex == n - 1) {
+                                element.children(".arrow").children(".right").hide();
+                            } else {
+                                element.children(".arrow").children(".right").show();
+                            }
+                        });
                         element.data("currentIndex", currentIndex);
                         element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass(activeClass);
                         element.children(".pagination").children("div[index=" + currentIndex + "]").addClass(activeClass);
@@ -144,20 +166,31 @@
                 var currentIndex;
                 if ($(this).hasClass("left")) {
                     if (lastIndex == 0) {
-                        currentIndex = n - 1;
+                        return;
                     } else {
                         currentIndex = lastIndex - 1;
                     }
                 } else {
                     if (lastIndex == n - 1) {
-                        currentIndex = 0;
+                        return;
                     } else {
                         currentIndex = lastIndex + 1;
                     }
                 }
                 element.children("div").animate({
                     "left": -100 * currentIndex + "%"
-                }, 1000);
+                }, 1000, function () {
+                    if (currentIndex == 0) {
+                        element.children(".arrow").children(".left").hide();
+                    } else {
+                        element.children(".arrow").children(".left").show();
+                    }
+                    if (currentIndex == n - 1) {
+                        element.children(".arrow").children(".right").hide();
+                    } else {
+                        element.children(".arrow").children(".right").show();
+                    }
+                });
                 element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass(activeClass);
                 element.children(".pagination").children("div[index=" + currentIndex + "]").addClass(activeClass);
                 element.data("currentIndex", currentIndex);
@@ -224,7 +257,7 @@
             });
         }
 
-        if(settings.callback){
+        if (settings.callback) {
             settings.callback();
         }
 

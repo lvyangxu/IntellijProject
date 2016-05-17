@@ -56,13 +56,14 @@
         });
         return $(this);
     };
-    $.fn.fullFit = function (delH, callback) {
-        let [x,y] = [$(this).width(), $(this).height()]
+    $.fn.fullFit = function (delH, callback,noLeft) {
+
         let element = $(this);
         $(this).fit(()=> {
+            let [x,y] = [$(this).width(), $(this).height()]
             let [w,h] = [$(window).width(), $(window).outerHeight(true)];
             element.parent().css({
-                "height": h - delH + "px"
+                "height": h - delH + "px",
             }, 2000);
 
             let offsetX, offsetY, scale;
@@ -80,11 +81,18 @@
                 offsetY = (h - shouldH) / 8;
             }
 
-            element.css({
-                // "margin-left": offsetX + "px",
+            let style = {
                 "margin-top": offsetY + "px",
                 "width": (scale) * 100 + "%"
-            }, 2000);
+            }
+            if(!noLeft){
+                style = $.extend(style,{
+                    "margin-left": offsetX + "px",
+                });
+            }
+
+            element.css(style,200);
+
 
             if (callback != undefined) {
                 callback();

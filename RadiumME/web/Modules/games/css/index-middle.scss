@@ -1,0 +1,19 @@
+.body {
+    width: auto;
+    .content{
+        .section{
+            .left,.right{
+                .text{
+                    margin-top:40px;
+                    .logo{
+                        margin-bottom: 0px;
+                    }
+                    .paragraph{
+                        margin-bottom: 30px;
+                    }
+                }
+            }
+        }
+    }
+}
+

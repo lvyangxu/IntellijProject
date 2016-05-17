@@ -10,6 +10,13 @@
   .navbar .container {
     max-width: 1330px;
     margin: auto; }
+    .navbar .container .search-panel {
+      display: none;
+      position: absolute;
+      height: 80px;
+      width: 1330px;
+      top: 70px;
+      background-color: rgba(0, 0, 0, 0.7); }
     .navbar .container .icon a img {
       float: left;
       height: 40px;
@@ -86,8 +93,6 @@
     font-weight: lighter;
     font-size: 20px;
     font-family: "Microsoft YaHei UI";
-    margin-left: 500px;
-    margin-right: 500px;
     word-spacing: 2px; }
   .single .text button {
     font-size: 22px;
@@ -103,7 +108,6 @@
     padding-right: 20px; }
 
 .body {
-  width: 1330px;
   margin: auto;
   font-family: NIRMALA; }
 

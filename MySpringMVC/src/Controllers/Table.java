@@ -31,7 +31,7 @@ public class Table {
                     MyMvcObject1.authenticate().updateMap(name).redirectMap(name).update(name).success();
                     break;
                 case "Read":
-                    MyMvcObject1.authenticate().readMap(name).redirectMap(name).read(name).success();
+                    MyMvcObject1.readMap(name).redirectMap(name).read(name).success();
                     break;
                 case "Delete":
                     MyMvcObject1.authenticate().deleteMap(name).redirectMap(name).delete(name).success();

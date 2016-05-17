@@ -58,12 +58,13 @@
         });
         return $(this);
     };
-    $.fn.fullFit = function (delH, callback) {
-        var x = $(this).width();
-        var y = $(this).height();
+    $.fn.fullFit = function (delH, callback, noLeft) {
+        var _this = this;
 
         var element = $(this);
         $(this).fit(function () {
+            var x = $(_this).width();
+            var y = $(_this).height();
             var w = $(window).width();
             var h = $(window).outerHeight(true);
 
@@ -88,11 +89,17 @@
                 offsetY = (h - shouldH) / 8;
             }
 
-            element.css({
-                // "margin-left": offsetX + "px",
+            var style = {
                 "margin-top": offsetY + "px",
                 "width": scale * 100 + "%"
-            }, 2000);
+            };
+            if (!noLeft) {
+                style = $.extend(style, {
+                    "margin-left": offsetX + "px"
+                });
+            }
+
+            element.css(style, 200);
 
             if (callback != undefined) {
                 callback();
