@@ -26,7 +26,10 @@
             "arrow": false,
             "fit": false,
             "scale": 1,
-            "outerDots": false
+            "outerDots": false,
+            "dotsActiveColor":"rgba(255,255,255,1)",
+            "dotsHoverColor":"rgba(255,255,255,0.6)",
+            "dotsColor":"rgba(255,255,255,0.28)"
         });
 
         element.addonInit("carousel", function () {
@@ -34,16 +37,18 @@
             let html = element.prop("innerHTML");
             element.html("<div>" + html + "</div>");
 
-            let activeClass = (settings.outerDots) ? "outer-active" : "active";
-
             // build pagination html
             if (settings.dots) {
                 element.append(function () {
                     let innerHtml = "<span class='pagination'>";
                     let i = 0;
                     element.children("div").children("div").each(function (index) {
-                        let active = (index == 0) ? "class='" + activeClass + "'" : "";
-                        innerHtml += "<div index='" + i + "' " + active + "></div>";
+                        if(i==0){
+                            innerHtml += "<div index='" + i + "' style='background-color: "+settings.dotsActiveColor+"' class='active'></div>";
+                        }else{
+                            innerHtml += "<div index='" + i + "' style='background-color: "+settings.dotsColor+"'></div>";
+                        }
+
                         i++;
                     });
                     innerHtml += "</span>";
@@ -98,10 +103,18 @@
                     "left": -100 * currentIndex + "%"
                 }, 1000);
 
-
-                element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass(activeClass);
-                element.children(".pagination").children("div[index=" + currentIndex + "]").addClass(activeClass);
+                let lastDots = element.children(".pagination").children("div[index=" + lastIndex + "]");
+                let currentDots = element.children(".pagination").children("div[index=" + currentIndex + "]");
+                lastDots.css({
+                    "background-color": settings.dotsColor
+                });
+                lastDots.removeClass("active");
+                currentDots.css({
+                    "background-color": settings.dotsActiveColor
+                });
+                currentDots.addClass("active");
                 element.data("currentIndex", currentIndex);
+
             });
 
             //arrow opacity
@@ -133,8 +146,14 @@
                             }
                         });
                         element.data("currentIndex", currentIndex);
-                        element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass(activeClass);
-                        element.children(".pagination").children("div[index=" + currentIndex + "]").addClass(activeClass);
+                        element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass("active");
+                        element.children(".pagination").children("div[index=" + lastIndex + "]").css({
+                            "background-color":settings.dotsColor
+                        });
+                        element.children(".pagination").children("div[index=" + currentIndex + "]").addClass("active");
+                        element.children(".pagination").children("div[index=" + currentIndex + "]").css({
+                            "background-color":settings.dotsActiveColor
+                        });
                     }
                 }
                 if (moveX < -30) {
@@ -155,8 +174,14 @@
                             }
                         });
                         element.data("currentIndex", currentIndex);
-                        element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass(activeClass);
-                        element.children(".pagination").children("div[index=" + currentIndex + "]").addClass(activeClass);
+                        element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass("active");
+                        element.children(".pagination").children("div[index=" + lastIndex + "]").css({
+                            "background-color":settings.dotsColor
+                        });
+                        element.children(".pagination").children("div[index=" + currentIndex + "]").addClass("active");
+                        element.children(".pagination").children("div[index=" + currentIndex + "]").css({
+                            "background-color":settings.dotsActiveColor
+                        });
                     }
                 }
             }
@@ -191,8 +216,14 @@
                         element.children(".arrow").children(".right").show();
                     }
                 });
-                element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass(activeClass);
-                element.children(".pagination").children("div[index=" + currentIndex + "]").addClass(activeClass);
+                element.children(".pagination").children("div[index=" + lastIndex + "]").removeClass("active");
+                element.children(".pagination").children("div[index=" + lastIndex + "]").css({
+                    "background-color":settings.dotsColor
+                });
+                element.children(".pagination").children("div[index=" + currentIndex + "]").addClass("active");
+                element.children(".pagination").children("div[index=" + currentIndex + "]").css({
+                    "background-color":settings.dotsActiveColor
+                });
                 element.data("currentIndex", currentIndex);
             });
 
@@ -250,10 +281,17 @@
                 "line-height": "80px"
             });
             element.children(".pagination").children("div").addClass("outer");
+            element.children(".pagination").children("div").css({
+                "background-color": settings.outerDotsColor
+            });
             element.children(".pagination").children("div").hover(function () {
-                $(this).addClass("outer-hover");
+                $(this).css({
+                    "background-color": settings.dotsHoverColor
+                });
             }, function () {
-                $(this).removeClass("outer-hover");
+                $(this).css({
+                    "background-color":$(this).hasClass("active")?settings.dotsActiveColor:settings.dotsColor
+                });
             });
         }
 

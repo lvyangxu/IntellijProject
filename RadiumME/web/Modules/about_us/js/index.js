@@ -3,12 +3,15 @@
 {
     (function () {
         $(".carousel").carousel({
-            "outerDots": true
+            "outerDots": true,
+            dotsActiveColor: "rgba(0,0,0,1)",
+            dotsHoverColor: "rgba(0,0,0,0.6)",
+            dotsColor: "rgba(0,0,0,0.28)"
         });
 
         //load text
-        var selectors = [".top button", ".body>.content>.title", ".body>.content>.p", ".carousel-text1", ".carousel-text2", ".carousel-text3"];
-        var names = ["top-button", "body-title", "body-paragraph", "carousel-paragraph-1", "carousel-paragraph-2", "carousel-paragraph-3"];
+        var selectors = [".top button", ".body>.content>.title", ".body>.content>p", ".carousel-text1 .text-title", ".carousel-text2 .text-title", ".carousel-text3 .text-title", ".carousel-text1 .text-content", ".carousel-text2 .text-content", ".carousel-text3 .text-content"];
+        var names = ["top-button", "body-title", "body-paragraph", "carousel-title-1", "carousel-title-2", "carousel-title-3", "carousel-paragraph-1", "carousel-paragraph-2", "carousel-paragraph-3"];
         var page = "about-us";
         loadText(page, selectors, names);
         switchLanguage(function () {

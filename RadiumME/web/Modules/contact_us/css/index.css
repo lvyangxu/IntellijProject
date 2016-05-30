@@ -1,56 +1,111 @@
-.body .title {
-  margin-left: 50px;
-  text-align: left;
-  font-size: 26px;
-  font-weight: bolder;
-  font-family: NIRMALA;
-  padding-top: 62px;
-  margin-bottom: 25px; }
-.body .games-div {
-  background-color: #F4F4F4;
-  padding-bottom: 69px;
-  border-bottom: 1px solid #f9f9f9; }
-  .body .games-div .games {
-    position: relative;
-    display: inline-block;
-    margin-left: 10px;
+.top-static {
+  margin-top: 70px;
+  position: relative; }
+  .top-static .overlay {
+    position: absolute;
+    top: 80%;
+    width: 100%; }
+    .top-static .overlay .text {
+      margin: 0 auto; }
+  .top-static .top-static-img {
+    width: 100%; }
+
+.body .recruit {
+  font-family: "Microsoft YaHei UI";
+  padding-top: 30px; }
+  .body .recruit .recruit-title {
+    text-align: center;
+    font-weight: bolder;
+    color: #0063db;
+    font-size: 30px;
+    margin-bottom: 40px; }
+  .body .recruit .recruit-content {
+    margin-bottom: 30px;
+    line-height: 30px; }
+    .body .recruit .recruit-content .small {
+      margin-top: 20px;
+      margin-bottom: 20px; }
+  .body .recruit .recruit-table table {
+    width: 100%;
+    text-align: left;
+    background-color: #e8e8e8; }
+    .body .recruit .recruit-table table thead tr {
+      height: 40px; }
+      .body .recruit .recruit-table table thead tr th {
+        font-size: 16px; }
+    .body .recruit .recruit-table table tbody tr {
+      height: 40px;
+      cursor: pointer; }
+      .body .recruit .recruit-table table tbody tr td {
+        font-size: 15px; }
+      .body .recruit .recruit-table table tbody tr td[colspan='4'] {
+        cursor: auto;
+        display: none; }
+        .body .recruit .recruit-table table tbody tr td[colspan='4'] .big {
+          font-size: 15px;
+          line-height: 25px; }
+        .body .recruit .recruit-table table tbody tr td[colspan='4'] .small {
+          font-size: 14px;
+          padding-bottom: 30px;
+          line-height: 25px; }
+        .body .recruit .recruit-table table tbody tr td[colspan='4'] .submit {
+          padding-bottom: 30px;
+          text-align: left; }
+          .body .recruit .recruit-table table tbody tr td[colspan='4'] .submit button {
+            width: 170px;
+            height: 45px;
+            border: none;
+            outline: none;
+            background-color: #373737;
+            color: white; }
+  .body .recruit .resume-div {
+    padding-top: 20px;
+    display: none;
+    position: fixed;
+    border: 1px solid #1b1a18;
+    background-color: white;
+    height: 300px;
     width: 300px; }
-    .body .games-div .games .overlay-panel {
-      display: none;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 2; }
-      .body .games-div .games .overlay-panel img {
-        width: 20%;
-        margin-left: 40%;
-        margin-top: 10%; }
-      .body .games-div .games .overlay-panel .name {
-        font-size: 24px;
-        margin-top: 50%;
-        color: white;
-        width: 100%;
-        text-align: center; }
-    .body .games-div .games img {
-      width: 100%; }
-    .body .games-div .games .text {
-      font-size: 16px;
-      color: #666;
-      font-family: Arial;
+    .body .recruit .resume-div .left, .body .recruit .resume-div .right {
+      display: inline-block;
+      margin-bottom: 20px; }
+      .body .recruit .resume-div .left input, .body .recruit .resume-div .right input {
+        width: 170px;
+        height: 30px;
+        border: 1px solid red; }
+    .body .recruit .resume-div .left {
       line-height: 30px;
-      word-break: break-all;
-      font-weight: bolder; }
-  .body .games-div .first {
-    margin-left: 50px; }
-  .body .games-div .games:hover .overlay-panel {
-    display: block; }
+      width: 70px;
+      text-align: right; }
+    .body .recruit .resume-div .attachment input[type=file] {
+      display: none; }
+    .body .recruit .resume-div .attachment button {
+      border: none;
+      width: 170px;
+      height: 30px;
+      border: 1px solid red; }
+    .body .recruit .resume-div .send {
+      text-align: center; }
+      .body .recruit .resume-div .send button {
+        border: none;
+        background-color: #1b1a18;
+        color: white;
+        height: 30px; }
 .body .address {
   border-top: 1px solid #dbdbdb;
   background-color: #e8e8e8;
   padding-bottom: 20px;
   font-size: 0; }
+  .body .address .title {
+    margin-left: 50px;
+    text-align: left;
+    font-size: 26px;
+    font-weight: bolder;
+    font-family: NIRMALA;
+    padding-top: 62px;
+    margin-bottom: 25px; }
   .body .address .left, .body .address .right {
+    vertical-align: top;
     padding-top: 0px;
     width: 590px;
     display: inline-block; }

@@ -1062,7 +1062,7 @@
                         var _loop3 = function _loop3(_i6) {
                             trHtml += "<tr>";
                             trHtml += element.data("thArr").map(function (d) {
-                                var tdText = checkedArr[_i6].parent().parent().children("td[th-id=" + d.id + "]").text();
+                                var tdText = checkedArr[_i6].parent().parent().children("td[th-id=" + d.id + "]").html();
                                 var tdHtml = func.getRequestTdHtml(d, tdText);
                                 return tdHtml;
                             }).collect("join", "");
@@ -1077,7 +1077,7 @@
 
                         //set unity tr html
                         var unityHtml = "<tr>" + element.data("thArr").map(function (d) {
-                            var tdText = checkedArr[0].parent().parent().children("td[th-id=" + d.id + "]").text();
+                            var tdText = checkedArr[0].parent().parent().children("td[th-id=" + d.id + "]").html();
                             var tdHtml = func.getRequestTdHtml(d, tdText);
                             return tdHtml;
                         }).collect("join", "") + "</tr>";

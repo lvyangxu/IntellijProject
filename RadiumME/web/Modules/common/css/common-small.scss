@@ -1,5 +1,97 @@
 .navbar{
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 	.container{
+		.search-panel{
+			white-space: nowrap;
+			width: 90%;
+			padding-left: 5%;
+			padding-right: 5%;
+
+
+			padding-top: 0;
+			background-color: white;
+			.hot{
+				min-height: 200px;
+				white-space:normal;
+
+                .title{
+					padding-top:10px;
+					border-top:1px solid #DBDBDB;
+					border-bottom: 1px solid #ECECEC;
+					margin-bottom: 15px;
+				}
+
+
+				.li{
+					$li-height:12px;
+					display: inline-block;
+					width: 90%;
+
+					margin-top:0px;
+					.img{
+
+						display: inline-block;
+						height: $li-height;
+						img{
+							margin-right: 10px;
+							height: 100%;
+						}
+					}
+					.text{
+						display: inline-block;
+						.big{
+							display: inline-block;
+							font-size: 15px;
+							font-weight: bolder;
+							font-family: Arial;
+							color: #666;
+						}
+						.small{
+							margin-left: 10px;
+							display: inline-block;
+							font-size: 15px;
+							font-family: Arial;
+							color:#DBDBDB;
+						}
+					}
+
+
+
+				}
+			}
+			.search-panel-body{
+				overflow-y: visible;
+				padding-top: 0;
+				a{
+					margin: 15px 5%;
+					border-bottom:none;
+					.big{
+                        width: 100%;
+					}
+					.small{
+                        display: none;
+					}
+				}
+			}
+			.pagination{
+                width: auto;
+				position: absolute;
+				right: 5%;
+				.previous:hover,.next:hover{
+					color: black;
+				}
+				.previous{
+                    padding-left: 0;
+				}
+
+				.next{
+                    padding-right: 0;
+
+				}
+			}
+
+		}
 		.icon{
 			$icon-height:24px;
 			margin-left: 20px;
@@ -21,7 +113,6 @@
 				border-bottom-right-radius: 5px;
 				box-shadow: 2px 2px 5px;
 				width: 140%;
-				//overflow: hidden;
 				div{
 					width: 14.28%;
 					a{
@@ -36,14 +127,31 @@
 			}
 			.search{
 				position: absolute;
-				top:5px;
-				float: right;
-                right: 90px;
+				top:0px;
+				right: 80px;
 				input{
-					width: 100px;
+					display: none;
+					border: 1px solid #DBDBDB;
+					border-radius: 25px;
+					padding-left: 30px;
+					padding-right: 20px;
 				}
+				input:hover{
+					border: 1px solid #DBDBDB;
+				}
+
 				img{
-					margin-left:0px;
+					margin-top:5px;
+					height: 18px;
+					float: right;
+				}
+				button{
+                    border: none;
+					outline: none;
+					background: transparent;
+					font-size: 14px;
+					float: right;
+					color: #666;
 				}
 			}
 			.language{

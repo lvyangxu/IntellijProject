@@ -51,6 +51,7 @@ var cookie = function () {
         value: function set(cookieName, cookieValue, expiredays) {
             var exdate = new Date();
             cookieValue = new myString(cookieValue).base64Encode().value;
+
             exdate.setDate(exdate.getDate() + expiredays);
             var exdateStr = expiredays == null ? "" : ";expires=" + exdate.toGMTString();
             document.cookie = cookieName + "=" + escape(cookieValue) + exdateStr + ";path=/";

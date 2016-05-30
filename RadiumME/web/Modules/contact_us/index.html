@@ -28,19 +28,24 @@
 <body>
 <div class="navbar MMRTEXT">
     <div class="container">
+        <div class="search-panel"></div>
         <div class="icon">
-            <a href="../home/"><img src="../Modules/common/image/icon.png"></a>
+            <a><img src="../Modules/common/image/icon.png"></a>
         </div>
         <div class="content">
             <div class="menu">
-                <div><a href="../home/">HOME</a></div>
-                <div><a href="../about_us/">ABOUT US</a></div>
-                <div><a href="../games/">GAMES</a></div>
-                <div><a href="../developers/">DEVELOPERS</a></div>
-                <div><a href="../blog/">BLOG</a></div>
-                <div><a href="../contact_us/">CONTACT US</a></div>
+                <div><a class="menu1" page="home">HOME</a></div>
+                <div><a class="menu2" page="about_us">ABOUT US</a></div>
+                <div><a class="menu3" page="games">GAMES</a></div>
+                <div><a class="menu4" page="developers">DEVELOPERS</a></div>
+                <div><a class="menu5" page="blog">BLOG</a></div>
+                <div><a class="menu6" page="contact_us">CONTACT US</a></div>
             </div>
-            <div class="search"><input><img src="../Modules/common/image/search.png"></div>
+            <div class="search">
+                <input>
+                <button>CANCEL</button>
+                <img src="../Modules/common/image/search.png">
+            </div>
             <div class="language yahei">
                 <span class="en lang">ENG</span>
                 <span class="line"></span>
@@ -56,47 +61,275 @@
             <button>READ HOW IT ALL BEGAN</button>
         </div>
     </div>
-    <img class="top_img" src="../Modules/contact_us/image/top.png">
+    <img class="top-static-img" src="../Modules/contact_us/image/top.png">
 </div>
 
 <div class="body">
     <div class="content">
-        <div class="games-div">
-            <div class="title">FIND SUPPORT FOR</div>
-            <div class="games game1 first">
-                <div class="overlay-panel">
-                    <div class="name">gam1</div>
-                    <a href="https://www.facebook.com/heroesalpha/"><img
-                            src="../Modules/contact_us/image/arrow.png"></a>
+        <div class="recruit">
+            <div class="recruit-content">
+                <div class="small">
+                    Radium ME拥有业内最独特的公司文化、最和谐的工作氛围、最棒的工作伙伴。我们期待符合公司基因的人才加入Radium ME Family，我们将为员工提供最好的薪酬福利和工作条件：<br>
+                    1、尊重员工价值，提供高于行业平均水平的丰厚薪资及奖金、完善的薪酬成长体系、提供项目奖金和公司期权，从短期和长期收益双向激励优秀员工和公司一起成长。<br>
+                    2、各种奖金福利：月度&季度奖金、全勤奖、推荐奖、年终奖、五险一金、年度体检、季度优秀员工特别奖励、不定期公司报销团建、季度定期外出团建、年度出国年会、欧美出国奖励……<br>
+                    3、最Fancy的办公室条件，打造创意和激情的工作氛围：由美国建筑设计师亲自打造简约工业风舒适办公环境、配备SODA STREAM，现磨阿拉比卡美式咖啡，进口牛奶，各种进口零食、各种水果茶点……
                 </div>
-                <img src="../Modules/contact_us/image/game1.png">
             </div>
-            <div class="games game2">
-                <div class="overlay-panel">
-                    <div class="name">gam1</div>
-                    <a href="https://www.facebook.com/heroeswarlords.fr/?fref=ts"><img
-                            src="../Modules/contact_us/image/arrow.png"></a>
+            <div class="recruit-table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>招聘职位</th>
+                        <th>招聘人数</th>
+                        <th>工作地点</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>产品经理</td>
+                        <td>1</td>
+                        <td>成都</td>
+                        <td><i class="fa fa-chevron-down" aria-hidden="true"></i></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="big">职位描述：</div>
+                            <div class="big">工作职责：</div>
+                            <div class="small">
+                                1、 根据产品战略、市场研究和现有产品的情况，创造性、阶段性合理地为产品设计新方案，优化游戏；<br>
+                                2、 协调运营、社区和项目组内各部门成员合作， 跟进并推动项目优化的开发进展，以确保开发顺利进行；<br>
+                                3、 与市场组合作制定产品发布的策略，跟进产品发布过程，确保产品顺利发布;<br>
+                                4、 根据市场的反馈制定版本内容，监控和分析产品数据，挖掘用户需求，持续优化改进用户体验和付费点；<br>
+                                5、 研究竞争对手的产品迭代方式，发现竞争对手产品发展的步骤和方向，并优化自身游戏；<br>
+                                6、 与客服组合作，聆听并回复用户的声音，发现产品问题和筛选有价值的需求;<br>
+                                7、 制定产品运营计划及更新内容，持续改善产品。
+                            </div>
+                            <div class="big">任职要求：</div>
+                            <div class="small">
+                                1、 本科或以上学历,熟悉欧美国家智能手机游戏市场、对主流手机游戏有足够的了解；<br>
+                                2、 有2年以上的手机游戏运营经验，完整参与过1款以上游戏的运营工作；<br>
+                                3、 有面向海外发行运营项目经验，熟悉海外运营模式和用户习惯；<br>
+                                4、 沟通和表达能力强，善于把握细节和关键；<br>
+                                5、 有责任心、做事仔细，具备较强的逻辑思维能力和数据分析能力；<br>
+                                6、 有团队管理经验以及语言特长优势者优先。
+                            </div>
+                            <div class="submit">
+                                <button>投递简历</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>游戏运营专员</td>
+                        <td>1</td>
+                        <td>成都</td>
+                        <td><i class="fa fa-chevron-down" aria-hidden="true"></i></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="big">职位描述：</div>
+                            <div class="small">
+                                1、主要负责手机游戏的日常运营、数据分析，以及配合客服、海外社区团队做好用户维护等工作；<br>
+                                2、负责游戏活动方案编写、实施以及结果验收；<br>
+                                3、负责游戏日常维护与管理：实时监控运营数据，收集、整理客服问题， 及时反馈异常，确保游戏的正常运营；<br>
+                                4、 根据运营结果进行数据分析，制作各种报表，提交改善建议。<br>
+                                负责产品运营期以及市场状况的数据分析；<br>
+                                5、协调社区、客服、测试等各部门之间的日常接口及沟通工作。
+                            </div>
+                            <div class="big">任职要求:</div>
+                            <div class="small">
+                                1、本科以上学历，1年以上手游产品运营工作经验。有过海外项目经验者优先；<br>
+                                2、思维灵活，具备较强的数据分析和逻辑思维能力;<br>
+                                3、有一定数据敏感性，责任心强，能适应较大工作压力；<br>
+                                4、表达沟通能力较好，有团队协作精神；<br>
+                                5、有语言特长者优先。
+                            </div>
+                            <div class="submit">
+                                <button>投递简历</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>游戏运营主管</td>
+                        <td>1</td>
+                        <td>成都</td>
+                        <td><i class="fa fa-chevron-down" aria-hidden="true"></i></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="big">岗位职责：</div>
+                            <div class="small">
+                                1、主要负责公司代理的手游产品在欧美地区的发行运营工作;<br>
+                                2、全面负责游戏运营的规划，并执行实施：包括计划拟定、活动规划、数据分析、社区维护、版本发布规划和管理等，做到长线稳定运营、收益最大化;<br>
+                                3、参与产品的市场定位并配合市场制定产品宣传方案;<br>
+                                4、运营日常线上管理：密切监控产品数据，及时发现并协调各部门和CP处理游戏各类问题;<br>
+                                3、运营数据分析，并撰写数据报告。结合运营数据、各版本效果和用户反馈，持续优化产品;<br>
+                                4、协调研发、测试、市场、运维、客服等部门，通过密切的沟通确保各部门高效合作;<br>
+                                5、发行平台建设、数据分析模型优化等其他运营和产品相关的事务;
+                            </div>
+                            <div class="big">任职要求：</div>
+                            <div class="small">
+                                1、本科以上学历，3年以上相关工作经验，1年以上游戏运营主管相关经验。计算机相关专业、统计学、市场营销、金融、数学等工科专业方面优先；<br>
+                                2、有完整发行过成功项目经历。有海外项目经验，熟悉海外运营模式和用户习惯，以及语言特长优势者优先；<br>
+                                3、思维活跃有创造力，具备较强的数据分析和逻辑思维能力;<br>
+                                4、具备良好的团队协作、组织协调能力，以及较强的分析问题、应对解决问题能力；
+                            </div>
+                            <div class="submit">
+                                <button>投递简历</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>社区运营专员（海外）</td>
+                        <td>1</td>
+                        <td>成都</td>
+                        <td><i class="fa fa-chevron-down" aria-hidden="true"></i></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="big">工作职责：</div>
+                            <div class="small">
+                                1、及时通过各社交平台及聊天工具，和国外社区玩家保持高频沟通；<br>
+                                2、国外社区玩家关系维护及社区活动创意、执行（如论坛、FB、Twitter、YouTube等平台）；<br>
+                                3、负责各社交平台的社区内容发布、推送及奖励统计；<br>
+                                4、通过私信、评论、邮件和其他聊天工具，收集社区用户的意见及建议，总结并提出建设性意见；<br>
+                                5、对各类新型社区形态保持关注，如reddit、Ins等，并尝试探索总结；<br>
+                                6、探索和规划社区整体发展。
+                            </div>
+                            <div class="big">任职要求：</div>
+                            <div class="small">
+                                1、英语和法语，至少掌握其中一种语言；<br>
+                                2、喜欢和用户交流，了解用户心理和习惯，喜欢创新；<br>
+                                3、有较强的文档撰写和语言表达能力，熟悉网络社区语言（诙谐、幽默）；<br>
+                                4、有游戏论坛版主经验优先；<br>
+                                5、熟悉网络社区论坛的运营及推广模式；<br>
+                                6、沟通能力佳，具备较强的玩家维护意识，善于提炼玩家问题关键点；<br>
+                                7、具备极强的执行力及团队合作能力；<br>
+                                8、认真、努力、踏实，工作细致，责任心强，不要玻璃心，抗压能力强；<br>
+                                9、熟练使用办公软件以及其他互联网编辑常用工具；<br>
+                                10、有个性，符合游戏行业抗压的同时也要保持High起的风格。
+                            </div>
+                            <div class="submit">
+                                <button>投递简历</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>游戏广告设计</td>
+                        <td>1</td>
+                        <td>成都</td>
+                        <td><i class="fa fa-chevron-down" aria-hidden="true"></i></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="big">工作职责：</div>
+                            <div class="small">
+                                1、负责设计和制作游戏宣传，包括插屏、Banner、GIF及视频广告；<br>
+                                2、分析竞品广告，优化广告转化率；<br>
+                                3、与广告投放人员沟通配合，优化广告成本。
+                            </div>
+                            <div class="big">任职要求：</div>
+                            <div class="small">
+                                1、美术类相关专业毕业，热衷游戏行业,良好的绘画技巧，对结构、造型、线条、色彩、空间、气氛等把握能力强；<br>
+                                2、1年以上游戏／广告设计工作经验，优秀应届生亦可；<br>
+                                3、具备一定的设计理念和创意思维；<br>
+                                4、练操作PS、Flash等设计软件；<br>
+                                5、工作认真细致，有较强的学习能力和责任心强，良好的沟通能力和团队合作精神。
+                            </div>
+                            <div class="submit">
+                                <button>投递简历</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>英语本地化专员</td>
+                        <td>1</td>
+                        <td>成都</td>
+                        <td><i class="fa fa-chevron-down" aria-hidden="true"></i></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="big">工作职责：</div>
+                            <div class="small">
+                                1、负责游戏产品翻译的统筹、本地化工作和对外沟通；<br>
+                                2、完成所交办的翻译任务，对游戏版本及周边的各类文本进行翻译、校对和编辑；<br>
+                                3、核对平台风格，润色英语翻译文字，使其适合英语的阅读体验，适应英语地区文化；<br>
+                                4、向相关部门提供游戏后续内容的更新意见及修改意见；<br>
+                                5、负责客服邮件质量审核；<br>
+                                6、负责整理、分析各种数据信息，并进行数据存档，完成团队的周、月、季、年等工作报表。
+                            </div>
+                            <div class="big">任职要求：</div>
+                            <div class="small">
+                                1、对应语言专业本科以上学历，专业四级以上，专业八级优先，或等同语言能力，有留学海归经验者优先，多语种能力者优先；<br>
+                                2、对英语地区文化和互联网环境有非常深入的了解，有欧美游戏业工作经验者或本地化翻译经验者优先；<br>
+                                3、具备优秀的中外互译能力、优秀的外文写作能力、流畅的外文听说能力；<br>
+                                4、热爱游戏行业和本职工作，学习能力强，责任心强，具备团队协作意识；<br>
+                                5、对游戏相关UI有一定认识与见解。
+                            </div>
+                            <div class="submit">
+                                <button>投递简历</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>会计</td>
+                        <td>1</td>
+                        <td>成都</td>
+                        <td><i class="fa fa-chevron-down" aria-hidden="true"></i></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="big">工作职责：</div>
+                            <div class="small">
+                                1、处理公司相关账务，协助出具财务报表<br>
+                                2、进行公司各项纳税申报与减免税备案工作<br>
+                                3、配合完成各项内部外部审计工作<br>
+                                4、协助进行预算管理和财务分析，提供数据支持<br>
+                                5、配合公司完成各项资质申请和政府补助的财务资料提供<br>
+                                6、负责公司财务凭证账册装订和相关财务税务文档保管<br>
+                                7、上级安排的其他工作
+                            </div>
+                            <div class="big">任职要求：</div>
+                            <div class="small">
+                                1、1-3年账务处理经验，持有会计从业资格证<br>
+                                2、熟悉游戏行业税收政策，有纳税申报和减免税备案实际工作经验，游戏行业优先 3、熟悉海外结算业务处理及相关外汇及涉外税收工作经验<br>
+                                4、初级会计师及以上资格，有参与上市审计工作经验优先<br>
+                                5、英语四级及以上
+                            </div>
+                            <div class="submit">
+                                <button>投递简历</button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="resume-div">
+                <div class="to">
+                    <div class="left">收件人:</div>
+                    <div class="right">echo.wen@radiumme.com</div>
                 </div>
-                <img src="../Modules/contact_us/image/game2.png">
-            </div>
-            <div class="games game3">
-                <div class="overlay-panel">
-                    <div class="name">gam1</div>
-                    <a href="https://vk.com/heroesxdarkness"><img src="../Modules/contact_us/image/arrow.png"></a>
+                <div class="name">
+                    <div class="left">姓名:</div>
+                    <div class="right"><input placeholder="请输入你的姓名"></div>
                 </div>
-                <img src="../Modules/contact_us/image/game3.png">
-            </div>
-            <div class="games game4">
-                <div class="overlay-panel">
-                    <div class="name">gam1</div>
-                    <a href="https://business.facebook.com/heroesXmortals/?business_id=324752557734755"><img
-                            src="../Modules/contact_us/image/arrow.png"></a>
+                <div class="phone">
+                    <div class="left">电话:</div>
+                    <div class="right"><input placeholder="请输入你的电话"></div>
                 </div>
-                <img src="../Modules/contact_us/image/game4.png">
+                <div class="attachment">
+                    <div class="left">附件:</div>
+                    <div class="right"><input type="file"><button>点此添加你的简历</button></div>
+                </div>
+                <div class="send">
+                    <button>投递你的简历</button>
+                </div>
+
             </div>
+
         </div>
         <div class="address">
-            <div class="title">FIND SUPPORT FOR</div>
+            <div class="title"></div>
             <div class="left">
                 <img src="../Modules/contact_us/image/address1.png">
                 <div class="button">RADIUM GAMES</div>

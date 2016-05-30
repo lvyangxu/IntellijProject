@@ -2,6 +2,7 @@
   height: 70px;
   position: fixed;
   z-index: 50;
+  top: 0;
   width: 100%;
   background-color: white;
   color: #313132;
@@ -13,15 +14,91 @@
     .navbar .container .search-panel {
       display: none;
       position: absolute;
-      height: 80px;
+      height: 700px;
       width: 1330px;
       top: 70px;
-      background-color: rgba(0, 0, 0, 0.7); }
-    .navbar .container .icon a img {
-      float: left;
-      height: 40px;
-      margin-top: 15px;
-      margin-bottom: 15px; }
+      padding-top: 10px;
+      background-color: #161616; }
+      .navbar .container .search-panel .fa-times {
+        color: #666;
+        float: right;
+        font-size: 20px;
+        padding-right: 30px;
+        cursor: pointer; }
+      .navbar .container .search-panel .fa-times:hover {
+        color: white; }
+      .navbar .container .search-panel .search-head {
+        padding-top: 40px;
+        color: #666; }
+        .navbar .container .search-panel .search-head .brand {
+          float: left;
+          padding-left: 100px; }
+        .navbar .container .search-panel .search-head .paginationStr {
+          margin-left: 60px;
+          float: right;
+          padding-right: 100px; }
+        .navbar .container .search-panel .search-head i {
+          float: right;
+          margin-right: 20px;
+          font-weight: bolder;
+          cursor: pointer; }
+      .navbar .container .search-panel .search-panel-body {
+        padding-top: 40px; }
+        .navbar .container .search-panel .search-panel-body a {
+          margin: 10px 100px;
+          color: #666;
+          height: 40px;
+          padding-top: 10px;
+          text-decoration: none;
+          display: block;
+          border-bottom: 1px solid #2d2d2d; }
+          .navbar .container .search-panel .search-panel-body a .big {
+            font-size: 16px;
+            font-weight: bolder;
+            width: 20%;
+            float: left;
+            text-align: justify;
+            display: inline-block;
+            color: #999; }
+          .navbar .container .search-panel .search-panel-body a .small {
+            font-size: 16px;
+            text-align: justify;
+            display: inline-block;
+            width: 80%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis; }
+        .navbar .container .search-panel .search-panel-body a:hover {
+          color: white; }
+      .navbar .container .search-panel .pagination {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        font-weight: bolder;
+        color: #666; }
+        .navbar .container .search-panel .pagination .previous, .navbar .container .search-panel .pagination .next {
+          cursor: pointer;
+          text-align: center;
+          display: inline-block;
+          border: none;
+          background-color: transparent;
+          color: #666;
+          outline: none; }
+        .navbar .container .search-panel .pagination .previous:hover, .navbar .container .search-panel .pagination .next:hover {
+          color: white; }
+        .navbar .container .search-panel .pagination .previous {
+          float: left;
+          padding-left: 100px; }
+        .navbar .container .search-panel .pagination .next {
+          float: right;
+          padding-right: 100px; }
+    .navbar .container .icon a {
+      cursor: pointer; }
+      .navbar .container .icon a img {
+        float: left;
+        height: 40px;
+        margin-top: 15px;
+        margin-bottom: 15px; }
     .navbar .container .content {
       float: right; }
       .navbar .container .content .menu {
@@ -29,6 +106,7 @@
         .navbar .container .content .menu div {
           float: left; }
           .navbar .container .content .menu div a {
+            cursor: pointer;
             font-size: 18px;
             margin-right: 30px;
             text-decoration: none;
@@ -39,12 +117,12 @@
             line-height: 75px;
             display: block; }
       .navbar .container .content .search {
-        float: left; }
+        float: left;
+        margin-top: 20px; }
         .navbar .container .content .search input {
           border: none;
           border-bottom: 2px solid #cdcdcd;
           height: 20px;
-          margin-top: 20px;
           outline: none; }
         .navbar .container .content .search input:hover {
           border: none;
@@ -54,6 +132,8 @@
           margin-left: 10px;
           vertical-align: middle;
           height: 21px; }
+        .navbar .container .content .search button {
+          display: none; }
       .navbar .container .content .language {
         float: left;
         margin-left: 20px; }
@@ -134,7 +214,7 @@ body .back-to-top {
     text-align: justify;
     font-family: Arial;
     line-height: 30px;
-    word-break: break-all; }
+    word-break: normal; }
 
 button {
   cursor: pointer; }
@@ -228,7 +308,7 @@ button {
   font-family: MMRTEXT; }
 
 .yahei {
-  font-family: "Microsoft YaHei UI"; }
+  font-family: "Microsoft YaHei UI" !important; }
 
 .Arial {
   font-family: Arial; }
@@ -238,5 +318,11 @@ button {
   src: url("../font/ARIALN.TTF"); }
 .ARIALN {
   font-family: ARIALN; }
+
+.font-weight-normal {
+  font-weight: normal !important; }
+
+.section-title-bottom {
+  margin-bottom: 15px !important; }
 
 /*# sourceMappingURL=common.css.map */

@@ -20,13 +20,24 @@
             float: left;
             color: white;
             font-family: Arial;
-            text-align: justify;
-            word-break:break-all;
+            //text-align: justify;
+            word-break: normal;
             position: relative;
             height: 488px;
-            p{
+            .carousel-text1,.carousel-text2,.carousel-text3 {
                 position: absolute;
                 bottom: 0px;
+                font-family: Arial;
+                line-height: 20px;
+                word-break: normal;
+                .text-title{
+                   font-size: 16px;
+                    margin-bottom: 15px;
+                }
+
+                .text-content{
+                    margin-bottom: 20px;
+                }
             }
         }
         .big {
@@ -37,11 +48,11 @@
                 width: 100%;
             }
         }
-        .right-big{
+        .right-big {
             float: right;
         }
     }
-    .carousel>div>div{
+    .carousel > div > div {
         background-color: #313132;
     }
 
@@ -51,7 +62,7 @@
             width: 25%;
             display: inline-block;
         }
-        .b{
+        .b {
             width: 25%;
             display: inline-block;
         }

@@ -18,16 +18,19 @@
 .about-us button {
   border-radius: 5px;
   border: 2px solid #373737;
-  background-color: #373737;
-  color: white;
   height: 40px;
   width: 200px;
   margin-top: 25px;
   margin-bottom: 80px;
-  font-size: 20px; }
+  font-size: 20px;
+  background-color: #373737; }
+  .about-us button a {
+    text-decoration: none;
+    color: white; }
 .about-us button:hover {
-  background-color: transparent;
-  color: #373737; }
+  background-color: transparent; }
+  .about-us button:hover a {
+    color: #373737; }
 
 .our-games {
   background-color: #313132;
@@ -41,15 +44,18 @@
     border-radius: 5px;
     border: 2px solid white;
     background-color: white;
-    color: #313132;
     height: 40px;
     width: 200px;
-    margin-top: 40px;
+    margin-top: 28px;
     margin-bottom: 80px;
     font-size: 20px; }
+    .our-games button a {
+      text-decoration: none;
+      color: #313132; }
   .our-games button:hover {
-    background-color: transparent;
-    color: white; }
+    background-color: transparent; }
+    .our-games button:hover a {
+      color: white; }
 
 .developers img {
   height: 60px;

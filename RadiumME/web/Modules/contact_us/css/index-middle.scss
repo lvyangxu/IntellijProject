@@ -1,11 +1,5 @@
 .body{
-    .games-div{
-        font-size: 0;
-        .games{
-            width: 22.5%;
-            margin-left: 2%;
-        }
-    }
+
 
     .address{
         font-size: 0;
@@ -17,5 +11,10 @@
             padding-left: 2%;
             padding-right: 0;
         }
+    }
+
+    .recruit {
+        width: 70%;
+        margin-left:15%;
     }
 }

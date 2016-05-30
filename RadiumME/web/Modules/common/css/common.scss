@@ -3,6 +3,7 @@
     height: 70px;
     position: fixed;
     z-index: 50;
+    top:0;
     width: 100%;
     background-color: white;
     color: #313132;
@@ -12,15 +13,119 @@
         max-width: 1330px;
         margin: auto;
         .search-panel{
+            $padding-width:100px;
             display: none;
             position: absolute;
-            height: 80px;
+            height: 700px;
             width: 1330px;
             top:70px;
-            background-color: rgba(0,0,0,0.7);
+            padding-top:10px;
+            background-color: #161616;
+            .fa-times{
+                color: #666;
+                float: right;
+                font-size: 20px;
+                padding-right: 30px;
+                cursor: pointer;
+            }
+            .fa-times:hover{
+                color: white;
+            }
+
+            .search-head{
+                padding-top: 40px;
+                color: #666;
+                .brand{
+                    float: left;
+                    padding-left: $padding-width;
+                }
+
+                .paginationStr{
+                    margin-left: 60px;
+                    float: right;
+                    padding-right: $padding-width;
+                }
+
+                i{
+                    float: right;
+                    margin-right: 20px;
+                    font-weight: bolder;
+                    cursor: pointer;
+                }
+            }
+
+
+            .search-panel-body{
+                padding-top: 40px;
+                a{
+                    margin: 10px $padding-width;
+                    color: #666;
+                    height: 40px;
+                    padding-top: 10px;
+                    text-decoration: none;
+                    display: block;
+                    border-bottom: 1px solid #2d2d2d;
+                    .big{
+                        font-size: 16px;
+                        font-weight: bolder;
+                        width: 20%;
+                        float:left;
+                        text-align: justify;
+                        display: inline-block;
+                        color: #999;
+                    }
+
+                    .small{
+                        font-size: 16px;
+                        text-align: justify;
+                        display: inline-block;
+                        width: 80%;
+                        white-space:nowrap;
+                        overflow:hidden;
+                        text-overflow:ellipsis;
+                    }
+
+                }
+                a:hover{
+                    color: white;
+                }
+            }
+
+            .pagination{
+                position: absolute;
+                bottom: 20px;
+                width: 100%;
+                font-weight: bolder;
+
+                color: #666;
+
+                .previous,.next{
+                    cursor: pointer;
+                    text-align: center;
+                    display: inline-block;
+                    border: none;
+                    background-color: transparent;
+                    color: #666;
+                    outline: none;
+                }
+
+                .previous:hover,.next:hover{
+                    color: white;
+                }
+
+                .previous{
+                    float: left;
+                    padding-left: $padding-width;
+                }
+                .next{
+                    float: right;
+                    padding-right: $padding-width;
+                }
+            }
         }
         .icon {
             a {
+                cursor: pointer;
                 img {
                     float: left;
                     height: 40px;
@@ -36,6 +141,7 @@
                 div {
                     float: left;
                     a {
+                        cursor: pointer;
                         font-size: 18px;
                         margin-right: 30px;
                         text-decoration: none;
@@ -50,12 +156,11 @@
             }
             .search {
                 float: left;
-
+                margin-top:20px;
                 input {
                     border: none;
                     border-bottom: 2px solid #cdcdcd;
                     height: 20px;
-                    margin-top:20px;
                     outline: none;
                 }
                 input:hover {
@@ -67,6 +172,9 @@
                     margin-left: 10px;
                     vertical-align: middle;
                     height: 21px;
+                }
+                button{
+                    display: none;
                 }
             }
             .language {
@@ -172,7 +280,7 @@ body {
         text-align: justify;
         font-family: Arial;
         line-height: 30px;
-        word-break: break-all;
+        word-break: normal;
     }
 }
 
@@ -296,7 +404,7 @@ $input-height: 33px;
 }
 
 .yahei {
-    font-family: "Microsoft YaHei UI";
+    font-family: "Microsoft YaHei UI" !important;
 }
 
 .Arial {
@@ -310,4 +418,12 @@ $input-height: 33px;
 
 .ARIALN {
     font-family: ARIALN;
+}
+
+.font-weight-normal{
+    font-weight: normal !important;
+}
+
+.section-title-bottom{
+    margin-bottom:15px !important;
 }

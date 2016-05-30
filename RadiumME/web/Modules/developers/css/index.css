@@ -8,6 +8,7 @@
     margin-top: 62px;
     margin-bottom: 25px; }
   .body .content .section {
+    vertical-align: top;
     display: inline-block;
     width: 33.33%; }
     .body .content .section .container {

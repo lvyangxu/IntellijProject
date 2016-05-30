@@ -1,78 +1,163 @@
+.top-static{
+    margin-top:70px;
+    position: relative;
+    .overlay{
+
+        position: absolute;
+        top:80%;
+        width: 100%;
+        .text{
+            margin: 0 auto;
+
+        }
+    }
+    .top-static-img{
+        width: 100%;
+    }
+
+}
 
 .body {
     $game-img-space: 10px;
     $address-img-space: 50px;
     $img-margin: 50px;
-    $game-title-top:62px;
-    $game-title-bottom:25px;
-    .title {
-        margin-left: $img-margin;
-        text-align: left;
-        font-size: 26px;
-        font-weight: bolder;
-        font-family: NIRMALA;
-        padding-top: $game-title-top;
-        margin-bottom: $game-title-bottom;
-    }
-    .games-div {
+    $game-title-top: 62px;
+    $game-title-bottom: 25px;
 
-        background-color: #F4F4F4;
-        padding-bottom: $game-title-top+7;
-        border-bottom: 1px solid #f9f9f9;
-
-        .games {
-            position: relative;
-            display: inline-block;
-            margin-left: $game-img-space;
-            width: (1330-$game-img-space*3-$img-margin*2)/4;
-            .overlay-panel {
-                display: none;
-                position: absolute;
+    .recruit {
+        font-family: "Microsoft YaHei UI";
+        padding-top: 30px;
+        .recruit-title {
+            text-align: center;
+            font-weight: bolder;
+            color: rgba(0, 99, 219, 1);
+            font-size: 30px;
+            margin-bottom: 40px;
+        }
+        .recruit-content {
+            margin-bottom: 30px;
+            line-height: 30px;
+            .small {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+        }
+        .recruit-table{
+            table{
                 width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.8);
-                z-index: 2;
-                img {
-                    width: 20%;
-                    margin-left: 40%;
-                    margin-top: 10%;
+                text-align: left;
+                background-color: rgba(232,232,232,1);
+                thead{
+                    tr{
+                        height: 40px;
+                        th{
+                            font-size: 16px;
+
+                        }
+                    }
                 }
-                .name {
-                    font-size: 24px;
-                    margin-top: 50%;
-                    color: white;
-                    width: 100%;
-                    text-align: center;
+                tbody{
+                    tr{
+                        height: 40px;
+                        cursor: pointer;
+                        td{
+                            font-size: 15px;
+                        }
+                        td[colspan='4']{
+                            cursor: auto;
+                            display: none;
+                            .big{
+                                font-size: 15px;
+                                line-height: 25px;
+                            }
+                            .small{
+                                font-size: 14px;
+                                padding-bottom: 30px;
+                                line-height: 25px;
+                            }
+                            .submit{
+                                padding-bottom: 30px;
+                                text-align: left;
+                                button{
+                                    width: 170px;
+                                    height: 45px;
+                                    border: none;
+                                    outline: none;
+                                    background-color: #373737;
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            img {
-                width: 100%;
+        }
+
+        .resume-div{
+            padding-top: 20px;
+            display: none;
+            position: fixed;
+            border: 1px solid rgba(27, 26, 24, 1);
+            background-color: white;
+            height: 300px;
+            width: 300px;
+
+            .left,.right{
+                display: inline-block;
+                margin-bottom: 20px;
+                input{
+                    width: 170px;
+                    height: 30px;
+                    border: 1px solid red;
+                }
             }
-            .text {
-                font-size: 16px;
-                color: #666;
-                font-family: Arial;
+            .left{
                 line-height: 30px;
-                word-break: break-all;
-                font-weight: bolder;
+                width: 70px;
+                text-align: right;
+
             }
-        }
-        .first {
-            margin-left: $img-margin;
-        }
-        .games:hover {
-            .overlay-panel {
-                display: block;
+
+            .attachment{
+                input[type=file]{
+                    display: none;
+                }
+                button{
+                    border: none;
+                    width: 170px;
+                    height: 30px;
+                    border: 1px solid red;
+                }
+            }
+
+            .send{
+                text-align: center;
+                button{
+                    border: none;
+                    background-color:rgba(27, 26, 24, 1);
+                    color: white;
+                    height: 30px;
+                }
             }
         }
     }
 
     .address {
+        .title {
+            margin-left: $img-margin;
+            text-align: left;
+            font-size: 26px;
+            font-weight: bolder;
+            font-family: NIRMALA;
+            padding-top: $game-title-top;
+            margin-bottom: $game-title-bottom;
+        }
         border-top: 1px solid #dbdbdb;
         background-color: #e8e8e8;
         padding-bottom: 20px;
         font-size: 0;
         .left, .right {
+            vertical-align: top;
             padding-top: 0px;
             width: (1330-$img-margin*2-$address-img-space)/2;
             display: inline-block;
@@ -88,7 +173,7 @@
                 height: 50px;
                 line-height: 50px;
             }
-            .text{
+            .text {
                 font-size: 14px;
             }
         }

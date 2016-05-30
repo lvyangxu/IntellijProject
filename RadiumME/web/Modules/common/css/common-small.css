@@ -1,47 +1,123 @@
-.navbar .container .icon {
-  margin-left: 20px; }
-  .navbar .container .icon a img {
-    height: 24px;
-    margin-top: 23px;
-    margin-bottom: 23px; }
-.navbar .container .content {
-  width: 100%; }
-  .navbar .container .content .menu {
-    height: 30px;
-    line-height: 30px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    box-shadow: 2px 2px 5px;
-    width: 140%; }
-    .navbar .container .content .menu div {
-      width: 14.28%; }
-      .navbar .container .content .menu div a {
-        width: 100%;
-        color: white;
-        height: 30px;
-        line-height: 30px;
-        font-size: 12px;
-        text-align: center; }
-  .navbar .container .content .search {
-    position: absolute;
-    top: 5px;
-    float: right;
-    right: 90px; }
-    .navbar .container .content .search input {
-      width: 100px; }
-    .navbar .container .content .search img {
-      margin-left: 0px; }
-  .navbar .container .content .language {
-    position: absolute;
-    top: 15px;
-    right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 0px;
-    text-align: right; }
-    .navbar .container .content .language .line {
-      margin-top: 2.5px; }
+.navbar {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
+  .navbar .container .search-panel {
+    white-space: nowrap;
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 0;
+    background-color: white; }
+    .navbar .container .search-panel .hot {
+      min-height: 200px;
+      white-space: normal; }
+      .navbar .container .search-panel .hot .title {
+        padding-top: 10px;
+        border-top: 1px solid #DBDBDB;
+        border-bottom: 1px solid #ECECEC;
+        margin-bottom: 15px; }
+      .navbar .container .search-panel .hot .li {
+        display: inline-block;
+        width: 90%;
+        margin-top: 0px; }
+        .navbar .container .search-panel .hot .li .img {
+          display: inline-block;
+          height: 12px; }
+          .navbar .container .search-panel .hot .li .img img {
+            margin-right: 10px;
+            height: 100%; }
+        .navbar .container .search-panel .hot .li .text {
+          display: inline-block; }
+          .navbar .container .search-panel .hot .li .text .big {
+            display: inline-block;
+            font-size: 15px;
+            font-weight: bolder;
+            font-family: Arial;
+            color: #666; }
+          .navbar .container .search-panel .hot .li .text .small {
+            margin-left: 10px;
+            display: inline-block;
+            font-size: 15px;
+            font-family: Arial;
+            color: #DBDBDB; }
+    .navbar .container .search-panel .search-panel-body {
+      overflow-y: visible;
+      padding-top: 0; }
+      .navbar .container .search-panel .search-panel-body a {
+        margin: 15px 5%;
+        border-bottom: none; }
+        .navbar .container .search-panel .search-panel-body a .big {
+          width: 100%; }
+        .navbar .container .search-panel .search-panel-body a .small {
+          display: none; }
+    .navbar .container .search-panel .pagination {
+      width: auto;
+      position: absolute;
+      right: 5%; }
+      .navbar .container .search-panel .pagination .previous:hover, .navbar .container .search-panel .pagination .next:hover {
+        color: black; }
+      .navbar .container .search-panel .pagination .previous {
+        padding-left: 0; }
+      .navbar .container .search-panel .pagination .next {
+        padding-right: 0; }
+  .navbar .container .icon {
+    margin-left: 20px; }
+    .navbar .container .icon a img {
+      height: 24px;
+      margin-top: 23px;
+      margin-bottom: 23px; }
+  .navbar .container .content {
+    width: 100%; }
+    .navbar .container .content .menu {
+      height: 30px;
+      line-height: 30px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      box-shadow: 2px 2px 5px;
+      width: 140%; }
+      .navbar .container .content .menu div {
+        width: 14.28%; }
+        .navbar .container .content .menu div a {
+          width: 100%;
+          color: white;
+          height: 30px;
+          line-height: 30px;
+          font-size: 12px;
+          text-align: center; }
+    .navbar .container .content .search {
+      position: absolute;
+      top: 0px;
+      right: 80px; }
+      .navbar .container .content .search input {
+        display: none;
+        border: 1px solid #DBDBDB;
+        border-radius: 25px;
+        padding-left: 30px;
+        padding-right: 20px; }
+      .navbar .container .content .search input:hover {
+        border: 1px solid #DBDBDB; }
+      .navbar .container .content .search img {
+        margin-top: 5px;
+        height: 18px;
+        float: right; }
+      .navbar .container .content .search button {
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 14px;
+        float: right;
+        color: #666; }
+    .navbar .container .content .language {
+      position: absolute;
+      top: 15px;
+      right: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      margin-left: 0px;
+      text-align: right; }
+      .navbar .container .content .language .line {
+        margin-top: 2.5px; }
 
 .footer {
   min-width: inherit; }

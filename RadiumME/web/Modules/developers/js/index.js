@@ -9,6 +9,11 @@
         loadText(page, selectors, names);
         switchLanguage(function () {
             loadText(page, selectors, names);
+            if (currentLang == "ch") {
+                $(".body .content .section .title").addClass("font-weight-normal");
+            } else {
+                $(".body .content .section .title").removeClass("font-weight-normal");
+            }
         });
     })();
 }

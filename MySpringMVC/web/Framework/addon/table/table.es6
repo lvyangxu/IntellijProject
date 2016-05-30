@@ -1045,7 +1045,7 @@
                         for (let i = 0; i < checkedArr.length; i++) {
                             trHtml += "<tr>";
                             trHtml += element.data("thArr").map((d)=> {
-                                let tdText = checkedArr[i].parent().parent().children("td[th-id=" + d.id + "]").text();
+                                let tdText = checkedArr[i].parent().parent().children("td[th-id=" + d.id + "]").html();
                                 let tdHtml = func.getRequestTdHtml(d, tdText);
                                 return tdHtml;
                             }).collect("join", "");
@@ -1057,7 +1057,7 @@
 
                         //set unity tr html
                         let unityHtml = "<tr>" + element.data("thArr").map((d)=> {
-                                let tdText = checkedArr[0].parent().parent().children("td[th-id=" + d.id + "]").text();
+                                let tdText = checkedArr[0].parent().parent().children("td[th-id=" + d.id + "]").html();
                                 let tdHtml = func.getRequestTdHtml(d, tdText);
                                 return tdHtml;
                             }).collect("join", "") + "</tr>";

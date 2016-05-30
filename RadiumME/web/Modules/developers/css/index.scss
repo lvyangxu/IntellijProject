@@ -11,6 +11,7 @@
         }
 
         .section {
+            vertical-align: top;
             display: inline-block;
             width: 33.33%;
             .container {
@@ -59,6 +60,7 @@
                 text-align: justify;
                 margin-right: 80px;
                 letter-spacing: -0.1px;
+                //min-height: 300px;
             }
         }
     }
