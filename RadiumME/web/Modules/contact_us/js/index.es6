@@ -16,12 +16,13 @@
     });
 
     //open resume form
-    $(".recruit-table .submit button").delegate("", "click", ()=> {
+    $(".recruit-table .submit button").delegate("", "click", function () {
         $(".resume-div").css({
-            "left":($(window).width()-300)/2,
-            "top":($(window).height()-300)/2
+            "left": ($(window).width() - 300) / 2,
+            "top": ($(window).height() - 300) / 2
         })
         $(".resume-div").show();
+        $(".resume-div .position .right").text($(this).parent().parent().parent().prev().children("td:first").text());
     });
 
     //select attachment
@@ -30,25 +31,111 @@
     });
 
     //listen attachment change
-    $(".resume-div .attachment input").delegate("", "change", function() {
+    $(".resume-div .attachment input").delegate("", "change", function () {
         let file = this.files[0];
-        if(file==undefined){
+        if (file == undefined) {
             $(".resume-div .attachment button").text("点此添加你的简历");
+            $(".resume-div .attachment button").css({
+                "border": "1px solid red"
+            });
             return;
         }
-        let displayName = (file.name.length>=15)?(file.name.substr(0,15)+"..."):file.name;
+        let displayName = (file.name.length >= 15) ? (file.name.substr(0, 15) + "...") : file.name;
         $(".resume-div .attachment button").text(displayName);
+        $(".resume-div .attachment button").css({
+            "border": "1px solid rgba(165,199,254,1)"
+        });
     });
 
-    $(".resume-div .name,.phone input").delegate("", "change", function() {
-        if($(this).val()==""){
+    //listen input change
+    $(".resume-div .name input,.resume-div .phone input").delegate("", "change", function () {
+        if ($(this).val() == "") {
             $(this).css({
-                "border":"1px solid red"
+                "border": "1px solid red"
             });
-        }else{
+        } else {
             $(this).css({
-                "border":"1px solid rgba(165,199,254,1)"
+                "border": "1px solid rgba(165,199,254,1)"
             });
         }
     });
+
+    $(".resume-div .close i").delegate("","click",function () {
+        $(".resume-div").hide();
+    });
+
+    //send resume
+    $(".resume-div .send button").delegate("", "click", function () {
+        let positionText = $(".resume-div .position .right");
+        let nameInput = $(".resume-div .name input");
+        let phoneInput = $(".resume-div .phone input");
+        let statusText = $(".resume-div .status .right");
+        let attachmentInput = $(".resume-div .attachment input");
+
+        //form check
+        if (nameInput.val() == "") {
+            nameInput.focus();
+            return;
+        }
+        if (phoneInput.val() == "") {
+            phoneInput.focus();
+            return;
+        }
+        if(attachmentInput[0].files[0]==undefined){
+            attachmentInput.focus();
+            return;
+        }
+        if(nameInput.val().length>10){
+            alert("名字太长了");
+            return;
+        }
+
+        let phoneRegex = new RegExp(/^\d{11}$/g);
+        if(!phoneRegex.test(phoneInput.val())){
+            phoneInput.focus();
+            alert("输入的手机号不正确");
+            return;
+        }
+
+        let requestData = "position=" + new myString(positionText.text()).base64UrlEncode().value;
+        requestData += "&name=" + new myString(nameInput.val()).base64UrlEncode().value;
+        requestData += "&phone=" + new myString(phoneInput.val()).base64UrlEncode().value;
+        let uploadFile = new FormData();
+        uploadFile.append(0,attachmentInput[0].files[0]);
+        let xhr = new XMLHttpRequest();
+
+        statusText.html("<div class='progress'><div class='percent'></div></div>");
+        xhr.upload.addEventListener("progress", function(evt){
+            if (evt.lengthComputable) {
+                let percentComplete = Math.round(evt.loaded * 100 / evt.total);
+                statusText.css({"width":percentComplete*190/100+"px"});
+                statusText.children(".progress").text(percentComplete+"%");
+            }
+        }, false);
+        xhr.addEventListener("load", function(evt){
+            let result = evt.target.responseText;
+            let jsonObject;
+            try{
+                jsonObject = new myString(result).toJson();
+            }catch(e){
+                console.log(e.message);
+                return;
+            }
+            if (jsonObject.success == "true") {
+                alert("投递成功");
+            } else {
+                alert("投递失败:"+jsonObject.message);
+            }
+        }, false);
+        xhr.addEventListener("error", function(){
+            alert("投递失败,请检查本地网络是否正常");
+        }, false);
+        xhr.addEventListener("abort", function(){
+            console.log("投递操作已被强行终止");
+        }, false);
+        xhr.open("POST", "../Resume/Send?"+requestData);
+        xhr.send(uploadFile);
+    });
+
+
 }

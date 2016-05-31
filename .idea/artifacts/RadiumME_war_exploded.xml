@@ -22,6 +22,7 @@
           <element id="library" level="application" name="mongodb" />
           <element id="library" level="application" name="log4j2" />
           <element id="library" level="application" name="tomcat-websocket" />
+          <element id="library" level="application" name="java-mail" />
         </element>
       </element>
     </root>

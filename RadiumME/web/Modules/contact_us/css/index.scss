@@ -45,27 +45,40 @@
         .recruit-table{
             table{
                 width: 100%;
-                text-align: left;
-                background-color: rgba(232,232,232,1);
+                border: 2px solid transparent;
+                border-collapse: collapse;
                 thead{
                     tr{
                         height: 40px;
                         th{
                             font-size: 16px;
-
+                            text-align: center;
+                        }
+                        th:first-child{
+                            text-align: left;
+                            padding-left: 20px;
                         }
                     }
                 }
                 tbody{
                     tr{
-                        height: 40px;
+
                         cursor: pointer;
                         td{
                             font-size: 15px;
+                            text-align: center;
+                            border-bottom: 1px solid #f2f2f3;
+                            border-collapse: collapse;
+                            height: 40px;
+                        }
+                        td:first-child{
+                            text-align: left;
+                            padding-left: 20px;
                         }
                         td[colspan='4']{
                             cursor: auto;
                             display: none;
+                            height: auto;
                             .big{
                                 font-size: 15px;
                                 line-height: 25px;
@@ -89,6 +102,12 @@
                             }
                         }
                     }
+                    tr:nth-child(4n+1),tr:nth-child(4n+2){
+                        background-color: rgba(232,232,232,1);
+                    }
+                    tr:nth-child(4n+3),tr:nth-child(4n+4){
+                        background-color: white;
+                    }
                 }
             }
         }
@@ -104,18 +123,23 @@
 
             .left,.right{
                 display: inline-block;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
                 input{
                     width: 170px;
                     height: 30px;
                     border: 1px solid red;
+                    outline: none;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+                input:focus{
+                    border-color: lightskyblue;
                 }
             }
             .left{
                 line-height: 30px;
                 width: 70px;
                 text-align: right;
-
             }
 
             .attachment{
@@ -124,19 +148,45 @@
                 }
                 button{
                     border: none;
-                    width: 170px;
+                    width: 192px;
                     height: 30px;
                     border: 1px solid red;
+                    outline: none;
                 }
             }
 
+            .status{
+
+                .right{
+                    background-color: #e8e8e8;
+                    width: 192px;
+                    text-align: center;
+                    height: 30px;
+                    line-height: 30px;
+                    .progress{
+                        background-color: #46b8da;
+                        height: 30px;
+                    }
+                }
+
+            }
+
             .send{
-                text-align: center;
+
                 button{
                     border: none;
-                    background-color:rgba(27, 26, 24, 1);
-                    color: white;
+                    background-color:#e8e8e8;
                     height: 30px;
+                    width: 192px;
+                }
+            }
+
+            .close{
+                position: absolute;
+                right: 1%;
+                top:0px;
+                i{
+                    cursor: pointer;
                 }
             }
         }

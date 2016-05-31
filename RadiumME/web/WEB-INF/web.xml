@@ -26,7 +26,7 @@
         <url-pattern>/Modules/*</url-pattern>
         <url-pattern>/Images/*</url-pattern>
         <url-pattern>/Framework/*</url-pattern>
-        <url-pattern>/Data/*</url-pattern>
+        <!--<url-pattern>/Data/*</url-pattern>-->
     </servlet-mapping>
 
     <session-config>
