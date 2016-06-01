@@ -32,13 +32,11 @@
             display: inline-block;
             font-size: 15px;
             font-weight: bolder;
-            font-family: Arial;
             color: #666; }
           .navbar .container .search-panel .hot .li .text .small {
             margin-left: 10px;
             display: inline-block;
             font-size: 15px;
-            font-family: Arial;
             color: #DBDBDB; }
     .navbar .container .search-panel .search-panel-body {
       overflow-y: visible;

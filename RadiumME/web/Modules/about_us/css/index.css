@@ -6,20 +6,21 @@
   margin-right: 1%;
   float: left;
   color: white;
-  font-family: Arial;
   word-break: normal;
   position: relative;
   height: 488px; }
   .body .carousel .small .carousel-text1, .body .carousel .small .carousel-text2, .body .carousel .small .carousel-text3 {
     position: absolute;
     bottom: 0px;
-    font-family: Arial;
     line-height: 20px;
     word-break: normal; }
     .body .carousel .small .carousel-text1 .text-title, .body .carousel .small .carousel-text2 .text-title, .body .carousel .small .carousel-text3 .text-title {
-      font-size: 16px;
+      font-family: Helvetica-Bold,Hiragino-W6;
+      font-size: 22px;
       margin-bottom: 15px; }
     .body .carousel .small .carousel-text1 .text-content, .body .carousel .small .carousel-text2 .text-content, .body .carousel .small .carousel-text3 .text-content {
+      font-family: Helvetica-Light,Hiragino-W3;
+      font-size: 16px;
       margin-bottom: 20px; }
 .body .carousel .big {
   font-size: 0;

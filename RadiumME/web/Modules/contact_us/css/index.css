@@ -11,14 +11,8 @@
     width: 100%; }
 
 .body .recruit {
-  font-family: "Microsoft YaHei UI";
+  font-family: Hiragino-W3;
   padding-top: 30px; }
-  .body .recruit .recruit-title {
-    text-align: center;
-    font-weight: bolder;
-    color: #0063db;
-    font-size: 30px;
-    margin-bottom: 40px; }
   .body .recruit .recruit-content {
     margin-bottom: 30px;
     line-height: 30px; }
@@ -33,7 +27,8 @@
       height: 40px; }
       .body .recruit .recruit-table table thead tr th {
         font-size: 16px;
-        text-align: center; }
+        text-align: center;
+        font-family: Hiragino-W6; }
       .body .recruit .recruit-table table thead tr th:first-child {
         text-align: left;
         padding-left: 20px; }
@@ -135,7 +130,6 @@
     text-align: left;
     font-size: 26px;
     font-weight: bolder;
-    font-family: NIRMALA;
     padding-top: 62px;
     margin-bottom: 25px; }
   .body .address .left, .body .address .right {
@@ -147,14 +141,15 @@
       width: 100%;
       margin-bottom: 25px; }
     .body .address .left .button, .body .address .right .button {
-      font-size: 18px;
+      font-family: Helvetica-Bold,Hiragino-W6;
+      font-size: 22px;
       font-weight: bolder;
-      font-family: NIRMALA;
       text-align: left;
       height: 50px;
       line-height: 50px; }
     .body .address .left .text, .body .address .right .text {
-      font-size: 14px; }
+      font-family: Helvetica-Light,Hiragino-W3;
+      font-size: 15px; }
   .body .address .left {
     padding-left: 50px; }
   .body .address .right {

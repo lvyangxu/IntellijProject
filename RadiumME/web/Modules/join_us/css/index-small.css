@@ -1,0 +1,20 @@
+.body .address {
+  font-size: 0; }
+  .body .address .title {
+    margin-left: 2%; }
+  .body .address .left, .body .address .right {
+    width: 47%;
+    padding-left: 2%;
+    padding-right: 0; }
+  @media screen and (max-width: 800px) {
+    .body .address .left, .body .address .right {
+      width: 100%;
+      padding-left: 0%; }
+      .body .address .left .button, .body .address .left .text, .body .address .right .button, .body .address .right .text {
+        padding-left: 2%; } }
+@media screen and (min-width: 800px) {
+  .body .recruit {
+    width: 70%;
+    margin-left: 15%; } }
+
+/*# sourceMappingURL=index-small.css.map */

@@ -25,15 +25,8 @@
     $game-title-bottom: 25px;
 
     .recruit {
-        font-family: "Microsoft YaHei UI";
+        font-family: Hiragino-W3;
         padding-top: 30px;
-        .recruit-title {
-            text-align: center;
-            font-weight: bolder;
-            color: rgba(0, 99, 219, 1);
-            font-size: 30px;
-            margin-bottom: 40px;
-        }
         .recruit-content {
             margin-bottom: 30px;
             line-height: 30px;
@@ -53,6 +46,7 @@
                         th{
                             font-size: 16px;
                             text-align: center;
+                            font-family: Hiragino-W6;
                         }
                         th:first-child{
                             text-align: left;
@@ -198,7 +192,6 @@
             text-align: left;
             font-size: 26px;
             font-weight: bolder;
-            font-family: NIRMALA;
             padding-top: $game-title-top;
             margin-bottom: $game-title-bottom;
         }
@@ -216,15 +209,16 @@
                 margin-bottom: 25px;
             }
             .button {
-                font-size: 18px;
+                font-family: Helvetica-Bold,Hiragino-W6;
+                font-size: 22px;
                 font-weight: bolder;
-                font-family: NIRMALA;
                 text-align: left;
                 height: 50px;
                 line-height: 50px;
             }
             .text {
-                font-size: 14px;
+                font-family: Helvetica-Light,Hiragino-W3;
+                font-size: 15px;
             }
         }
         .left {

@@ -21,6 +21,7 @@ public class TableMap {
             case "games-text":
             case "developers-text":
             case "blog-text":
+            case "join-us-text":
             case "contact-us-text":
                 result.put("page","'"+table.replace("-text","")+"'");
                 break;
@@ -37,6 +38,7 @@ public class TableMap {
             case "games-text":
             case "developers-text":
             case "blog-text":
+            case "join-us-text":
             case "contact-us-text":
                 result.put("page","'"+table.replace("-text","")+"'");
                 break;
@@ -52,6 +54,7 @@ public class TableMap {
             case "games-text":
             case "developers-text":
             case "blog-text":
+            case "join-us-text":
             case "contact-us-text":
                 result = "select * from text where page='"+table.replace("-text","")+"'";
                 break;
@@ -71,6 +74,7 @@ public class TableMap {
             case "games-text":
             case "developers-text":
             case "blog-text":
+            case "join-us-text":
             case "contact-us-text":
                 result.put("page","'"+table.replace("-text","")+"'");
                 break;
@@ -87,6 +91,7 @@ public class TableMap {
             case "games-text":
             case "developers-text":
             case "blog-text":
+            case "join-us-text":
             case "contact-us-text":
                 result = "text";
                 break;

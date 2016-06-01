@@ -122,8 +122,6 @@ var switchLanguage = function switchLanguage(callback) {
 //menu nav
 $(".navbar .menu a").delegate("", "click", function () {
     var url = $(this).attr("page");
-    // let arr1 = [""]
-    // url =
     url = "../" + url + "/#" + currentLang;
     window.location.href = url;
 });
@@ -132,8 +130,8 @@ var isSearching = false;
 
 //load text
 var loadText = function loadText(page, selectorArr, nameArr) {
-    selectorArr = selectorArr.concat([".navbar .menu1", ".navbar .menu2", ".navbar .menu3", ".navbar .menu4", ".navbar .menu5", ".navbar .menu6", ".footer button", ".footer input"]);
-    nameArr = nameArr.concat(["menu1", "menu2", "menu3", "menu4", "menu5", "menu6", "footer-button", "footer-input-placeholder"]);
+    selectorArr = selectorArr.concat([".navbar .menu1", ".navbar .menu2", ".navbar .menu3", ".navbar .menu4", ".navbar .menu5", ".navbar .menu6", ".navbar .menu7", ".footer button", ".footer input"]);
+    nameArr = nameArr.concat(["menu1", "menu2", "menu3", "menu4", "menu5", "menu6", "menu7", "footer-button", "footer-input-placeholder"]);
     http.request("../Table/text/Read", "").then(function (result) {
         var _loop = function _loop(i) {
             var selector = selectorArr[i];
@@ -163,9 +161,9 @@ var loadText = function loadText(page, selectorArr, nameArr) {
             }
 
             if (currentLang == "ch") {
-                element.addClass("yahei");
+                element.addClass("");
             } else {
-                element.removeClass("yahei");
+                element.removeClass("");
             }
         };
 

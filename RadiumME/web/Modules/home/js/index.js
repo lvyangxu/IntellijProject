@@ -22,6 +22,14 @@
         switchLanguage(function () {
             loadText(page, selectors, names);
         });
+
+        $(".about-us button").delegate("", "click", function () {
+            window.location.href = "../about_us/#" + currentLang;
+        });
+
+        $(".our-games button").delegate("", "click", function () {
+            window.location.href = "../games/#" + currentLang;
+        });
     })();
 }
 

@@ -62,12 +62,14 @@
   width: 60px; }
 .developers .first-div {
   margin-top: 60px;
-  margin-bottom: 60px; }
+  margin-bottom: 60px;
+  font-family: Helvetica-Light,Hiragino-W3; }
   .developers .first-div .second {
     margin-left: 100px;
     margin-right: 100px; }
 .developers .second-div {
-  margin-bottom: 60px; }
+  margin-bottom: 60px;
+  font-family: Helvetica-Light,Hiragino-W3; }
   .developers .second-div .first {
     margin-right: 50px; }
   .developers .second-div .second {

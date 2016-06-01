@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGI,cAAQ;EACJ,SAAS,EAAE,CAAC;EACZ,qBAAM;IACF,WAAW,EAAE,EAAE;EAEnB,2CAAY;IACR,KAAK,EAAE,GAAG;IACV,YAAY,EAAE,EAAE;IAChB,aAAa,EAAE,CAAC;AAIxB,cAAS;EACL,KAAK,EAAE,GAAG;EACV,WAAW,EAAC,GAAG",
+"sources": ["index-middle.scss"],
+"names": [],
+"file": "index-middle.css"
+}

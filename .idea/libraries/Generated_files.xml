@@ -220,8 +220,8 @@
         <item url="file://$PROJECT_DIR$/node_modules/core-js/fn/object/entries-compiled.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/wall/wall.js" />
         <item url="file://$PROJECT_DIR$/node_modules/core-js/fn/object/is-object-compiled.js" />
-        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/extend/array.js" />
         <item url="file://$PROJECT_DIR$/node_modules/core-js/fn/object/classof-compiled.js" />
+        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/extend/array.js" />
         <item url="file://$PROJECT_DIR$/node_modules/core-js/fn/object/is-frozen-compiled.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/extend/jquery.js" />
         <item url="file://$PROJECT_DIR$/node_modules/core-js/fn/object/define-compiled.js" />
@@ -1035,6 +1035,7 @@
         <item url="file://$PROJECT_DIR$/node_modules/core-js/library/modules/es7.object.entries-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/lodash/lang/cloneDeep-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/core-js/library/modules/es6.number.epsilon-compiled.js" />
+        <item url="file://$PROJECT_DIR$/RadiumME/web/Modules/join_us/contact_us/js/index.js" />
         <item url="file://$PROJECT_DIR$/node_modules/lodash/lang/isString-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/core-js/library/modules/es6.regexp.replace-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/lodash/lang/isBoolean-compiled.js" />
@@ -1597,8 +1598,8 @@
       <root url="file://$PROJECT_DIR$/node_modules/core-js/fn/object/entries-compiled.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/wall/wall.js" />
       <root url="file://$PROJECT_DIR$/node_modules/core-js/fn/object/is-object-compiled.js" />
-      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/extend/array.js" />
       <root url="file://$PROJECT_DIR$/node_modules/core-js/fn/object/classof-compiled.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/extend/array.js" />
       <root url="file://$PROJECT_DIR$/node_modules/core-js/fn/object/is-frozen-compiled.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/extend/jquery.js" />
       <root url="file://$PROJECT_DIR$/node_modules/core-js/fn/object/define-compiled.js" />
@@ -2412,6 +2413,7 @@
       <root url="file://$PROJECT_DIR$/node_modules/core-js/library/modules/es7.object.entries-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/lodash/lang/cloneDeep-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/core-js/library/modules/es6.number.epsilon-compiled.js" />
+      <root url="file://$PROJECT_DIR$/RadiumME/web/Modules/join_us/js/index.js" />
       <root url="file://$PROJECT_DIR$/node_modules/lodash/lang/isString-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/core-js/library/modules/es6.regexp.replace-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/lodash/lang/isBoolean-compiled.js" />

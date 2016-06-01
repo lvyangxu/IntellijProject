@@ -9,6 +9,7 @@
     color: #313132;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    font-family: Helvetica-Bold,Hiragino-W6,test;
     .container {
         max-width: 1330px;
         margin: auto;
@@ -147,7 +148,7 @@
                         text-decoration: none;
                         color: #313132;
                         letter-spacing: 0.5px;
-                        font-weight: bolder;
+                        //font-weight: bolder;
                         height: 70px;
                         line-height: 75px;
                         display: block;
@@ -202,6 +203,7 @@
 
 .top {
     padding-top: 70px;
+    font-family: Helvetica-Bold,Hiragino-W6;
     .overlay {
         position: absolute;
         background-color: rgba(27, 26, 24, 0.6);
@@ -219,14 +221,11 @@
     width: 100%;
     .text {
         .big {
-            font-weight: bolder;
             font-size: 70px;
-            font-family: Arial;
         }
         .small {
             font-weight: lighter;
             font-size: 20px;
-            font-family: "Microsoft YaHei UI";
             word-spacing: 2px;
         }
 
@@ -239,7 +238,6 @@
             height: 60px;
             min-width: 300px;
             font-weight: bolder;
-            font-family: NIRMALA;
             padding-left: 20px;
             padding-right: 20px;
         }
@@ -248,7 +246,6 @@
 
 .body {
     margin: auto;
-    font-family: NIRMALA;
 }
 
 body {
@@ -271,16 +268,27 @@ body {
     .title {
         padding-top: 30px;
         margin-bottom: 30px;
-        font-size: 20px;
+        font-size: 22px;
         text-align: center;
-        font-weight: bolder;
-        font-family: NIRMALA;
+        font-family: Helvetica-Bold,Hiragino-W6;
     }
     p {
         text-align: justify;
-        font-family: Arial;
+        font-family: Helvetica-Light,Hiragino-W3;
         line-height: 30px;
         word-break: normal;
+        font-size: 16px;
+    }
+    button{
+        a{
+            font-family: Helvetica-Bold,Hiragino-W6;
+        }
+    }
+    .button{
+        font-family: Helvetica-Bold,Hiragino-W6;
+    }
+    .text{
+        font-family: Helvetica-Light,Hiragino-W3;
     }
 }
 
@@ -294,6 +302,7 @@ $input-height: 33px;
     background-color: #424242;
     text-align: center;
     min-width: 1330px;
+    font-family: Helvetica-Bold,Hiragino-W6;
     .content {
         width: 511px;
         padding-top: 150px;
@@ -359,6 +368,7 @@ $input-height: 33px;
         color: white;
         text-align: center;
         height: 50px;
+        font-family: Helvetica-Light,Hiragino-W3;
         div {
             color: #666;
             font-size: 14px;
@@ -377,52 +387,29 @@ $input-height: 33px;
 }
 
 @font-face {
-    font-family: BEBASNEUE;
-    src: url("../font/BEBASNEUE.otf");
-}
+    font-family: Hiragino-W3;
+    src: url("../font/Hiragino Sans GB W3.otf");
 
-.BEBASNEUE {
-    font-family: BEBASNEUE;
 }
 
 @font-face {
-    font-family: NIRMALA;
-    src: url("../font/NIRMALA.TTF");
-}
+    font-family: Hiragino-W6;
+    src: url("../font/Hiragino Sans GB W6.otf");
 
-.NIRMALA {
-    font-family: NIRMALA;
 }
 
 @font-face {
-    font-family: MMRTEXT;
-    src: url("../font/MMRTEXT.TTF");
-}
-
-.MMRTEXT {
-    font-family: MMRTEXT;
-}
-
-.yahei {
-    font-family: "Microsoft YaHei UI" !important;
-}
-
-.Arial {
-    font-family: Arial;
+    font-family: Helvetica-Bold;
+    //src: url("../font/Helvetica Neue.ttf");
+    src: url("../font/blenderpro-medium-webfont.woff");
 }
 
 @font-face {
-    font-family: ARIALN;
-    src: url("../font/ARIALN.TTF");
+    font-family: Helvetica-Light;
+    src: url("../font/Helvetica Neue Light.otf");
+    //src: url("../font/blenderpro-book-webfont.woff");
 }
 
-.ARIALN {
-    font-family: ARIALN;
-}
-
-.font-weight-normal{
-    font-weight: normal !important;
-}
 
 .section-title-bottom{
     margin-bottom:15px !important;

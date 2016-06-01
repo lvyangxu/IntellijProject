@@ -25,6 +25,13 @@
         loadText(page, selectors, names);
     });
 
+    $(".about-us button").delegate("","click",()=>{
+       window.location.href="../about_us/#"+currentLang;
+    });
+
+    $(".our-games button").delegate("","click",()=>{
+        window.location.href="../games/#"+currentLang;
+    });
 }
 
 

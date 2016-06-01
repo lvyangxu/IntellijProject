@@ -27,6 +27,7 @@
             <div section="games">games</div>
             <div section="developers">developers</div>
             <div section="blog">blog</div>
+            <div section="join_us">join us</div>
             <div section="contact_us">contact us</div>
         </div>
     </div>
@@ -77,6 +78,16 @@
     <div id="blog" class="page">
         <div section="文字">
             <div id="blog-text" class="table" title="文字" curd="cur">
+                <span th-id="name" type="text" key>名称</span>
+                <span th-id="ch" type="text" min="0" max="5000">中文</span>
+                <span th-id="en" type="text" min="0" max="5000">英文</span>
+            </div>
+        </div>
+        <div section="图片"></div>
+    </div>
+    <div id="join_us" class="page">
+        <div section="文字">
+            <div id="join-us-text" class="table" title="文字" curd="cur">
                 <span th-id="name" type="text" key>名称</span>
                 <span th-id="ch" type="text" min="0" max="5000">中文</span>
                 <span th-id="en" type="text" min="0" max="5000">英文</span>
