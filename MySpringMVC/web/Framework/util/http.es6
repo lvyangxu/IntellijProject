@@ -15,7 +15,7 @@ class http {
      * @returns {*}
      */
     static doAjaxInJquery(url, httpRequestType, requestTimeOutSecond, requestParaData, successCallback, failureCallback) {
-        let request = $.ajax({
+        let request = $.ajax({ 
             type: httpRequestType,
             url: url,
             cache: false,

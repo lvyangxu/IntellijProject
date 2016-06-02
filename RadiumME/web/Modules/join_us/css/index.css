@@ -11,7 +11,7 @@
     width: 100%; }
 
 .body .recruit {
-  font-family: Hiragino-W3;
+  font-family: Helvetica-Light,Hiragino-W3;
   padding-top: 30px; }
   .body .recruit .recruit-content {
     margin-bottom: 30px;
@@ -28,7 +28,7 @@
       .body .recruit .recruit-table table thead tr th {
         font-size: 16px;
         text-align: center;
-        font-family: Hiragino-W6; }
+        font-family: Helvetica-Bold,Hiragino-W6; }
       .body .recruit .recruit-table table thead tr th:first-child {
         text-align: left;
         padding-left: 20px; }

@@ -15,36 +15,14 @@
          * @returns {string}
          */
         var refernce = function refernce(folderPath, filePathArr) {
-            var result = "";
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = filePathArr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var filePath = _step.value;
-
-                    if (filePath.endsWith(".css")) {
-                        result += "<link rel=\"stylesheet\" href=\"" + relativePath + folderPath + filePath + "\">";
-                    } else {
-                        result += "<script src=\"" + relativePath + folderPath + filePath + "\"></script>";
-                    }
+            var result = filePathArr.map(function (d) {
+                if (d.endsWith(".css")) {
+                    d = "<link rel=\"stylesheet\" href=\"" + relativePath + folderPath + d + "\">";
+                } else {
+                    d = "<script src=\"" + relativePath + folderPath + d + "\"></script>";
                 }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
+                return d;
+            }).join("");
             return result;
         };
 
@@ -79,33 +57,11 @@
          * load addon
          */
         var loadAddon = function loadAddon(nameArr) {
-            var result = "";
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
-
-            try {
-                for (var _iterator2 = nameArr[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                    var name = _step2.value;
-
-                    var addonArr = [name + "/" + name + ".js", name + "/" + name + ".css"];
-                    result += refernce("addon/", addonArr);
-                }
-            } catch (err) {
-                _didIteratorError2 = true;
-                _iteratorError2 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                        _iterator2.return();
-                    }
-                } finally {
-                    if (_didIteratorError2) {
-                        throw _iteratorError2;
-                    }
-                }
-            }
-
+            var result = nameArr.map(function (d) {
+                var addonArr = [d + "/" + d + ".js", d + "/" + d + ".css"];
+                d = refernce("addon/", addonArr);
+                return d;
+            }).join("");
             return result;
         };
         refernceString += loadAddon(["nav", "section", "table", "select", "wall", "datepicker", "upload", "carousel"]);

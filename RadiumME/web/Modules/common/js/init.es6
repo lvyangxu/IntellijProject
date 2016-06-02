@@ -12,14 +12,14 @@
      * @returns {string}
      */
     let refernce = (folderPath, filePathArr)=> {
-        var result = "";
-        for (let filePath of filePathArr) {
-            if (filePath.endsWith(".css")) {
-                result += "<link rel=\"stylesheet\" href=\"" + relativePath + folderPath + filePath + "\">";
+        let result = filePathArr.map(d=> {
+            if (d.endsWith(".css")) {
+                d = "<link rel=\"stylesheet\" href=\"" + relativePath + folderPath + d + "\">";
             } else {
-                result += "<script src=\"" + relativePath + folderPath + filePath + "\"></script>";
+                d = "<script src=\"" + relativePath + folderPath + d + "\"></script>";
             }
-        }
+            return d;
+        }).join("");
         return result;
     }
 
@@ -54,14 +54,14 @@
      * load addon
      */
     let loadAddon = (nameArr)=> {
-        let result = "";
-        for(let name of nameArr){
-            let addonArr = [name + "/" + name + ".js", name + "/" + name + ".css"];
-            result += refernce("addon/", addonArr);
-        } 
+        let result = nameArr.map(d=> {
+            let addonArr = [d + "/" + d + ".js", d + "/" + d + ".css"];
+            d = refernce("addon/", addonArr);
+            return d;
+        }).join("");
         return result;
     }
-    refernceString += loadAddon(["nav","section","table","select","wall","datepicker","upload","carousel"]);
+    refernceString += loadAddon(["nav", "section", "table", "select", "wall", "datepicker", "upload", "carousel"]);
 
     /**
      * output all reference

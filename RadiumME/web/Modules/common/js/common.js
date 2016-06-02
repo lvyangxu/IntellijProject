@@ -31,7 +31,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         });
 
         //top button scroll
-        $(".top,.top-static").children(".overlay").children(".text").children("button").delegate("", "click", function () {
+        $(".top").children(".overlay").children(".text").children("button").delegate("", "click", function () {
             var marginT = parseInt($(".body").children(".content").children("div").css("margin-top"));
             $("body").animate({ scrollTop: $(".body").children(".content").offset().top - marginT - 70 }, 1000);
         });
@@ -61,7 +61,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 maxX = -$(window).width() * 0.4 - left;
                 leftX = left;
                 touchStartX = e.changedTouches[0].pageX;
-                console.log(minX + "," + maxX);
             }
         }, false);
         $(".navbar .menu")[0].addEventListener("touchmove", function (e) {
@@ -72,7 +71,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     var touchMoveX = thisTouchEndX - touchStartX;
                     currentX = currentX + touchMoveX;
                     historyX += touchMoveX;
-                    // console.log(historyX);
                     if (touchMoveX > minX) {
                         return {
                             v: void 0
@@ -89,6 +87,52 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 }();
 
                 if ((typeof _ret2 === "undefined" ? "undefined" : _typeof(_ret2)) === "object") return _ret2.v;
+            }
+        }, false);
+
+        var isMouseUp = false;
+        $(".navbar .menu")[0].addEventListener("mousedown", function (e) {
+
+            if ($(window).width() <= 1100) {
+                var left = $(".navbar .menu").css("margin-left");
+                left = Number.parseInt(left);
+                minX = 0 - left;
+                maxX = -$(window).width() * 0.4 - left;
+                leftX = left;
+                touchStartX = e.pageX;
+                isMouseUp = true;
+            }
+        }, false);
+        $(".navbar .menu")[0].addEventListener("mousemove", function (e) {
+            e.preventDefault();
+            if ($(window).width() <= 1100 && isMouseUp) {
+                var _ret3 = function () {
+                    var thisTouchEndX = e.pageX;
+                    var touchMoveX = thisTouchEndX - touchStartX;
+                    currentX = currentX + touchMoveX;
+                    historyX += touchMoveX;
+                    if (touchMoveX > minX) {
+                        return {
+                            v: void 0
+                        };
+                    }
+                    if (touchMoveX < maxX) {
+                        return {
+                            v: void 0
+                        };
+                    }
+                    setTimeout(function () {
+                        $(".navbar .menu").css({ "margin-left": touchMoveX + leftX });
+                    }, 1);
+                }();
+
+                if ((typeof _ret3 === "undefined" ? "undefined" : _typeof(_ret3)) === "object") return _ret3.v;
+            }
+        }, false);
+        $(".navbar .menu")[0].addEventListener("mouseleave", function (e) {
+            e.preventDefault();
+            if ($(window).width() <= 1100) {
+                isMouseUp = false;
             }
         }, false);
     })();
@@ -173,7 +217,7 @@ var loadText = function loadText(page, selectorArr, nameArr) {
 
         var search = function search() {
             if ($(window).width() >= 1100) {
-                var _ret4 = function () {
+                var _ret5 = function () {
                     var keyText = $(".navbar .search input").val();
                     keyText = keyText.toLowerCase();
                     if (keyText == "") {
@@ -250,9 +294,9 @@ var loadText = function loadText(page, selectorArr, nameArr) {
                     });
                 }();
 
-                if ((typeof _ret4 === "undefined" ? "undefined" : _typeof(_ret4)) === "object") return _ret4.v;
+                if ((typeof _ret5 === "undefined" ? "undefined" : _typeof(_ret5)) === "object") return _ret5.v;
             } else {
-                var _ret5 = function () {
+                var _ret6 = function () {
                     //
                     $("body").css({
                         "overflow-y": "hidden"
@@ -442,7 +486,7 @@ var loadText = function loadText(page, selectorArr, nameArr) {
                     });
                 }();
 
-                if ((typeof _ret5 === "undefined" ? "undefined" : _typeof(_ret5)) === "object") return _ret5.v;
+                if ((typeof _ret6 === "undefined" ? "undefined" : _typeof(_ret6)) === "object") return _ret6.v;
             }
         };
 

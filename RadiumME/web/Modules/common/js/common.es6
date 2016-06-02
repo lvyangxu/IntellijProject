@@ -26,7 +26,7 @@
     });
 
     //top button scroll
-    $(".top,.top-static").children(".overlay").children(".text").children("button").delegate("", "click", function () {
+    $(".top").children(".overlay").children(".text").children("button").delegate("", "click", function () {
         var marginT = parseInt($(".body").children(".content").children("div").css("margin-top"));
         $("body").animate({scrollTop: $(".body").children(".content").offset().top - marginT - 70}, 1000);
     });
@@ -51,7 +51,6 @@
             maxX = -$(window).width() * 0.4 - left;
             leftX = left;
             touchStartX = e.changedTouches[0].pageX;
-            console.log(minX + "," + maxX);
         }
 
     }, false);
@@ -62,7 +61,6 @@
             let touchMoveX = thisTouchEndX - touchStartX;
             currentX = currentX + touchMoveX;
             historyX += touchMoveX;
-            // console.log(historyX);
             if (touchMoveX > minX) {
                 return;
             }
@@ -75,14 +73,53 @@
         }
     }, false);
 
+    let isMouseUp = false;
+    $(".navbar .menu")[0].addEventListener("mousedown", function (e) {
+
+        if ($(window).width() <= 1100) {
+            let left = $(".navbar .menu").css("margin-left");
+            left = Number.parseInt(left);
+            minX = 0 - left;
+            maxX = -$(window).width() * 0.4 - left;
+            leftX = left;
+            touchStartX = e.pageX;
+            isMouseUp = true;
+        }
+
+    }, false);
+    $(".navbar .menu")[0].addEventListener("mousemove", function (e) {
+        e.preventDefault();
+        if ($(window).width() <= 1100 && isMouseUp) {
+            let thisTouchEndX = e.pageX;
+            let touchMoveX = thisTouchEndX - touchStartX;
+            currentX = currentX + touchMoveX;
+            historyX += touchMoveX;
+            if (touchMoveX > minX) {
+                return;
+            }
+            if (touchMoveX < maxX) {
+                return;
+            }
+            setTimeout(()=> {
+                $(".navbar .menu").css({"margin-left": touchMoveX + leftX});
+            }, 1);
+        }
+    }, false);
+    $(".navbar .menu")[0].addEventListener("mouseleave", function (e) {
+        e.preventDefault();
+        if ($(window).width() <= 1100) {
+            isMouseUp = false;
+        }
+
+    }, false);
 }
 
 //switch language
 let currentLang = "en";
-if(window.location.hash=="#en"){
+if (window.location.hash == "#en") {
     currentLang = "en";
 }
-if(window.location.hash=="#ch"){
+if (window.location.hash == "#ch") {
     currentLang = "ch";
     $(".section .title").addClass("section-title-bottom");
 }
@@ -92,11 +129,11 @@ let switchLanguage = (callback)=> {
         if ($(this).hasClass("en")) {
             currentLang = "en";
             $(".section .title").removeClass("section-title-bottom");
-            window.location.hash = "#"+currentLang;
+            window.location.hash = "#" + currentLang;
         } else {
             currentLang = "ch";
             $(".section .title").addClass("section-title-bottom");
-            window.location.hash = "#"+currentLang;
+            window.location.hash = "#" + currentLang;
         }
         callback();
     });
@@ -113,8 +150,8 @@ let isSearching = false;
 
 //load text
 let loadText = (page, selectorArr, nameArr)=> {
-    selectorArr = selectorArr.concat([".navbar .menu1",".navbar .menu2",".navbar .menu3",".navbar .menu4",".navbar .menu5",".navbar .menu6",".navbar .menu7",".footer button",".footer input"]);
-    nameArr = nameArr.concat(["menu1","menu2","menu3","menu4","menu5","menu6","menu7","footer-button","footer-input-placeholder"]); 
+    selectorArr = selectorArr.concat([".navbar .menu1", ".navbar .menu2", ".navbar .menu3", ".navbar .menu4", ".navbar .menu5", ".navbar .menu6", ".navbar .menu7", ".footer button", ".footer input"]);
+    nameArr = nameArr.concat(["menu1", "menu2", "menu3", "menu4", "menu5", "menu6", "menu7", "footer-button", "footer-input-placeholder"]);
     http.request("../Table/text/Read", "").then(result=> {
         for (let i = 0; i < selectorArr.length; i++) {
             let selector = selectorArr[i];
@@ -139,13 +176,13 @@ let loadText = (page, selectorArr, nameArr)=> {
                 text = (text == undefined) ? "" : text;
                 return text;
             });
-            if(selector==".footer input"){
-                element.attr("placeholder",(currentLang=="en")?"Subscribe email to our newsletter...":"电子邮箱");
+            if (selector == ".footer input") {
+                element.attr("placeholder", (currentLang == "en") ? "Subscribe email to our newsletter..." : "电子邮箱");
             }
 
-            if(currentLang=="ch"){
+            if (currentLang == "ch") {
                 element.addClass("");
-            }else{
+            } else {
                 element.removeClass("");
             }
         }
