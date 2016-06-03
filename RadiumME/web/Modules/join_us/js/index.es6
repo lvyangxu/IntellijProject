@@ -1,7 +1,7 @@
 {
     //load text
-    let selectors = [".top button", "game-div>.title", "game1 .name", "game2 .name", "game3 .name", "game4 .name",
-        ".address>.title", ".address>.left>.button", ".address .left p", ".address>.right>.button", ".address .right p",".recruit-content .small"];
+    let selectors = [".top button", "game-div .title", "game1 .name", "game2 .name", "game3 .name", "game4 .name",
+        ".address .title", ".address .left .button", ".address .left p", ".address .right .button", ".address .right p",".recruit-content .small"];
     let names = ["top-button", "games-title", "game1-title", "game2-title", "game3-title", "game4-title",
         "address-title", "left-title", "left-paragraph", "right-title", "right-paragraph","recruit-content"];
     let page = "join-us";

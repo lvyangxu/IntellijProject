@@ -13,7 +13,7 @@
      */
     let refernce = (folderPath, filePathArr)=> {
         let result = filePathArr.map(d=> {
-            if (d.endsWith(".css")) {
+            if (d.indexOf(".css") != -1) {
                 d = "<link rel=\"stylesheet\" href=\"" + relativePath + folderPath + d + "\">";
             } else {
                 d = "<script src=\"" + relativePath + folderPath + d + "\"></script>";

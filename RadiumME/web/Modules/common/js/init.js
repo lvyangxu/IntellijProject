@@ -16,7 +16,7 @@
          */
         var refernce = function refernce(folderPath, filePathArr) {
             var result = filePathArr.map(function (d) {
-                if (d.endsWith(".css")) {
+                if (d.indexOf(".css") != -1) {
                     d = "<link rel=\"stylesheet\" href=\"" + relativePath + folderPath + d + "\">";
                 } else {
                     d = "<script src=\"" + relativePath + folderPath + d + "\"></script>";

@@ -176,7 +176,7 @@
     font-size: 22px;
     border-radius: 8px;
     border: 2px solid white;
-    background-color: inherit;
+    background-color: transparent;
     color: white;
     height: 60px;
     min-width: 300px;
@@ -295,7 +295,7 @@ button {
 
 @font-face {
   font-family: Hiragino-W3;
-  src: url("../font/Hiragino Sans GB W3.otf"); }
+  src: url("../font/Hiragino Sans GB W3.otf") format("truetype"); }
 @font-face {
   font-family: Hiragino-W6;
   src: url("../font/Hiragino Sans GB W6.otf"); }

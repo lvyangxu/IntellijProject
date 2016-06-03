@@ -176,18 +176,13 @@ var isSearching = false;
 var loadText = function loadText(page, selectorArr, nameArr) {
     selectorArr = selectorArr.concat([".navbar .menu1", ".navbar .menu2", ".navbar .menu3", ".navbar .menu4", ".navbar .menu5", ".navbar .menu6", ".navbar .menu7", ".footer button", ".footer input"]);
     nameArr = nameArr.concat(["menu1", "menu2", "menu3", "menu4", "menu5", "menu6", "menu7", "footer-button", "footer-input-placeholder"]);
-    http.request("../Table/text/Read", "").then(function (result) {
+    //ie do not support promise
+    http.doAjaxInJquery("../Table/text/Read", "post", "30", "", function (result) {
+        result = new myString(result).toJson().message;
+
         var _loop = function _loop(i) {
             var selector = selectorArr[i];
-            var element = void 0;
-            if (selector.includes(">")) {
-                var arr = selector.split(">");
-                selector = arr[0];
-                var xPath = arr.slice(1).collect("join", ">");
-                element = $(selector).xPath(xPath);
-            } else {
-                element = $(selector);
-            }
+            var element = $(selector);
 
             element.html(function () {
                 var text = result.filter(function (d) {
@@ -496,7 +491,7 @@ var loadText = function loadText(page, selectorArr, nameArr) {
         $(".navbar .search img").delegate("", "click", function () {
             search();
         });
-    }).catch(function (result) {
+    }, function (result) {
         alert("loading data error,please refresh this page");
     });
 

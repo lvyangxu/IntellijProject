@@ -233,7 +233,7 @@
             font-size: 22px;
             border-radius: 8px;
             border: 2px solid white;
-            background-color: inherit;
+            background-color: transparent;
             color: white;
             height: 60px;
             min-width: 300px;
@@ -388,7 +388,7 @@ $input-height: 33px;
 
 @font-face {
     font-family: Hiragino-W3;
-    src: url("../font/Hiragino Sans GB W3.otf");
+    src: url("../font/Hiragino Sans GB W3.otf") format('truetype');
 
 }
 
@@ -400,14 +400,12 @@ $input-height: 33px;
 
 @font-face {
     font-family: Helvetica-Bold;
-    //src: url("../font/Helvetica Neue.ttf");
     src: url("../font/blenderpro-medium-webfont.woff");
 }
 
 @font-face {
     font-family: Helvetica-Light;
     src: url("../font/Helvetica Neue Light.otf");
-    //src: url("../font/blenderpro-book-webfont.woff");
 }
 
 

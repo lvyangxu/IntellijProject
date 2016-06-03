@@ -152,18 +152,13 @@ let isSearching = false;
 let loadText = (page, selectorArr, nameArr)=> {
     selectorArr = selectorArr.concat([".navbar .menu1", ".navbar .menu2", ".navbar .menu3", ".navbar .menu4", ".navbar .menu5", ".navbar .menu6", ".navbar .menu7", ".footer button", ".footer input"]);
     nameArr = nameArr.concat(["menu1", "menu2", "menu3", "menu4", "menu5", "menu6", "menu7", "footer-button", "footer-input-placeholder"]);
-    http.request("../Table/text/Read", "").then(result=> {
+    //ie do not support promise
+    http.doAjaxInJquery("../Table/text/Read", "post", "30", "", (result)=> {
+        result = new myString(result).toJson().message;
         for (let i = 0; i < selectorArr.length; i++) {
             let selector = selectorArr[i];
-            let element;
-            if (selector.includes(">")) {
-                let arr = selector.split(">");
-                selector = arr[0];
-                let xPath = arr.slice(1).collect("join", ">");
-                element = $(selector).xPath(xPath);
-            } else {
-                element = $(selector);
-            }
+            let element = $(selector);
+
 
             element.html(()=> {
                 let text = result.filter(d=> {
@@ -468,9 +463,9 @@ let loadText = (page, selectorArr, nameArr)=> {
             search();
         });
 
-    }).catch(result=> {
+    }, (result)=> {
         alert("loading data error,please refresh this page");
-    });
+    })
 
     //back to top button
     $(".back-to-top").children("i").delegate("", "click", function () {
