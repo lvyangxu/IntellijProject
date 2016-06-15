@@ -24,18 +24,5 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Spring-4.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Spring MVC-4.2.5.RELEASE" level="project" />
-    <orderEntry type="library" name="appache-common-io" level="application" />
-    <orderEntry type="library" name="dom4j" level="application" />
-    <orderEntry type="library" name="jackson" level="application" />
-    <orderEntry type="library" name="json" level="application" />
-    <orderEntry type="library" name="log4j" level="application" />
-    <orderEntry type="library" name="log4j2" level="application" />
-    <orderEntry type="library" name="mongodb" level="application" />
-    <orderEntry type="library" name="mysql" level="application" />
-    <orderEntry type="library" name="poi" level="application" />
-    <orderEntry type="library" name="tomcat-websocket" level="application" />
-    <orderEntry type="module" module-name="MySpringMVC" />
-    <orderEntry type="library" name="Tomcat 8.0.30" level="application_server_libraries" />
-    <orderEntry type="library" name="java-mail" level="application" />
   </component>
 </module>

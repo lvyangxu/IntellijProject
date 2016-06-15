@@ -23,7 +23,7 @@ public class TableMap {
             case "blog-text":
             case "join-us-text":
             case "contact-us-text":
-                result.put("page","'"+table.replace("-text","")+"'");
+                result.put("page", "'" + table.replace("-text", "") + "'");
                 break;
         }
         return result;
@@ -40,7 +40,7 @@ public class TableMap {
             case "blog-text":
             case "join-us-text":
             case "contact-us-text":
-                result.put("page","'"+table.replace("-text","")+"'");
+                result.put("page", "'" + table.replace("-text", "") + "'");
                 break;
         }
         return result;
@@ -56,7 +56,7 @@ public class TableMap {
             case "blog-text":
             case "join-us-text":
             case "contact-us-text":
-                result = "select * from text where page='"+table.replace("-text","")+"'";
+                result = "select * from text where page='" + table.replace("-text", "") + "'";
                 break;
             default:
                 result = "select * from " + table;
@@ -76,13 +76,13 @@ public class TableMap {
             case "blog-text":
             case "join-us-text":
             case "contact-us-text":
-                result.put("page","'"+table.replace("-text","")+"'");
+                result.put("page", "'" + table.replace("-text", "") + "'");
                 break;
         }
         return result;
     }
 
-    public static String redirectMap(String table){
+    public static String redirectMap(String table) {
         String result = "";
         switch (table) {
             //write the detail map on the main project

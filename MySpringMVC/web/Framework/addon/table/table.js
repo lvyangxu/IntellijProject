@@ -571,7 +571,7 @@
                         break;
                     //text
                     default:
-                        defaultValue = v == undefined ? "" : " value='" + v + "'";
+                        defaultValue = v == undefined ? "" : " value='" + v.replace(/'/g, '&apos;') + "'";
                         result = "<input class='form-control'" + readonlyHtml + defaultValue + keyHtml + ">";
                         break;
                 }

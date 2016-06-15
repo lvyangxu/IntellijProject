@@ -31,5 +31,6 @@
     <orderEntry type="library" name="Spring MVC-4.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Spring-4.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="tomcat-websocket" level="application" />
+    <orderEntry type="library" name="java-mail" level="application" />
   </component>
 </module>

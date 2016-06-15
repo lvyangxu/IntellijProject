@@ -15,7 +15,7 @@
 
     <mvc:annotation-driven/>
     <!--默认地址跳转到指定页面-->
-    <mvc:view-controller path="/" view-name="login/index"/>
+    <mvc:view-controller path="/" view-name="home/index"/>
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 

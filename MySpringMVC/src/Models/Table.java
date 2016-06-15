@@ -231,6 +231,8 @@ public class Table {
             //decode
             String[] valueArr = new MyString(value).split(",");
             value = new MyString(valueArr[i]).base64Decode().toString();
+            //escape charactor
+            value = value.replace("'","\\'");
             value = valueTypeStr + value + valueTypeStr;
             String connectStr = "=";
             field = name + connectStr + value;
