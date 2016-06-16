@@ -1,0 +1,69 @@
+.addon-table {
+    div[key] {
+        display: none;
+    }
+
+    .request{
+        margin-bottom: 10px;
+
+    }
+
+    .filter{
+        margin-bottom: 10px;
+    }
+
+    .pagination{
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+        text-align: center;
+        border: solid 1px gray;
+        border-collapse: collapse;
+        box-shadow: 5px 5px rgba(224,244,244,1);
+        thead {
+            tr {
+                height: 40px;
+                th {
+                    border: solid 1px gray;
+                    input[type=checkbox]{
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+                th.content:hover {
+                    cursor: pointer;
+                    background-color: #2aabd2;
+                }
+            }
+
+        }
+        tbody {
+            tr {
+                height: 40px;
+                td {
+                    border: solid 1px gray;
+                    .fa-refresh {
+                        animation: loading 3s infinite linear;
+                        font-size: 30px;
+
+                        @keyframes loading {
+                            from {
+                                transform: rotateZ(0deg)
+                            }
+                            to {
+                                transform: rotateZ(360deg)
+                            }
+                        }
+                    }
+                }
+
+            }
+            tr:hover {
+
+            }
+        }
+    }
+
+}

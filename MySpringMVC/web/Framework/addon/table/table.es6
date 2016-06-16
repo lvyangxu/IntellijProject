@@ -564,7 +564,7 @@
                         result = "<input class='form-control'" + readonlyHtml + defaultValue + keyHtml + " type='number' step='" + step + "'" + minHtml + maxHtml + ">";
                         break;
                     //text
-                    default:
+                    default: 
                         defaultValue = (v == undefined) ? "" : " value='" + v.replace(/'/g,'&apos;') + "'";
                         result = "<input class='form-control'" + readonlyHtml + defaultValue + keyHtml + ">";
                         break;

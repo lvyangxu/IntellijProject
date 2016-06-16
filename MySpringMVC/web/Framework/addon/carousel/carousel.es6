@@ -14,7 +14,7 @@
 }(function ($) {
     "use strict";
     $.fn.carousel = function (options) {
-        return this.each(function () {
+        return this.each(function () { 
             carousel($(this), options);
         });
     };

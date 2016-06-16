@@ -1,0 +1,26 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/OperationSystem/web/Modules/common/js/init.js" />
+        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/nav/nav.js" />
+        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/table/table.js" />
+        <item url="file://$PROJECT_DIR$/OperationSystem/web/Modules/serverInfo/js/index.js" />
+        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/table/table.js" />
+        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/nav/nav.js" />
+        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/carousel/carousel.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/OperationSystem/web/Modules/common/js/init.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/nav/nav.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/table/table.js" />
+      <root url="file://$PROJECT_DIR$/OperationSystem/web/Modules/serverInfo/js/index.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/table/table.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/nav/nav.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/carousel/carousel.js" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

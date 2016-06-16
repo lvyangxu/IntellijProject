@@ -11,7 +11,7 @@
         factory(jQuery);
     }
 
-}(function ($) {
+}(function ($) { 
     'use strict';
     $.fn.nav = function(options){
         return this.each(()=> {

@@ -8,8 +8,8 @@
           <element id="module-output" name="MySpringMVC" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Spring MVC-4.2.5.RELEASE" />
-          <element id="library" level="project" name="Spring-4.2.5.RELEASE" />
+          <element id="library" level="project" name="Spring MVC-4.3.0.RELEASE" />
+          <element id="library" level="project" name="Spring-4.3.0.RELEASE" />
           <element id="library" level="application" name="dom4j" />
           <element id="library" level="application" name="jackson" />
           <element id="library" level="application" name="json" />
@@ -18,8 +18,10 @@
           <element id="library" level="application" name="mongodb" />
           <element id="library" level="application" name="mysql" />
           <element id="library" level="application" name="poi" />
-          <element id="library" level="application" name="appache-common-io" />
           <element id="library" level="application" name="tomcat-websocket" />
+          <element id="library" level="application" name="java-mail" />
+          <element id="library" level="application" name="appache-common-io" />
+          <element id="library" level="application_server_libraries" name="Tomcat 8.0.30" />
         </element>
       </element>
     </root>
