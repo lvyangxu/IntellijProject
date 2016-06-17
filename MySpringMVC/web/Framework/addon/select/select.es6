@@ -25,7 +25,7 @@
             "title": element.property("title", "multi-select"),
             "data": null,
             "selectCallback": null
-        });
+        }); 
 
         let contain = element.xPath(".contain");
         let panel = element.xPath(".contain>.panel");

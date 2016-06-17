@@ -30,7 +30,9 @@ public class TableMap {
     public static String readMap(HttpServletRequest request, String table) throws MyException {
         String result = "";
         switch (table) {
-
+            default:
+                result = "select * from "+table;
+                break;
         }
         return result;
     }

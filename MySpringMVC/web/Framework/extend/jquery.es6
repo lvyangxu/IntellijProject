@@ -14,7 +14,7 @@
                 callback($(this));
             }
             $(this).data({"init": true});
-        }
+        } 
     };
 
     $.fn.addonSettingExtend = function (options, defaultSetting) {

@@ -1,7 +1,10 @@
 'use strict';
 
 /**
- * Created by karl on 2016/4/1.
+ * demo like below
+ * <div class='nav'>
+ *     <div key='a'>b</div>
+ * </div>
  */
 (function (factory) {
     'use strict';
