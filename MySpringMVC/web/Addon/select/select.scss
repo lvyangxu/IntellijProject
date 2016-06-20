@@ -1,0 +1,46 @@
+.addon-select {
+
+    .select-panel {
+        position: absolute;
+        display: none;
+        background-color: rgba(196, 225, 255, 1);
+        padding: 10px;
+        font-size: 12px;
+        .select-panel-head {
+            height: 30px;
+            input[type=checkbox] {
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+                margin-right: 10px;
+            }
+            .text {
+                vertical-align: middle;
+                display: inline-block;
+                height: 24px;
+            }
+        }
+        .select-panel-body{
+            .group{
+                display: inline-block;
+                vertical-align: top;
+                margin-left: 10px;
+                input[type=checkbox] {
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    margin-right: 10px;
+                }
+                .text {
+                    vertical-align: middle;
+                    display: inline-block;
+                    height: 24px;
+                }
+            }
+            .group:first-child{
+                margin-left: 0;
+            }
+
+        }
+    }
+}

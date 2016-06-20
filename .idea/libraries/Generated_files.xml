@@ -11,6 +11,7 @@
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/nav/nav.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/carousel/carousel.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/select/select.js" />
+        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/select/select.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
@@ -23,6 +24,7 @@
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/nav/nav.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/carousel/carousel.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/select/select.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/select/select.js" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

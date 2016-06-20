@@ -5,12 +5,6 @@
         display: none;
     }
 
-    .view{
-        float:right;
-        width: 1%;
-        background: linear-gradient(to bottom, #5bc0de 0, #2aabd2 100%) repeat-x;
-    }
-
     .left {
         display: inline-block;
         float: left;
@@ -29,7 +23,6 @@
     .right {
         float: right;
         display: inline-block;
-        margin-right: 2%;
         .rowPerPage {
             margin-bottom: 10px;
             text-align: right;
@@ -49,6 +42,34 @@
                 display: inline-block;
             }
         }
+
+        .progress {
+            height: 34px;
+            position: relative;
+            background-color: rgba(121, 200, 230, 1);
+            cursor: pointer;
+            .text {
+                position: absolute;
+                height: 34px;
+                text-align: center;
+                line-height: 34px;
+                moz-user-select: -moz-none;
+                -moz-user-select: none;
+                -o-user-select:none;
+                -khtml-user-select:none;
+                -webkit-user-select:none;
+                -ms-user-select:none;
+                user-select:none;
+                width: 100%;
+            }
+            .current {
+                width: 0;
+                height: 32px;
+                background-color: rgba(99, 191, 225, 1);
+                border: 1px solid rgba(65,132,243,1);
+            }
+        }
+
     }
 
     table {
@@ -56,7 +77,7 @@
         $hover-color: #97cbff;
         $odd-row-color: #d9ffff;
         $even-row-color: #c4e1ff;
-        width: 98%;
+        width: 100%;
         float: left;
         text-align: center;
         border: solid 1px gray;
@@ -76,6 +97,9 @@
                 }
                 th.func {
                     background-color: $func-color;
+                }
+                th.hide{
+                    display: none;
                 }
                 th.content:hover {
                     cursor: pointer;

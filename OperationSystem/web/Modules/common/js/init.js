@@ -64,7 +64,7 @@
             }).join("");
             return result;
         };
-        refernceString += loadAddon(["table", "nav"]);
+        refernceString += loadAddon(["table", "nav", "select"]);
 
         /**
          * output all reference

@@ -31,24 +31,23 @@
                 "lineNumber": (element.attr("lineNumber") == "false") ? false : true
             },
             url: element.attr("url"),
-            paginationArr: [5, 10, 15, 20, 25, 50, 100],
+            rowPerPageArr: [5, 10, 15, 20, 25, 50, 100],
             displayRowNum: 5,
             currentRowIndex: 1,
-            currentPageIndex: 1,
             //a tbody row height
             rowHeight: 40
         });
 
         //table node
         let node = {
+            table(){
+                return element.children("table");
+            },
             thead(){
                 return element.xPath("table>thead");
             },
             tbody(){
                 return element.xPath("table>tbody");
-            },
-            view(){
-                return element.xPath(".view");
             },
             left(){
                 return element.xPath(".left");
@@ -59,14 +58,14 @@
             request(){
                 return element.xPath(".left>.request");
             },
+            filter(){
+                return element.xPath(".left>.filter");
+            },
             rowPerPageSelect(){
                 return element.xPath(".right>.rowPerPage>select");
             },
-            pagination(){
-                return element.xPath(".right>.pagination");
-            },
-            pages(){
-                return element.xPath(".right>.pagination>.pages");
+            progress(){
+                return element.xPath(".right>.progress");
             }
         }
 
@@ -75,6 +74,12 @@
             noData(){
                 node.tbody().html(()=> {
                     let tbodyHtml = "<tr><td colspan='" + settings.colNum + "'>there is not any matched data</td></tr>";
+                    return tbodyHtml;
+                });
+            },
+            errorData(){
+                node.tbody().html(()=> {
+                    let tbodyHtml = "<tr><td colspan='" + settings.colNum + "'>an error occured when getting data</td></tr>";
                     return tbodyHtml;
                 });
             },
@@ -101,41 +106,78 @@
                 }).join("");
                 node.tbody().html(tbodyHtml);
             },
-            drawPagination(){
-                //draw pagination data
-                let currentRowPerPageNum = settings.displayRowNum;
-                if (settings.data != undefined) {
-                    let pageLength = (settings.data.length - 1) / currentRowPerPageNum + 1;
-                    pageLength = (pageLength <= 1) ? 1 : pageLength;
-                    let maxDisplayNum = (pageLength > 5) ? 5 : pageLength;
-                    let pageHtml = "";
-                    for (let i = 1; i < maxDisplayNum; i++) {
-                        if (i == settings.currentPageIndex) {
-                            pageHtml += "<button class='button-success'>" + i + "</button>";
-                        } else {
-                            pageHtml += "<button class='button-info'>" + i + "</button>";
+            mouseScroll(e){
+                //prevent browser scroll
+                e.preventDefault();
+                let lastIndex = settings.currentRowIndex;
+                let deltaY = e.originalEvent.deltaY;
+                if (deltaY < 0) {
+                    //scroll up
+                    if (settings.currentRowIndex > 1) {
+                        settings.currentRowIndex--;
+                        func.scrollTbody(lastIndex);
+                        func.setProgress();
+                    }
+                } else {
+                    //scroll down
+                    if (settings.data != undefined) {
+                        if (settings.currentRowIndex < settings.data.length - settings.displayRowNum + 1) {
+                            settings.currentRowIndex++;
+                            func.scrollTbody(lastIndex);
+                            func.setProgress();
                         }
                     }
-                    node.pages().html(pageHtml);
                 }
             },
-            scrollTbody(){
+            scrollTbody(lastIndex){
+                let i = settings.currentRowIndex;
+                if (i == lastIndex) {
+                    return;
+                }
+                if (lastIndex > settings.currentRowIndex) {
+                    while (i <= lastIndex) {
+                        node.tbody().children("tr[row=" + (i - 1) + "]").slideDown(50);
+                        i++;
+                    }
+                } else {
+                    while (i >= lastIndex) {
+                        node.tbody().children("tr[row=" + (i - 1) + "]").slideUp(50);
+                        i--;
+                    }
+                }
 
-
+            },
+            setProgress(){
+                let total = settings.data.length;
+                let h = settings.displayRowNum;
+                let percent;
+                if (total > h) {
+                    percent = (settings.currentRowIndex - 1) / (total - h);
+                } else {
+                    percent = 0;
+                }
+                percent = percent > 1 ? 1 : percent;
+                node.progress().children(".text").text((percent * 100).toFixed(2) + "%");
+                let w = (node.progress().width() - 2) * percent;
+                node.progress().children(".current").width(w);
             },
             setTbodyHeight(){
                 //set element height
                 let leftH = node.left().outerHeight(true);
                 let theadH = node.thead().outerHeight(true);
-                let displayRowNum = settings.displayRowNum;
+                let h = settings.displayRowNum;
+                let total;
                 if (settings.data != undefined && settings.data.length != undefined) {
-                    displayRowNum = (displayRowNum > settings.data.length) ? settings.data.length : displayRowNum;
+                    h = (h > settings.data.length) ? settings.data.length : h;
+                    total = settings.data.length;
                 } else {
-                    displayRowNum = 1;
+                    h = 1;
+                    total = 1;
                 }
-                let tbodyH = displayRowNum * settings.rowHeight;
+                let tbodyH = h * settings.rowHeight;
                 element.height(leftH + theadH + tbodyH + 1);
-                node.view().height(theadH + tbodyH + 1);
+
+
             },
             listenTbodyCheckbox(){
                 //listen tbody checkbox
@@ -150,14 +192,14 @@
                 });
             },
             read(){
+                func.loading();
                 http.request(settings.url, "").then(result=> {
                     settings.data = result;
-                    settings.currentPageIndex = 1;
                     func.drawTbody();
                     func.setTbodyHeight();
-                    func.drawPagination();
                     func.listenTbodyCheckbox();
                 }).catch(result=> {
+                    func.errorData();
                     throw result;
                 });
             }
@@ -170,11 +212,12 @@
             element.children("div[key]").each(function () {
                 settings.th.push({
                     id: $(this).attr("key"),
-                    name: $(this).text()
+                    name: $(this).text(),
+                    hide: $(this).has("hide")
                 });
             });
             let theadContentHtml = settings.th.map(d=> {
-                d = "<th class='content' id='" + d.id + "'>" + d.name + "</th>";
+                d = "<th class='content' name='" + d.id + "'>" + d.name + "</th>";
                 return d;
             }).join("");
             let theadHtml = "<thead><tr>";
@@ -197,28 +240,49 @@
                 requestHtml += "<button class='read button-info'><i class='fa fa-refresh'></i></button>";
                 requestHtml += "<button class='create button-info'><i class='fa fa-plus'></i></button>";
                 requestHtml += "</div>";
-                let filterHtml = "<div class='filter'><button class='button-info'><i class='fa fa-refresh'></i></button></div>";
+                let filterHtml = "<div class='filter'>";
+                filterHtml += "<div class='column-filter' title='column'></div>";
+                filterHtml += "</div>";
                 let leftHtml = "<div class='left'>" + requestHtml + filterHtml + "</div>";
 
-                let rowPerPageHtml = settings.paginationArr.map(d=> {
+                let rowPerPageHtml = settings.rowPerPageArr.map(d=> {
                     d = "<option>" + d + "</option>";
                     return d;
                 }).join("");
                 rowPerPageHtml = "<div class='rowPerPage'>Row Per Page : <select>" + rowPerPageHtml + "</select></div>";
-                let paginationHtml = "<div class='pagination'>";
-                paginationHtml += "<button class='button-info'><i class='fa fa-angle-double-left'></i></button>";
-                paginationHtml += "<button class='button-info'><i class='fa fa-angle-left'></i></button>";
-                paginationHtml += "<div class='pages'><button class='button-success'>1</button></div>";
-                paginationHtml += "<button class='button-info'><i class='fa fa-angle-right'></i></button>";
-                paginationHtml += "<button class='button-info'><i class='fa fa-angle-double-right'></i></button>";
-                paginationHtml += "</div>";
-                let rightHtml = "<div class='right'>" + rowPerPageHtml + paginationHtml + "</div>";
+                let progressHtml = "<div class='progress'><div class='text'>0%</div><div class='current'></div></div>";
+
+                let rightHtml = "<div class='right'>" + rowPerPageHtml + progressHtml + "</div>";
 
                 let tableHtml = "<table>" + theadHtml + "<tbody></tbody></table>";
 
-                let viewHtml = "<div class='view'></div>";
+                return leftHtml + rightHtml + tableHtml;
+            });
 
-                return leftHtml + rightHtml + tableHtml + viewHtml;
+            //listen column filter
+            node.filter().children(".column-filter").select({
+                data: settings.th.map(d=> {
+                    d.checked = !d.hide;
+                    return d;
+                }),
+                callback: ()=> {
+                    node.thead().xPath("tr>th.content").each(function () {
+                        let thId = $(this).attr("name");
+                        let columnFilterData = node.filter().children(".column-filter").data("data");
+                        console.log(columnFilterData.find(d=>{
+                            return (d.id == thId);
+                        }));
+                        let isChecked = columnFilterData.find(d=>{
+                           return (d.id == thId);
+                        }).checked;
+                        if(isChecked){
+                            $(this).removeClass("hide");
+                        }else{
+                            $(this).addClass("hide");
+                        }
+
+                    });
+                }
             });
 
             func.noData();
@@ -232,35 +296,19 @@
         });
 
         //mouse wheel scroll
-        node.tbody().delegate("", "mousewheel", function (e) {
-            //prevent browser scroll
-            e.preventDefault();
+        node.table().delegate("", "mousewheel", function (e) {
+            func.mouseScroll(e);
+        });
 
-            let deltaY = e.originalEvent.deltaY;
-            if (deltaY < 0) {
-                //scroll up
-                if (settings.currentRowIndex > 1) {
-                    settings.currentRowIndex--;
-                    node.tbody().children("tr[row=" + settings.currentRowIndex + "]").slideDown(50);
-                }
-            } else {
-                //scroll down
-                if (settings.data != undefined) {
-                    if (settings.currentRowIndex < settings.data.length - settings.displayRowNum) {
-                        node.tbody().children("tr[row=" + settings.currentRowIndex + "]").slideUp(50);
-                        settings.currentRowIndex++;
-                    }
-                }
-
-            }
-
+        node.progress().delegate("", "mousewheel", function (e) {
+            func.mouseScroll(e);
         });
 
         //listen row per page select
         node.rowPerPageSelect().delegate("", "change", function () {
             settings.displayRowNum = node.rowPerPageSelect().children("option:selected").text();
             func.setTbodyHeight();
-            func.drawPagination();
+            func.setProgress();
         });
 
         //listen read button
@@ -279,30 +327,24 @@
             }
         });
 
-        //listen pagination button
-        node.pagination().children("button").delegate("", "click", function () {
-            if ($(this).hasClass("fa-angle-double-left")) {
-                func.scrollTbody();
+        //listen progress click
+        node.progress().delegate("", "click", function (e) {
+            let clickPercent = (e.clientX - $(this).offset().left) / $(this).width();
+            if (settings.data == undefined) {
+                return;
             }
-            if ($(this).hasClass("fa-angle-left")) {
-                if (settings.currentPageIndex > 1) {
-                    settings.currentPageIndex--;
-                }
-                func.scrollTbody();
-            }
-            if ($(this).hasClass("fa-angle-double-right")) {
-                func.scrollTbody();
-            }
-            if ($(this).hasClass("fa-angle-right")) {
-                if (settings.data != undefined) {
-                    if (settings.currentPageIndex < settings.data.length) {
-                        settings.currentPageIndex++;
-                        func.scrollTbody();
-                    }
+            //find the nearest number
+            for (let i = 1; i <= settings.data.length; i++) {
+                let nodePercent = (i - 1) / (settings.data.length - settings.displayRowNum);
+                if (nodePercent >= clickPercent) {
+                    let lastIndex = settings.currentRowIndex;
+                    settings.currentRowIndex = i;
+                    func.scrollTbody(lastIndex);
+                    func.setProgress();
+                    break;
                 }
             }
         });
-
 
         return element;
     }
