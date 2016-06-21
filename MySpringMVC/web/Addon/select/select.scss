@@ -1,11 +1,15 @@
 .addon-select {
-
+    display: inline-block;
     .select-panel {
         position: absolute;
+        z-index: 2;
         display: none;
         background-color: rgba(196, 225, 255, 1);
         padding: 10px;
         font-size: 12px;
+        box-shadow: 3px 3px 3px rgba(220, 225, 255, 1);
+        border: 2px solid rgba(210, 225, 255, 1);
+        border-radius: 2px;
         .select-panel-head {
             height: 30px;
             input[type=checkbox] {

@@ -1,34 +1,40 @@
-.addon-select .select-panel {
-  position: absolute;
-  display: none;
-  background-color: #c4e1ff;
-  padding: 10px;
-  font-size: 12px; }
-  .addon-select .select-panel .select-panel-head {
-    height: 30px; }
-    .addon-select .select-panel .select-panel-head input[type=checkbox] {
+.addon-select {
+  display: inline-block; }
+  .addon-select .select-panel {
+    position: absolute;
+    z-index: 2;
+    display: none;
+    background-color: #c4e1ff;
+    padding: 10px;
+    font-size: 12px;
+    box-shadow: 3px 3px 3px #dce1ff;
+    border: 2px solid #d2e1ff;
+    border-radius: 2px; }
+    .addon-select .select-panel .select-panel-head {
+      height: 30px; }
+      .addon-select .select-panel .select-panel-head input[type=checkbox] {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        margin-right: 10px; }
+      .addon-select .select-panel .select-panel-head .text {
+        vertical-align: middle;
+        display: inline-block;
+        height: 24px; }
+    .addon-select .select-panel .select-panel-body .group {
       display: inline-block;
-      width: 18px;
-      height: 18px;
-      margin-right: 10px; }
-    .addon-select .select-panel .select-panel-head .text {
-      vertical-align: middle;
-      display: inline-block;
-      height: 24px; }
-  .addon-select .select-panel .select-panel-body .group {
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 10px; }
-    .addon-select .select-panel .select-panel-body .group input[type=checkbox] {
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      margin-right: 10px; }
-    .addon-select .select-panel .select-panel-body .group .text {
-      vertical-align: middle;
-      display: inline-block;
-      height: 24px; }
-  .addon-select .select-panel .select-panel-body .group:first-child {
-    margin-left: 0; }
+      vertical-align: top;
+      margin-left: 10px; }
+      .addon-select .select-panel .select-panel-body .group input[type=checkbox] {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        margin-right: 10px; }
+      .addon-select .select-panel .select-panel-body .group .text {
+        vertical-align: middle;
+        display: inline-block;
+        height: 24px; }
+    .addon-select .select-panel .select-panel-body .group:first-child {
+      margin-left: 0; }
 
 /*# sourceMappingURL=select.css.map */

@@ -27,15 +27,17 @@
         let settings = element.addonSettingExtend(options, {
             //func column,all default true
             funcColumn: {
-                "checkbox": (element.attr("checkbox") == "false") ? false : true,
-                "lineNumber": (element.attr("lineNumber") == "false") ? false : true
+                checkbox: (element.attr("checkbox") == "false") ? false : true,
+                lineNumber: (element.attr("lineNumber") == "false") ? false : true,
+                detail: (element.attr("detail") == "false") ? false : true
             },
             url: element.attr("url"),
             rowPerPageArr: [5, 10, 15, 20, 25, 50, 100],
             displayRowNum: 5,
             currentRowIndex: 1,
             //a tbody row height
-            rowHeight: 40
+            rowHeight: 40,
+
         });
 
         //table node
@@ -60,6 +62,9 @@
             },
             filter(){
                 return element.xPath(".left>.filter");
+            },
+            rowFilterPanel(){
+                return element.xPath(".left>.filter>.row-filter>.row-filter-panel");
             },
             rowPerPageSelect(){
                 return element.xPath(".right>.rowPerPage>select");
@@ -92,13 +97,16 @@
             drawTbody(){
                 //draw row data
                 let rowNum = 1;
-                let tbodyHtml = settings.data.map(d=> {
+                let tbodyHtml = settings.sortedData.map(d=> {
                     let trHtml = settings.funcColumn.checkbox ? "<td class='func'><input type='checkbox'></td>" : "";
                     trHtml += settings.funcColumn.lineNumber ? "<td class='func'>" + rowNum + "</td>" : "";
-                    settings.th.map(d1=> {
+                    trHtml += settings.funcColumn.detail ? "<td class='func'><i class='fa fa-plus'></i></td>" : "";
+                    trHtml += settings.th.map(d1=> {
                         let k = d1.id;
                         let v = (d[k] == undefined) ? "" : d[k];
-                        trHtml += "<td name='" + k + "'>" + v + "</td>";
+                        let classHtml = d1.checked ? "" : " class='hide'";
+                        d1 = "<td name='" + k + "'" + classHtml + ">" + v + "</td>";
+                        return d1;
                     });
                     trHtml = "<tr row='" + rowNum + "'>" + trHtml + "</tr>";
                     rowNum++;
@@ -195,6 +203,8 @@
                 func.loading();
                 http.request(settings.url, "").then(result=> {
                     settings.data = result;
+                    settings.filterData = result.concat();
+                    settings.sortedData = result.concat();
                     func.drawTbody();
                     func.setTbodyHeight();
                     func.listenTbodyCheckbox();
@@ -202,7 +212,39 @@
                     func.errorData();
                     throw result;
                 });
+            },
+            sort(cell){
+                let sortId = cell.attr("name");
+                if (cell.children("i").hasClass("fa-sort")) {
+                    //unset other column sort
+                    cell.siblings("th.content").children("i").attr("class", "fa fa-sort");
+
+                    //no sort to desc
+                    cell.children("i").removeClass("fa-sort");
+                    cell.children("i").addClass("fa-sort-desc");
+                    settings.sortedData.sort(function (a, b) {
+                        let va = isNaN(parseFloat(a[sortId])) ? a[sortId] : parseFloat(a[sortId]);
+                        let vb = isNaN(parseFloat(b[sortId])) ? b[sortId] : parseFloat(b[sortId]);
+                        return va > vb ? 1 : -1;
+                    });
+                } else if (cell.children("i").hasClass("fa-sort-desc")) {
+                    //desc to asc
+                    cell.children("i").removeClass("fa-sort-desc");
+                    cell.children("i").addClass("fa-sort-asc");
+                    settings.sortedData.sort(function (a, b) {
+                        let va = isNaN(parseFloat(a[sortId])) ? a[sortId] : parseFloat(a[sortId]);
+                        let vb = isNaN(parseFloat(b[sortId])) ? b[sortId] : parseFloat(b[sortId]);
+                        return va < vb ? 1 : -1;
+                    });
+                } else {
+                    //asc to no sort
+                    cell.children("i").removeClass("fa-sort-asc");
+                    cell.children("i").addClass("fa-sort");
+                    settings.sortedData = settings.filterData.concat();
+                }
+                func.drawTbody();
             }
+
         }
 
         //table init
@@ -217,12 +259,14 @@
                 });
             });
             let theadContentHtml = settings.th.map(d=> {
-                d = "<th class='content' name='" + d.id + "'>" + d.name + "</th>";
+                let classHtml = d.hide ? " hide" : "";
+                d = "<th class='content" + classHtml + "' name='" + d.id + "'><i class='fa fa-sort'></i>" + d.name + "</th>";
                 return d;
             }).join("");
             let theadHtml = "<thead><tr>";
             theadHtml += settings.funcColumn.checkbox ? "<th class='func'><input type='checkbox'></th>" : "";
             theadHtml += settings.funcColumn.lineNumber ? "<th class='func'>line</th>" : "";
+            theadHtml += settings.funcColumn.detail ? "<th class='func'>detail</th>" : "";
             theadHtml += theadContentHtml + "</tr></thead>";
 
             //colNum
@@ -237,12 +281,19 @@
             //append html
             element.append(()=> {
                 let requestHtml = "<div class='request'>";
-                requestHtml += "<button class='read button-info'><i class='fa fa-refresh'></i></button>";
-                requestHtml += "<button class='create button-info'><i class='fa fa-plus'></i></button>";
+                requestHtml += "<button class='read button-warning'><i class='fa fa-refresh'></i></button>";
+                requestHtml += "<button class='create button-warning'><i class='fa fa-plus'></i></button>";
                 requestHtml += "</div>";
                 let filterHtml = "<div class='filter'>";
                 filterHtml += "<div class='column-filter' title='column'></div>";
-                filterHtml += "</div>";
+                let rowFilterHtml = "<div class='row-filter'><button class='button-info'>row<i class='fa fa-check-square-o'></i></button>";
+                rowFilterHtml += "<div class='row-filter-panel'>";
+                rowFilterHtml += "<div class='row-filter-panel-head'><button class='button-success'><i class='fa fa-plus'></i>add new filter</button></div>";
+                rowFilterHtml += "<div class='row-filter-panel-body'></div>";
+                rowFilterHtml += "</div>";
+                rowFilterHtml += "</div>";
+                rowFilterHtml += "</div>";
+                filterHtml += rowFilterHtml;
                 let leftHtml = "<div class='left'>" + requestHtml + filterHtml + "</div>";
 
                 let rowPerPageHtml = settings.rowPerPageArr.map(d=> {
@@ -266,21 +317,27 @@
                     return d;
                 }),
                 callback: ()=> {
-                    node.thead().xPath("tr>th.content").each(function () {
-                        let thId = $(this).attr("name");
+                    let selectCallback = (cell)=> {
+                        let thId = cell.attr("name");
                         let columnFilterData = node.filter().children(".column-filter").data("data");
-                        console.log(columnFilterData.find(d=>{
+                        let findData = columnFilterData.find(d=> {
                             return (d.id == thId);
-                        }));
-                        let isChecked = columnFilterData.find(d=>{
-                           return (d.id == thId);
-                        }).checked;
-                        if(isChecked){
-                            $(this).removeClass("hide");
-                        }else{
-                            $(this).addClass("hide");
+                        });
+                        if (findData == undefined) {
+                            return;
                         }
-
+                        let isChecked = findData.checked;
+                        if (isChecked) {
+                            cell.removeClass("hide");
+                        } else {
+                            cell.addClass("hide");
+                        }
+                    }
+                    node.thead().xPath("tr>th.content").each(function () {
+                        selectCallback($(this));
+                    });
+                    node.tbody().xPath("tr>td[name]").each(function () {
+                        selectCallback($(this));
                     });
                 }
             });
@@ -344,6 +401,62 @@
                     break;
                 }
             }
+        });
+
+        //listen thead click
+        node.thead().xPath("tr>th.content").delegate("", "click", function () {
+            func.sort($(this));
+        });
+
+        //listen row filter
+        node.filter().xPath(".row-filter>button").delegate("", "click", function () {
+            $(this).parent().children(".row-filter-panel").toggle();
+        });
+
+        //listen row filter add button
+        node.rowFilterPanel().xPath(".row-filter-panel-head>button").delegate("", "click", function () {
+            node.rowFilterPanel().children(".row-filter-panel-body").append(()=> {
+                let rowHtml = "<div class='row'><select>";
+                rowHtml += settings.th.map(d=> {
+                    d = "<option>" + d.name + "</option>";
+                    return d;
+                }).join("");
+                rowHtml += "</select><div class='value'></div><button class='button-minus'><i class='fa fa-times'></i></button>";
+                rowHtml += "</div>";
+                return rowHtml;
+            });
+
+            //addon select
+            let setAddonSelect = (rowAddonSelect)=>{
+                let addonSelectColumnName = rowAddonSelect.parent().children("select").children("option:selected").text();
+                let addonSelectId = settings.th.find(d=> {
+                    return d.name == addonSelectColumnName;
+                }).id;
+                let i = 0;
+                let addonSelectData = settings.data.distinct(d=>{
+                    return d[addonSelectId];
+                }).map(d=> {
+                    d = {id: i, name: d[addonSelectId], checked: true};
+                    i++;
+                    return d;
+                });
+                rowAddonSelect.select({
+                    data: addonSelectData
+                });
+            }
+
+            //listen name select change
+            node.rowFilterPanel().children(".row-filter-panel-body").children(".row:last").children("select").delegate("","change",function () {
+                let columnName = $(this).children("option:selected").text();
+                setAddonSelect($(this).parent().children(".value"));
+            });
+
+            let newSelect = node.rowFilterPanel().children(".row-filter-panel-body").children(".row:last").children(".value");
+            setAddonSelect(newSelect);
+
+
+
+
         });
 
         return element;

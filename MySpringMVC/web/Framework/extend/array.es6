@@ -1,7 +1,7 @@
 /**
  *
  */
-{
+{ 
 //filter
     Array.prototype.filter = function (callback) {
         var result = new Array();
