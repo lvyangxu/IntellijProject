@@ -15,12 +15,25 @@ public class Response {
 
     /**
      * response string message
+     *
      * @param response
      * @param message
      */
     private static void response(HttpServletResponse response, String message) {
+        response(response, message, 200);
+    }
+
+    /**
+     * response string message with httpStatusCode
+     *
+     * @param response
+     * @param message
+     * @param statusCode
+     */
+    private static void response(HttpServletResponse response, String message, Integer httpStatusCode) {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+        response.setStatus(httpStatusCode);
         PrintWriter PrintWriter1 = null;
         try {
             PrintWriter1 = response.getWriter();
@@ -34,6 +47,7 @@ public class Response {
 
     /**
      * response success json string message
+     *
      * @param response
      * @param responseMessage
      */
@@ -42,7 +56,7 @@ public class Response {
         if (responseMessage.length != 0) {
             message = responseMessage[0];
         }
-        if ((message.startsWith("{") && message.endsWith("}"))||(message.startsWith("[") && message.endsWith("]"))) {
+        if ((message.startsWith("{") && message.endsWith("}")) || (message.startsWith("[") && message.endsWith("]"))) {
             message = "{\"success\":\"true\",\"message\":" + message + "}";
         } else {
             message = "{\"success\":\"true\",\"message\":\"" + message + "\"}";
@@ -53,6 +67,7 @@ public class Response {
 
     /**
      * response fail json string message
+     *
      * @param response
      * @param message
      */
@@ -61,7 +76,16 @@ public class Response {
         response(response, message);
     }
 
-    public static void file(HttpServletResponse response,String filePath,String fileName) throws MyException {
+    /**
+     * response unauthorized width 401 http status code
+     * @param response
+     */
+    public static void unauthorized(HttpServletResponse response) {
+        response(response, "authenticate failed", 401);
+    }
+
+
+    public static void file(HttpServletResponse response, String filePath, String fileName) throws MyException {
         response.setHeader("Content-type", "APPLICATION/OCTET-STREAM");
         try {
             response.setHeader("Content-Disposition", "attachment;fileName=" + java.net.URLEncoder.encode(fileName, "UTF-8"));
@@ -70,7 +94,7 @@ public class Response {
         }
         response.setCharacterEncoding("UTF-8");
         try {
-            try (InputStream inputStream = new FileInputStream(new File(filePath+fileName))) {
+            try (InputStream inputStream = new FileInputStream(new File(filePath + fileName))) {
                 OutputStream os = new BufferedOutputStream(response.getOutputStream());
                 byte[] b = new byte[2048];
                 int length;

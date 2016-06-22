@@ -24,13 +24,13 @@ public class Session {
               try {
                   account = new MyString(account).urlDecode().base64Decode().toString();
               } catch (Exception e) {
-                  throw new MyException("invalid account cookie:"+account);
+                  throw new MyException("authenticate failed");
               }
                String password = Cookie.get(request, passwordCookieName);
               try {
                   password = new MyString(password).urlDecode().base64Decode().toString();
               } catch (Exception e) {
-                  throw new MyException("invalid password cookie:"+password);
+                  throw new MyException("authenticate failed");
               }
               Account.authenticate(account,password);
           }

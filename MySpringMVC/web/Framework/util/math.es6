@@ -11,5 +11,5 @@ class math {
     static buildRandom(max) {
         let random = Math.round(Math.random() * max);
         return random;
-    }
+    } 
 } 

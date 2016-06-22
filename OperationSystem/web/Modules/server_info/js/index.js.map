@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.es6"],"names":[],"mappings":";;AAAA;AACI,MAAE,QAAF,EAAY,KAAZ;AACA,MAAE,MAAF,EAAU,GAAV;AACH","file":"index.js","sourcesContent":["{\r\n    $(\".table\").table();\r\n    $(\".nav\").nav();\r\n}"]}

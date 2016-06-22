@@ -19,7 +19,7 @@ var date = function () {
         key: "getLocalDay",
 
 
-        /**
+        /** 
          * get current local day
          * @param addDays
          * @returns {string|*} 

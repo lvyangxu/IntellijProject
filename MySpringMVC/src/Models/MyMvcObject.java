@@ -1,5 +1,6 @@
 package Models;
 
+import Init.Init;
 import MiddleWare.*;
 import Request.Parameter;
 import Response.Response;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +51,14 @@ public class MyMvcObject {
 
     public void fail(String messgae) {
         Response.fail(this.response, messgae);
+    }
+
+    public void unauthorised() throws MyException {
+        try {
+            this.response.sendRedirect(Init.loginRedirectUrl);
+        } catch (IOException e) {
+            throw new MyException("redict error");
+        }
     }
 
     public MyMvcObject authenticate() throws MyException {

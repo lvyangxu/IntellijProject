@@ -46,7 +46,10 @@ class http {
                 }catch(e){ 
                     reject("Invalid json format");
                 }
-                if(result.success!=undefined&&result.success=="true"){
+                if(result.success==undefined||result.message == undefined){
+                    reject("Invalid Data")
+                }
+                if(result.success=="true"){
                     resolve(result.message);
                 }else{
                     let errorMessage = "Invalid Data";

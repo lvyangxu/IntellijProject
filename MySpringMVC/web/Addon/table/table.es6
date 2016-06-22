@@ -31,7 +31,7 @@
                 lineNumber: (element.attr("lineNumber") == "false") ? false : true,
                 detail: (element.attr("detail") == "false") ? false : true
             },
-            url: element.attr("url"),
+            url: element.property("url", "../Table/" + element.property("name", "") + "/"),
             rowPerPageArr: [5, 10, 15, 20, 25, 50, 100],
             displayRowNum: 5,
             currentRowIndex: 1,
@@ -101,13 +101,14 @@
                     let trHtml = settings.funcColumn.checkbox ? "<td class='func'><input type='checkbox'></td>" : "";
                     trHtml += settings.funcColumn.lineNumber ? "<td class='func'>" + rowNum + "</td>" : "";
                     trHtml += settings.funcColumn.detail ? "<td class='func'><i class='fa fa-plus'></i></td>" : "";
+                    trHtml += "<td name='id'>" + d.id + "</td>";
                     trHtml += settings.th.map(d1=> {
                         let k = d1.id;
                         let v = (d[k] == undefined) ? "" : d[k];
                         let classHtml = d1.checked ? "" : " class='hide'";
                         d1 = "<td name='" + k + "'" + classHtml + ">" + v + "</td>";
                         return d1;
-                    });
+                    }).join("");
                     trHtml = "<tr row='" + rowNum + "'>" + trHtml + "</tr>";
                     rowNum++;
                     return trHtml;
@@ -128,8 +129,8 @@
                     }
                 } else {
                     //scroll down
-                    if (settings.data != undefined) {
-                        if (settings.currentRowIndex < settings.data.length - settings.displayRowNum + 1) {
+                    if (settings.sortedData != undefined) {
+                        if (settings.currentRowIndex < settings.sortedData.length - settings.displayRowNum + 1) {
                             settings.currentRowIndex++;
                             func.scrollTbody(lastIndex);
                             func.setProgress();
@@ -174,13 +175,11 @@
                 let leftH = node.left().outerHeight(true);
                 let theadH = node.thead().outerHeight(true);
                 let h = settings.displayRowNum;
-                let total;
                 if (settings.data != undefined && settings.data.length != undefined) {
                     h = (h > settings.data.length) ? settings.data.length : h;
-                    total = settings.data.length;
+                    h = (h == 0) ? 1 : h;
                 } else {
                     h = 1;
-                    total = 1;
                 }
                 let tbodyH = h * settings.rowHeight;
                 element.height(leftH + theadH + tbodyH + 1);
@@ -201,11 +200,14 @@
             },
             read(){
                 func.loading();
-                http.request(settings.url, "").then(result=> {
+                http.request(settings.url + "Read", "").then(result=> {
                     settings.data = result;
-                    settings.filterData = result.concat();
                     settings.sortedData = result.concat();
-                    func.drawTbody();
+                    if (result.length == 0) {
+                        func.noData();
+                    } else {
+                        func.drawTbody();
+                    }
                     func.setTbodyHeight();
                     func.listenTbodyCheckbox();
                 }).catch(result=> {
@@ -240,9 +242,18 @@
                     //asc to no sort
                     cell.children("i").removeClass("fa-sort-asc");
                     cell.children("i").addClass("fa-sort");
-                    settings.sortedData = settings.filterData.concat();
+                    settings.sortedData = settings.data.concat();
                 }
                 func.drawTbody();
+            },
+            getSelectRow(){
+                let selectedTrArr = [];
+                node.tbody().xPath("tr>td.func>input[type=checkbox]").each(function () {
+                    if ($(this).prop("checked")) {
+                        selectedTrArr.push($(this).parent().parent());
+                    }
+                });
+                return selectedTrArr;
             }
 
         }
@@ -267,6 +278,7 @@
             theadHtml += settings.funcColumn.checkbox ? "<th class='func'><input type='checkbox'></th>" : "";
             theadHtml += settings.funcColumn.lineNumber ? "<th class='func'>line</th>" : "";
             theadHtml += settings.funcColumn.detail ? "<th class='func'>detail</th>" : "";
+            theadHtml += "<th class='content' name='id'>rowId</th>";
             theadHtml += theadContentHtml + "</tr></thead>";
 
             //colNum
@@ -283,17 +295,28 @@
                 let requestHtml = "<div class='request'>";
                 requestHtml += "<button class='read button-warning'><i class='fa fa-refresh'></i></button>";
                 requestHtml += "<button class='create button-warning'><i class='fa fa-plus'></i></button>";
+
+                let createPanelHtml = "<div class='create-panel'><div class='create-panel-head'>";
+                createPanelHtml += "<button class='button-success'><i class='fa fa-plus'></i></button>";
+                createPanelHtml += "<button class='button-success'><i class='fa fa-undo'></i></button>";
+                createPanelHtml += "</div><div class='create-panel-body'></div></div>";
+                requestHtml += createPanelHtml;
+                requestHtml += "<button class='update button-warning'><i class='fa fa-pencil-square-o'></i></button>";
+                requestHtml += "<button class='delete button-danger'><i class='fa fa-times'></i></button>";
                 requestHtml += "</div>";
+
                 let filterHtml = "<div class='filter'>";
                 filterHtml += "<div class='column-filter' title='column'></div>";
                 let rowFilterHtml = "<div class='row-filter'><button class='button-info'>row<i class='fa fa-check-square-o'></i></button>";
                 rowFilterHtml += "<div class='row-filter-panel'>";
-                rowFilterHtml += "<div class='row-filter-panel-head'><button class='button-success'><i class='fa fa-plus'></i>add new filter</button></div>";
+                rowFilterHtml += "<div class='row-filter-panel-head'><button class='add-button button-success'><i class='fa fa-plus'></i>add new filter</button>";
+                rowFilterHtml += "<button class='filter-button button-success'><i class='fa fa-filter'></i>filter</button></div>";
                 rowFilterHtml += "<div class='row-filter-panel-body'></div>";
                 rowFilterHtml += "</div>";
                 rowFilterHtml += "</div>";
-                rowFilterHtml += "</div>";
                 filterHtml += rowFilterHtml;
+                filterHtml += "<button class='button-info'><i class='fa fa-undo'></i></button>";
+                filterHtml += "</div>";
                 let leftHtml = "<div class='left'>" + requestHtml + filterHtml + "</div>";
 
                 let rowPerPageHtml = settings.rowPerPageArr.map(d=> {
@@ -373,6 +396,34 @@
             func.read();
         });
 
+        //listen create button
+        node.request().xPath(".create").delegate("", "click", function () {
+            node.request().children(".create-panel").toggle();
+        });
+
+        //listen delete button
+        node.request().xPath(".delete").delegate("", "click", function () {
+            let selectedRowArr = func.getSelectRow();
+            if (selectedRowArr.length == 0) {
+                alert("please check at least one box on the left ");
+                return;
+            }
+            if (confirm("do you really want to delete selected " + selectedRowArr.length + " rows?")) {
+                let requestData = "id=";
+                requestData += selectedRowArr.map(d=> {
+                    let id = d.children("td[name=id]").text();
+                    d = new myString(id).base64UrlEncode().value;
+                    return d;
+                }).join(",");
+                http.request(settings.url + "Delete", requestData).then(result=> {
+                    func.read();
+                }).catch(result=> {
+                    alert("delete data failed:" + result);
+                });
+            }
+
+        });
+
         //listen thead checkbox
         node.thead().xPath("tr>th.func>input[type=checkbox]").delegate("", "click", function () {
             if ($(this).prop("checked")) {
@@ -414,7 +465,7 @@
         });
 
         //listen row filter add button
-        node.rowFilterPanel().xPath(".row-filter-panel-head>button").delegate("", "click", function () {
+        node.rowFilterPanel().xPath(".row-filter-panel-head>.add-button").delegate("", "click", function () {
             node.rowFilterPanel().children(".row-filter-panel-body").append(()=> {
                 let rowHtml = "<div class='row'><select>";
                 rowHtml += settings.th.map(d=> {
@@ -427,13 +478,13 @@
             });
 
             //addon select
-            let setAddonSelect = (rowAddonSelect)=>{
+            let setAddonSelect = (rowAddonSelect)=> {
                 let addonSelectColumnName = rowAddonSelect.parent().children("select").children("option:selected").text();
                 let addonSelectId = settings.th.find(d=> {
                     return d.name == addonSelectColumnName;
                 }).id;
                 let i = 0;
-                let addonSelectData = settings.data.distinct(d=>{
+                let addonSelectData = settings.data.distinct(d=> {
                     return d[addonSelectId];
                 }).map(d=> {
                     d = {id: i, name: d[addonSelectId], checked: true};
@@ -446,18 +497,54 @@
             }
 
             //listen name select change
-            node.rowFilterPanel().children(".row-filter-panel-body").children(".row:last").children("select").delegate("","change",function () {
+            node.rowFilterPanel().children(".row-filter-panel-body").children(".row:last").children("select").delegate("", "change", function () {
                 let columnName = $(this).children("option:selected").text();
                 setAddonSelect($(this).parent().children(".value"));
+            });
+
+            //listen row filter delete button
+            node.rowFilterPanel().xPath(".row-filter-panel-body>.row>.button-minus").delegate("", "click", function () {
+                $(this).parent().remove();
             });
 
             let newSelect = node.rowFilterPanel().children(".row-filter-panel-body").children(".row:last").children(".value");
             setAddonSelect(newSelect);
 
 
-
-
         });
+
+        //listen row filter filter button
+        node.rowFilterPanel().xPath(".row-filter-panel-head>.filter-button").delegate("", "click", function () {
+            let data = settings.data.concat();
+            node.rowFilterPanel().xPath(".row-filter-panel-body>.row").each(function () {
+                let filterId = settings.th.find(d=> {
+                    return d.name == $(this).children("select").children("option:selected").text();
+                }).id;
+                let filterData = $(this).children(".value").data("data").filter(d=> {
+                    return d.checked;
+                });
+                data = data.filter(d=> {
+                    let findData = filterData.find(d1=> {
+                        return d1.name == d[filterId];
+                    });
+                    return findData != undefined;
+                });
+            });
+            settings.sortedData = data;
+
+            //close current panel
+            node.rowFilterPanel().xPath(".row-filter-panel-body>.row>.value>.select-panel").hide();
+            node.rowFilterPanel().hide();
+
+            func.drawTbody();
+        });
+
+        //listen revert button
+        node.filter().children(".button-info").delegate("", "click", function () {
+            settings.sortedData = settings.data.concat();
+            func.drawTbody();
+        });
+
 
         return element;
     }

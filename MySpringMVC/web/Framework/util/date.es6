@@ -3,7 +3,7 @@
  */
 class date {
 
-    /**
+    /** 
      * get current local day
      * @param addDays
      * @returns {string|*} 

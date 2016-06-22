@@ -65,13 +65,13 @@ public class Account {
                     isValid = true;
                     break;
                 } else {
-                    throw new MyException("relogin:invalid password");
+                    throw new MyException("authenticate failed");
                 }
             }
         }
 
         if (!isValid) {
-            throw new MyException("relogin:invalid username");
+            throw new MyException("authenticate failed");
         }
     }
 }

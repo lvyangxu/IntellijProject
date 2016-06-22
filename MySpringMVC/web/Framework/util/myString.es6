@@ -6,7 +6,7 @@ class myString {
 
     constructor(value) {
         this.value = value;
-    }
+    } 
 
     /**
      * string to json

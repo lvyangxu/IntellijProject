@@ -62,7 +62,10 @@ var http = function () {
                     } catch (e) {
                         reject("Invalid json format");
                     }
-                    if (result.success != undefined && result.success == "true") {
+                    if (result.success == undefined || result.message == undefined) {
+                        reject("Invalid Data");
+                    }
+                    if (result.success == "true") {
                         resolve(result.message);
                     } else {
                         var errorMessage = "Invalid Data";

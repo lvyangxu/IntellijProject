@@ -7,6 +7,7 @@ import Util.MyString;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -91,17 +92,11 @@ public class Table {
 
         //build sqlCommand
         List<String> commandList = new ArrayList<>();
+        String idStr = Parameter.get(request,"id");
+        String[] idArr = new MyString(idStr).split(",");
         for (Integer i = 0; i < rowNumber; i++) {
-            String prefix = "delete from " + table + " where ";
-            String joinStr = " and ";
-            String command = prefix;
-            for (String field : fieldList) {
-                field = getFieldStr(request, field, defaultMap, i);
-                command += field;
-                command += joinStr;
-            }
-            command = command.substring(0, command.length() - joinStr.length());
-            command += ";";
+            String id = new MyString(idArr[i]).base64Decode().toString();
+            String command = "delete from " + table + " where id="+id + ";";
             commandList.add(command);
         }
         mysql.batch(commandList);
@@ -181,23 +176,7 @@ public class Table {
      * @return
      */
     private static Integer getRowNumber(HttpServletRequest request, List<String> fieldList) {
-        //get table field name string
-        List<String> fieldNameList = fieldList.stream().map(field -> {
-            String[] arr = new MyString(field).split("\\|");
-            String name = arr[0];
-            return name;
-        }).collect(Collectors.toList());
-
-        //whether column is auto increasement
-        List<String> fieldExtraList = fieldList.stream().map(field -> {
-            String[] arr = new MyString(field).split("\\|");
-            String extra = arr[5];
-            return extra;
-        }).collect(Collectors.toList());
-
-        //get value numbers
-        Integer defaultKeyIndex = (fieldExtraList.get(0).equals("auto_increment")) ? 1 : 0;
-        String defaultKeyValue = Parameter.get(request, fieldNameList.get(defaultKeyIndex));
+        String defaultKeyValue = Parameter.get(request, "id");
         Integer rowNumber = new MyString(defaultKeyValue).split(",").length;
         return rowNumber;
     }

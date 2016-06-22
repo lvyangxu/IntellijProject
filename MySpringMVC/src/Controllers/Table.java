@@ -31,7 +31,7 @@ public class Table {
                     MyMvcObject1.authenticate().updateMap(name).redirectMap(name).update(name).success();
                     break;
                 case "Read":
-                    MyMvcObject1.readMap(name).redirectMap(name).read(name).success();
+                    MyMvcObject1.authenticate().readMap(name).redirectMap(name).read(name).success();
                     break;
                 case "Delete":
                     MyMvcObject1.authenticate().deleteMap(name).redirectMap(name).delete(name).success();
@@ -41,7 +41,16 @@ public class Table {
                     break;
             }
         } catch (MyException e) {
-            MyMvcObject1.fail(e.getMessage());
+            if(e.getMessage().equals("authenticate failed")){
+                try {
+                    MyMvcObject1.unauthorised();
+                } catch (MyException e1) {
+                    MyMvcObject1.fail("unauthorised redict failed");
+                }
+            }else {
+                MyMvcObject1.fail(e.getMessage());
+            }
+
         }
     }
 

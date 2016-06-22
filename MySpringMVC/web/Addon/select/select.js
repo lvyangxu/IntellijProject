@@ -67,6 +67,21 @@
                     return panelHtml;
                 });
 
+                node.panelBodyCheckbox().delegate("", "click", function () {
+                    var _this = this;
+
+                    var optionId = $(this).parent().attr("optionId");
+                    settings.data = settings.data.map(function (d) {
+                        if (d.id == optionId) {
+                            d.checked = $(_this).prop("checked");
+                        }
+                        return d;
+                    });
+                    if (settings.callback != undefined) {
+                        settings.callback();
+                    }
+                });
+
                 element.data("data", settings.data);
             }
         };
@@ -87,19 +102,6 @@
                 var numStr = checkedNum + "/" + settings.data.length;
                 panelHtml += "<div class='select-panel-head'><input type='checkbox'" + allCheckedHtml + "><div class='text'>" + numStr + "</div></div>";
                 panelHtml += "<div class='select-panel-body'>";
-                for (var i = 0; i <= settings.data.length / 10; i++) {
-                    var end = i * 10 + 10 < settings.data.length ? i * 10 + 10 : settings.data.length;
-                    var currentArr = settings.data.slice(i * 10, end);
-
-                    panelHtml += "<div class='group'>";
-                    panelHtml += currentArr.map(function (d) {
-                        var checkedHtml = d.checked ? " checked='checked'" : "";
-                        d = "<div optionId='" + d.id + "'><input type='checkbox'" + checkedHtml + "><div class='text'>" + d.name + "</div></div>";
-                        return d;
-                    }).join("");
-                    panelHtml += "</div>";
-                }
-
                 panelHtml += "</div>";
                 panelHtml += "</div>";
                 return buttonHtml + panelHtml;
@@ -113,26 +115,13 @@
 
             //listen checkbox
             node.panelHeadCheckbox().delegate("", "click", function () {
-                var _this = this;
+                var _this2 = this;
 
                 settings.data = settings.data.map(function (d) {
-                    d.checked = $(_this).prop("checked");
+                    d.checked = $(_this2).prop("checked");
                     return d;
                 });
                 node.panelBodyCheckbox().prop("checked", $(this).prop("checked"));
-                func.setData();
-                settings.callback();
-            });
-            node.panelBodyCheckbox().delegate("", "click", function () {
-                var _this2 = this;
-
-                var optionId = $(this).parent().attr("optionId");
-                settings.data = settings.data.map(function (d) {
-                    if (d.id == optionId) {
-                        d.checked = $(_this2).prop("checked");
-                    }
-                    return d;
-                });
                 func.setData();
                 settings.callback();
             });

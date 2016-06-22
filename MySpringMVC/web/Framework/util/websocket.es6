@@ -7,7 +7,7 @@ class websocket{
         if(!window.WebSocket){
             throw("your browser do not support websocket");
             return;
-        }
+        } 
 
         //get websocket url
         let baseUrl = window.location.href;
