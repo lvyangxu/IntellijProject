@@ -254,6 +254,30 @@
                     }
                 });
                 return selectedTrArr;
+            },
+            getTdHmtl(type){
+                let tdHtml;
+                switch (type) {
+                    case "":
+                        break;
+                    case "input":
+                    default:
+                        tdHtml = "<input type='text'>";
+                        break;
+                }
+                return tdHtml;
+            },
+            getTdValue(td, type){
+                let tdValue;
+                switch (type) {
+                    case "":
+                        break;
+                    case "input":
+                    default:
+                        tdValue = td.children("input").val();
+                        break;
+                }
+                return tdValue;
             }
 
         }
@@ -266,6 +290,7 @@
                 settings.th.push({
                     id: $(this).attr("key"),
                     name: $(this).text(),
+                    type: $(this).property("type", "input"),
                     hide: $(this).has("hide")
                 });
             });
@@ -293,16 +318,48 @@
             //append html
             element.append(()=> {
                 let requestHtml = "<div class='request'>";
-                requestHtml += "<button class='read button-warning'><i class='fa fa-refresh'></i></button>";
-                requestHtml += "<button class='create button-warning'><i class='fa fa-plus'></i></button>";
+                let readHtml = "<button class='read button-warning'><i class='fa fa-refresh'></i></button>";
+                requestHtml += readHtml;
 
-                let createPanelHtml = "<div class='create-panel'><div class='create-panel-head'>";
-                createPanelHtml += "<button class='button-success'><i class='fa fa-plus'></i></button>";
-                createPanelHtml += "<button class='button-success'><i class='fa fa-undo'></i></button>";
-                createPanelHtml += "</div><div class='create-panel-body'></div></div>";
-                requestHtml += createPanelHtml;
-                requestHtml += "<button class='update button-warning'><i class='fa fa-pencil-square-o'></i></button>";
-                requestHtml += "<button class='delete button-danger'><i class='fa fa-times'></i></button>";
+                let createHtml = "<div class='create'><button class='button-warning'><i class='fa fa-plus'></i></button>";
+                createHtml += "<div class='create-panel'><div class='create-panel-head'>";
+                createHtml += "<button class='add-button button-success'><i class='fa fa-plus'></i></button>";
+                createHtml += "<button class='minus-button button-success'><i class='fa fa-minus'></i></button>";
+                createHtml += "<button class='revert-button button-success'><i class='fa fa-undo'></i></button>";
+                createHtml += "<button class='submit-button button-warning'>Submit</button>";
+                createHtml += "</div><div class='create-panel-body'>";
+                createHtml += "<table class='submit-table'><thead>";
+                createHtml += settings.th.map(d=> {
+                    d = "<th>" + d.name + "</th>";
+                    return d;
+                }).join("");
+                createHtml += "</thead><tbody></tbody></table>";
+                createHtml += "<div class='unify'>you can unify all rows data at the below table";
+                createHtml += "<table class='unify-table'><thead>";
+                createHtml += settings.th.map(d=> {
+                    d = "<th>" + d.name + "</th>";
+                    return d;
+                }).join("");
+                createHtml += "</thead><tbody><tr>";
+                createHtml += settings.th.map(d=> {
+                    d = "<td>" + func.getTdHmtl(d.type) + "</td>";
+                    return d;
+                }).join("");
+                createHtml += "</tr></tbody></table></div>";
+
+                createHtml += "</div></div></div>";
+                requestHtml += createHtml;
+
+                let updateHtml = "<div class='update'><button class='button-warning'><i class='fa fa-pencil-square-o'></i></button>";
+                updateHtml += "<div class='update-panel'><div class='update-panel-head'>";
+                updateHtml += "<button class='button-success'><i class='fa fa-plus'></i></button>";
+                updateHtml += "<button class='button-success'><i class='fa fa-undo'></i></button>";
+                updateHtml += "</div><div class='update-panel-body'></div></div></div>";
+                requestHtml += updateHtml;
+
+                let deleteHtml = "<button class='delete button-danger'><i class='fa fa-times'></i></button>";
+                requestHtml += deleteHtml;
+
                 requestHtml += "</div>";
 
                 let filterHtml = "<div class='filter'>";
@@ -376,11 +433,11 @@
         });
 
         //mouse wheel scroll
-        node.table().delegate("", "mousewheel", function (e) {
+        node.table().delegate("", "mousewheel DOMMouseScroll", function (e) {
             func.mouseScroll(e);
         });
 
-        node.progress().delegate("", "mousewheel", function (e) {
+        node.progress().delegate("", "mousewheel DOMMouseScroll", function (e) {
             func.mouseScroll(e);
         });
 
@@ -397,8 +454,72 @@
         });
 
         //listen create button
-        node.request().xPath(".create").delegate("", "click", function () {
-            node.request().children(".create-panel").toggle();
+        node.request().xPath(".create>button").delegate("", "click", function () {
+            node.request().xPath(".create>.create-panel").toggle();
+        });
+
+        //listen create panel add button
+        node.request().xPath(".create>.create-panel>.create-panel-head>.add-button").delegate("", "click", function () {
+            let createPanelTbody = node.request().xPath(".create>.create-panel>.create-panel-body>.submit-table>tbody");
+            createPanelTbody.append(()=> {
+                let newRowHtml = "<tr>";
+                newRowHtml += settings.th.map(d=> {
+                    d = "<td name='" + d.id + "'>" + func.getTdHmtl(d.type) + "</td>";
+                    return d;
+                }).join("");
+                newRowHtml += "</tr>";
+                return newRowHtml;
+            });
+        });
+
+        //listen create panel minus button
+        node.request().xPath(".create>.create-panel>.create-panel-head>.minus-button").delegate("", "click", function () {
+            node.request().xPath(".create>.create-panel>.create-panel-body>.submit-table>tbody>tr:last").remove();
+        });
+
+        //listen create panel revert button
+        node.request().xPath(".create>.create-panel>.create-panel-head>.revert-button").delegate("", "click", function () {
+            node.request().xPath(".create>.create-panel>.create-panel-body>.submit-table>tbody>tr").remove();
+        });
+
+        //listen create panel submit button
+        node.request().xPath(".create>.create-panel>.create-panel-head>.submit-button").delegate("", "click", function () {
+            let tr = node.request().xPath(".create>.create-panel>.create-panel-body>.submit-table>tbody>tr");
+            if (tr.length == 0) {
+                alert("please add at least one row");
+                return;
+            }
+
+            if (confirm("do you want to create the " + tr.length + " row data below ?")) {
+                let requestData = settings.th.map(d=> {
+                    let data = d.id + "=";
+                    data += tr.toArray().map(d1=> {
+                        d1 = d1.children("td[name=" + d.id + "]");
+                        d1 = func.getTdValue(d1, d.type);
+                        d1 = new myString(d1).base64UrlEncode().value;
+                        return d1;
+                    }).join(",");
+                    return data;
+                }).join("&");
+
+                http.request(settings.url + "Create", requestData).then(result=> {
+                    node.request().xPath(".create>.create-panel").hide();
+                    func.read();
+                }).catch(result=> {
+                    alert("create data failed:" + result);
+                });
+            }
+
+        });
+
+        //listen unify table td value change
+        // node.request().xPath(".create>.create-panel>.create-panel-body>.unify-table>tbody>tr>td>input[type=text]").delegate("","input",function () {
+        //
+        // });
+
+        //listen update button
+        node.request().xPath(".update>button").delegate("", "click", function () {
+            node.request().xPath(".update>.update-panel").toggle();
         });
 
         //listen delete button

@@ -42,6 +42,7 @@ public class Table {
             command = command.substring(0, command.length() - joinStr.length());
             command += ";";
             commandList.add(command);
+            Init.log4j.database("try create:"+command);
         }
         mysql.batch(commandList);
     }
@@ -76,12 +77,14 @@ public class Table {
             command += notkeyFieldCommand.substring(0, notkeyFieldCommand.length() - 1) + " where " + keyFieldCommand.substring(0, keyFieldCommand.length() - 5);
             command += ";";
             commandList.add(command);
+            Init.log4j.database("try update:"+command);
         }
         mysql.batch(commandList);
 
     }
 
     public static String read(String table, String sqlCommand) throws MyException {
+        Init.log4j.database("try read:"+sqlCommand);
         return mysql.select(sqlCommand).toJson();
     }
 
@@ -92,12 +95,13 @@ public class Table {
 
         //build sqlCommand
         List<String> commandList = new ArrayList<>();
-        String idStr = Parameter.get(request,"id");
+        String idStr = Parameter.get(request, "id");
         String[] idArr = new MyString(idStr).split(",");
         for (Integer i = 0; i < rowNumber; i++) {
             String id = new MyString(idArr[i]).base64Decode().toString();
-            String command = "delete from " + table + " where id="+id + ";";
+            String command = "delete from " + table + " where id=" + id + ";";
             commandList.add(command);
+            Init.log4j.database("try delete:"+command);
         }
         mysql.batch(commandList);
 
@@ -177,6 +181,10 @@ public class Table {
      */
     private static Integer getRowNumber(HttpServletRequest request, List<String> fieldList) {
         String defaultKeyValue = Parameter.get(request, "id");
+        if (defaultKeyValue == null) {
+            String defaultKey = new MyString(fieldList.get(1)).split("\\|")[0];
+            defaultKeyValue = Parameter.get(request, defaultKey);
+        }
         Integer rowNumber = new MyString(defaultKeyValue).split(",").length;
         return rowNumber;
     }
@@ -207,11 +215,16 @@ public class Table {
             if (value == null) {
                 value = "";
             }
+            if (name.equals("id")) {
+                field = "id=null";
+                return field;
+            }
+
             //decode
             String[] valueArr = new MyString(value).split(",");
             value = new MyString(valueArr[i]).base64Decode().toString();
             //escape charactor
-            value = value.replace("'","\\'");
+            value = value.replace("'", "\\'");
             value = valueTypeStr + value + valueTypeStr;
             String connectStr = "=";
             field = name + connectStr + value;

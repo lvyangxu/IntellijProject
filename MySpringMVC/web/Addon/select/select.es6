@@ -1,5 +1,7 @@
 /**
- * select js
+ * demo like below
+ * <div class='select' title='xxx'>
+ * </div>
  */
 (function (factory) {
     'use strict';
