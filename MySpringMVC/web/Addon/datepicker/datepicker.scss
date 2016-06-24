@@ -1,3 +1,66 @@
 .addon-datepicker{
+    input{
+        height: 24px;
+        width: 70px !important;
+        text-align: center;
+    }
 
+    .button-info{
+        padding: 0;
+        height: 30px;
+        width: 30px;
+        border-radius: 0;
+        vertical-align: top;
+    }
+
+    .datepicker-panel{
+        position: absolute;
+        display: none;
+        .datepicker-panel-head{
+            background-color: #c4e1ff;
+            padding: 10px;
+            font-size: 12px;
+            box-shadow: 3px 3px 3px #dce1ff;
+            border: 2px solid #d2e1ff;
+            border-radius: 2px;
+            z-index: 2;
+            .fa-arrow-circle-left{
+                float: left;
+            }
+            .text{
+                display: inline-block;
+            }
+            .fa-arrow-circle-right{
+                float: right;
+            }
+        }
+        .datepicker-panel-body{
+            background-color: #c4e1ff;
+            .week{
+                .week-head{
+                    display: inline-block;
+                    width: 30px;
+                    height: 30px;
+                    line-height: 30px;
+                }
+            }
+            .row{
+                text-align: left;
+                div{
+                    display: inline-block;
+                    text-align: center;
+                    width: 30px;
+                    height: 30px;
+                    line-height: 30px;
+                    cursor: pointer;
+                }
+                div.disabled{
+                    opacity: 0.5;
+                }
+                div:hover{
+                    background-color: #97cbff;
+                }
+            }
+        }
+    }
 }

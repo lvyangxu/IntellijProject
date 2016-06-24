@@ -119,7 +119,7 @@
                 //prevent browser scroll
                 e.preventDefault();
                 let lastIndex = settings.currentRowIndex;
-                let deltaY = e.originalEvent.deltaY;
+                let deltaY = e.originalEvent.deltaY||e.originalEvent.detail;
                 if (deltaY < 0) {
                     //scroll up
                     if (settings.currentRowIndex > 1) {
@@ -258,7 +258,11 @@
             getTdHmtl(type){
                 let tdHtml;
                 switch (type) {
-                    case "":
+                    case "day":
+                    case "month":
+                    case "week":
+                        let typeHtml = " type='"+type+"'";
+                        tdHtml = "<div class='datepicker'"+typeHtml+"></div>";
                         break;
                     case "input":
                     default:
@@ -270,7 +274,10 @@
             getTdValue(td, type){
                 let tdValue;
                 switch (type) {
-                    case "":
+                    case "day":
+                    case "month":
+                    case "week":
+                        tdValue = td.children(".datepicker").data("data");
                         break;
                     case "input":
                     default:
@@ -334,18 +341,18 @@
                     return d;
                 }).join("");
                 createHtml += "</thead><tbody></tbody></table>";
-                createHtml += "<div class='unify'>you can unify all rows data at the below table";
-                createHtml += "<table class='unify-table'><thead>";
-                createHtml += settings.th.map(d=> {
-                    d = "<th>" + d.name + "</th>";
-                    return d;
-                }).join("");
-                createHtml += "</thead><tbody><tr>";
-                createHtml += settings.th.map(d=> {
-                    d = "<td>" + func.getTdHmtl(d.type) + "</td>";
-                    return d;
-                }).join("");
-                createHtml += "</tr></tbody></table></div>";
+                // createHtml += "<div class='unify'>you can unify all rows data at the below table";
+                // createHtml += "<table class='unify-table'><thead>";
+                // createHtml += settings.th.map(d=> {
+                //     d = "<th>" + d.name + "</th>";
+                //     return d;
+                // }).join("");
+                // createHtml += "</thead><tbody><tr>";
+                // createHtml += settings.th.map(d=> {
+                //     d = "<td>" + func.getTdHmtl(d.type) + "</td>";
+                //     return d;
+                // }).join("");
+                // createHtml += "</tr></tbody></table></div>";
 
                 createHtml += "</div></div></div>";
                 requestHtml += createHtml;
@@ -470,6 +477,7 @@
                 newRowHtml += "</tr>";
                 return newRowHtml;
             });
+            createPanelTbody.xPath("tr:last>td>.datepicker").datepicker();
         });
 
         //listen create panel minus button

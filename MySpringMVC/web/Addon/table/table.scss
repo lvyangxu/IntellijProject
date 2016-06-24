@@ -238,6 +238,9 @@
                     input[type=text]{
                         height: 24px;
                     }
+                    button{
+                        margin-right: 0 !important;
+                    }
                 }
                 td[name=id] {
                     display: none;

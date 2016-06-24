@@ -3,16 +3,29 @@
  */
 class date {
 
-    /** 
+    static getDate(dateStr) {
+        let arr = dateStr.split("-");
+        let d = new Date(arr[0], Number.parseInt(arr[1]) - 1, arr[2]);
+        return d;
+    }
+
+    static getDateStr(d) {
+        let [year,month,day] = [d.getFullYear(), d.getMonth() + 1, d.getDate()];
+        month = month < 10 ? ("0" + month) : month;
+        day = day < 10 ? ("0" + day) : day;
+        return year + "-" + month + "-" + day;
+    }
+
+    /**
      * get current local day
      * @param addDays
-     * @returns {string|*} 
+     * @returns {string|*}
      */
     static getLocalDay(addDays) {
         let d = new Date();
         d.setDate(d.getDate() + addDays);
         let [year,month,day] = [d.getFullYear(), d.getMonth() + 1, d.getDate()];
-        Array.from([month, day], d=> {
+        [month, day] = [month, day].map(d=> {
             d = d < 10 ? "0" + d : d
             return d;
         })
@@ -100,15 +113,19 @@ class date {
      */
     static toLastMonth(dateStr) {
         let [year,month] = dateStr.split("-");
-        Array.from([year, month], d=>Number.parseInt(d));
+        [year, month] = [year, month].map(d=> {
+            d = Number.parseInt(d);
+            return d;
+        });
         if (month == 1) {
             year = year - 1;
             return year + "-12";
         } else {
-            return year + "-" + Number.parseInt(month - 1);
+            let m = Number.parseInt(month - 1);
+            return year + "-" + ((m < 10) ? ("0" + m) : m);
         }
     }
-  
+
     /**
      * convert yyyy-MM to it's addNum month string
      * @param dateStr
@@ -147,16 +164,16 @@ class date {
      * @param dateStr2
      * @returns {*}
      */
-    static later(dateStr1,dateStr2){
-        let [d1,d2] = [dateStr1,dateStr2]
-        Array.from([d1,d2],function (d) {
+    static later(dateStr1, dateStr2) {
+        let [d1,d2] = [dateStr1, dateStr2]
+        Array.from([d1, d2], function (d) {
             d = d.split("-");
-            d = new Date(d[0],Number.parseInt(d[1])-1,d[2]);
+            d = new Date(d[0], Number.parseInt(d[1]) - 1, d[2]);
             return d;
         })
-        if(d1.getTime()>=d2.getTime()){
+        if (d1.getTime() >= d2.getTime()) {
             return dateStr1;
-        }else{
+        } else {
             return dateStr2;
         }
     }

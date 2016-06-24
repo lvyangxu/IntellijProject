@@ -16,14 +16,32 @@ var date = function () {
     }
 
     _createClass(date, null, [{
-        key: "getLocalDay",
+        key: "getDate",
+        value: function getDate(dateStr) {
+            var arr = dateStr.split("-");
+            var d = new Date(arr[0], Number.parseInt(arr[1]) - 1, arr[2]);
+            return d;
+        }
+    }, {
+        key: "getDateStr",
+        value: function getDateStr(d) {
+            var year = d.getFullYear();
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
 
+            month = month < 10 ? "0" + month : month;
+            day = day < 10 ? "0" + day : day;
+            return year + "-" + month + "-" + day;
+        }
 
-        /** 
+        /**
          * get current local day
          * @param addDays
-         * @returns {string|*} 
+         * @returns {string|*}
          */
+
+    }, {
+        key: "getLocalDay",
         value: function getLocalDay(addDays) {
             var d = new Date();
             d.setDate(d.getDate() + addDays);
@@ -31,10 +49,16 @@ var date = function () {
             var month = d.getMonth() + 1;
             var day = d.getDate();
 
-            Array.from([month, day], function (d) {
+            var _map = [month, day].map(function (d) {
                 d = d < 10 ? "0" + d : d;
                 return d;
             });
+
+            var _map2 = _slicedToArray(_map, 2);
+
+            month = _map2[0];
+            day = _map2[1];
+
             var result = year + "-" + month + "-" + day;
             return result;
         }
@@ -148,14 +172,22 @@ var date = function () {
             var year = _dateStr$split2[0];
             var month = _dateStr$split2[1];
 
-            Array.from([year, month], function (d) {
-                return Number.parseInt(d);
+            var _map3 = [year, month].map(function (d) {
+                d = Number.parseInt(d);
+                return d;
             });
+
+            var _map4 = _slicedToArray(_map3, 2);
+
+            year = _map4[0];
+            month = _map4[1];
+
             if (month == 1) {
                 year = year - 1;
                 return year + "-12";
             } else {
-                return year + "-" + Number.parseInt(month - 1);
+                var m = Number.parseInt(month - 1);
+                return year + "-" + (m < 10 ? "0" + m : m);
             }
         }
 
