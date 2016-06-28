@@ -42,7 +42,7 @@ public class Table {
             command = command.substring(0, command.length() - joinStr.length());
             command += ";";
             commandList.add(command);
-            Init.log4j.database("try create:"+command);
+            Init.log4j.database("try create:" + command);
         }
         mysql.batch(commandList);
     }
@@ -77,14 +77,14 @@ public class Table {
             command += notkeyFieldCommand.substring(0, notkeyFieldCommand.length() - 1) + " where " + keyFieldCommand.substring(0, keyFieldCommand.length() - 5);
             command += ";";
             commandList.add(command);
-            Init.log4j.database("try update:"+command);
+            Init.log4j.database("try update:" + command);
         }
         mysql.batch(commandList);
 
     }
 
     public static String read(String table, String sqlCommand) throws MyException {
-        Init.log4j.database("try read:"+sqlCommand);
+        Init.log4j.database("try read:" + sqlCommand);
         return mysql.select(sqlCommand).toJson();
     }
 
@@ -101,7 +101,7 @@ public class Table {
             String id = new MyString(idArr[i]).base64Decode().toString();
             String command = "delete from " + table + " where id=" + id + ";";
             commandList.add(command);
-            Init.log4j.database("try delete:"+command);
+            Init.log4j.database("try delete:" + command);
         }
         mysql.batch(commandList);
 
@@ -210,12 +210,12 @@ public class Table {
             value = defaultMap.get(name);
             field = name + "=" + value;
         } else {
-            value = request.getParameter(name);
+            value = Parameter.get(request, name);
             //if client don't send value of filed,then default set ''
             if (value == null) {
                 value = "";
             }
-            if (name.equals("id")) {
+            if (name.equals("id") && value.equals("")) {
                 field = "id=null";
                 return field;
             }

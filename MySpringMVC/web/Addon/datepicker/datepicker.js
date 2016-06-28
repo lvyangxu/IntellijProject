@@ -1,7 +1,5 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
 /**
  * demo like below
  * <div class='select' title='xxx'>
@@ -21,7 +19,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     "use strict";
 
     $.fn.datepicker = function (options) {
-        return this.each(function () {
+        return $(this).each(function () {
             datepicker($(this), options);
         });
     };
@@ -41,8 +39,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
         var func = {
             setData: function setData() {
-                settings.dataStr = date.getDateStr(settings.data);
-                element.children("input").val(settings.dataStr);
+                var dataStr = new date(settings.data).toString();;
+                element.children("input").val(dataStr);
+                node.panel().xPath(".datepicker-panel-head>.text").text(dataStr);
+                element.data("data", settings.data);
             },
             drawPanelBody: function drawPanelBody() {
                 node.panel().xPath(".datepicker-panel-body").html(function () {
@@ -54,15 +54,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     }).join("");
                     panelBodyHtml += "</div>";
 
-                    var firstStr = settings.dataStr.substr(0, 7) + "-01";
-                    var first = date.getDate(firstStr);
-                    var daysOfMonth = date.getDaysOfMonth(first);
-                    var lastMonthStr = date.toLastMonth(firstStr) + "-01";
-                    var daysOflastMonth = date.getDaysOfMonth(date.getDate(lastMonthStr));
-
-                    var first_DayOfWeek = first.getDay();
+                    var daysOfMonth = new date(settings.data).toDaysOfMonth();
+                    var daysOflastMonth = new date(settings.data).lastMonth().toDaysOfMonth();
+                    var first_DayOfWeek = new date(settings.data).firstDay().value.getDay();
                     first_DayOfWeek = first_DayOfWeek == 0 ? 7 : first_DayOfWeek;
 
+                    var currentDay = settings.data.getDate();
                     var start = -first_DayOfWeek + 2;
                     for (var i = 0; i < 6; i++) {
                         var rowHtml = "<div class='row'>";
@@ -77,13 +74,32 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                                 displayN = n > daysOfMonth ? n - daysOfMonth : n;
                                 classHtml = n > daysOfMonth ? " class='disabled'" : "";
                             }
+                            if (currentDay == n) {
+                                classHtml = " class='active'";
+                            }
+
                             rowHtml += "<div" + classHtml + ">" + displayN + "</div>";
                         }
                         rowHtml += "</div>";
                         panelBodyHtml += rowHtml;
                     }
-
                     return panelBodyHtml;
+                });
+
+                node.panel().xPath(".datepicker-panel-body>.row>div").delegate("", "click", function () {
+                    var day = $(this).text();
+                    if ($(this).hasClass("disabled")) {
+                        if (day < 10) {
+                            settings.data = new date(settings.data).addMonth(1).value;
+                        }
+                        if (day > 20) {
+                            settings.data = new date(settings.data).addMonth(-1).value;
+                        }
+                    }
+                    settings.data.setDate(day);
+                    func.setData();
+                    func.drawPanelBody();
+                    node.panel().hide();
                 });
             }
         };
@@ -91,16 +107,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         element.addonInit("datepicker", function () {
             var dateStr = date.getLocalDay(settings.addNum);
             dateStr = settings.type == "month" ? dateStr.substr(0, 7) : dateStr;
-            var defaultData = element.text() == "" ? dateStr : element.text();
-            settings.dataStr = defaultData;
-            settings.data = date.getDate(defaultData);
+            var dataStr = element.text() == "" ? dateStr : element.text();
+            settings.data = new date(dataStr).value;
 
             // build html
             element.append(function () {
                 var datepickerHtml = "<input><button class='button-info'><i class='fa fa-calendar'></i></button>";
                 datepickerHtml += "<div class='datepicker-panel'>";
                 datepickerHtml += "<div class='datepicker-panel-head'><i class='fa fa-arrow-circle-left'></i><div class='text'>";
-                datepickerHtml += settings.dataStr + "</div><i class='fa fa-arrow-circle-right'></i></div>";
+                datepickerHtml += dataStr + "</div><i class='fa fa-arrow-circle-right'></i></div>";
                 datepickerHtml += "<div class='datepicker-panel-body'></div>";
                 datepickerHtml += "</div>";
                 return datepickerHtml;
@@ -114,11 +129,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             });
 
             node.panel().xPath(".datepicker-panel-head>.fa-arrow-circle-left").delegate("", "click", function () {
-
+                var date1 = new date(settings.data);
+                settings.data = date1.addMonth(-1).value;
+                func.setData();
                 func.drawPanelBody();
-                console.log(_typeof(settings.data));
+            });
+
+            node.panel().xPath(".datepicker-panel-head>.fa-arrow-circle-right").delegate("", "click", function () {
+                var date1 = new date(settings.data);
+                settings.data = date1.addMonth(1).value;
+                func.setData();
+                func.drawPanelBody();
             });
         });
+
+        if (options == undefined) {
+            return;
+        }
+
+        if (options.data != undefined) {
+            if (options.data != "") {
+                settings.data = options.data;
+            }
+            func.setData();
+        }
 
         return element;
     };

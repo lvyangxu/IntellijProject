@@ -3,13 +3,20 @@
  */
 class date {
 
-    static getDate(dateStr) {
-        let arr = dateStr.split("-");
-        let d = new Date(arr[0], Number.parseInt(arr[1]) - 1, arr[2]);
-        return d;
+    constructor(value) {
+        if (typeof(value) == "string") {
+            let arr = value.split("-");
+            let [year,month,day] = [arr[0], Number.parseInt(arr[1]) - 1, arr[2]];
+            day = (day == undefined) ? 1 : day;
+            let d = new Date(year, month, day);
+            this.value = new Date(d.getTime());
+        } else {
+            this.value = value;
+        }
     }
 
-    static getDateStr(d) {
+    toString() {
+        let d = new Date(this.value.getTime());
         let [year,month,day] = [d.getFullYear(), d.getMonth() + 1, d.getDate()];
         month = month < 10 ? ("0" + month) : month;
         day = day < 10 ? ("0" + day) : day;
@@ -50,12 +57,8 @@ class date {
         return result;
     }
 
-    /**
-     * get days of the date's month have
-     * @param d js date object
-     * @returns {number}
-     */
-    static getDaysOfMonth(d) {
+    toDaysOfMonth() {
+        let d = new Date(this.value.getTime());
         let result = 0;
         let month = d.getMonth() + 1;
         switch (month) {
@@ -87,54 +90,34 @@ class date {
         return result;
     }
 
-    /**
-     * convert a date string to monday string in the same week
-     * @param dateStr
-     * @returns {string}
-     */
-    static toMonday(dateStr) {
-        let arr = dateStr.split("-");
-        let d = new Date(arr[0], Number.parseInt(arr[1]) - 1, arr[2]);
+    monday() {
+        let d = new Date(this.value.getTime());
         let dayOfWeek = d.getDay();
         if (dayOfWeek == 0) {
             dayOfWeek = 7;
         }
         let mondayNum = d.getDate() - dayOfWeek + 1;
         d.setDate(mondayNum);
-        let [year,month,day] = [d.getFullYear(), Number.parseInt(d.getMonth()) + 1, d.getDate()];
-        Array.from([month, day], d1=>d1 < 10 ? ("0" + d1) : d1);
-        return year + "-" + month + "-" + day;
+        this.value = new Date(d.getTime());
+        return this;
     }
 
-    /**
-     * convert yyyy-MM to it's last month string
-     * @param dateStr
-     * @returns {string}
-     */
-    static toLastMonth(dateStr) {
-        let [year,month] = dateStr.split("-");
-        [year, month] = [year, month].map(d=> {
-            d = Number.parseInt(d);
-            return d;
-        });
-        if (month == 1) {
-            year = year - 1;
-            return year + "-12";
+    lastMonth() {
+        let d = new Date(this.value.getTime());
+        let [year,month] = [d.getFullYear(), d.getMonth()];
+        if (month == 0) {
+            d.setFullYear(year - 1);
+            d.setMonth(11);
         } else {
-            let m = Number.parseInt(month - 1);
-            return year + "-" + ((m < 10) ? ("0" + m) : m);
+            d.setMonth(month - 1);
         }
+        this.value = new Date(d.getTime());
+        return this;
     }
 
-    /**
-     * convert yyyy-MM to it's addNum month string
-     * @param dateStr
-     * @param addNum
-     * @returns {string}
-     */
-    static addMonth(dateStr, addNum) {
-        let [year,month] = dateStr.split("-");
-        Array.from([year, month], d=>Number.parseInt(d));
+    addMonth(addNum) {
+        let d = new Date(this.value.getTime());
+        let [year,month] = [d.getFullYear(), d.getMonth() + 1];
         let yNum = parseInt(addNum / 12);
         let mNum = addNum % 12;
         if (mNum >= 0) {
@@ -147,34 +130,29 @@ class date {
             }
         } else {
             if (month + mNum > 0) {
-                year += +yNum;
+                year += yNum;
                 month += mNum;
             } else {
-                year += +yNum - 1;
+                year += yNum - 1;
                 month += mNum + 12;
             }
         }
-        month = (month < 10 ? "0" + month : month);
-        return year + "-" + month;
+        let maxDaysOfMonth = new date(new Date(year,month-1,1)).toDaysOfMonth();
+        if(d.getDate()>maxDaysOfMonth){
+            d.setDate(maxDaysOfMonth);
+        }
+        d.setFullYear(year);
+        d.setMonth(month - 1);
+
+
+        this.value = new Date(d.getTime());
+        return this;
     }
 
-    /**
-     * get the later dateStr
-     * @param dateStr1
-     * @param dateStr2
-     * @returns {*}
-     */
-    static later(dateStr1, dateStr2) {
-        let [d1,d2] = [dateStr1, dateStr2]
-        Array.from([d1, d2], function (d) {
-            d = d.split("-");
-            d = new Date(d[0], Number.parseInt(d[1]) - 1, d[2]);
-            return d;
-        })
-        if (d1.getTime() >= d2.getTime()) {
-            return dateStr1;
-        } else {
-            return dateStr2;
-        }
+    firstDay(){
+        let d = new Date(this.value.getTime());
+        d.setDate(1);
+        this.value = new Date(d.getTime());
+        return this;
     }
 }

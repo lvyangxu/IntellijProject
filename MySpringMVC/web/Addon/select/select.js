@@ -19,7 +19,7 @@
     "use strict";
 
     $.fn.select = function (options) {
-        return this.each(function () {
+        return $(this).each(function () {
             select($(this), options);
         });
     };
@@ -27,7 +27,8 @@
     var select = function select(element, options) {
 
         var settings = element.addonSettingExtend(options, {
-            "title": element.property("title", "select"),
+            "name": element.property("name", "select"),
+            "title": element.property("title", ""),
             "data": [],
             "callback": function callback() {}
         });
@@ -92,7 +93,7 @@
 
             // build html
             element.append(function () {
-                var buttonHtml = "<button class='button-info'>" + settings.title + " <i class='fa fa-check-square-o'></i></button>";
+                var buttonHtml = "<button class='button-info'>" + settings.name + " <i class='fa fa-check-square-o'></i></button>";
                 var panelHtml = "<div class='select-panel'>";
                 var allChecked = settings.data.some(function (d) {
                     return !d.checked;
@@ -129,7 +130,11 @@
             });
         });
 
-        if (options != undefined && options.data != undefined) {
+        if (options == undefined) {
+            return;
+        }
+
+        if (options.data != undefined) {
             func.setData();
         }
 

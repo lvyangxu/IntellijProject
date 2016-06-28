@@ -1,0 +1,39 @@
+.addon-modal{
+    $backColor:rgba(128,128,128,0.8);
+    $panelColor:rgba(255,255,255,1);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: $backColor;
+    z-index: 60;
+    display: none;
+
+
+    .modal-panel{
+        margin: auto;
+        background-color: $panelColor;
+        border-radius: 5px;
+        .close{
+            height: 34px;
+            .button-info{
+                float: right;
+            }
+        }
+
+        .row{
+            display: inline-block;
+            height: 25px;
+            width: 50%;
+            .name{
+                display: inline-block;
+                width: 10%;
+            }
+            .form{
+                display: inline-block;
+                width: 40%;
+            }
+        }
+
+    }
+
+}

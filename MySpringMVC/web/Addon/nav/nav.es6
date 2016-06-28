@@ -17,7 +17,7 @@
 }(function ($) { 
     'use strict';
     $.fn.nav = function(options){
-        return this.each(()=> {
+        return $(this).each(function(){
             nav($(this), options);
         });
     };

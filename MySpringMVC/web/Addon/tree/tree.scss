@@ -1,0 +1,51 @@
+.addon-tree{
+    $backColor:rgba(196,225,255,1);
+    $level1Color:rgba(217,255,255,1);
+    $level2Color:rgba(233,255,255,1);
+    $hoverColor:rgba(151,203,255,1);
+    $borderColor:rgba(128,128,128,1);
+    $activeColor:rgba(74,185,218,1);
+
+    position: fixed;
+    top:0;
+    left: 0;
+    height: 100%;
+    background-color: $backColor;
+    div[key]{
+        display: none;
+    }
+    .level1{
+        background-color: $level1Color;
+        min-height: 50px;
+        line-height: 50px;
+        border-bottom: 1px solid $borderColor;
+        cursor: pointer;
+        i{
+            padding-left: 10px;
+            padding-right: 5px;
+        }
+        .level2{
+            display: none;
+            background-color: $level2Color;
+            height: 40px;
+            padding-left: 20px;
+        }
+        .level2:hover{
+            background-color: $hoverColor;
+        }
+
+        .level2.active{
+            background-color: $activeColor
+        }
+    }
+
+    .level1:hover{
+        background-color: $hoverColor;
+    }
+}
+
+.addon-tree+.tree-panel{
+    div[tree-key]{
+        display: none;
+    }
+}

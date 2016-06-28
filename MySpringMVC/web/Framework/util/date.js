@@ -11,20 +11,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  */
 
 var date = function () {
-    function date() {
+    function date(value) {
         _classCallCheck(this, date);
+
+        if (typeof value == "string") {
+            var arr = value.split("-");
+            var year = arr[0];
+            var month = Number.parseInt(arr[1]) - 1;
+            var day = arr[2];
+
+            day = day == undefined ? 1 : day;
+            var d = new Date(year, month, day);
+            this.value = new Date(d.getTime());
+        } else {
+            this.value = value;
+        }
     }
 
-    _createClass(date, null, [{
-        key: "getDate",
-        value: function getDate(dateStr) {
-            var arr = dateStr.split("-");
-            var d = new Date(arr[0], Number.parseInt(arr[1]) - 1, arr[2]);
-            return d;
-        }
-    }, {
-        key: "getDateStr",
-        value: function getDateStr(d) {
+    _createClass(date, [{
+        key: "toString",
+        value: function toString() {
+            var d = new Date(this.value.getTime());
             var year = d.getFullYear();
             var month = d.getMonth() + 1;
             var day = d.getDate();
@@ -41,6 +48,113 @@ var date = function () {
          */
 
     }, {
+        key: "toDaysOfMonth",
+        value: function toDaysOfMonth() {
+            var d = new Date(this.value.getTime());
+            var result = 0;
+            var month = d.getMonth() + 1;
+            switch (month) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    result = 31;
+                    break;
+                case 2:
+                    //判断是否是闰年
+                    var year = d.getFullYear();
+                    if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+                        result = 29;
+                    } else {
+                        result = 28;
+                    }
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    result = 30;
+                    break;
+            }
+            return result;
+        }
+    }, {
+        key: "monday",
+        value: function monday() {
+            var d = new Date(this.value.getTime());
+            var dayOfWeek = d.getDay();
+            if (dayOfWeek == 0) {
+                dayOfWeek = 7;
+            }
+            var mondayNum = d.getDate() - dayOfWeek + 1;
+            d.setDate(mondayNum);
+            this.value = new Date(d.getTime());
+            return this;
+        }
+    }, {
+        key: "lastMonth",
+        value: function lastMonth() {
+            var d = new Date(this.value.getTime());
+            var year = d.getFullYear();
+            var month = d.getMonth();
+
+            if (month == 0) {
+                d.setFullYear(year - 1);
+                d.setMonth(11);
+            } else {
+                d.setMonth(month - 1);
+            }
+            this.value = new Date(d.getTime());
+            return this;
+        }
+    }, {
+        key: "addMonth",
+        value: function addMonth(addNum) {
+            var d = new Date(this.value.getTime());
+            var year = d.getFullYear();
+            var month = d.getMonth() + 1;
+
+            var yNum = parseInt(addNum / 12);
+            var mNum = addNum % 12;
+            if (mNum >= 0) {
+                if (month + mNum <= 12) {
+                    year += yNum;
+                    month += mNum;
+                } else {
+                    year += yNum + 1;
+                    month += mNum - 12;
+                }
+            } else {
+                if (month + mNum > 0) {
+                    year += yNum;
+                    month += mNum;
+                } else {
+                    year += yNum - 1;
+                    month += mNum + 12;
+                }
+            }
+            var maxDaysOfMonth = new date(new Date(year, month - 1, 1)).toDaysOfMonth();
+            if (d.getDate() > maxDaysOfMonth) {
+                d.setDate(maxDaysOfMonth);
+            }
+            d.setFullYear(year);
+            d.setMonth(month - 1);
+
+            this.value = new Date(d.getTime());
+            return this;
+        }
+    }, {
+        key: "firstDay",
+        value: function firstDay() {
+            var d = new Date(this.value.getTime());
+            d.setDate(1);
+            this.value = new Date(d.getTime());
+            return this;
+        }
+    }], [{
         key: "getLocalDay",
         value: function getLocalDay(addDays) {
             var d = new Date();
@@ -87,176 +201,6 @@ var date = function () {
             });
             var result = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
             return result;
-        }
-
-        /**
-         * get days of the date's month have
-         * @param d js date object
-         * @returns {number}
-         */
-
-    }, {
-        key: "getDaysOfMonth",
-        value: function getDaysOfMonth(d) {
-            var result = 0;
-            var month = d.getMonth() + 1;
-            switch (month) {
-                case 1:
-                case 3:
-                case 5:
-                case 7:
-                case 8:
-                case 10:
-                case 12:
-                    result = 31;
-                    break;
-                case 2:
-                    //判断是否是闰年
-                    var year = d.getFullYear();
-                    if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
-                        result = 29;
-                    } else {
-                        result = 28;
-                    }
-                    break;
-                case 4:
-                case 6:
-                case 9:
-                case 11:
-                    result = 30;
-                    break;
-            }
-            return result;
-        }
-
-        /**
-         * convert a date string to monday string in the same week
-         * @param dateStr
-         * @returns {string}
-         */
-
-    }, {
-        key: "toMonday",
-        value: function toMonday(dateStr) {
-            var arr = dateStr.split("-");
-            var d = new Date(arr[0], Number.parseInt(arr[1]) - 1, arr[2]);
-            var dayOfWeek = d.getDay();
-            if (dayOfWeek == 0) {
-                dayOfWeek = 7;
-            }
-            var mondayNum = d.getDate() - dayOfWeek + 1;
-            d.setDate(mondayNum);
-            var year = d.getFullYear();
-            var month = Number.parseInt(d.getMonth()) + 1;
-            var day = d.getDate();
-
-            Array.from([month, day], function (d1) {
-                return d1 < 10 ? "0" + d1 : d1;
-            });
-            return year + "-" + month + "-" + day;
-        }
-
-        /**
-         * convert yyyy-MM to it's last month string
-         * @param dateStr
-         * @returns {string}
-         */
-
-    }, {
-        key: "toLastMonth",
-        value: function toLastMonth(dateStr) {
-            var _dateStr$split = dateStr.split("-");
-
-            var _dateStr$split2 = _slicedToArray(_dateStr$split, 2);
-
-            var year = _dateStr$split2[0];
-            var month = _dateStr$split2[1];
-
-            var _map3 = [year, month].map(function (d) {
-                d = Number.parseInt(d);
-                return d;
-            });
-
-            var _map4 = _slicedToArray(_map3, 2);
-
-            year = _map4[0];
-            month = _map4[1];
-
-            if (month == 1) {
-                year = year - 1;
-                return year + "-12";
-            } else {
-                var m = Number.parseInt(month - 1);
-                return year + "-" + (m < 10 ? "0" + m : m);
-            }
-        }
-
-        /**
-         * convert yyyy-MM to it's addNum month string
-         * @param dateStr
-         * @param addNum
-         * @returns {string}
-         */
-
-    }, {
-        key: "addMonth",
-        value: function addMonth(dateStr, addNum) {
-            var _dateStr$split3 = dateStr.split("-");
-
-            var _dateStr$split4 = _slicedToArray(_dateStr$split3, 2);
-
-            var year = _dateStr$split4[0];
-            var month = _dateStr$split4[1];
-
-            Array.from([year, month], function (d) {
-                return Number.parseInt(d);
-            });
-            var yNum = parseInt(addNum / 12);
-            var mNum = addNum % 12;
-            if (mNum >= 0) {
-                if (month + mNum <= 12) {
-                    year += yNum;
-                    month += mNum;
-                } else {
-                    year += yNum + 1;
-                    month += mNum - 12;
-                }
-            } else {
-                if (month + mNum > 0) {
-                    year += +yNum;
-                    month += mNum;
-                } else {
-                    year += +yNum - 1;
-                    month += mNum + 12;
-                }
-            }
-            month = month < 10 ? "0" + month : month;
-            return year + "-" + month;
-        }
-
-        /**
-         * get the later dateStr
-         * @param dateStr1
-         * @param dateStr2
-         * @returns {*}
-         */
-
-    }, {
-        key: "later",
-        value: function later(dateStr1, dateStr2) {
-            var d1 = dateStr1;
-            var d2 = dateStr2;
-
-            Array.from([d1, d2], function (d) {
-                d = d.split("-");
-                d = new Date(d[0], Number.parseInt(d[1]) - 1, d[2]);
-                return d;
-            });
-            if (d1.getTime() >= d2.getTime()) {
-                return dateStr1;
-            } else {
-                return dateStr2;
-            }
         }
     }]);
 

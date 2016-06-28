@@ -2,7 +2,7 @@
 
 {
     $(".table").table();
-    $(".nav").nav();
+    $(".tree").tree();
 }
 
 //# sourceMappingURL=index.js.map

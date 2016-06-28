@@ -1,4 +1,16 @@
 .addon-datepicker{
+    @mixin disableSelect {
+        moz-user-select: -moz-none;
+        -moz-user-select: none;
+        -o-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    @include disableSelect;
+
     input{
         height: 24px;
         width: 70px !important;
@@ -54,12 +66,17 @@
                     line-height: 30px;
                     cursor: pointer;
                 }
-                div.disabled{
-                    opacity: 0.5;
-                }
                 div:hover{
                     background-color: #97cbff;
                 }
+                div.active{
+                    background-color: rgba(65,132,243,1);
+                }
+
+                div.disabled{
+                    opacity: 0.5;
+                }
+
             }
         }
     }

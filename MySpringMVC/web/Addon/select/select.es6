@@ -16,7 +16,7 @@
 }(function ($) {
     "use strict";
     $.fn.select = function (options) {
-        return this.each(function () {
+        return $(this).each(function () {
             select($(this), options);
         });
     };
@@ -24,7 +24,8 @@
     let select = function (element, options) {
 
         let settings = element.addonSettingExtend(options, {
-            "title": element.property("title", "select"),
+            "name": element.property("name", "select"),
+            "title": element.property("title", ""),
             "data": [],
             "callback": ()=> {
             }
@@ -50,7 +51,7 @@
                 let numStr = checkedNum + "/" + settings.data.length;
                 node.panel().xPath(".select-panel-head>.text").text(numStr);
 
-                node.panel().children(".select-panel-body").html(()=>{
+                node.panel().children(".select-panel-body").html(()=> {
                     let panelHtml = "";
                     for (let i = 0; i <= settings.data.length / 10; i++) {
                         let end = (i * 10 + 10) < settings.data.length ? ((i * 10 + 10)) : settings.data.length;
@@ -75,7 +76,7 @@
                         }
                         return d;
                     });
-                    if(settings.callback!=undefined){
+                    if (settings.callback != undefined) {
                         settings.callback();
                     }
                 });
@@ -88,7 +89,7 @@
 
             // build html
             element.append(function () {
-                let buttonHtml = "<button class='button-info'>" + settings.title + " <i class='fa fa-check-square-o'></i></button>";
+                let buttonHtml = "<button class='button-info'>" + settings.name + " <i class='fa fa-check-square-o'></i></button>";
                 let panelHtml = "<div class='select-panel'>";
                 let allChecked = settings.data.some(d=> {
                     return !d.checked;
@@ -124,7 +125,11 @@
 
         });
 
-        if (options != undefined && options.data != undefined) {
+        if (options == undefined) {
+            return;
+        }
+
+        if (options.data != undefined) {
             func.setData();
         }
 

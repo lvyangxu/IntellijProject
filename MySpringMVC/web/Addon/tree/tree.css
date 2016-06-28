@@ -1,0 +1,33 @@
+.addon-tree {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #c4e1ff; }
+  .addon-tree div[key] {
+    display: none; }
+  .addon-tree .level1 {
+    background-color: #d9ffff;
+    min-height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid gray;
+    cursor: pointer; }
+    .addon-tree .level1 i {
+      padding-left: 10px;
+      padding-right: 5px; }
+    .addon-tree .level1 .level2 {
+      display: none;
+      background-color: #e9ffff;
+      height: 40px;
+      padding-left: 20px; }
+    .addon-tree .level1 .level2:hover {
+      background-color: #97cbff; }
+    .addon-tree .level1 .level2.active {
+      background-color: #4ab9da; }
+  .addon-tree .level1:hover {
+    background-color: #97cbff; }
+
+.addon-tree + .tree-panel div[tree-key] {
+  display: none; }
+
+/*# sourceMappingURL=tree.css.map */

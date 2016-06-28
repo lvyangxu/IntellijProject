@@ -20,10 +20,8 @@
     'use strict';
 
     $.fn.nav = function (options) {
-        var _this = this;
-
-        return this.each(function () {
-            nav($(_this), options);
+        return $(this).each(function () {
+            nav($(this), options);
         });
     };
 

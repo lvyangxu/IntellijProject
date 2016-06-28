@@ -1,4 +1,4 @@
 {
     $(".table").table();
-    $(".nav").nav();
+    $(".tree").tree();
 }

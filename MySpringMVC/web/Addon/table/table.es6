@@ -17,7 +17,7 @@
 }(function ($) {
     'use strict';
     $.fn.table = function (options) {
-        return this.each(()=> {
+        return $(this).each(function () {
             table($(this), options);
         });
     };
@@ -100,13 +100,14 @@
                 let tbodyHtml = settings.sortedData.map(d=> {
                     let trHtml = settings.funcColumn.checkbox ? "<td class='func'><input type='checkbox'></td>" : "";
                     trHtml += settings.funcColumn.lineNumber ? "<td class='func'>" + rowNum + "</td>" : "";
-                    trHtml += settings.funcColumn.detail ? "<td class='func'><i class='fa fa-plus'></i></td>" : "";
+                    trHtml += settings.funcColumn.detail ? "<td class='func'><i class='fa fa-tablet' title='see all detail row in a new modal'></i></td>" : "";
                     trHtml += "<td name='id'>" + d.id + "</td>";
                     trHtml += settings.th.map(d1=> {
                         let k = d1.id;
                         let v = (d[k] == undefined) ? "" : d[k];
                         let classHtml = d1.checked ? "" : " class='hide'";
-                        d1 = "<td name='" + k + "'" + classHtml + ">" + v + "</td>";
+                        v = (d1.type == "day") ? v.substr(0, 10) : v;
+                        d1 = "<td name='" + k + "' type='" + d1.type + "'" + classHtml + ">" + v + "</td>";
                         return d1;
                     }).join("");
                     trHtml = "<tr row='" + rowNum + "'>" + trHtml + "</tr>";
@@ -114,12 +115,33 @@
                     return trHtml;
                 }).join("");
                 node.tbody().html(tbodyHtml);
+
+                //listen detail button
+                node.tbody().xPath("tr>.func>i.fa-tablet").delegate("", "click", function () {
+                    let tr = $(this).parent().parent();
+                    let modalHtml = "";
+                    tr.children("td[name]").each(function () {
+                        let name = $(this).attr("name");
+                        let d1 = settings.th.find(d=> {
+                            return d.id == name;
+                        });
+                        let tdName = (d1 == undefined) ? "id" : d1.name;
+                        let tdHtml = (d1 == undefined) ? "" : func.getTdHtml(d1.type);
+                        modalHtml += "<div class='row'><div class='name'>" + tdName + ":</div><div class='form'>" + tdHtml + "</div></div>";
+                    });
+                    $(this).modal({
+                        width: 0.8,
+                        height: 0.8,
+                        marginTop: 0.1,
+                        html: modalHtml
+                    });
+                });
             },
             mouseScroll(e){
                 //prevent browser scroll
                 e.preventDefault();
                 let lastIndex = settings.currentRowIndex;
-                let deltaY = e.originalEvent.deltaY||e.originalEvent.detail;
+                let deltaY = e.originalEvent.deltaY || e.originalEvent.detail;
                 if (deltaY < 0) {
                     //scroll up
                     if (settings.currentRowIndex > 1) {
@@ -255,14 +277,14 @@
                 });
                 return selectedTrArr;
             },
-            getTdHmtl(type){
+            getTdHtml(type){
                 let tdHtml;
                 switch (type) {
                     case "day":
                     case "month":
                     case "week":
-                        let typeHtml = " type='"+type+"'";
-                        tdHtml = "<div class='datepicker'"+typeHtml+"></div>";
+                        let typeHtml = " type='" + type + "'";
+                        tdHtml = "<div class='datepicker'" + typeHtml + "></div>";
                         break;
                     case "input":
                     default:
@@ -278,6 +300,7 @@
                     case "month":
                     case "week":
                         tdValue = td.children(".datepicker").data("data");
+                        tdValue = new date(tdValue).toString();
                         break;
                     case "input":
                     default:
@@ -325,15 +348,15 @@
             //append html
             element.append(()=> {
                 let requestHtml = "<div class='request'>";
-                let readHtml = "<button class='read button-warning'><i class='fa fa-refresh'></i></button>";
+                let readHtml = "<button class='read button-warning' title='refresh data from server'><i class='fa fa-refresh'></i></button>";
                 requestHtml += readHtml;
 
-                let createHtml = "<div class='create'><button class='button-warning'><i class='fa fa-plus'></i></button>";
+                let createHtml = "<div class='create'><button class='button-warning' title='create new row data'><i class='fa fa-plus'></i></button>";
                 createHtml += "<div class='create-panel'><div class='create-panel-head'>";
-                createHtml += "<button class='add-button button-success'><i class='fa fa-plus'></i></button>";
-                createHtml += "<button class='minus-button button-success'><i class='fa fa-minus'></i></button>";
-                createHtml += "<button class='revert-button button-success'><i class='fa fa-undo'></i></button>";
-                createHtml += "<button class='submit-button button-warning'>Submit</button>";
+                createHtml += "<button class='add-button button-success' title='add a new row below'><i class='fa fa-plus'></i></button>";
+                createHtml += "<button class='minus-button button-success' title='remove the last row below'><i class='fa fa-minus'></i></button>";
+                createHtml += "<button class='revert-button button-success' title='remove all row below'><i class='fa fa-undo'></i></button>";
+                createHtml += "<button class='submit-button button-warning' title='add the data below to server'>Submit</button>";
                 createHtml += "</div><div class='create-panel-body'>";
                 createHtml += "<table class='submit-table'><thead>";
                 createHtml += settings.th.map(d=> {
@@ -349,7 +372,7 @@
                 // }).join("");
                 // createHtml += "</thead><tbody><tr>";
                 // createHtml += settings.th.map(d=> {
-                //     d = "<td>" + func.getTdHmtl(d.type) + "</td>";
+                //     d = "<td>" + func.getTdHtml(d.type) + "</td>";
                 //     return d;
                 // }).join("");
                 // createHtml += "</tr></tbody></table></div>";
@@ -357,21 +380,27 @@
                 createHtml += "</div></div></div>";
                 requestHtml += createHtml;
 
-                let updateHtml = "<div class='update'><button class='button-warning'><i class='fa fa-pencil-square-o'></i></button>";
+                let updateHtml = "<div class='update'><button class='button-warning' title='update selected rows'><i class='fa fa-pencil-square-o'></i></button>";
                 updateHtml += "<div class='update-panel'><div class='update-panel-head'>";
-                updateHtml += "<button class='button-success'><i class='fa fa-plus'></i></button>";
-                updateHtml += "<button class='button-success'><i class='fa fa-undo'></i></button>";
-                updateHtml += "</div><div class='update-panel-body'></div></div></div>";
+                updateHtml += "<button class='submit-button button-warning' title='update the data below on server'>Submit</button>";
+                updateHtml += "</div><div class='update-panel-body'>";
+                updateHtml += "<table class='submit-table'><thead>";
+                updateHtml += settings.th.map(d=> {
+                    d = "<th>" + d.name + "</th>";
+                    return d;
+                }).join("");
+                updateHtml += "</thead><tbody></tbody></table>";
+                updateHtml += "</div></div></div>";
                 requestHtml += updateHtml;
 
-                let deleteHtml = "<button class='delete button-danger'><i class='fa fa-times'></i></button>";
+                let deleteHtml = "<button class='delete button-danger' title='delete selected rows on server'><i class='fa fa-times'></i></button>";
                 requestHtml += deleteHtml;
 
                 requestHtml += "</div>";
 
                 let filterHtml = "<div class='filter'>";
-                filterHtml += "<div class='column-filter' title='column'></div>";
-                let rowFilterHtml = "<div class='row-filter'><button class='button-info'>row<i class='fa fa-check-square-o'></i></button>";
+                filterHtml += "<div class='column-filter' name='column' title='column filter'></div>";
+                let rowFilterHtml = "<div class='row-filter' title='row filter'><button class='button-info'>row<i class='fa fa-check-square-o'></i></button>";
                 rowFilterHtml += "<div class='row-filter-panel'>";
                 rowFilterHtml += "<div class='row-filter-panel-head'><button class='add-button button-success'><i class='fa fa-plus'></i>add new filter</button>";
                 rowFilterHtml += "<button class='filter-button button-success'><i class='fa fa-filter'></i>filter</button></div>";
@@ -379,7 +408,7 @@
                 rowFilterHtml += "</div>";
                 rowFilterHtml += "</div>";
                 filterHtml += rowFilterHtml;
-                filterHtml += "<button class='button-info'><i class='fa fa-undo'></i></button>";
+                filterHtml += "<button class='button-info' title='revert data before filter row'><i class='fa fa-undo'></i></button>";
                 filterHtml += "</div>";
                 let leftHtml = "<div class='left'>" + requestHtml + filterHtml + "</div>";
 
@@ -396,6 +425,7 @@
 
                 return leftHtml + rightHtml + tableHtml;
             });
+
 
             //listen column filter
             node.filter().children(".column-filter").select({
@@ -437,243 +467,333 @@
             func.read();
 
             element.data("setting", settings);
-        });
 
-        //mouse wheel scroll
-        node.table().delegate("", "mousewheel DOMMouseScroll", function (e) {
-            func.mouseScroll(e);
-        });
-
-        node.progress().delegate("", "mousewheel DOMMouseScroll", function (e) {
-            func.mouseScroll(e);
-        });
-
-        //listen row per page select
-        node.rowPerPageSelect().delegate("", "change", function () {
-            settings.displayRowNum = node.rowPerPageSelect().children("option:selected").text();
-            func.setTbodyHeight();
-            func.setProgress();
-        });
-
-        //listen read button
-        node.request().xPath(".read").delegate("", "click", function () {
-            func.read();
-        });
-
-        //listen create button
-        node.request().xPath(".create>button").delegate("", "click", function () {
-            node.request().xPath(".create>.create-panel").toggle();
-        });
-
-        //listen create panel add button
-        node.request().xPath(".create>.create-panel>.create-panel-head>.add-button").delegate("", "click", function () {
-            let createPanelTbody = node.request().xPath(".create>.create-panel>.create-panel-body>.submit-table>tbody");
-            createPanelTbody.append(()=> {
-                let newRowHtml = "<tr>";
-                newRowHtml += settings.th.map(d=> {
-                    d = "<td name='" + d.id + "'>" + func.getTdHmtl(d.type) + "</td>";
-                    return d;
-                }).join("");
-                newRowHtml += "</tr>";
-                return newRowHtml;
+            //mouse wheel scroll
+            node.table().delegate("", "mousewheel DOMMouseScroll", function (e) {
+                func.mouseScroll(e);
             });
-            createPanelTbody.xPath("tr:last>td>.datepicker").datepicker();
-        });
 
-        //listen create panel minus button
-        node.request().xPath(".create>.create-panel>.create-panel-head>.minus-button").delegate("", "click", function () {
-            node.request().xPath(".create>.create-panel>.create-panel-body>.submit-table>tbody>tr:last").remove();
-        });
+            node.progress().delegate("", "mousewheel DOMMouseScroll", function (e) {
+                func.mouseScroll(e);
+            });
 
-        //listen create panel revert button
-        node.request().xPath(".create>.create-panel>.create-panel-head>.revert-button").delegate("", "click", function () {
-            node.request().xPath(".create>.create-panel>.create-panel-body>.submit-table>tbody>tr").remove();
-        });
+            //listen row per page select
+            node.rowPerPageSelect().delegate("", "change", function () {
+                settings.displayRowNum = node.rowPerPageSelect().children("option:selected").text();
+                func.setTbodyHeight();
+                func.setProgress();
+            });
 
-        //listen create panel submit button
-        node.request().xPath(".create>.create-panel>.create-panel-head>.submit-button").delegate("", "click", function () {
-            let tr = node.request().xPath(".create>.create-panel>.create-panel-body>.submit-table>tbody>tr");
-            if (tr.length == 0) {
-                alert("please add at least one row");
-                return;
-            }
+            //listen read button
+            node.request().xPath(".read").delegate("", "click", function () {
+                func.read();
+            });
 
-            if (confirm("do you want to create the " + tr.length + " row data below ?")) {
-                let requestData = settings.th.map(d=> {
-                    let data = d.id + "=";
-                    data += tr.toArray().map(d1=> {
-                        d1 = d1.children("td[name=" + d.id + "]");
-                        d1 = func.getTdValue(d1, d.type);
-                        d1 = new myString(d1).base64UrlEncode().value;
-                        return d1;
-                    }).join(",");
-                    return data;
-                }).join("&");
+            //listen create button
+            node.request().xPath(".create>button").delegate("", "click", function () {
+                node.request().xPath(".create>.create-panel").toggle();
+            });
 
-                http.request(settings.url + "Create", requestData).then(result=> {
-                    node.request().xPath(".create>.create-panel").hide();
-                    func.read();
-                }).catch(result=> {
-                    alert("create data failed:" + result);
+            //listen create panel add button
+            node.request().xPath(".create>.create-panel>.create-panel-head>.add-button").delegate("", "click", function () {
+                let createPanelTbody = node.request().xPath(".create>.create-panel>.create-panel-body>.submit-table>tbody");
+                createPanelTbody.append(()=> {
+                    let newRowHtml = "<tr>";
+                    newRowHtml += settings.th.map(d=> {
+                        d = "<td name='" + d.id + "'>" + func.getTdHtml(d.type) + "</td>";
+                        return d;
+                    }).join("");
+                    newRowHtml += "</tr>";
+                    return newRowHtml;
                 });
-            }
+                createPanelTbody.xPath("tr:last>td>.datepicker").datepicker();
+            });
 
-        });
+            //listen create panel minus button
+            node.request().xPath(".create>.create-panel>.create-panel-head>.minus-button").delegate("", "click", function () {
+                node.request().xPath(".create>.create-panel>.create-panel-body>.submit-table>tbody>tr:last").remove();
+            });
 
-        //listen unify table td value change
-        // node.request().xPath(".create>.create-panel>.create-panel-body>.unify-table>tbody>tr>td>input[type=text]").delegate("","input",function () {
-        //
-        // });
+            //listen create panel revert button
+            node.request().xPath(".create>.create-panel>.create-panel-head>.revert-button").delegate("", "click", function () {
+                node.request().xPath(".create>.create-panel>.create-panel-body>.submit-table>tbody>tr").remove();
+            });
 
-        //listen update button
-        node.request().xPath(".update>button").delegate("", "click", function () {
-            node.request().xPath(".update>.update-panel").toggle();
-        });
-
-        //listen delete button
-        node.request().xPath(".delete").delegate("", "click", function () {
-            let selectedRowArr = func.getSelectRow();
-            if (selectedRowArr.length == 0) {
-                alert("please check at least one box on the left ");
-                return;
-            }
-            if (confirm("do you really want to delete selected " + selectedRowArr.length + " rows?")) {
-                let requestData = "id=";
-                requestData += selectedRowArr.map(d=> {
-                    let id = d.children("td[name=id]").text();
-                    d = new myString(id).base64UrlEncode().value;
-                    return d;
-                }).join(",");
-                http.request(settings.url + "Delete", requestData).then(result=> {
-                    func.read();
-                }).catch(result=> {
-                    alert("delete data failed:" + result);
-                });
-            }
-
-        });
-
-        //listen thead checkbox
-        node.thead().xPath("tr>th.func>input[type=checkbox]").delegate("", "click", function () {
-            if ($(this).prop("checked")) {
-                node.tbody().xPath("tr>td.func>input[type=checkbox]").prop({"checked": true});
-                node.tbody().children("tr").addClass("active");
-            } else {
-                node.tbody().xPath("tr>td.func>input[type=checkbox]").prop({"checked": false});
-                node.tbody().children("tr").removeClass("active");
-            }
-        });
-
-        //listen progress click
-        node.progress().delegate("", "click", function (e) {
-            let clickPercent = (e.clientX - $(this).offset().left) / $(this).width();
-            if (settings.data == undefined) {
-                return;
-            }
-            //find the nearest number
-            for (let i = 1; i <= settings.data.length; i++) {
-                let nodePercent = (i - 1) / (settings.data.length - settings.displayRowNum);
-                if (nodePercent >= clickPercent) {
-                    let lastIndex = settings.currentRowIndex;
-                    settings.currentRowIndex = i;
-                    func.scrollTbody(lastIndex);
-                    func.setProgress();
-                    break;
+            //listen create panel submit button
+            node.request().xPath(".create>.create-panel>.create-panel-head>.submit-button").delegate("", "click", function () {
+                let tr = node.request().xPath(".create>.create-panel>.create-panel-body>.submit-table>tbody>tr");
+                if (tr.length == 0) {
+                    alert("please add at least one row");
+                    return;
                 }
-            }
-        });
 
-        //listen thead click
-        node.thead().xPath("tr>th.content").delegate("", "click", function () {
-            func.sort($(this));
-        });
+                if (confirm("do you want to create the " + tr.length + " row data below ?")) {
+                    let requestData = settings.th.map(d=> {
+                        let data = d.id + "=";
+                        data += tr.toArray().map(d1=> {
+                            d1 = d1.children("td[name=" + d.id + "]");
+                            d1 = func.getTdValue(d1, d.type);
+                            d1 = new myString(d1).base64UrlEncode().value;
+                            return d1;
+                        }).join(",");
+                        return data;
+                    }).join("&");
 
-        //listen row filter
-        node.filter().xPath(".row-filter>button").delegate("", "click", function () {
-            $(this).parent().children(".row-filter-panel").toggle();
-        });
-
-        //listen row filter add button
-        node.rowFilterPanel().xPath(".row-filter-panel-head>.add-button").delegate("", "click", function () {
-            node.rowFilterPanel().children(".row-filter-panel-body").append(()=> {
-                let rowHtml = "<div class='row'><select>";
-                rowHtml += settings.th.map(d=> {
-                    d = "<option>" + d.name + "</option>";
-                    return d;
-                }).join("");
-                rowHtml += "</select><div class='value'></div><button class='button-minus'><i class='fa fa-times'></i></button>";
-                rowHtml += "</div>";
-                return rowHtml;
-            });
-
-            //addon select
-            let setAddonSelect = (rowAddonSelect)=> {
-                let addonSelectColumnName = rowAddonSelect.parent().children("select").children("option:selected").text();
-                let addonSelectId = settings.th.find(d=> {
-                    return d.name == addonSelectColumnName;
-                }).id;
-                let i = 0;
-                let addonSelectData = settings.data.distinct(d=> {
-                    return d[addonSelectId];
-                }).map(d=> {
-                    d = {id: i, name: d[addonSelectId], checked: true};
-                    i++;
-                    return d;
-                });
-                rowAddonSelect.select({
-                    data: addonSelectData
-                });
-            }
-
-            //listen name select change
-            node.rowFilterPanel().children(".row-filter-panel-body").children(".row:last").children("select").delegate("", "change", function () {
-                let columnName = $(this).children("option:selected").text();
-                setAddonSelect($(this).parent().children(".value"));
-            });
-
-            //listen row filter delete button
-            node.rowFilterPanel().xPath(".row-filter-panel-body>.row>.button-minus").delegate("", "click", function () {
-                $(this).parent().remove();
-            });
-
-            let newSelect = node.rowFilterPanel().children(".row-filter-panel-body").children(".row:last").children(".value");
-            setAddonSelect(newSelect);
-
-
-        });
-
-        //listen row filter filter button
-        node.rowFilterPanel().xPath(".row-filter-panel-head>.filter-button").delegate("", "click", function () {
-            let data = settings.data.concat();
-            node.rowFilterPanel().xPath(".row-filter-panel-body>.row").each(function () {
-                let filterId = settings.th.find(d=> {
-                    return d.name == $(this).children("select").children("option:selected").text();
-                }).id;
-                let filterData = $(this).children(".value").data("data").filter(d=> {
-                    return d.checked;
-                });
-                data = data.filter(d=> {
-                    let findData = filterData.find(d1=> {
-                        return d1.name == d[filterId];
+                    http.request(settings.url + "Create", requestData).then(result=> {
+                        node.request().xPath(".create>.create-panel").hide();
+                        func.read();
+                    }).catch(result=> {
+                        alert("create data failed:" + result);
                     });
-                    return findData != undefined;
-                });
+                }
+
             });
-            settings.sortedData = data;
 
-            //close current panel
-            node.rowFilterPanel().xPath(".row-filter-panel-body>.row>.value>.select-panel").hide();
-            node.rowFilterPanel().hide();
+            //listen unify table td value change
+            // node.request().xPath(".create>.create-panel>.create-panel-body>.unify-table>tbody>tr>td>input[type=text]").delegate("","input",function () {
+            //
+            // });
 
-            func.drawTbody();
+            //listen update button
+            node.request().xPath(".update>button").delegate("", "click", function () {
+                let updatePanel = node.request().xPath(".update>.update-panel");
+                if (updatePanel.is(":hidden")) {
+                    let selectedRowArr = func.getSelectRow();
+                    if (selectedRowArr.length == 0) {
+                        alert("please check at least one box on the left ");
+                        return;
+                    }
+                    let updatePanelTbody = updatePanel.xPath(".update-panel-body>.submit-table>tbody");
+                    updatePanelTbody.html(()=> {
+                        let updatePanelTbodyHtml = selectedRowArr.map(row=> {
+                            let rowHtml = "<tr>";
+                            rowHtml += "<td name='id'>" + row.children("td[name=id]").text() + "</td>";
+                            rowHtml += settings.th.map(d=> {
+                                d = "<td name='" + d.id + "'>" + func.getTdHtml(d.type) + "</td>";
+                                return d;
+                            }).join("");
+                            rowHtml += "</tr>";
+                            return rowHtml;
+                        }).join("");
+                        return updatePanelTbodyHtml;
+                    });
+                    updatePanelTbody.children("tr").each(function (i) {
+                        let selectTr = selectedRowArr[i];
+                        let updateTr = $(this);
+                        selectTr.children("td").each(function () {
+                            let name = $(this).attr("name");
+                            let type = $(this).attr("type");
+                            switch (type) {
+                                case "day":
+                                case "month":
+                                case "week":
+                                    updateTr.xPath("td[name=" + name + "]>.datepicker").datepicker({
+                                        "data": $(this).text()
+                                    });
+                                    break;
+                                default:
+                                    updateTr.xPath("td[name=" + name + "]>input").val($(this).text());
+                                    break;
+                            }
+
+                        });
+
+                    })
+
+                    updatePanelTbody.xPath("tr>td>.datepicker").datepicker();
+                    updatePanel.show();
+                } else {
+                    updatePanel.hide();
+                }
+
+
+            });
+
+            //listen update panel submit button
+            node.request().xPath(".update>.update-panel>.update-panel-head>.submit-button").delegate("", "click", function () {
+                let tr = node.request().xPath(".update>.update-panel>.update-panel-body>.submit-table>tbody>tr");
+                if (tr.length == 0) {
+                    alert("please update at least one row");
+                    return;
+                }
+
+                if (confirm("do you want to update the " + tr.length + " row data below ?")) {
+                    let id = tr.children("td[name=id]").text();
+                    id = new myString(id).base64UrlEncode().value;
+                    let requestData = "id=" + id + "&";
+                    requestData += settings.th.map(d=> {
+                        let data = d.id + "=";
+                        data += tr.toArray().map(d1=> {
+                            d1 = d1.children("td[name=" + d.id + "]");
+                            d1 = func.getTdValue(d1, d.type);
+                            d1 = new myString(d1).base64UrlEncode().value;
+                            return d1;
+                        }).join(",");
+                        return data;
+                    }).join("&");
+
+                    http.request(settings.url + "Update", requestData).then(result=> {
+                        node.request().xPath(".update>.update-panel").hide();
+                        func.read();
+                    }).catch(result=> {
+                        alert("update data failed:" + result);
+                    });
+                }
+            });
+
+            //listen delete button
+            node.request().xPath(".delete").delegate("", "click", function () {
+                let selectedRowArr = func.getSelectRow();
+                if (selectedRowArr.length == 0) {
+                    alert("please check at least one box on the left ");
+                    return;
+                }
+                if (confirm("do you really want to delete selected " + selectedRowArr.length + " rows?")) {
+                    let requestData = "id=";
+                    requestData += selectedRowArr.map(d=> {
+                        let id = d.children("td[name=id]").text();
+                        d = new myString(id).base64UrlEncode().value;
+                        return d;
+                    }).join(",");
+                    http.request(settings.url + "Delete", requestData).then(result=> {
+                        func.read();
+                    }).catch(result=> {
+                        alert("delete data failed:" + result);
+                    });
+                }
+
+            });
+
+            //listen thead checkbox
+            node.thead().xPath("tr>th.func>input[type=checkbox]").delegate("", "click", function () {
+                if ($(this).prop("checked")) {
+                    node.tbody().xPath("tr>td.func>input[type=checkbox]").prop({"checked": true});
+                    node.tbody().children("tr").addClass("active");
+                } else {
+                    node.tbody().xPath("tr>td.func>input[type=checkbox]").prop({"checked": false});
+                    node.tbody().children("tr").removeClass("active");
+                }
+            });
+
+            //listen progress click
+            node.progress().delegate("", "click", function (e) {
+                let clickPercent = (e.clientX - $(this).offset().left) / $(this).width();
+                if (settings.data == undefined) {
+                    return;
+                }
+                //find the nearest number
+                for (let i = 1; i <= settings.data.length; i++) {
+                    let nodePercent = (i - 1) / (settings.data.length - settings.displayRowNum);
+                    if (nodePercent >= clickPercent) {
+                        let lastIndex = settings.currentRowIndex;
+                        settings.currentRowIndex = i;
+                        func.scrollTbody(lastIndex);
+                        func.setProgress();
+                        break;
+                    }
+                }
+            });
+
+            //listen thead click
+            node.thead().xPath("tr>th.content").delegate("", "click", function () {
+                func.sort($(this));
+            });
+
+            //listen row filter
+            node.filter().xPath(".row-filter>button").delegate("", "click", function () {
+                $(this).parent().children(".row-filter-panel").toggle();
+            });
+
+            //listen row filter add button
+            node.rowFilterPanel().xPath(".row-filter-panel-head>.add-button").delegate("", "click", function () {
+                node.rowFilterPanel().children(".row-filter-panel-body").append(()=> {
+                    let rowHtml = "<div class='row'><select>";
+                    rowHtml += settings.th.map(d=> {
+                        d = "<option>" + d.name + "</option>";
+                        return d;
+                    }).join("");
+                    rowHtml += "</select><div class='value'></div><button class='button-minus'><i class='fa fa-times'></i></button>";
+                    rowHtml += "</div>";
+                    return rowHtml;
+                });
+
+                //addon select
+                let setAddonSelect = (rowAddonSelect)=> {
+                    let addonSelectColumnName = rowAddonSelect.parent().children("select").children("option:selected").text();
+                    let addonSelectId = settings.th.find(d=> {
+                        return d.name == addonSelectColumnName;
+                    }).id;
+                    let i = 0;
+                    let addonSelectData = settings.data.distinct(d=> {
+                        return d[addonSelectId];
+                    }).map(d=> {
+                        d = {id: i, name: d[addonSelectId], checked: true};
+                        i++;
+                        return d;
+                    });
+                    rowAddonSelect.select({
+                        data: addonSelectData
+                    });
+                }
+
+                //listen name select change
+                node.rowFilterPanel().children(".row-filter-panel-body").children(".row:last").children("select").delegate("", "change", function () {
+                    let columnName = $(this).children("option:selected").text();
+                    setAddonSelect($(this).parent().children(".value"));
+                });
+
+                //listen row filter delete button
+                node.rowFilterPanel().xPath(".row-filter-panel-body>.row>.button-minus").delegate("", "click", function () {
+                    $(this).parent().remove();
+                });
+
+                let newSelect = node.rowFilterPanel().children(".row-filter-panel-body").children(".row:last").children(".value");
+                setAddonSelect(newSelect);
+
+
+            });
+
+            //listen row filter filter button
+            node.rowFilterPanel().xPath(".row-filter-panel-head>.filter-button").delegate("", "click", function () {
+                let data = settings.data.concat();
+                node.rowFilterPanel().xPath(".row-filter-panel-body>.row").each(function () {
+                    let filterId = settings.th.find(d=> {
+                        return d.name == $(this).children("select").children("option:selected").text();
+                    }).id;
+                    let filterData = $(this).children(".value").data("data").filter(d=> {
+                        return d.checked;
+                    });
+                    data = data.filter(d=> {
+                        let findData = filterData.find(d1=> {
+                            return d1.name == d[filterId];
+                        });
+                        return findData != undefined;
+                    });
+                });
+                settings.sortedData = data;
+
+                //close current panel
+                node.rowFilterPanel().xPath(".row-filter-panel-body>.row>.value>.select-panel").hide();
+                node.rowFilterPanel().hide();
+
+                func.drawTbody();
+            });
+
+            //listen revert button
+            node.filter().children(".button-info").delegate("", "click", function () {
+                settings.sortedData = settings.data.concat();
+                func.drawTbody();
+            });
+
         });
 
-        //listen revert button
-        node.filter().children(".button-info").delegate("", "click", function () {
-            settings.sortedData = settings.data.concat();
-            func.drawTbody();
-        });
+        if (options == undefined) {
+            return;
+        }
 
+        if (options.resize) {
+            func.setTbodyHeight();
+        }
 
         return element;
     }
