@@ -68,6 +68,11 @@ var http = function () {
                     if (result.success == "true") {
                         resolve(result.message);
                     } else {
+                        if (result.message == "unauthorised") {
+                            window.location.href = "../login/";
+                            return;
+                        }
+
                         var errorMessage = "Invalid Data";
                         if (result.message != undefined) {
                             errorMessage = result.message;

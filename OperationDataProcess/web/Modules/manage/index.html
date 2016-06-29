@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+          name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>Title</title>
+    <script src="../Modules/common/js/init.js"></script>
+    <link rel="stylesheet" href="../Modules/manage/css/index.css">
+</head>
+<body>
+
+<div class="tree">
+    <div key="operation" title="运营数据">
+        <div key="login">登录数据</div>
+        <div key="server">服务器信息</div>
+    </div>
+    <div key="serverApply" title="xxxx"></div>
+</div>
+
+<div class="tree-panel">
+    <div tree-key="operation_login">
+        <div class="table" name="login_data">
+            <div key="date">日期</div>
+            <div key="dau">dau</div>
+            <div key="averageOnlineTime">平均在线时长(s)</div>
+            <div key="maxOnlineTime">最大在线时长(s)</div>
+            <div key="loginTimes">登陆次数</div>
+            <div key="averageLoginTimes">平均登录次数</div>
+        </div>
+    </div>
+    <div tree-key="operation_server">
+        <div class="table" name="serverinfo">
+            <div key="serverId">服务器id</div>
+            <div key="host">主机</div>
+            <div key="createTime" type="day">创建时间</div>
+            <div key="type">类型</div>
+            <div key="username">用户名</div>
+            <div key="password">密码</div>
+            <div key="port">端口</div>
+        </div>
+    </div>
+</div>
+
+<script src="../Modules/manage/js/index.js"></script>
+</body>
+</html>

@@ -22,15 +22,21 @@
 
         .row{
             display: inline-block;
-            height: 25px;
+            height: 30px;
             width: 50%;
+
             .name{
                 display: inline-block;
-                width: 10%;
+                width: 20%;
+                text-align: right;
+                height: 100%;
+
             }
             .form{
                 display: inline-block;
-                width: 40%;
+                width: 80%;
+                height: 100%;
+
             }
         }
 

@@ -52,6 +52,11 @@ class http {
                 if(result.success=="true"){
                     resolve(result.message);
                 }else{
+                    if(result.message == "unauthorised"){
+                        window.location.href="../login/";
+                        return;
+                    }
+
                     let errorMessage = "Invalid Data";
                     if(result.message!=undefined){
                         errorMessage = result.message;

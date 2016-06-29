@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!--系统日志-->
+    <appender name="system" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${OperationDataProcessRoot}/Log/system" />
+        <param name="Threshold" value="info" />
+        <param name="Append" value="true" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yy-MM-dd HH:mm:ss}] %5p %m%n" />
+        </layout>
+    </appender>
+    <!--数据库相关日志-->
+    <appender name="database" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${OperationDataProcessRoot}/Log/database" />
+        <param name="Threshold" value="info" />
+        <param name="Append" value="true" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yy-MM-dd HH:mm:ss}] %5p %m%n" />
+        </layout>
+    </appender>
+    <!--错误日志-->
+    <appender name="error" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${OperationDataProcessRoot}/Log/error" />
+        <param name="Threshold" value="info" />
+        <param name="Append" value="true" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yy-MM-dd HH:mm:ss}] %5p %m%n" />
+        </layout>
+    </appender>
+    <!--业务日志-->
+    <appender name="business" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${OperationDataProcessRoot}/Log/business" />
+        <param name="Threshold" value="info" />
+        <param name="Append" value="true" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yy-MM-dd HH:mm:ss}] %5p %m%n" />
+        </layout>
+    </appender>
+    <!--表格日志-->
+    <appender name="table" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${OperationDataProcessRoot}/Log/table" />
+        <param name="Threshold" value="info" />
+        <param name="Append" value="true" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yy-MM-dd HH:mm:ss}] %5p %m%n" />
+        </layout>
+    </appender>
+    <!--上传日志-->
+    <appender name="upload" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${OperationDataProcessRoot}/Log/upload" />
+        <param name="Threshold" value="info" />
+        <param name="Append" value="true" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yy-MM-dd HH:mm:ss}] %5p %m%n" />
+        </layout>
+    </appender>
+    <!--下载日志-->
+    <appender name="download" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${OperationDataProcessRoot}/Log/download" />
+        <param name="Threshold" value="info" />
+        <param name="Append" value="true" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yy-MM-dd HH:mm:ss}] %5p %m%n" />
+        </layout>
+    </appender>
+    <!--登录日志-->
+    <appender name="login" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${OperationDataProcessRoot}/Log/login" />
+        <param name="Threshold" value="info" />
+        <param name="Append" value="true" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.txt'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yy-MM-dd HH:mm:ss}] %5p %m%n" />
+        </layout>
+    </appender>
+
+    <logger name="system">
+        <level value="all" />
+        <appender-ref ref="system" />
+    </logger>
+    <logger name="database">
+        <level value="all" />
+        <appender-ref ref="database" />
+    </logger>
+    <logger name="error">
+        <level value="all" />
+        <appender-ref ref="error" />
+    </logger>
+    <logger name="business">
+        <level value="all" />
+        <appender-ref ref="business" />
+    </logger>
+    <logger name="table">
+        <level value="all" />
+        <appender-ref ref="table" />
+    </logger>
+    <logger name="upload">
+        <level value="all" />
+        <appender-ref ref="upload" />
+    </logger>
+    <logger name="download">
+        <level value="all" />
+        <appender-ref ref="download" />
+    </logger>
+    <logger name="login">
+        <level value="all" />
+        <appender-ref ref="login" />
+    </logger>
+    <root>
+        <level value="info" />
+    </root>
+
+</log4j:configuration>       

@@ -6,10 +6,12 @@
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/http.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/modal/tree.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/table/table.js" />
+        <item url="file://$PROJECT_DIR$/OperationDataProcess/web/Modules/server_info/js/index.js" />
         <item url="file://$PROJECT_DIR$/OperationSystem/web/Modules/server_info/js/index.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/modal/modal.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/table/table.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/websocket.js" />
+        <item url="file://$PROJECT_DIR$/OperationDataProcess/web/Modules/common/js/init.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/nav/nav.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/myString.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/carousel/carousel.js" />
@@ -30,27 +32,29 @@
       <root url="file://$PROJECT_DIR$/OperationSystem/web/Modules/game/js/index.js" />
       <root url="file://$PROJECT_DIR$/OperationSystem/web/Modules/game/js/index.js" />
       <root url="file://$PROJECT_DIR$/OperationSystem/web/Modules/common/js/init.js" />
-      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/http.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/modal/tree.js" />
-      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/table/table.js" />
-      <root url="file://$PROJECT_DIR$/OperationSystem/web/Modules/server_info/js/index.js" />
+      <root url="file://$PROJECT_DIR$/OperationDataProcess/web/Modules/manage/js/index.js" />
+      <root url="file://$PROJECT_DIR$/OperationSystem/web/Modules/manage/js/index.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/modal/modal.js" />
-      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/table/table.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/websocket.js" />
-      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/nav/nav.js" />
+      <root url="file://$PROJECT_DIR$/OperationDataProcess/web/Modules/common/js/init.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/myString.js" />
-      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/carousel/carousel.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/cookie.js" />
-      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/tree/tree.js" />
-      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/nav/nav.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/extend/array.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/date.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/extend/jquery.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/math.js" />
-      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/datepicker/datepicker.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/datepicker/datepicker.js" />
-      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/select/select.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/select/select.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/http.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/table/table.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/table/table.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/nav/nav.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/carousel/carousel.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/tree/tree.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/nav/nav.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/datepicker/datepicker.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/addon/select/select.js" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

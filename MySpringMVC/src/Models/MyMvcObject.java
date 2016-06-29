@@ -54,11 +54,7 @@ public class MyMvcObject {
     }
 
     public void unauthorised() throws MyException {
-        try {
-            this.response.sendRedirect(Init.loginRedirectUrl);
-        } catch (IOException e) {
-            throw new MyException("redict error");
-        }
+        fail("unauthorised");
     }
 
     public MyMvcObject authenticate() throws MyException {
