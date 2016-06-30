@@ -40,6 +40,8 @@
                 float: left;
             }
             .text{
+                width: 195px;
+                text-align: center;
                 display: inline-block;
             }
             .fa-arrow-circle-right{
@@ -48,7 +50,12 @@
         }
         .datepicker-panel-body{
             background-color: #c4e1ff;
+            width: 240px;
+
             .week{
+                width: 210px;
+
+                margin-left: 15px;
                 .week-head{
                     display: inline-block;
                     width: 30px;
@@ -57,7 +64,8 @@
                 }
             }
             .row{
-                text-align: left;
+                width: 210px;
+                margin-left: 15px;
                 div{
                     display: inline-block;
                     text-align: center;

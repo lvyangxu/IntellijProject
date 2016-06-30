@@ -5,7 +5,7 @@
 class myString {
 
     constructor(value) {
-        this.value = value;
+        this.value = value.toString();
     } 
 
     /**

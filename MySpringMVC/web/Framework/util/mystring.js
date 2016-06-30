@@ -12,7 +12,7 @@ var myString = function () {
     function myString(value) {
         _classCallCheck(this, myString);
 
-        this.value = value;
+        this.value = value.toString();
     }
 
     /**

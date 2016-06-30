@@ -127,13 +127,78 @@
                         });
                         let tdName = (d1 == undefined) ? "id" : d1.name;
                         let tdHtml = (d1 == undefined) ? "" : func.getTdHtml(d1.type);
-                        modalHtml += "<div class='row'><div class='name'>" + tdName + ":</div><div class='form'>" + tdHtml + "</div></div>";
+                        let tdId = (d1 == undefined) ? "id" : d1.id;
+                        let tdType = (d1 == undefined) ? "id" : d1.type;
+                        modalHtml += "<div class='row' name='" + tdId + "' type='" + tdType + "'><div class='name'>" + tdName + ":</div><div class='form'>" + tdHtml + "</div></div>";
+
                     });
+                    modalHtml += "<div class='modal-submit'><button class='button-warning' title='update the data above on server'>Submit</button></div>";
+
                     $(this).modal({
                         width: 0.8,
                         height: 0.8,
                         marginTop: 0.1,
-                        html: modalHtml
+                        html: modalHtml,
+                        name: "table"
+                    });
+
+                    $("body").xPath(".addon-modal>.modal-panel>.modal-panel-body>.row>.form>.datepicker").datepicker();
+
+                    //set td value
+                    $("body").xPath(".addon-modal>.modal-panel>.modal-panel-body>.row").each(function () {
+                        let tdId = $(this).attr("name");
+                        let tdType = $(this).attr("type");
+                        let trTd = tr.children("td[name=" + tdId + "]");
+                        if (tdType == "id") {
+                            $(this).xPath(".form").text(trTd.text());
+                        } else {
+                            switch (tdType) {
+                                case "day":
+                                case "month":
+                                case "week":
+                                    $(this).xPath(".form>.datepicker").datepicker({"data": new date(trTd.text()).value});
+                                    break;
+                                default:
+                                    $(this).xPath(".form>input").val(trTd.text());
+                                    break;
+                            }
+                        }
+                    });
+
+                    $("body").xPath(".addon-modal>.modal-panel>.modal-panel-body>.modal-submit>.button-warning").delegate("", "click", function () {
+                        if (confirm("do you really want to update the data above?")) {
+                            let requestData = "";
+                            $("body").xPath(".addon-modal>.modal-panel>.modal-panel-body>.row").each(function () {
+                                let id = $(this).attr("name");
+                                let type = $(this).attr("type");
+                                let v = "";
+                                if (id == "id") {
+                                    v = $(this).children(".form").text();
+                                } else {
+                                    switch (type) {
+                                        case "day":
+                                        case "month":
+                                        case "week":
+                                            v = $(this).xPath(".form>.datepicker").data("data");
+                                            v = new date(v).toString();
+                                            break;
+                                        default:
+                                            v = $(this).xPath(".form>input").val();
+                                            break;
+                                    }
+                                }
+                                v = new myString(v).base64UrlEncode().value;
+                                requestData += id + "=" + v + "&";
+                            });
+                            requestData = requestData.substr(0, requestData.length - 2);
+
+                            http.request(settings.url + "Update", requestData).then(result=> {
+                                $("body").xPath(".addon-modal").remove();
+                                func.read();
+                            }).catch(result=> {
+                                alert("update data failed:" + result);
+                            });
+                        }
                     });
                 });
             },
@@ -288,7 +353,7 @@
                         break;
                     case "input":
                     default:
-                        tdHtml = "<input type='text'>";
+                        tdHtml = "<input type='text' class='input'>";
                         break;
                 }
                 return tdHtml;

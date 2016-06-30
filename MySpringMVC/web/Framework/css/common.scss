@@ -42,3 +42,20 @@ body {
 @include button(danger,#d9534f,#c12e2a,#b92c28);
 @include button(warning,#f0ad4e,#eb9316,#e38d13);
 @include button(minus,#ff7b40,#ff9e73,#ff4f00);
+
+.input{
+    height: 20px;
+    padding: 6px 6px;
+    font-size: 14px;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    
+}
+.input:focus{
+    text-decoration: none;
+}
