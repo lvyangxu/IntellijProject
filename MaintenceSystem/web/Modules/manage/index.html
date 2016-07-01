@@ -25,7 +25,9 @@
     </div>
     <div key="serverApply" title="服务器申请"></div>
     <div key="finance" title="财务管理"></div>
-    <div key="user" title="用户管理"></div>
+    <div key="user" title="系统管理">
+        <div key="login">登录日志</div>
+    </div>
     <div key="monitor" title="服务器监控"></div>
     <div key="deploy" title="自动化部署"></div>
 </div>
@@ -76,33 +78,16 @@
             <div key="note">备注</div>
         </div>
     </div>
+    <div tree-key="user_login">
+        <div class="table" name="user_login" curd="r">
+            <div key="user">登录用户</div>
+            <div key="ip">ip</div>
+            <div key="login_time">登录时间</div>
+        </div>
+    </div>
+
 </div>
 
-<div class="test">
-<table>
-    <thead>
-    <tr>
-        <th>a</th>
-        <th>b</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>1</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>2</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>3</td>
-    </tr>
-    </tbody>
-
-</table>
-    </div>
 
 <script src="../Modules/manage/js/index.js"></script>
 </body>

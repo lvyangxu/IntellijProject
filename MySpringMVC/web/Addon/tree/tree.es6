@@ -82,7 +82,6 @@
                 $(this).addClass("active");
                 $("div[tree-key]").hide();
                 $("div[tree-key="+name+"]").show();
-                $("div[tree-key="+name+"]").find(".addon-table").table({"resize":true});
             })
 
         });

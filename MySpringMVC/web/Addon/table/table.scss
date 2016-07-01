@@ -1,5 +1,4 @@
 .addon-table {
-    overflow-y: hidden;
     i {
         cursor: pointer;
     }
@@ -39,9 +38,9 @@
             button {
                 margin-right: 10px;
             }
-            .create, .update {
+            .create, .update, .copy {
                 display: inline-block;
-                .create-panel, .update-panel {
+                .create-panel, .update-panel, .copy-panel {
                     @include panel;
                     table {
                         margin-top: 10px;

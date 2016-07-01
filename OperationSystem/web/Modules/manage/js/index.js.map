@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.es6"],"names":[],"mappings":";;AAAA;AACI,MAAE,QAAF,EAAY,KAAZ;AACA,MAAE,OAAF,EAAW,IAAX;AACH","file":"index.js","sourcesContent":["{\r\n    $(\".table\").table();\r\n    $(\".tree\").tree();\r\n}"]}

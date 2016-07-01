@@ -23,8 +23,15 @@
     };
 
     let table = (element, options)=> {
+        let curd = element.property("curd", "");
         //default setting
         let settings = element.addonSettingExtend(options, {
+            curd: {
+                c: (curd == "") ? true : curd.includes("c"),
+                u: (curd == "") ? true : curd.includes("u"),
+                r: (curd == "") ? true : curd.includes("r"),
+                d: (curd == "") ? true : curd.includes("d")
+            },
             //func column,all default true
             funcColumn: {
                 checkbox: (element.attr("checkbox") == "false") ? false : true,
@@ -68,9 +75,6 @@
             },
             rowPerPageSelect(){
                 return element.xPath(".right>.rowPerPage>select");
-            },
-            progress(){
-                return element.xPath(".right>.progress");
             }
         }
 
@@ -132,7 +136,7 @@
                         modalHtml += "<div class='row' name='" + tdId + "' type='" + tdType + "'><div class='name'>" + tdName + ":</div><div class='form'>" + tdHtml + "</div></div>";
 
                     });
-                    modalHtml += "<div class='modal-submit'><button class='button-warning' title='update the data above on server'>Submit</button></div>";
+                    modalHtml += settings.curd.u ? "<div class='modal-submit'><button class='button-warning' title='update the data above on server'>Submit</button></div>" : "";
 
                     $(this).modal({
                         width: 0.8,
@@ -202,77 +206,6 @@
                     });
                 });
             },
-            mouseScroll(e){
-                //prevent browser scroll
-                e.preventDefault();
-                let lastIndex = settings.currentRowIndex;
-                let deltaY = e.originalEvent.deltaY || e.originalEvent.detail;
-                if (deltaY < 0) {
-                    //scroll up
-                    if (settings.currentRowIndex > 1) {
-                        settings.currentRowIndex--;
-                        func.scrollTbody(lastIndex);
-                        func.setProgress();
-                    }
-                } else {
-                    //scroll down
-                    if (settings.sortedData != undefined) {
-                        if (settings.currentRowIndex < settings.sortedData.length - settings.displayRowNum + 1) {
-                            settings.currentRowIndex++;
-                            func.scrollTbody(lastIndex);
-                            func.setProgress();
-                        }
-                    }
-                }
-            },
-            scrollTbody(lastIndex){
-                let i = settings.currentRowIndex;
-                if (i == lastIndex) {
-                    return;
-                }
-                if (lastIndex > settings.currentRowIndex) {
-                    while (i <= lastIndex) {
-                        node.tbody().children("tr[row=" + (i - 1) + "]").slideDown(50);
-                        i++;
-                    }
-                } else {
-                    while (i >= lastIndex) {
-                        node.tbody().children("tr[row=" + (i - 1) + "]").slideUp(50);
-                        i--;
-                    }
-                }
-
-            },
-            setProgress(){
-                let total = settings.data.length;
-                let h = settings.displayRowNum;
-                let percent;
-                if (total > h) {
-                    percent = (settings.currentRowIndex - 1) / (total - h);
-                } else {
-                    percent = 0;
-                }
-                percent = percent > 1 ? 1 : percent;
-                node.progress().children(".text").text((percent * 100).toFixed(2) + "%");
-                let w = (node.progress().width() - 2) * percent;
-                node.progress().children(".current").width(w);
-            },
-            setTbodyHeight(){
-                //set element height
-                let leftH = node.left().outerHeight(true);
-                let theadH = node.thead().outerHeight(true);
-                let h = settings.displayRowNum;
-                if (settings.data != undefined && settings.data.length != undefined) {
-                    h = (h > settings.data.length) ? settings.data.length : h;
-                    h = (h == 0) ? 1 : h;
-                } else {
-                    h = 1;
-                }
-                let tbodyH = h * settings.rowHeight;
-                element.height(leftH + theadH + tbodyH + 1);
-
-
-            },
             listenTbodyCheckbox(){
                 //listen tbody checkbox
                 node.tbody().xPath("tr>td.func>input[type=checkbox]").delegate("", "click", function () {
@@ -295,7 +228,6 @@
                     } else {
                         func.drawTbody();
                     }
-                    func.setTbodyHeight();
                     func.listenTbodyCheckbox();
                 }).catch(result=> {
                     func.errorData();
@@ -414,6 +346,7 @@
             element.append(()=> {
                 let requestHtml = "<div class='request'>";
                 let readHtml = "<button class='read button-warning' title='refresh data from server'><i class='fa fa-refresh'></i></button>";
+                readHtml = settings.curd.r ? readHtml : "";
                 requestHtml += readHtml;
 
                 let createHtml = "<div class='create'><button class='button-warning' title='create new row data'><i class='fa fa-plus'></i></button>";
@@ -443,6 +376,8 @@
                 // createHtml += "</tr></tbody></table></div>";
 
                 createHtml += "</div></div></div>";
+                createHtml = settings.curd.c ? createHtml : "";
+
                 requestHtml += createHtml;
 
                 let updateHtml = "<div class='update'><button class='button-warning' title='update selected rows'><i class='fa fa-pencil-square-o'></i></button>";
@@ -456,10 +391,27 @@
                 }).join("");
                 updateHtml += "</thead><tbody></tbody></table>";
                 updateHtml += "</div></div></div>";
+                updateHtml = settings.curd.u ? updateHtml : "";
                 requestHtml += updateHtml;
 
+                let copyHtml = "<div class='copy'><button class='button-warning' title='create new data with the selected Initially data'><i class='fa fa-files-o'></i></button>";
+                copyHtml += "<div class='copy-panel'><div class='copy-panel-head'>";
+                copyHtml += "<button class='submit-button button-warning' title='create the data below on server'>Submit</button>";
+                copyHtml += "</div><div class='copy-panel-body'>";
+                copyHtml += "<table class='submit-table'><thead>";
+                copyHtml += settings.th.map(d=> {
+                    d = "<th>" + d.name + "</th>";
+                    return d;
+                }).join("");
+                copyHtml += "</thead><tbody></tbody></table>";
+                copyHtml += "</div></div></div>";
+                copyHtml = settings.curd.c ? copyHtml : "";
+                requestHtml += copyHtml;
+
                 let deleteHtml = "<button class='delete button-danger' title='delete selected rows on server'><i class='fa fa-times'></i></button>";
+                deleteHtml = settings.curd.d ? deleteHtml : "";
                 requestHtml += deleteHtml;
+
 
                 requestHtml += "</div>";
 
@@ -482,9 +434,13 @@
                     return d;
                 }).join("");
                 rowPerPageHtml = "<div class='rowPerPage'>Row Per Page : <select>" + rowPerPageHtml + "</select></div>";
-                let progressHtml = "<div class='progress'><div class='text'>0%</div><div class='current'></div></div>";
-
-                let rightHtml = "<div class='right'>" + rowPerPageHtml + progressHtml + "</div>";
+                let paginationHtml = "<div class='pagination'>";
+                paginationHtml += "<button class='button-info'><i class='fa fa-angle-double-left'></i></button>";
+                paginationHtml += "<button class='button-info'><i class='fa fa-angle-left'></i></button>";
+                paginationHtml += "<button class='button-info'><i class='fa fa-angle-right'></i></button>";
+                paginationHtml += "<button class='button-info'><i class='fa fa-angle-double-right'></i></button>";
+                paginationHtml += "</div>";
+                let rightHtml = "<div class='right'>" + rowPerPageHtml + paginationHtml + "</div>";
 
                 let tableHtml = "<table>" + theadHtml + "<tbody></tbody></table>";
 
@@ -526,27 +482,15 @@
 
             func.noData();
 
-            func.setTbodyHeight();
 
             //auto do read
             func.read();
 
             element.data("setting", settings);
 
-            //mouse wheel scroll
-            node.table().delegate("", "mousewheel DOMMouseScroll", function (e) {
-                func.mouseScroll(e);
-            });
-
-            node.progress().delegate("", "mousewheel DOMMouseScroll", function (e) {
-                func.mouseScroll(e);
-            });
-
             //listen row per page select
             node.rowPerPageSelect().delegate("", "change", function () {
                 settings.displayRowNum = node.rowPerPageSelect().children("option:selected").text();
-                func.setTbodyHeight();
-                func.setProgress();
             });
 
             //listen read button
@@ -729,6 +673,89 @@
 
             });
 
+            //listen copy button
+            node.request().xPath(".copy>button").delegate("", "click", function () {
+                let copyPanel = node.request().xPath(".copy>.copy-panel");
+                if (copyPanel.is(":hidden")) {
+                    let selectedRowArr = func.getSelectRow();
+                    if (selectedRowArr.length == 0) {
+                        alert("please check at least one box on the left ");
+                        return;
+                    }
+
+                    let copyPanelTbody = copyPanel.xPath(".copy-panel-body>.submit-table>tbody");
+                    copyPanelTbody.html(()=> {
+                        let copyPanelTbodyHtml = selectedRowArr.map(row=> {
+                            let rowHtml = "<tr>";
+                            rowHtml += "<td name='id'>" + row.children("td[name=id]").text() + "</td>";
+                            rowHtml += settings.th.map(d=> {
+                                d = "<td name='" + d.id + "'>" + func.getTdHtml(d.type) + "</td>";
+                                return d;
+                            }).join("");
+                            rowHtml += "</tr>";
+                            return rowHtml;
+                        }).join("");
+                        return copyPanelTbodyHtml;
+                    });
+
+                    copyPanelTbody.children("tr").each(function (i) {
+                        let selectTr = selectedRowArr[i];
+                        let copyTr = $(this);
+                        selectTr.children("td").each(function () {
+                            let name = $(this).attr("name");
+                            let type = $(this).attr("type");
+                            switch (type) {
+                                case "day":
+                                case "month":
+                                case "week":
+                                    copyTr.xPath("td[name=" + name + "]>.datepicker").datepicker({
+                                        "data": $(this).text()
+                                    });
+                                    break;
+                                default:
+                                    copyTr.xPath("td[name=" + name + "]>input").val($(this).text());
+                                    break;
+                            }
+                        });
+                    })
+                    copyPanelTbody.xPath("tr>td>.datepicker").datepicker();
+                    copyPanel.show();
+                } else {
+                    copyPanel.hide();
+                }
+
+            });
+
+            //listen copy panel submit button
+            node.request().xPath(".copy>.copy-panel>.copy-panel-head>.submit-button").delegate("", "click", function () {
+                let tr = node.request().xPath(".copy>.copy-panel>.copy-panel-body>.submit-table>tbody>tr");
+                if (tr.length == 0) {
+                    alert("please create at least one row");
+                    return;
+                }
+
+                if (confirm("do you want to create the " + tr.length + " row data below ?")) {
+
+                    let requestData = settings.th.map(d=> {
+                        let data = d.id + "=";
+                        data += tr.toArray().map(d1=> {
+                            d1 = d1.children("td[name=" + d.id + "]");
+                            d1 = func.getTdValue(d1, d.type);
+                            d1 = new myString(d1).base64UrlEncode().value;
+                            return d1;
+                        }).join(",");
+                        return data;
+                    }).join("&");
+
+                    http.request(settings.url + "Create", requestData).then(result=> {
+                        node.request().xPath(".copy>.copy-panel").hide();
+                        func.read();
+                    }).catch(result=> {
+                        alert("copy data failed:" + result);
+                    });
+                }
+            });
+
             //listen thead checkbox
             node.thead().xPath("tr>th.func>input[type=checkbox]").delegate("", "click", function () {
                 if ($(this).prop("checked")) {
@@ -737,25 +764,6 @@
                 } else {
                     node.tbody().xPath("tr>td.func>input[type=checkbox]").prop({"checked": false});
                     node.tbody().children("tr").removeClass("active");
-                }
-            });
-
-            //listen progress click
-            node.progress().delegate("", "click", function (e) {
-                let clickPercent = (e.clientX - $(this).offset().left) / $(this).width();
-                if (settings.data == undefined) {
-                    return;
-                }
-                //find the nearest number
-                for (let i = 1; i <= settings.data.length; i++) {
-                    let nodePercent = (i - 1) / (settings.data.length - settings.displayRowNum);
-                    if (nodePercent >= clickPercent) {
-                        let lastIndex = settings.currentRowIndex;
-                        settings.currentRowIndex = i;
-                        func.scrollTbody(lastIndex);
-                        func.setProgress();
-                        break;
-                    }
                 }
             });
 
@@ -854,10 +862,6 @@
 
         if (options == undefined) {
             return;
-        }
-
-        if (options.resize) {
-            func.setTbodyHeight();
         }
 
         return element;

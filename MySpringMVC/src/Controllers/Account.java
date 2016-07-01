@@ -20,11 +20,13 @@ public class Account {
 
     @RequestMapping(value = "/DoLogin")
     public void doLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-        MyMvcObject MyMvcObject1 = new MyMvcObject(request,response, session);
+        MyMvcObject MyMvcObject1 = new MyMvcObject(request, response, session);
         try {
             MyMvcObject1.login().success();
+            MiddleWare.LoginCallback.success(request, response);
         } catch (MyException e) {
             MyMvcObject1.fail(e.getMessage());
+            MiddleWare.LoginCallback.failed(request, response);
         }
     }
 
@@ -34,9 +36,9 @@ public class Account {
         return "/login";
     }
 
-    @RequestMapping(value="/GetCookieName")
-    public void getCookieName(HttpServletRequest request, HttpServletResponse response, HttpSession session){
-        MyMvcObject MyMvcObject1 = new MyMvcObject(request,response, session);
+    @RequestMapping(value = "/GetCookieName")
+    public void getCookieName(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+        MyMvcObject MyMvcObject1 = new MyMvcObject(request, response, session);
         MyMvcObject1.getCookieName().success();
     }
 }
