@@ -16,6 +16,7 @@ public class Account {
 
     /**
      * login
+     *
      * @param request
      * @param session
      * @throws MyException
@@ -25,10 +26,10 @@ public class Account {
         //get username and password in request
         String usernameP = Parameter.get(request, "username");
         String passwordP = Parameter.get(request, "password");
-        if(usernameP==null){
+        if (usernameP == null) {
             throw new MyException("empty username");
         }
-        if(passwordP==null){
+        if (passwordP == null) {
             throw new MyException("empty password");
         }
 
@@ -44,17 +45,18 @@ public class Account {
             throw new MyException("invalid password");
         }
 
-        authenticate(usernameP,passwordP);
-
+        authenticate(usernameP, passwordP);
+        session.setAttribute("username", usernameP);
     }
 
     /**
      * check session
+     *
      * @param usernameP
      * @param passwordP
      * @throws MyException
      */
-    public static void authenticate(String usernameP,String passwordP) throws MyException {
+    public static void authenticate(String usernameP, String passwordP) throws MyException {
         //get username and password in mysql and validate them
         boolean isValid = false;
         for (List<String> row : mysql.select("select username,password from user").rows()) {

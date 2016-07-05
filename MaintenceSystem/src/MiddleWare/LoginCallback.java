@@ -16,11 +16,19 @@ public class LoginCallback {
     public static void success(HttpServletRequest request, HttpServletResponse response) {
         try {
             String user = Parameter.get(request, "username");
-            if(user==null){
+            if (user == null) {
                 throw new MyException("null username");
             }
             user = new MyString(user).base64Decode().toString();
-            Init.mysql.update("insert into user_login set id=null,user='"+user+"',ip='"+request.getRemoteAddr()+"',login_time=now()");
+            Init.mysql.update("insert into user_login set id=null,user='" + user + "',ip='" + request.getRemoteAddr() + "',login_time=now()");
+        } catch (MyException e) {
+            Init.log4j.error("add user login history failed:" + e.getMessage());
+        }
+    }
+
+    public static void success(HttpServletRequest request, HttpServletResponse response, String username, String password) {
+        try {
+            Init.mysql.update("insert into user_login set id=null,user='" + username + "',ip='" + request.getRemoteAddr() + "',login_time=now()");
         } catch (MyException e) {
             Init.log4j.error("add user login history failed:" + e.getMessage());
         }

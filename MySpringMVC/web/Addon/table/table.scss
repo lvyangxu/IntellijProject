@@ -64,7 +64,7 @@
                     }
                     .unify {
                         text-align: center;
-                        font-size: 20px;
+                        font-size: 12px;
                         color: #ff7b40;
                         .unify-table {
                             color: #ff7b40;
@@ -138,11 +138,15 @@
 
         .pagination {
             margin-bottom: 10px;
+            float: right;
             button {
                 margin-left: 5px;
             }
-            .pages {
-                display: inline-block;
+            .page {
+                width: 34px;
+                height: 28px;
+                text-align: center;
+                margin-left: 5px;
             }
         }
 

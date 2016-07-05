@@ -5,12 +5,16 @@
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/table/table.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/tree/tree.js" />
         <item url="file://$PROJECT_DIR$/MaintenceSystem/web/Modules/manage/js/index.js" />
+        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/extend/jquery.js" />
+        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/datepicker/datepicker.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/table/table.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/tree/tree.js" />
       <root url="file://$PROJECT_DIR$/MaintenceSystem/web/Modules/manage/js/index.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/extend/jquery.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/datepicker/datepicker.js" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

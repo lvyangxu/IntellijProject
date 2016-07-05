@@ -14,7 +14,7 @@
                 callback($(this));
             }
             $(this).data({"init": true});
-        } 
+        }
     };
 
     $.fn.addonSettingExtend = function (options, defaultSetting) {
@@ -56,7 +56,7 @@
         });
         return $(this);
     };
-    $.fn.fullFit = function (delH, callback,noLeft) {
+    $.fn.fullFit = function (delH, callback, noLeft) {
 
         let element = $(this);
         $(this).fit(()=> {
@@ -85,13 +85,13 @@
                 "margin-top": offsetY + "px",
                 "width": (scale) * 100 + "%"
             }
-            if(!noLeft){
-                style = $.extend(style,{
+            if (!noLeft) {
+                style = $.extend(style, {
                     "margin-left": offsetX + "px",
                 });
             }
 
-            element.css(style,200);
+            element.css(style, 200);
 
 
             if (callback != undefined) {

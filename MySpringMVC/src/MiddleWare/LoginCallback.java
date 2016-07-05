@@ -12,6 +12,10 @@ public class LoginCallback {
 
     }
 
+    public static void success(HttpServletRequest request, HttpServletResponse response, String username, String password) {
+
+    }
+
     public static void failed(HttpServletRequest request, HttpServletResponse response){
 
     }

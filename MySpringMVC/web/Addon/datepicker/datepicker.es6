@@ -25,7 +25,8 @@
 
         let settings = element.addonSettingExtend(options, {
             type: element.property("type", "day"),
-            addNum: element.property("add-num", 0)
+            addNum: element.property("add-num", 0),
+            callback:()=>{}
         });
 
         let node = {
@@ -83,6 +84,7 @@
                     return panelBodyHtml;
                 });
 
+                //listen day click
                 node.panel().xPath(".datepicker-panel-body>.row>div").delegate("","click",function () {
                     let day = $(this).text();
                     if($(this).hasClass("disabled")){
@@ -97,6 +99,7 @@
                     func.setData();
                     func.drawPanelBody();
                     node.panel().hide();
+                    settings.callback();
                 });
             }
         };

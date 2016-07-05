@@ -58,7 +58,7 @@ public class MyMvcObject {
     }
 
     public MyMvcObject authenticate() throws MyException {
-        MiddleWare.Session.authenticate(this.request, this.session);
+        MiddleWare.Session.authenticate(this.request, this.response, this.session);
         return this;
     }
 
