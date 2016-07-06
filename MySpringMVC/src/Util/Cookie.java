@@ -1,4 +1,4 @@
-package Request;
+package Util;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 public class Cookie {
 
     public static String get(HttpServletRequest request,String cookieName){
-        String result = "";
+        String result = null;
         javax.servlet.http.Cookie[] CookiesArr = request.getCookies();
         if(CookiesArr == null){
-            return "";
+            return result;
         }
 
         for (javax.servlet.http.Cookie Cookie1 : CookiesArr) {

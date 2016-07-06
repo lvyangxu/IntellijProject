@@ -1,7 +1,7 @@
 package Dao;
 
 import Models.MyException;
-import Request.Parameter;
+import Util.Parameter;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;

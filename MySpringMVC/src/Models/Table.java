@@ -1,20 +1,17 @@
 package Models;
 
-import Dao.*;
 import Init.Init;
-import Request.Parameter;
+import Util.Parameter;
 import Util.MyString;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static Init.Init.*;
 
@@ -179,7 +176,7 @@ public class Table {
      * @param fieldList
      * @return
      */
-    private static Integer getRowNumber(HttpServletRequest request, List<String> fieldList) {
+    private static Integer getRowNumber(HttpServletRequest request, List<String> fieldList) throws MyException {
         String defaultKeyValue = Parameter.get(request, "id");
         if (defaultKeyValue == null) {
             String defaultKey = new MyString(fieldList.get(1)).split("\\|")[0];

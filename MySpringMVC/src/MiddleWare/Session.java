@@ -1,11 +1,8 @@
 package MiddleWare;
 
-import Models.Account;
 import Models.MyException;
-import Request.Cookie;
-import Request.Parameter;
+import Util.Cookie;
 import Util.MyString;
-import jdk.nashorn.internal.objects.Global;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +12,10 @@ import static Init.Init.passwordCookieName;
 import static Init.Init.usernameCookieName;
 
 /**
- * Created by karl on 2016/4/20.
+ * Created by karl on 2016/7/6.
  */
 public class Session {
+
     public static void authenticate(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws MyException {
         if (session.getAttribute("username") == null) {
             String username = Cookie.get(request, usernameCookieName);
@@ -33,10 +31,8 @@ public class Session {
             } catch (Exception e) {
                 throw new MyException("authenticate failed");
             }
-            Account.authenticate(username, password);
-            session.setAttribute("username",username);
-            System.out.println(11);
-            MiddleWare.LoginCallback.success(request, response, username, password);
+
+            Account.validate(request, response, session, username, password);
         }
     }
 

@@ -1,11 +1,15 @@
-package Response;
+package MiddleWare;
 
 import Models.MyException;
 import Util.Log4j;
+import Util.MyString;
+import Util.Parameter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
+import static Init.Init.WebRoot;
 import static Init.Init.log4j;
 
 /**
@@ -78,6 +82,7 @@ public class Response {
 
     /**
      * response unauthorized width 401 http status code
+     *
      * @param response
      */
     public static void unauthorized(HttpServletResponse response) {
@@ -85,7 +90,14 @@ public class Response {
     }
 
 
-    public static void file(HttpServletResponse response, String filePath, String fileName) throws MyException {
+    public static void excel(HttpServletRequest request, HttpServletResponse response, String table) throws MyException {
+
+        String filePath = "Data/" + table + "/";
+        filePath = WebRoot + filePath;
+        String fileName = Parameter.get(request,"fileName");
+        fileName = new MyString(fileName).base64Decode().toString();
+        fileName += ".xlsx";
+
         response.setHeader("Content-type", "APPLICATION/OCTET-STREAM");
         try {
             response.setHeader("Content-Disposition", "attachment;fileName=" + java.net.URLEncoder.encode(fileName, "UTF-8"));

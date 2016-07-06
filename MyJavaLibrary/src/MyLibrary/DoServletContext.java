@@ -21,46 +21,7 @@ public class DoServletContext extends HttpServlet{
 //
 //    DoDataTranslation DoCode1 = new DoDataTranslation();
 //
-//    /**
-//     * ��Ĭ�ϵ�ContentType"text/html;charset=UTF-8"�ظ��ͻ���
-//     * @param HttpServletResponse1 HttpServletResponse����
-//     * @param replyString Ҫ�ظ����ַ�������
-//     * @return �ɹ�����null,ʧ�ܷ���String���͵��쳣��Ϣ
-//     */
-//    public static String replyStringToClientWithDefaultContentType(HttpServletResponse HttpServletResponse1, String replyString) {
-//        String result = null;
-//        HttpServletResponse1.setContentType("text/html;charset=UTF-8");
-//        try {
-//            PrintWriter PrintWriter1 = HttpServletResponse1.getWriter();
-//            PrintWriter1.print(replyString);
-//            PrintWriter1.flush();
-//            PrintWriter1.close();
-//        } catch (Exception e) {
-//            result = e.getMessage();
-//        }
-//        return result;
-//    }
-//
-//        /**
-//     * ��Ĭ�ϵ�ContentType"text/html;charset=UTF-8"�ظ��ͻ���
-//     * @param HttpServletResponse1 HttpServletResponse����
-//     * @param replyString Ҫ�ظ����ַ�������
-//     * @return �ɹ�����null,ʧ�ܷ���String���͵��쳣��Ϣ
-//     */
-//    public String replyStringToClientWithJsonContentType(HttpServletResponse HttpServletResponse1, String replyString) {
-//        String result = null;
-//        HttpServletResponse1.setContentType("application/json");
-//        HttpServletResponse1.setCharacterEncoding("UTF-8");
-//        try {
-//            PrintWriter PrintWriter1 = HttpServletResponse1.getWriter();
-//            PrintWriter1.print(replyString);
-//            PrintWriter1.flush();
-//            PrintWriter1.close();
-//        } catch (Exception e) {
-//            result = e.getMessage();
-//        }
-//        return result;
-//    }
+
 //
 //
 //    /**

@@ -27,7 +27,6 @@
         <url-pattern>/Images/*</url-pattern>
         <url-pattern>/Framework/*</url-pattern>
         <url-pattern>/Addon/*</url-pattern>
-        <!--<url-pattern>/Data/*</url-pattern>-->
     </servlet-mapping>
 
     <session-config>

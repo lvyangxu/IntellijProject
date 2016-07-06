@@ -255,6 +255,10 @@
                 }
                 td.func {
                     background-color: $func-color;
+                    .attachment-panel {
+                        display: none;
+                        position: absolute;
+                    }
                 }
             }
             tr:nth-child(2n+1) {

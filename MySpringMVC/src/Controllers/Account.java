@@ -2,6 +2,7 @@ package Controllers;
 
 import Models.MyException;
 import Models.MyMvcObject;
+import org.omg.CORBA.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -23,19 +24,23 @@ public class Account {
         MyMvcObject MyMvcObject1 = new MyMvcObject(request, response, session);
         try {
             MyMvcObject1.login().success();
-            MiddleWare.LoginCallback.success(request, response);
         } catch (MyException e) {
             MyMvcObject1.fail(e.getMessage());
-            MiddleWare.LoginCallback.failed(request, response);
         }
     }
 
     @RequestMapping(value = "/DoLogout")
-    public String doLogout(HttpSession session) {
-        session.setAttribute("username", null);
+    public String doLogout(HttpServletRequest request) {
+        Util.Session.set(request,"username",null);
         return "/login";
     }
 
+    /**
+     * get application cookie name
+     * @param request
+     * @param response
+     * @param session
+     */
     @RequestMapping(value = "/GetCookieName")
     public void getCookieName(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         MyMvcObject MyMvcObject1 = new MyMvcObject(request, response, session);

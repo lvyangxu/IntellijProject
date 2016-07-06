@@ -1,6 +1,6 @@
 /**
  * demo like below
- * <div class='table'>
+ * <div class='table' table-id='xxx'>
  *     <div key='id'>id</div>
  * </div>
  */
@@ -32,6 +32,7 @@
                     r: (curd == "") ? true : curd.includes("r"),
                     d: (curd == "") ? true : curd.includes("d")
                 },
+                export: (element.attr("export") == "false") ? false : true,
                 //func column,all default true
                 funcColumn: {
                     checkbox: (element.attr("checkbox") == "false") ? false : true,
@@ -39,7 +40,9 @@
                     detail: (element.attr("detail") == "false") ? false : true,
                     attachment: (element.attr("attachment") == "false") ? false : true
                 },
-                url: element.property("url", "../Table/" + element.property("name", "") + "/"),
+                title: element.property("table-title", ""),
+                id: element.property("table-id", ""),
+                url: element.property("url", "../Table/" + element.property("table-id", "") + "/"),
                 rowPerPageArr: [5, 10, 15, 20, 25, 50, 100],
                 displayRowNum: 5,
                 currentRowIndex: 1,
@@ -107,7 +110,7 @@
                         let trHtml = settings.funcColumn.checkbox ? "<td class='func'><input type='checkbox'></td>" : "";
                         trHtml += settings.funcColumn.lineNumber ? "<td class='func'>" + rowNum + "</td>" : "";
                         trHtml += settings.funcColumn.detail ? "<td class='func'><i class='fa fa-tablet' title='see all detail row in a new modal'></i></td>" : "";
-                        trHtml += settings.funcColumn.attachment ? "<td class='func'><i class='fa fa-paperclip' title='attachment panel'></i></td>" : "";
+                        trHtml += settings.funcColumn.attachment ? "<td class='func'><i class='fa fa-paperclip' title='attachment panel'></i><div class='attachment-panel'></div></td>" : "";
                         trHtml += "<td name='id'>" + d.id + "</td>";
                         trHtml += settings.th.map(d1=> {
                             let k = d1.id;
@@ -207,6 +210,20 @@
                                 });
                             }
                         });
+                    });
+
+                    //listen attach button
+                    node.tbody().xPath("tr>.func>i.fa-paperclip").delegate("","click",function () {
+                        let attachmentPanel = $(this).next(".attachment-panel");
+                        if(attachmentPanel.is(":hidden")){
+                            http.request(settings.url+"AttachmentList","").then(result=>{
+
+                            }).catch(result=>{
+
+                            });
+                        }else{
+
+                        }
                     });
 
                 },
@@ -447,6 +464,10 @@
                     copyHtml = settings.curd.c ? copyHtml : "";
                     requestHtml += copyHtml;
 
+                    let exportHtml = "<button class='export button-warning' title='export selected rows to excel'><i class='fa fa-download'></i></button>";
+                    exportHtml = settings.export ? exportHtml : "";
+                    requestHtml += exportHtml;
+
                     let deleteHtml = "<button class='delete button-danger' title='delete selected rows on server'><i class='fa fa-times'></i></button>";
                     deleteHtml = settings.curd.d ? deleteHtml : "";
                     requestHtml += deleteHtml;
@@ -491,7 +512,6 @@
                 //listen unify table
                 let createUnifyTd = node.request().xPath(".create>.create-panel>.create-panel-body>.unify>.unify-table>tbody>tr>td");
                 let updateUnifyTd = node.request().xPath(".update>.update-panel>.update-panel-body>.unify>.unify-table>tbody>tr>td");
-
                 [createUnifyTd, updateUnifyTd].map(d=> {
                     d.children(".datepicker").each(function () {
                         let thisD = $(this);
@@ -819,6 +839,41 @@
                             func.read();
                         }).catch(result=> {
                             alert("copy data failed:" + result);
+                        });
+                    }
+                });
+
+                //listen export button
+                node.request().xPath(".export").delegate("", "click", function () {
+                    let selectedRow = func.getSelectRow();
+                    if (selectedRow.length == 0) {
+                        alert("please check at least one box on the left");
+                        return;
+                    }
+
+                    if (confirm("do you really want to export selected " + selectedRow.length + " rows to excel?")) {
+                        let title = new myString(settings.title).base64UrlEncode().value;
+                        let data = settings.th.map(d=> {
+                            d = node.thead().xPath("tr>th[name=" + d.id + "]").text();
+                            return d;
+                        }).join("\t");
+                        data += "\n" + selectedRow.map(d=> {
+                                d = settings.th.map(d1=> {
+                                    d1 = node.tbody().xPath("tr>td[name=" + d1.id + "]").text();
+                                    return d1;
+                                }).join("\t");
+                                return d;
+                            }).join("\n");
+                        data = new myString(data).base64UrlEncode().value;
+
+                        let requestData = "title=" + title + "&data=" + data;
+
+                        http.request(settings.url + "ExportCreate", requestData).then(result=> {
+                            let fileName = settings.title;
+                            fileName = new myString(fileName).base64UrlEncode().value;
+                            window.location.href = settings.url + "ExportDownload?fileName=" + fileName;
+                        }).catch(result=> {
+                            alert("export excel failed:" + result);
                         });
                     }
                 });

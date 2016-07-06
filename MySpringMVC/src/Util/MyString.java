@@ -16,7 +16,10 @@ public class MyString {
 
     private String value;
 
-    public MyString(String value) {
+    public MyString(String value) throws MyException {
+        if(value==null){
+            throw new MyException("MyString value is null");
+        }
         this.value = value;
     }
 

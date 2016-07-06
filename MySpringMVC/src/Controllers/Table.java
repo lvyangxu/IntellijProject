@@ -2,6 +2,7 @@ package Controllers;
 
 import Models.MyException;
 import Models.MyMvcObject;
+import Util.Parameter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,38 +20,35 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/Table")
 public class Table {
 
-    @RequestMapping(value = "/{name}/{type}")
-    public void table(HttpServletRequest request, HttpServletResponse response, HttpSession session, @PathVariable String name,@PathVariable String type){
+    @RequestMapping(value = "/{table}/{type}")
+    public void table(HttpServletRequest request, HttpServletResponse response, HttpSession session, @PathVariable String table,@PathVariable String type){
         MyMvcObject MyMvcObject1 = new MyMvcObject(request,response, session);
         try {
             switch (type){
                 case "Create":
-                    MyMvcObject1.authenticate().createMap(name).redirectMap(name).create(name).success();
+                    MyMvcObject1.authenticate().createMap(table).redirectMap(table).create(table).success();
                     break;
                 case "Update":
-                    MyMvcObject1.authenticate().updateMap(name).redirectMap(name).update(name).success();
+                    MyMvcObject1.authenticate().updateMap(table).redirectMap(table).update(table).success();
                     break;
                 case "Read":
-                    MyMvcObject1.authenticate().readMap(name).redirectMap(name).read(name).success();
+                    MyMvcObject1.authenticate().readMap(table).redirectMap(table).read(table).success();
                     break;
                 case "Delete":
-                    MyMvcObject1.authenticate().deleteMap(name).redirectMap(name).delete(name).success();
+                    MyMvcObject1.authenticate().deleteMap(table).redirectMap(table).delete(table).success();
                     break;
-                case "Export":
-                    MyMvcObject1.authenticate().export(name).success();
+                case "ExportCreate":
+                    MyMvcObject1.authenticate().export(table).success();
+                    break;
+                case "ExportDownload":
+                    MyMvcObject1.authenticate().excel(table);
+                    break;
+                case "AttachmentList":
+                    MyMvcObject1.authenticate().attachmentList(table);
                     break;
             }
         } catch (MyException e) {
-            if(e.getMessage().equals("authenticate failed")){
-                try {
-                    MyMvcObject1.unauthorised();
-                } catch (MyException e1) {
-                    MyMvcObject1.fail("unauthorised redict failed");
-                }
-            }else {
-                MyMvcObject1.fail(e.getMessage());
-            }
-
+            MyMvcObject1.fail(e.getMessage());
         }
     }
 

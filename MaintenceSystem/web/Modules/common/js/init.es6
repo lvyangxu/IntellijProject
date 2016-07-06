@@ -47,7 +47,7 @@
     /**
      * load util
      */
-    let utilArr = ["cookie.js", "date.js", "http.js", "math.js", "myString.js", "websocket.js"];
+    let utilArr = ["cookie.js", "date.js", "http.js", "math.js", "myString.js", "websocket.js","spring.js"];
     refernceString += refernce("util/", utilArr);
 
     /**
