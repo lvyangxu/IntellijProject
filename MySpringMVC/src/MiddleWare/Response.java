@@ -89,18 +89,23 @@ public class Response {
         response(response, "authenticate failed", 401);
     }
 
-
-    public static void excel(HttpServletRequest request, HttpServletResponse response, String table) throws MyException {
-
-        String filePath = "Data/" + table + "/";
-        filePath = WebRoot + filePath;
-        String fileName = Parameter.get(request,"fileName");
-        fileName = new MyString(fileName).base64Decode().toString();
-        fileName += ".xlsx";
-
+    /**
+     * response file stream
+     *
+     * @param response
+     * @param filePath
+     * @param fileName
+     * @throws MyException
+     */
+    public static void download(HttpServletResponse response, String filePath, String fileName) throws MyException {
         response.setHeader("Content-type", "APPLICATION/OCTET-STREAM");
+        file(response, filePath, fileName);
+    }
+
+    public static void file(HttpServletResponse response, String filePath, String fileName) throws MyException {
+        filePath = WebRoot + filePath;
         try {
-            response.setHeader("Content-Disposition", "attachment;fileName=" + java.net.URLEncoder.encode(fileName, "UTF-8"));
+            response.setHeader("Content-Disposition", "fileName=" + java.net.URLEncoder.encode(fileName, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             throw new MyException("unSupportEncoding");
         }

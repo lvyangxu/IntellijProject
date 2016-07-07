@@ -103,6 +103,65 @@
                         return tbodyHtml;
                     });
                 },
+                //refresh attachment panel
+                refreshAttachmentList(attachmentPanel) {
+                    //loading
+                    attachmentPanel.xPath(".attachment-panel-body>table>tbody").html(()=> {
+                        let d = "<tr><td colspan='5'><i class='fa fa-refresh'></i></td></tr>";
+                        return d;
+                    });
+
+                    let id = attachmentPanel.parent().parent().children("td[name=id]").text();
+                    id = new myString(id).base64UrlEncode().value;
+                    let requestData = "id=" + id;
+                    http.request(settings.url + "AttachmentList", requestData).then(result=> {
+                        if (result.length == 0) {
+                            attachmentPanel.xPath(".attachment-panel-body>table>tbody").html("<tr><td colspan='5'>there is not any attachment</td></tr>");
+                            return;
+                        }
+
+                        let attachmentTbodyHtml = result.map(d=> {
+                            let trHtml = "<tr>";
+                            trHtml += "<td><input type='checkbox'></td>";
+                            trHtml += "<td name='fileName'>" + d.name + "</td>";
+                            let size = d.size;
+                            size = (size / 1024 > 1) ? ((size / 1024).toFixed(2) + "KB") : (size + "B");
+                            size = (Number.parseInt(size) / 1024 > 1) ? ((Number.parseInt(size) / 1024).toFixed(2) + "M") : size;
+                            trHtml += "<td>" + size + "</td>";
+                            trHtml += "<td><i class='fa fa-eye'></i></td>";
+                            trHtml += "<td><i class='fa fa-download'></i></td>";
+                            trHtml += "</tr>";
+                            return trHtml;
+                        }).join("");
+                        attachmentPanel.xPath(".attachment-panel-body>table>tbody").html(attachmentTbodyHtml);
+
+                        //listen attachment preview button
+                        attachmentPanel.xPath(".attachment-panel-body>table>tbody>tr>td>i.fa-eye").delegate("", "click", function () {
+                            let fileName = $(this).parent().parent().children("td[name=fileName]").text();
+                            fileName = new myString(fileName).base64UrlEncode().value;
+                            window.open(settings.url + "AttachmentPreview?fileName=" + fileName + "&id=" + id);
+                        });
+
+                        //listen attachment download button
+                        attachmentPanel.xPath(".attachment-panel-body>table>tbody>tr>td>i.fa-download").delegate("", "click", function () {
+                            let fileName = $(this).parent().parent().children("td[name=fileName]").text();
+                            fileName = new myString(fileName).base64UrlEncode().value;
+                            window.location.href = settings.url + "AttachmentDownload?fileName=" + fileName + "&id=" + id;
+                        });
+
+                        //listen attachment panel thead checkbox
+                        attachmentPanel.xPath(".attachment-panel-body>table>thead>tr>th>input[type=checkbox]").delegate("","click",function () {
+                           if($(this).prop("checked")){
+                               attachmentPanel.xPath(".attachment-panel-body>table>tbody>tr>td>input[type=checkbox]").prop("checked",true);
+                           }else{
+                               attachmentPanel.xPath(".attachment-panel-body>table>tbody>tr>td>input[type=checkbox]").prop("checked",false);
+                           }
+                        });
+
+                    }).catch(result=> {
+                        attachmentPanel.xPath(".attachment-panel-body>table>tbody").html("<tr><td colspan='5'>an error occured when getting attachment list</td></tr>");
+                    });
+                },
                 drawTbody(){
                     //draw row data
                     let rowNum = 1;
@@ -110,7 +169,19 @@
                         let trHtml = settings.funcColumn.checkbox ? "<td class='func'><input type='checkbox'></td>" : "";
                         trHtml += settings.funcColumn.lineNumber ? "<td class='func'>" + rowNum + "</td>" : "";
                         trHtml += settings.funcColumn.detail ? "<td class='func'><i class='fa fa-tablet' title='see all detail row in a new modal'></i></td>" : "";
-                        trHtml += settings.funcColumn.attachment ? "<td class='func'><i class='fa fa-paperclip' title='attachment panel'></i><div class='attachment-panel'></div></td>" : "";
+                        let attachmentHtml = "<i class='fa fa-paperclip' title='attachment panel'></i>";
+                        attachmentHtml += "<div class='attachment-panel'>";
+                        attachmentHtml += "<div class='attachment-panel-head'>";
+                        attachmentHtml += "<button class='button-warning read' title='refresh attachment list'><i class='fa fa-refresh'></i></button>";
+                        attachmentHtml += "<button class='button-warning create' title='add a new row to upload an attachment'><i class='fa fa-plus'></i></button>";
+                        attachmentHtml += "<button class='button-danger delete' title='delete selected attachments'><i class='fa fa-times'></i></button>";
+                        attachmentHtml += "</div>";
+                        attachmentHtml += "<div class='attachment-panel-body'><table><thead><tr>";
+                        attachmentHtml += "<th><input type='checkbox'></th><th>file name</th><th>file size</th><th>preview</th><th>download</th></tr></thead><tbody>";
+                        attachmentHtml += "<tr><td colspan='5'>there is not any attachment</td></tr>";
+                        attachmentHtml += "</tbody></table></div>";
+                        attachmentHtml += "</div>";
+                        trHtml += settings.funcColumn.attachment ? ("<td class='func'>" + attachmentHtml + "</td>") : "";
                         trHtml += "<td name='id'>" + d.id + "</td>";
                         trHtml += settings.th.map(d1=> {
                             let k = d1.id;
@@ -175,6 +246,7 @@
                             }
                         });
 
+                        //listen modal submit button
                         $("body").xPath(".addon-modal>.modal-panel>.modal-panel-body>.modal-submit>.button-warning").delegate("", "click", function () {
                             if (confirm("do you really want to update the data above?")) {
                                 let requestData = "";
@@ -212,19 +284,57 @@
                         });
                     });
 
+
                     //listen attach button
-                    node.tbody().xPath("tr>.func>i.fa-paperclip").delegate("","click",function () {
+                    node.tbody().xPath("tr>.func>i.fa-paperclip").delegate("", "click", function () {
                         let attachmentPanel = $(this).next(".attachment-panel");
-                        if(attachmentPanel.is(":hidden")){
-                            http.request(settings.url+"AttachmentList","").then(result=>{
-
-                            }).catch(result=>{
-
-                            });
-                        }else{
-
+                        if (attachmentPanel.is(":hidden")) {
+                            attachmentPanel.show();
+                            func.refreshAttachmentList(attachmentPanel);
+                        } else {
+                            attachmentPanel.hide();
                         }
                     });
+
+                    //listen attachment panel head read button
+                    node.tbody().xPath("tr>.func>.attachment-panel>.attachment-panel-head>.read").delegate("", "click", function () {
+                        func.refreshAttachmentList($(this).parent().parent());
+                    });
+
+                    //listen attachment panel head delete button
+                    node.tbody().xPath("tr>.func>.attachment-panel>.attachment-panel-head>.delete").delegate("", "click", function () {
+               
+                    });
+
+                    //listen all attachment add button
+                    // node.tbody().xPath("tr>.func>.attachment-panel>.attachment-panel-head>.button-warning").delegate("", "click", function () {
+                    //     let tr = $(this).parent().next(".attachment-panel-body").xPath("table>tbody>tr");
+                    //     let trHtml = "<tr><td><input type='checkbox'></td><td><input type='file'><input class='input' type='text' readonly='readonly' placeholder='select file here'></td><td name='size'></td><td colspan='2'><div class='progress'><div class='percent'></div></div></td></tr>";
+                    //     if (tr.length == 1 && tr.children("td").first().attr("colspan") == 5) {
+                    //         tr.parent().html(trHtml);
+                    //     } else {
+                    //         tr.parent().append(trHtml);
+                    //     }
+                    //     let newTr = $(this).parent().next(".attachment-panel-body").xPath("table>tbody>tr:last");
+                    //     //listen select file button
+                    //     newTr.xPath("td>.input").delegate("", "click", function () {
+                    //         $(this).prev("input[type=file]").click();
+                    //     });
+                    //     //listen file input change
+                    //     newTr.xPath("td>input[type=file]").delegate("", "change", function () {
+                    //         let file = this.files[0];
+                    //         if (file == undefined) {
+                    //             newTr.xPath("td>.input").val("no file selected");
+                    //             newTr.xPath("td[name=size]").text("");
+                    //             return;
+                    //         }
+                    //         let displayName = (file.name.length >= 15) ? (file.name.substr(0, 15) + "...") : file.name;
+                    //         newTr.xPath("td>.input").val(displayName);
+                    //         newTr.xPath("td[name=size]").text(file.length);
+                    //     });
+                    //
+                    //
+                    // });
 
                 },
                 listenTbodyCheckbox(){

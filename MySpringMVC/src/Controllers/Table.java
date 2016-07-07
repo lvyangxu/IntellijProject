@@ -44,7 +44,13 @@ public class Table {
                     MyMvcObject1.authenticate().excel(table);
                     break;
                 case "AttachmentList":
-                    MyMvcObject1.authenticate().attachmentList(table);
+                    MyMvcObject1.authenticate().attachmentList(table).success();
+                    break;
+                case "AttachmentDownload":
+                    MyMvcObject1.authenticate().attachmentDownload(table);
+                    break;
+                case "AttachmentPreview":
+                    MyMvcObject1.authenticate().attachmentPreview(table);
                     break;
             }
         } catch (MyException e) {

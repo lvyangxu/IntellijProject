@@ -257,7 +257,31 @@
                     background-color: $func-color;
                     .attachment-panel {
                         display: none;
-                        position: absolute;
+                        @include panel;
+                        .attachment-panel-head{
+                            text-align: left;
+                            button{
+                               margin-right: 10px !important;
+                            }
+
+                            .fa-refresh{
+                                animation: none;
+                                font-size: 14px;
+                            }
+                        }
+                        .attachment-panel-body{
+                            margin-top:10px;
+                            input[type=file]{
+                                display: none;
+                            }
+                            input[type=text]{
+                                width: 120px;
+                            }
+                            .progress{
+                                background-color: #46b8da;
+                                height: 30px;
+                            }
+                        }
                     }
                 }
             }

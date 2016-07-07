@@ -11,8 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static Init.Init.*;
 
@@ -74,16 +78,68 @@ public class MyMvcObject {
 
     /**
      * response excel file
+     *
      * @param table
      * @throws MyException
      */
     public void excel(String table) throws MyException {
-        Response.excel(this.request, this.response, table);
+        String filePath = "Data/export/" + table + "/";
+        String fileName = Parameter.get(request, "fileName");
+        fileName = new MyString(fileName).base64Decode().toString();
+        fileName += ".xlsx";
+        Response.download(this.response, filePath, fileName);
     }
 
-    public void attachmentList(String table) throws MyException {
-        String[] arr = Path.getFileNameList(WebRoot+"Data/"+table+"/");
-        String a = "";
+    /**
+     * get attachment list
+     *
+     * @param table
+     * @return
+     * @throws MyException
+     */
+    public MyMvcObject attachmentList(String table) throws MyException {
+        String id = Parameter.get(this.request, "id");
+        id = new MyString(id).base64Decode().toString();
+        List<File> fileList = Path.getChildrenFile(WebRoot + "Data/attachment/" + table + "/" + id + "/");
+        String result = fileList.stream().map(d -> {
+            String name = d.getName();
+            long size = d.length();
+            String json = "{\"name\":\"" + name + "\",\"size\":\"" + String.valueOf(size) + "\"}";
+            return json;
+        }).collect(Collectors.joining(","));
+        result = "[" + result + "]";
+        this.responseMessage = result;
+        return this;
+    }
+
+    /**
+     * download attachment
+     * @param table
+     * @throws MyException
+     */
+    public void attachmentDownload(String table) throws MyException {
+        String id = Parameter.get(this.request, "id");
+        id = new MyString(id).base64Decode().toString();
+        String fileName = Parameter.get(this.request, "fileName");
+        fileName = new MyString(fileName).base64Decode().toString();
+
+        String filePath = "Data/attachment/" + table + "/" + id + "/";
+        Response.download(response, filePath, fileName);
+    }
+
+    /**
+     * preview attachment
+     * @param table
+     * @throws MyException
+     */
+    public void attachmentPreview(String table) throws MyException {
+        String id = Parameter.get(this.request, "id");
+        id = new MyString(id).base64Decode().toString();
+        String fileName = Parameter.get(this.request, "fileName");
+        fileName = new MyString(fileName).base64Decode().toString();
+
+        String filePath = "Data/attachment/" + table + "/" + id + "/";
+        Response.file(response, filePath, fileName);
     }
 
     /**
@@ -235,7 +291,7 @@ public class MyMvcObject {
         data = new MyString(data).base64Decode().toString();
 
         //save data in excel
-        String filePath = WebRoot + "/Data/" + table + "/";
+        String filePath = WebRoot + "/Data/export/" + table + "/";
         Path.create(filePath);
         String fileName = title + ".xlsx";
         StringBuilder StringBuilder1 = new StringBuilder(data);

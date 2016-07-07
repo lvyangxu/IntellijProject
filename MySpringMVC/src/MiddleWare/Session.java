@@ -23,13 +23,13 @@ public class Session {
             try {
                 username = new MyString(username).urlDecode().base64Decode().toString();
             } catch (Exception e) {
-                throw new MyException("authenticate failed");
+                throw new MyException("unauthorised");
             }
             String password = Cookie.get(request, passwordCookieName);
             try {
                 password = new MyString(password).urlDecode().base64Decode().toString();
             } catch (Exception e) {
-                throw new MyException("authenticate failed");
+                throw new MyException("unauthorised");
             }
 
             Account.validate(request, response, session, username, password);
