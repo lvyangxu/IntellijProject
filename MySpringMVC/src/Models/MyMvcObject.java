@@ -1,11 +1,9 @@
 package Models;
 
 import MiddleWare.*;
-import Util.Parameter;
+import MiddleWare.Session;
+import Util.*;
 import MiddleWare.Response;
-import Util.MyString;
-import Util.Path;
-import Util.Poi;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -140,6 +138,38 @@ public class MyMvcObject {
 
         String filePath = "Data/attachment/" + table + "/" + id + "/";
         Response.file(response, filePath, fileName);
+    }
+
+    /**
+     * delete attachment
+     * @param table
+     * @throws MyException
+     */
+    public MyMvcObject attachmentDelete(String table) throws MyException{
+        String id = Parameter.get(this.request, "id");
+        id = new MyString(id).base64Decode().toString();
+        String fileName = Parameter.get(this.request, "fileName");
+        String[] fileNameArr = new MyString(fileName).split(",");
+        String filePath = "Data/attachment/" + table + "/" + id + "/";
+        for(String fileNameStr:fileNameArr){
+            fileNameStr = new MyString(fileNameStr).base64Decode().toString();
+            MyFile.delete(WebRoot+filePath+fileNameStr);
+        }
+        return this;
+    }
+
+    /**
+     * get upload file and save it
+     * @param table
+     * @return
+     * @throws MyException
+     */
+    public MyMvcObject attachmentUpload(String table) throws MyException{
+        String id = Parameter.get(this.request, "id");
+        id = new MyString(id).base64Decode().toString();
+        String filePath = "Data/attachment/" + table + "/" + id + "/";
+        Upload.springMvcFileUpload(this.request,this.response,WebRoot+filePath);
+        return this;
     }
 
     /**

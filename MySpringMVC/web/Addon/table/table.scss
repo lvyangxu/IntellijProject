@@ -258,29 +258,56 @@
                     .attachment-panel {
                         display: none;
                         @include panel;
-                        .attachment-panel-head{
+                        @include disableSelect;
+                        .attachment-panel-head {
                             text-align: left;
-                            button{
-                               margin-right: 10px !important;
+                            button {
+                                margin-right: 10px !important;
                             }
 
-                            .fa-refresh{
+                            .fa-refresh {
                                 animation: none;
                                 font-size: 14px;
                             }
-                        }
-                        .attachment-panel-body{
-                            margin-top:10px;
-                            input[type=file]{
+
+                            .attachment-create-panel {
                                 display: none;
+                                @include panel;
+                                table {
+                                    margin-top:10px;
+                                    thead{
+                                        th{
+                                            min-width: 150px;
+                                        }
+                                    }
+
+                                    tbody {
+                                        td {
+                                            input[type=file] {
+                                                display: none;
+                                            }
+                                            input[type=text]{
+                                                width:136px;
+                                            }
+                                            .progress {
+                                                background-color: #46b8da;
+                                                height: 30px;
+                                                .percent{
+                                                    position: absolute;
+                                                    height: 30px;
+                                                    width: 150px;
+                                                    line-height: 30px;
+                                                    text-align: center;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
                             }
-                            input[type=text]{
-                                width: 120px;
-                            }
-                            .progress{
-                                background-color: #46b8da;
-                                height: 30px;
-                            }
+                        }
+                        .attachment-panel-body {
+                            margin-top: 10px;
                         }
                     }
                 }

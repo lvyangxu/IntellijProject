@@ -52,6 +52,12 @@ public class Table {
                 case "AttachmentPreview":
                     MyMvcObject1.authenticate().attachmentPreview(table);
                     break;
+                case "AttachmentDelete":
+                    MyMvcObject1.authenticate().attachmentDelete(table).success();
+                    break;
+                case "AttachmentUpload":
+                    MyMvcObject1.authenticate().attachmentUpload(table).success();
+                    break;
             }
         } catch (MyException e) {
             MyMvcObject1.fail(e.getMessage());

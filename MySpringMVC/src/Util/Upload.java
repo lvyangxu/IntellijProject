@@ -18,23 +18,16 @@ import java.util.Iterator;
 public class Upload {
 
     public static void springMvcFileUpload(HttpServletRequest request, HttpServletResponse response, String fileSavePath, String fileSaveName) throws MyException {
-        //创建一个通用的多部分解析器
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
-        //判断 request 是否有文件上传,即多部分请求
         if (multipartResolver.isMultipart(request)) {
-            //转换成多部分request
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-            //取得request中的所有文件名
             Iterator<String> iter = multiRequest.getFileNames();
             while (iter.hasNext()) {
-                //取得上传文件
                 MultipartFile file = multiRequest.getFile(iter.next());
                 if (file != null) {
-                    //取得当前上传文件的文件名称
                     String myFileName = file.getOriginalFilename();
-                    //如果名称不为“”,说明该文件存在，否则说明该文件不存在
                     if (myFileName.trim() != "") {
-                        //定义上传路径
+                        Path.create(fileSavePath);
                         String path =  fileSavePath + fileSaveName;
                         MyFile.delete(path);
                         File localFile = new File(path);
@@ -49,26 +42,27 @@ public class Upload {
         }
     }
 
+    /**
+     * get upload file and save it
+     * @param request
+     * @param response
+     * @param fileSavePath
+     * @return return fileName
+     * @throws MyException
+     */
     public static String springMvcFileUpload(HttpServletRequest request, HttpServletResponse response, String fileSavePath) throws MyException {
         String fileName = null;
-        //创建一个通用的多部分解析器
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
-        //判断 request 是否有文件上传,即多部分请求
         if (multipartResolver.isMultipart(request)) {
-            //转换成多部分request
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-            //取得request中的所有文件名
             Iterator<String> iter = multiRequest.getFileNames();
             while (iter.hasNext()) {
-                //取得上传文件
                 MultipartFile file = multiRequest.getFile(iter.next());
                 if (file != null) {
-                    //取得当前上传文件的文件名称
                     String myFileName = file.getOriginalFilename();
                     fileName = myFileName;
-                    //如果名称不为“”,说明该文件存在，否则说明该文件不存在
                     if (myFileName.trim() != "") {
-                        //定义上传路径
+                        Path.create(fileSavePath);
                         String path =  fileSavePath + myFileName;
                         File localFile = new File(path);
                         try {
