@@ -18,7 +18,5 @@ public class MyFile {
                 throw new MyException("delete file failed");
             }
         }
-
-
     }
 }

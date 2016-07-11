@@ -10,10 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static Init.Init.*;
@@ -112,6 +109,7 @@ public class MyMvcObject {
 
     /**
      * download attachment
+     *
      * @param table
      * @throws MyException
      */
@@ -127,6 +125,7 @@ public class MyMvcObject {
 
     /**
      * preview attachment
+     *
      * @param table
      * @throws MyException
      */
@@ -142,34 +141,56 @@ public class MyMvcObject {
 
     /**
      * delete attachment
+     *
      * @param table
      * @throws MyException
      */
-    public MyMvcObject attachmentDelete(String table) throws MyException{
+    public MyMvcObject attachmentDelete(String table) throws MyException {
         String id = Parameter.get(this.request, "id");
         id = new MyString(id).base64Decode().toString();
         String fileName = Parameter.get(this.request, "fileName");
         String[] fileNameArr = new MyString(fileName).split(",");
         String filePath = "Data/attachment/" + table + "/" + id + "/";
-        for(String fileNameStr:fileNameArr){
+        for (String fileNameStr : fileNameArr) {
             fileNameStr = new MyString(fileNameStr).base64Decode().toString();
-            MyFile.delete(WebRoot+filePath+fileNameStr);
+            MyFile.delete(WebRoot + filePath + fileNameStr);
         }
         return this;
     }
 
     /**
      * get upload file and save it
+     *
      * @param table
      * @return
      * @throws MyException
      */
-    public MyMvcObject attachmentUpload(String table) throws MyException{
+    public MyMvcObject attachmentUpload(String table) throws MyException {
         String id = Parameter.get(this.request, "id");
         id = new MyString(id).base64Decode().toString();
         String filePath = "Data/attachment/" + table + "/" + id + "/";
-        Upload.springMvcFileUpload(this.request,this.response,WebRoot+filePath);
+        Upload.springMvcFileUpload(this.request, this.response, WebRoot + filePath);
         return this;
+    }
+
+    public MyMvcObject attachmentBatchCreate(String table) throws MyException {
+        String id = Parameter.get(request, "id");
+        String[] arr = new MyString(id).split(",");
+        Map<String, Integer> zipMap = new HashMap<>();
+        List<String> zipDirectoryList = new ArrayList<>();
+        for (String idStr : arr) {
+            idStr = new MyString(idStr).base64Decode().toString();
+            String path = WebRoot + "Data/attachment/" + table + "/" + idStr + "/";
+            zipMap.put(path, 1);
+        }
+        Zip.zip(zipMap, WebRoot + "Data/attachment/" + table + "/" + table + ".zip");
+        return this;
+    }
+
+    public void attachmentBatchDownload(String table) throws MyException {
+        String filePath = "Data/attachment/" + table + "/";
+        String fileName = table + ".zip";
+        Response.download(response, filePath, fileName);
     }
 
     /**

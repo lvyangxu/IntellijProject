@@ -58,6 +58,15 @@ public class Table {
                 case "AttachmentUpload":
                     MyMvcObject1.authenticate().attachmentUpload(table).success();
                     break;
+                case "AttachmentBatchCreate":
+                    MyMvcObject1.authenticate().attachmentBatchCreate(table).success();
+                    break;
+                case "AttachmentBatchDownload":
+                    MyMvcObject1.authenticate().attachmentBatchDownload(table);
+                    break;
+                default:
+                    MyMvcObject1.authenticate().fail("unknown action");
+                    break;
             }
         } catch (MyException e) {
             MyMvcObject1.fail(e.getMessage());

@@ -369,45 +369,45 @@
                         let id = $(this).parent().parent().parent().parent().parent().parent().children("td[name=id]").text();
                         id = new myString(id).base64UrlEncode().value;
 
-                        if(tr.length == 0){
+                        if (tr.length == 0) {
                             alert("please add at least one file for upload");
                             return;
                         }
-                        let allHasFile = tr.toArray().every(d=>{
+                        let allHasFile = tr.toArray().every(d=> {
                             d = d.xPath("td>input[type=file]")[0].files[0];
                             d = (d != undefined);
                             return d;
                         });
-                        if(!allHasFile){
+                        if (!allHasFile) {
                             alert("please ensure all rows has the selected file");
                             return;
                         }
 
-                        let requestData = "id="+ id;
+                        let requestData = "id=" + id;
                         let promiseArr = [];
 
                         //upload all files async each other
                         tr.each(function () {
                             let thisTr = $(this);
-                            let uploadPromise = new Promise(function (resolve,reject) {
+                            let uploadPromise = new Promise(function (resolve, reject) {
                                 let uploadFile = new FormData();
-                                uploadFile.append(0,thisTr.xPath("td>input[type=file]")[0].files[0]);
+                                uploadFile.append(0, thisTr.xPath("td>input[type=file]")[0].files[0]);
                                 let xhr = new XMLHttpRequest();
                                 let status = thisTr.xPath("td[name=status]");
                                 status.html("<div class='progress'><div class='percent'></div></div>");
-                                xhr.upload.addEventListener("progress", function(evt){
+                                xhr.upload.addEventListener("progress", function (evt) {
                                     if (evt.lengthComputable) {
                                         let percentComplete = Math.round(evt.loaded * 100 / evt.total);
-                                        status.xPath(".progress").css({"width":percentComplete+"%"});
-                                        status.xPath(".progress>.percent").text(percentComplete+"%");
+                                        status.xPath(".progress").css({"width": percentComplete + "%"});
+                                        status.xPath(".progress>.percent").text(percentComplete + "%");
                                     }
                                 }, false);
-                                xhr.addEventListener("load", function(evt){
+                                xhr.addEventListener("load", function (evt) {
                                     let result = evt.target.responseText;
                                     let jsonObject;
-                                    try{
+                                    try {
                                         jsonObject = new myString(result).toJson();
-                                    }catch(e){
+                                    } catch (e) {
                                         let rejectMessage = "invalid json message";
                                         status.xPath(".progress>.percent").text(rejectMessage);
                                         reject(rejectMessage);
@@ -416,31 +416,31 @@
                                     if (jsonObject.success == "true") {
                                         resolve();
                                     } else {
-                                        let rejectMessage = "upload failed:"+jsonObject.message;
+                                        let rejectMessage = "upload failed:" + jsonObject.message;
                                         status.xPath(".progress>.percent").text(rejectMessage);
                                         reject(rejectMessage);
                                     }
                                 }, false);
-                                xhr.addEventListener("error", function(){
+                                xhr.addEventListener("error", function () {
                                     let rejectMessage = "upload failed:check your network";
                                     status.xPath(".progress>.percent").text(rejectMessage);
                                     reject(rejectMessage);
                                 }, false);
-                                xhr.addEventListener("abort", function(){
+                                xhr.addEventListener("abort", function () {
                                     let rejectMessage = "upload abort";
                                     status.xPath(".progress>.percent").text(rejectMessage);
                                     reject(rejectMessage);
                                 }, false);
-                                xhr.open("POST", settings.url+"AttachmentUpload?"+requestData);
+                                xhr.open("POST", settings.url + "AttachmentUpload?" + requestData);
                                 xhr.send(uploadFile);
                             });
                             promiseArr.push(uploadPromise);
                         });
 
-                        Promise.all(promiseArr).then(result=>{
+                        Promise.all(promiseArr).then(result=> {
                             attachmentCreatePanel.hide();
                             func.attachmentRefresh(attachmentCreatePanel.parent().parent());
-                        }).catch(result=>{
+                        }).catch(result=> {
                             alert(result);
                         })
                     });
@@ -540,7 +540,7 @@
                     }
                     func.drawTbody();
                 },
-                getSelectRow(){
+                getSelectRowArr(){
                     let selectedTrArr = [];
                     node.tbody().xPath("tr>td.func>input[type=checkbox]").each(function () {
                         if ($(this).prop("checked")) {
@@ -718,6 +718,9 @@
                     let exportHtml = "<button class='export button-warning' title='export selected rows to excel'><i class='fa fa-download'></i></button>";
                     exportHtml = settings.export ? exportHtml : "";
                     requestHtml += exportHtml;
+
+                    let batchAttachHtml = "<button class='batchAttach button-warning' title='download all attachments of selected rows below'><i class='fa fa-paperclip'></i></button>";
+                    requestHtml += batchAttachHtml;
 
                     let deleteHtml = "<button class='delete button-danger' title='delete selected rows on server'><i class='fa fa-times'></i></button>";
                     deleteHtml = settings.curd.d ? deleteHtml : "";
@@ -902,7 +905,7 @@
                 node.request().xPath(".update>button").delegate("", "click", function () {
                     let updatePanel = node.request().xPath(".update>.update-panel");
                     if (updatePanel.is(":hidden")) {
-                        let selectedRowArr = func.getSelectRow();
+                        let selectedRowArr = func.getSelectRowArr();
                         if (selectedRowArr.length == 0) {
                             alert("please check at least one box on the left ");
                             return;
@@ -988,34 +991,11 @@
                     }
                 });
 
-                //listen delete button
-                node.request().xPath(".delete").delegate("", "click", function () {
-                    let selectedRowArr = func.getSelectRow();
-                    if (selectedRowArr.length == 0) {
-                        alert("please check at least one box on the left ");
-                        return;
-                    }
-                    if (confirm("do you really want to delete selected " + selectedRowArr.length + " rows?")) {
-                        let requestData = "id=";
-                        requestData += selectedRowArr.map(d=> {
-                            let id = d.children("td[name=id]").text();
-                            d = new myString(id).base64UrlEncode().value;
-                            return d;
-                        }).join(",");
-                        http.request(settings.url + "Delete", requestData).then(result=> {
-                            func.read();
-                        }).catch(result=> {
-                            alert("delete data failed:" + result);
-                        });
-                    }
-
-                });
-
                 //listen copy button
                 node.request().xPath(".copy>button").delegate("", "click", function () {
                     let copyPanel = node.request().xPath(".copy>.copy-panel");
                     if (copyPanel.is(":hidden")) {
-                        let selectedRowArr = func.getSelectRow();
+                        let selectedRowArr = func.getSelectRowArr();
                         if (selectedRowArr.length == 0) {
                             alert("please check at least one box on the left ");
                             return;
@@ -1096,7 +1076,7 @@
 
                 //listen export button
                 node.request().xPath(".export").delegate("", "click", function () {
-                    let selectedRow = func.getSelectRow();
+                    let selectedRow = func.getSelectRowArr();
                     if (selectedRow.length == 0) {
                         alert("please check at least one box on the left");
                         return;
@@ -1128,6 +1108,53 @@
                         });
                     }
                 });
+
+                //listen attachment batch download button
+                node.request().xPath(".batchAttach").delegate("", "click", function () {
+                    let selectedRows = func.getSelectRowArr();
+                    if (selectedRows.length == 0) {
+                        alert("please check at least one box on the left");
+                        return;
+                    }
+
+                    if (confirm("do you really want to download all the selected " + selectedRows.length + " rows attachments?")) {
+                        let requestData = "id=" + selectedRows.map(d=> {
+                                d = d.children("td[name=id]").text();
+                                d = new myString(d).base64UrlEncode().value;
+                                return d;
+                            }).join(",");
+                        http.request(settings.url + "AttachmentBatchCreate", requestData).then(result=> {
+                            window.location.href = settings.url + "AttachmentBatchDownload";
+                        }).catch(result=> {
+                            alert("batch download attachments failed:"+result);
+                        });
+                    }
+
+                });
+
+                //listen delete button
+                node.request().xPath(".delete").delegate("", "click", function () {
+                    let selectedRowArr = func.getSelectRowArr();
+                    if (selectedRowArr.length == 0) {
+                        alert("please check at least one box on the left ");
+                        return;
+                    }
+                    if (confirm("do you really want to delete selected " + selectedRowArr.length + " rows?")) {
+                        let requestData = "id=";
+                        requestData += selectedRowArr.map(d=> {
+                            let id = d.children("td[name=id]").text();
+                            d = new myString(id).base64UrlEncode().value;
+                            return d;
+                        }).join(",");
+                        http.request(settings.url + "Delete", requestData).then(result=> {
+                            func.read();
+                        }).catch(result=> {
+                            alert("delete data failed:" + result);
+                        });
+                    }
+
+                });
+
 
                 //listen thead checkbox
                 node.thead().xPath("tr>th.func>input[type=checkbox]").delegate("", "click", function () {
