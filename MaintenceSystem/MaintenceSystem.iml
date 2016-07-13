@@ -43,5 +43,6 @@
     <orderEntry type="module" module-name="MySpringMVC" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.0.30" level="application_server_libraries" />
     <orderEntry type="library" name="appache-common-io" level="application" />
+    <orderEntry type="module" module-name="MyUtil" />
   </component>
 </module>

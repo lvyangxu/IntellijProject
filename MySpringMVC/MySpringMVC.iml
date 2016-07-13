@@ -36,5 +36,6 @@
     <orderEntry type="library" name="Spring MVC-4.3.0.RELEASE" level="project" />
     <orderEntry type="library" name="Spring-4.3.0.RELEASE" level="project" />
     <orderEntry type="library" name="appache-common-io" level="application" />
+    <orderEntry type="module" module-name="MyUtil" />
   </component>
 </module>

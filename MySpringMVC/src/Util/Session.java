@@ -1,14 +1,8 @@
 package Util;
 
-import MiddleWare.Account;
 import Models.MyException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import static Init.Init.passwordCookieName;
-import static Init.Init.usernameCookieName;
 
 /**
  * Created by karl on 2016/4/20.

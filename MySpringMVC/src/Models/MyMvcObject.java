@@ -1,7 +1,6 @@
 package Models;
 
 import MiddleWare.*;
-import MiddleWare.Session;
 import Util.*;
 import MiddleWare.Response;
 

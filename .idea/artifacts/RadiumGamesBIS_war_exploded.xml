@@ -8,6 +8,7 @@
         <element id="directory" name="classes">
           <element id="module-output" name="RadiumGamesBIS" />
           <element id="module-output" name="MySpringMVC" />
+          <element id="module-output" name="MyUtil" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Spring-4.3.0.RELEASE" />

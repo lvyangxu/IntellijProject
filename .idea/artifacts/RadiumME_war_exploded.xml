@@ -8,6 +8,7 @@
         <element id="directory" name="classes">
           <element id="module-output" name="RadiumME" />
           <element id="module-output" name="MySpringMVC" />
+          <element id="module-output" name="MyUtil" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="application" name="log4j" />

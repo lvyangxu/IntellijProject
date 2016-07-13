@@ -44,7 +44,7 @@
                 id: element.property("table-id", ""),
                 url: element.property("url", "../Table/" + element.property("table-id", "") + "/"),
                 rowPerPageArr: [5, 10, 15, 20, 25, 50, 100],
-                displayRowNum: 5,
+                displayRowNum: 10,
                 currentRowIndex: 1,
                 //a tbody row height
                 rowHeight: 40,
@@ -511,6 +511,23 @@
                 },
                 sort(cell){
                     let sortId = cell.attr("name");
+                    let cellType = settings.th.find(d=> {
+                        return d.id == sortId;
+                    }).type;
+                    let parseCellValue = (d=> {
+                        switch (cellType) {
+                            case "day":
+                            case "month":
+                            case "week":
+                                d = d[sortId];
+                                break;
+                            default:
+                                d = isNaN(parseFloat(d[sortId])) ? d[sortId] : parseFloat(d[sortId]);
+                                break;
+                        }
+                        return d;
+                    });
+
                     if (cell.children("i").hasClass("fa-sort")) {
                         //unset other column sort
                         cell.siblings("th.content").children("i").attr("class", "fa fa-sort");
@@ -519,8 +536,8 @@
                         cell.children("i").removeClass("fa-sort");
                         cell.children("i").addClass("fa-sort-desc");
                         settings.sortedData.sort(function (a, b) {
-                            let va = isNaN(parseFloat(a[sortId])) ? a[sortId] : parseFloat(a[sortId]);
-                            let vb = isNaN(parseFloat(b[sortId])) ? b[sortId] : parseFloat(b[sortId]);
+                            let va = parseCellValue(a);
+                            let vb = parseCellValue(b);
                             return va > vb ? 1 : -1;
                         });
                     } else if (cell.children("i").hasClass("fa-sort-desc")) {
@@ -528,8 +545,8 @@
                         cell.children("i").removeClass("fa-sort-desc");
                         cell.children("i").addClass("fa-sort-asc");
                         settings.sortedData.sort(function (a, b) {
-                            let va = isNaN(parseFloat(a[sortId])) ? a[sortId] : parseFloat(a[sortId]);
-                            let vb = isNaN(parseFloat(b[sortId])) ? b[sortId] : parseFloat(b[sortId]);
+                            let va = parseCellValue(a);
+                            let vb = parseCellValue(b);
                             return va < vb ? 1 : -1;
                         });
                     } else {
@@ -538,6 +555,7 @@
                         cell.children("i").addClass("fa-sort");
                         settings.sortedData = settings.data.concat();
                     }
+                    settings.displayData = settings.sortedData.slice(settings.pageIndex * settings.displayRowNum, (settings.pageIndex + 1) * settings.displayRowNum);
                     func.drawTbody();
                 },
                 getSelectRowArr(){
@@ -739,12 +757,15 @@
                     rowFilterHtml += "</div>";
                     rowFilterHtml += "</div>";
                     filterHtml += rowFilterHtml;
+
+                    filterHtml += "<input class='singleFilter input' placeholder='single filter'>";
                     filterHtml += "<button class='button-info' title='revert data before filter row'><i class='fa fa-undo'></i></button>";
                     filterHtml += "</div>";
                     let leftHtml = "<div class='left'>" + requestHtml + filterHtml + "</div>";
 
                     let rowPerPageHtml = settings.rowPerPageArr.map(d=> {
-                        d = "<option>" + d + "</option>";
+                        let selectedHtml = (d == settings.displayRowNum) ? " selected='selected'" : "";
+                        d = "<option" + selectedHtml + ">" + d + "</option>";
                         return d;
                     }).join("");
                     rowPerPageHtml = "<div class='rowPerPage'>Total Row : <label>0</label> | Row Per Page : <select>" + rowPerPageHtml + "</select></div>";
@@ -1090,7 +1111,7 @@
                         }).join("\t");
                         data += "\n" + selectedRow.map(d=> {
                                 d = settings.th.map(d1=> {
-                                    d1 = node.tbody().xPath("tr>td[name=" + d1.id + "]").text();
+                                    d1 = d.children("td[name=" + d1.id + "]").text(); 
                                     return d1;
                                 }).join("\t");
                                 return d;
@@ -1123,10 +1144,13 @@
                                 d = new myString(d).base64UrlEncode().value;
                                 return d;
                             }).join(",");
+                        $(this).children("i").addClass("rotate");
                         http.request(settings.url + "AttachmentBatchCreate", requestData).then(result=> {
+                            $(this).children("i").removeClass("rotate");
                             window.location.href = settings.url + "AttachmentBatchDownload";
                         }).catch(result=> {
-                            alert("batch download attachments failed:"+result);
+                            $(this).children("i").removeClass("rotate");
+                            alert("batch download attachments failed:" + result);
                         });
                     }
 
@@ -1249,13 +1273,34 @@
                     node.rowFilterPanel().xPath(".row-filter-panel-body>.row>.value>.select-panel").hide();
                     node.rowFilterPanel().hide();
 
-                    func.drawTbody();
+                    settings.pageIndex = 0;
+                    func.turnPage();
+                });
+
+                //listen single filter
+                node.filter().children(".singleFilter").delegate("", "input", function () {
+                    let filterStr = $(this).val();
+                    settings.sortedData = settings.data.filter(d=> {
+                        let isMatched = false;
+                        for(let k in d){
+                            if(d[k].includes(filterStr)){
+                                isMatched = true;
+                                break;
+                            }
+                        }
+                        return isMatched;
+                    }).concat();
+                    settings.pageIndex = 0;
+                    func.turnPage();
+
                 });
 
                 //listen revert button
                 node.filter().children(".button-info").delegate("", "click", function () {
                     settings.sortedData = settings.data.concat();
-                    func.drawTbody();
+                    settings.pageIndex = 0;
+                    node.filter().children(".singleFilter").val("");
+                    func.turnPage();
                 });
 
                 //listen page button
@@ -1272,13 +1317,13 @@
 
                     }
                     if ($(this).children("i").hasClass("fa-angle-right")) {
-                        if (settings.pageIndex < settings.data.length / settings.displayRowNum - 1) {
+                        if (settings.pageIndex < settings.sortedData.length / settings.displayRowNum - 1) {
                             settings.pageIndex++;
                             func.turnPage();
                         }
                     }
                     if ($(this).children("i").hasClass("fa-angle-double-right")) {
-                        settings.pageIndex = Math.ceil(settings.data.length / settings.displayRowNum - 1);
+                        settings.pageIndex = Math.ceil(settings.sortedData.length / settings.displayRowNum - 1);
                         func.turnPage();
                     }
 

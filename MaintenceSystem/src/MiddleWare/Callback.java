@@ -2,7 +2,6 @@ package MiddleWare;
 
 import Init.Init;
 import Models.MyException;
-import Util.Parameter;
 import Util.MyString;
 
 import javax.servlet.http.HttpServletRequest;

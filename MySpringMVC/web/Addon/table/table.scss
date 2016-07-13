@@ -3,6 +3,18 @@
         cursor: pointer;
     }
 
+    .rotate{
+        animation: rotate 3s infinite linear;
+        @keyframes rotate {
+            from {
+                transform: rotateZ(0deg)
+            }
+            to {
+                transform: rotateZ(360deg)
+            }
+        }
+    }
+
     @mixin disableSelect {
         moz-user-select: -moz-none;
         -moz-user-select: none;
@@ -46,14 +58,18 @@
                         margin-top: 10px;
                         thead {
                             th {
-                                min-width: 50px;
+                                min-width: 100px;
                             }
                         }
                         tbody {
                             tr {
                                 td {
                                     input {
-                                        width: 40px;
+                                        width: 100px;
+                                        text-align: center;
+                                    }
+                                    .datepicker{
+                                        width: 120px;
                                     }
                                 }
                             }
@@ -73,6 +89,7 @@
 
                 }
             }
+
 
         }
 
@@ -118,7 +135,10 @@
                     }
                 }
             }
-
+            .singleFilter{
+                width: 100px;
+                margin-right: 10px;
+            }
         }
     }
 

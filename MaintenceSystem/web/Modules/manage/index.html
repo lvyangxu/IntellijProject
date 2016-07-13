@@ -9,6 +9,8 @@
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
     <title>Maintence System</title>
+    <link rel="icon" href="../Images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../Images/favicon.ico" type="image/x-icon"/>
     <script src="../Modules/common/js/init.js"></script>
     <link rel="stylesheet" href="../Modules/manage/css/index.css">
 </head>
@@ -28,45 +30,53 @@
     <div key="user" title="系统管理">
         <div key="login">登录日志</div>
     </div>
-    <div key="monitor" title="服务器监控"></div>
+    <div key="monitor" title="服务器监控">
+        <div key="list">联系人</div>
+        <div key="zabbix">zabbix</div>
+    </div>
     <div key="deploy" title="自动化部署"></div>
 </div>
 
 <div class="tree-panel">
     <div tree-key="server_info_server">
         <div class="table" table-id="server_info" table-title="服务器管理">
-            <div key="category">组</div>
-            <div key="serverRoom">机房</div>
+            <div key="serverRoom">区域</div>
             <div key="game">游戏名称</div>
-            <div key="supplier">供应商</div>
+            <div key="instance">实例名称</div>
+            <div key="supplier">云平台名称</div>
             <div key="internetIp">公网ip</div>
             <div key="intranetIp">内网ip</div>
             <div key="cpu">CPU</div>
             <div key="memory">内存</div>
             <div key="bandwidth">带宽</div>
             <div key="disk">硬盘</div>
-            <div key="os">操作系统</div>
+            <div key="os" hide>操作系统</div>
             <div key="service">运行服务</div>
-            <div key="startTime" type="day">上架时间</div>
-            <div key="endTime" type="day">到期时间</div>
+            <div key="startTime" type="day" hide>上架时间</div>
+            <div key="endTime" type="day" hide>到期时间</div>
             <div key="status">状态</div>
             <div key="username" hide>登录名</div>
             <div key="password" hide>密码</div>
-            <div key="operationHistory">维护记录</div>
-            <div key="price">价格</div>
-            <div key="assetId">资产编号</div>
-            <div key="serialNum">设备序列号</div>
+            <div key="operationHistory" hide>维护记录</div>
+            <div key="price" hide>价格</div>
+            <div key="assetId" hide>资产编号</div>
+            <div key="serialNum" hide>设备序列号</div>
             <div key="publicPort">开放端口</div>
+            <div key="secretKey">密钥值</div>
+            <div key="safeGroup">安全组</div>
             <div key="note" hide>备注</div>
         </div>
     </div>
     <div tree-key="server_info_game">
         <div class="table" table-id="game" table-title="运营游戏">
             <div key="game">游戏</div>
+            <div key="supplier">服务器供应商</div>
             <div key="cp">CP</div>
+            <div key="name">姓名</div>
+            <div key="duty">职责</div>
+            <div key="phone">电话</div>
+            <div key="qq">QQ</div>
             <div key="email">邮箱</div>
-            <div key="contacts">联系方式</div>
-            <div key="address">地址</div>
             <div key="note">备注</div>
         </div>
     </div>
@@ -74,7 +84,7 @@
         <div class="table" table-id="cloud" table-title="云平台登记">
             <div key="name">名称</div>
             <div key="contacts">联系方式</div>
-            <div key="createTime">添加时间</div>
+            <div key="createTime" type="day">添加时间</div>
             <div key="note">备注</div>
         </div>
     </div>
@@ -85,6 +95,8 @@
             <div key="login_time">登录时间</div>
         </div>
     </div>
+    <div tree-key="monitor_list"></div>
+    <div tree-key="monitor_zabbix"></div>
 
 </div>
 
