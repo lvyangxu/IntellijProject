@@ -40,7 +40,7 @@
 
         var func = {
             setData: function setData() {
-                var dataStr = new date(settings.data).toString();;
+                var dataStr = new date(settings.data).toString();
                 element.children("input").val(dataStr);
                 node.panel().xPath(".datepicker-panel-head>.text").text(dataStr);
                 element.data("data", settings.data);
@@ -97,6 +97,8 @@
                         if (day > 20) {
                             settings.data = new date(settings.data).addMonth(-1).value;
                         }
+                    } else {
+                        settings.data = new date(settings.data).value;
                     }
                     settings.data.setDate(day);
                     func.setData();
@@ -143,6 +145,29 @@
                 settings.data = date1.addMonth(1).value;
                 func.setData();
                 func.drawPanelBody();
+            });
+
+            element.children("input").delegate("", "blur", function () {
+                var arr = $(this).val().split("-");
+                var lastValue = new date(settings.data).toString();
+                if (arr.length != 3) {
+                    $(this).val(lastValue);
+                    return;
+                }
+                var year = arr[0];
+                var month = arr[1];
+                var day = arr[2];
+
+                var yearRegex = /^[1-2][0-9]{3}$/g;
+                var monthRegex = /(^[1][0-2]$)|(^[0][1-9]$)|(^[1-9]$)/g;
+                var dayRegex = /(^[1-2][0-9]$)|(^[3][0-1]$)|(^[0][1-9]$)|(^[1-9]$)/g;
+
+                if (yearRegex.test(year) && monthRegex.test(month) && dayRegex.test(day)) {
+                    settings.data = new date($(this).val()).value;
+                    func.setData();
+                } else {
+                    $(this).val(lastValue);
+                }
             });
         });
 

@@ -7,6 +7,7 @@ class date {
         if (typeof(value) == "string") {
             let arr = value.split("-");
             let [year,month,day] = [arr[0], Number.parseInt(arr[1]) - 1, arr[2]];
+
             day = (day == undefined) ? 1 : day;
             let d = new Date(year, month, day);
             this.value = new Date(d.getTime());
@@ -137,8 +138,8 @@ class date {
                 month += mNum + 12;
             }
         }
-        let maxDaysOfMonth = new date(new Date(year,month-1,1)).toDaysOfMonth();
-        if(d.getDate()>maxDaysOfMonth){
+        let maxDaysOfMonth = new date(new Date(year, month - 1, 1)).toDaysOfMonth();
+        if (d.getDate() > maxDaysOfMonth) {
             d.setDate(maxDaysOfMonth);
         }
         d.setFullYear(year);
@@ -149,7 +150,7 @@ class date {
         return this;
     }
 
-    firstDay(){
+    firstDay() {
         let d = new Date(this.value.getTime());
         d.setDate(1);
         this.value = new Date(d.getTime());

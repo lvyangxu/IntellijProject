@@ -20,6 +20,7 @@ var date = function () {
             var month = Number.parseInt(arr[1]) - 1;
             var day = arr[2];
 
+
             day = day == undefined ? 1 : day;
             var d = new Date(year, month, day);
             this.value = new Date(d.getTime());

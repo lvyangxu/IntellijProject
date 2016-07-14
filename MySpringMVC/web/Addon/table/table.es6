@@ -33,6 +33,7 @@
                     d: (curd == "") ? true : curd.includes("d")
                 },
                 export: (element.attr("export") == "false") ? false : true,
+                chart: (element.attr("export") == "false") ? false : true,
                 //func column,all default true
                 funcColumn: {
                     checkbox: (element.attr("checkbox") == "false") ? false : true,
@@ -759,7 +760,24 @@
                     filterHtml += rowFilterHtml;
 
                     filterHtml += "<input class='singleFilter input' placeholder='single filter'>";
-                    filterHtml += "<button class='button-info' title='revert data before filter row'><i class='fa fa-undo'></i></button>";
+                    filterHtml += "<button class='revert button-info' title='revert data before filter row'><i class='fa fa-undo'></i></button>";
+                    filterHtml += "<div class='chart'>";
+                    filterHtml += "<button class='button-info' title=''><i class='fa fa-line-chart'></i></button>";
+                    filterHtml += "<div class='chart-panel'><div class='chart-panel-head'><button class='button-success'><i class='fa fa-paint-brush'></i></button></div>";
+                    filterHtml += "<div class='chart-panel-body'><div class='row dataSource'><label>data source:</label><select>";
+                    let dataSourceTypeArr = ["all original row data", "data after filtering", "selected row data"];
+                    filterHtml += dataSourceTypeArr.map(d=> {
+                        d = "<option>" + d + "</option>";
+                        return d;
+                    }).join("");
+                    filterHtml += "</select></div><div class='row xAxis'><label>x axis:</label><select>";
+                    filterHtml += settings.th.map(d=> {
+                        d = "<option>" + d.name + "</option>";
+                        return d;
+                    }).join("");
+                    filterHtml += "</select></div>";
+                    filterHtml += "<div class='row yAxis'><label>y axis:</label><div class='select' name='y axis' title='select all your y axis'></div></div></div></div>";
+                    filterHtml += "</div>";
                     filterHtml += "</div>";
                     let leftHtml = "<div class='left'>" + requestHtml + filterHtml + "</div>";
 
@@ -781,7 +799,9 @@
 
                     let tableHtml = "<table>" + theadHtml + "<tbody></tbody></table>";
 
-                    return leftHtml + rightHtml + tableHtml;
+                    let chartHtml = "<div class='chart'></div>";
+
+                    return leftHtml + rightHtml + tableHtml + chartHtml;
                 });
 
                 //listen unify table
@@ -1111,7 +1131,7 @@
                         }).join("\t");
                         data += "\n" + selectedRow.map(d=> {
                                 d = settings.th.map(d1=> {
-                                    d1 = d.children("td[name=" + d1.id + "]").text(); 
+                                    d1 = d.children("td[name=" + d1.id + "]").text();
                                     return d1;
                                 }).join("\t");
                                 return d;
@@ -1282,8 +1302,8 @@
                     let filterStr = $(this).val();
                     settings.sortedData = settings.data.filter(d=> {
                         let isMatched = false;
-                        for(let k in d){
-                            if(d[k].includes(filterStr)){
+                        for (let k in d) {
+                            if (d[k].includes(filterStr)) {
                                 isMatched = true;
                                 break;
                             }
@@ -1296,12 +1316,47 @@
                 });
 
                 //listen revert button
-                node.filter().children(".button-info").delegate("", "click", function () {
+                node.filter().children(".revert").delegate("", "click", function () {
                     settings.sortedData = settings.data.concat();
                     settings.pageIndex = 0;
                     node.filter().children(".singleFilter").val("");
                     func.turnPage();
                 });
+
+                //listen chart button
+                node.filter().xPath(".chart>button").delegate("", "click", function () {
+                    let chartPanle = $(this).next(".chart-panel");
+                    if (chartPanle.is(":hidden")) {
+
+                        let yAxisData = settings.th.filter(d=> {
+                            //checking if data is number
+                            let isNumber = settings.data.every(d1=> {
+                                let v = d1[d.id];
+                                return Number.isNaN(v);
+                            });
+                            console.log(isNumber);
+                            return isNumber;
+                        }).map(d=>{
+                            return d;
+                        });
+                        node.filter().xPath(".chart>.chart-panel>.chart-panel-body>.row>.select").select({
+                            "data": yAxisData
+                        });
+
+                        chartPanle.show();
+                    } else {
+                        chartPanle.hide();
+                    }
+                });
+
+                //init y axis select
+                let sourceType = node.filter().xPath(".chart>.chart-panel>.chart-panel-body>.dataSource>.select>option:selected").text();
+
+
+                //listen chart refresh button
+
+                //listen chart x axis change
+
 
                 //listen page button
                 node.right().xPath(".pagination>.button-info").delegate("", "click", function () {

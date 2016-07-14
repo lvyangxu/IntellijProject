@@ -16,7 +16,7 @@
 }(function ($) {
     "use strict";
     $.fn.datepicker = function (options) {
-        return $(this).each(function(){
+        return $(this).each(function () {
             datepicker($(this), options);
         });
     };
@@ -26,7 +26,8 @@
         let settings = element.addonSettingExtend(options, {
             type: element.property("type", "day"),
             addNum: element.property("add-num", 0),
-            callback:()=>{}
+            callback: ()=> {
+            }
         });
 
         let node = {
@@ -37,10 +38,10 @@
 
         let func = {
             setData(){
-                let dataStr = new date(settings.data).toString();;
+                let dataStr = new date(settings.data).toString();
                 element.children("input").val(dataStr);
                 node.panel().xPath(".datepicker-panel-head>.text").text(dataStr);
-                element.data("data",settings.data);
+                element.data("data", settings.data);
             },
             drawPanelBody(){
                 node.panel().xPath(".datepicker-panel-body").html(()=> {
@@ -72,7 +73,7 @@
                                 displayN = n > daysOfMonth ? (n - daysOfMonth) : n;
                                 classHtml = n > daysOfMonth ? " class='disabled'" : "";
                             }
-                            if(currentDay == n){
+                            if (currentDay == n) {
                                 classHtml = " class='active'";
                             }
 
@@ -85,15 +86,17 @@
                 });
 
                 //listen day click
-                node.panel().xPath(".datepicker-panel-body>.row>div").delegate("","click",function () {
+                node.panel().xPath(".datepicker-panel-body>.row>div").delegate("", "click", function () {
                     let day = $(this).text();
-                    if($(this).hasClass("disabled")){
-                        if(day<10){
+                    if ($(this).hasClass("disabled")) {
+                        if (day < 10) {
                             settings.data = new date(settings.data).addMonth(1).value;
                         }
-                        if(day>20){
+                        if (day > 20) {
                             settings.data = new date(settings.data).addMonth(-1).value;
                         }
+                    } else {
+                        settings.data = new date(settings.data).value;
                     }
                     settings.data.setDate(day);
                     func.setData();
@@ -142,14 +145,36 @@
                 func.drawPanelBody();
             });
 
+            element.children("input").delegate("", "blur", function () {
+                let arr = $(this).val().split("-");
+                let lastValue = new date(settings.data).toString();
+                if (arr.length != 3) {
+                    $(this).val(lastValue);
+                    return;
+                }
+                let [year,month,day] =[arr[0], arr[1], arr[2]];
+                let yearRegex = /^[1-2][0-9]{3}$/g;
+                let monthRegex = /(^[1][0-2]$)|(^[0][1-9]$)|(^[1-9]$)/g;
+                let dayRegex = /(^[1-2][0-9]$)|(^[3][0-1]$)|(^[0][1-9]$)|(^[1-9]$)/g;
+
+
+                if (yearRegex.test(year) && monthRegex.test(month) && dayRegex.test(day)) {
+                    settings.data = new date($(this).val()).value;
+                    func.setData();
+                }else {
+                    $(this).val(lastValue);
+                }
+
+            });
+
         });
 
-        if(options == undefined){
+        if (options == undefined) {
             return;
         }
 
         if (options.data != undefined) {
-            if(options.data!=""){
+            if (options.data != "") {
                 settings.data = options.data;
             }
             func.setData();

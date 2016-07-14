@@ -95,7 +95,7 @@
 
         .filter {
             margin-bottom: 10px;
-            .row-filter {
+            .row-filter{
                 display: inline-block;
                 margin-left: 10px;
                 margin-right: 10px;
@@ -138,6 +138,32 @@
             .singleFilter{
                 width: 100px;
                 margin-right: 10px;
+            }
+            .revert{
+                margin-right: 10px;
+            }
+            .chart{
+                display: inline-block;
+                .chart-panel{
+                    @include panel;
+                    .row{
+                        font-size: 14px;
+                        line-height: 34px;
+                        margin-top: 10px;
+                        select{
+                            height: 34px;
+                            width: 150px;
+                            margin-right: 100px;
+                        }
+
+                        label{
+                            display:inline-block ;
+                            width: 100px;
+                        }
+
+                    }
+
+                }
             }
         }
     }
