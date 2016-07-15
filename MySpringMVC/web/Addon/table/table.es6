@@ -49,7 +49,8 @@
                 currentRowIndex: 1,
                 //a tbody row height
                 rowHeight: 40,
-                pageIndex: 0
+                pageIndex: 0,
+                chartDataSourceType: "all original row data"
 
             });
 
@@ -615,6 +616,22 @@
                     let start = settings.displayRowNum * settings.pageIndex;
                     let end = settings.displayRowNum * (settings.pageIndex + 1);
                     settings.displayData = settings.sortedData.slice(start, end);
+                },
+                setYAxisSelectData(data){
+                    let yAxisData = settings.th.filter(d=> {
+                        //checking if data is number
+                        let isNumber = (data.length == 0) ? false : data.every(d1=> {
+                            let v = d1[d.id];
+                            v = Number.parseFloat(v);
+                            return !Number.isNaN(v);
+                        });
+                        return isNumber;
+                    }).map(d=> {
+                        return d;
+                    });
+                    node.filter().xPath(".chart>.chart-panel>.chart-panel-body>.row>.select").select({
+                        "data": yAxisData
+                    });
                 }
 
             }
@@ -765,9 +782,9 @@
                     filterHtml += "<button class='button-info' title=''><i class='fa fa-line-chart'></i></button>";
                     filterHtml += "<div class='chart-panel'><div class='chart-panel-head'><button class='button-success'><i class='fa fa-paint-brush'></i></button></div>";
                     filterHtml += "<div class='chart-panel-body'><div class='row dataSource'><label>data source:</label><select>";
-                    let dataSourceTypeArr = ["all original row data", "data after filtering", "selected row data"];
+                    let dataSourceTypeArr = [{"text":"all original row data","value":"original"}, {"text":"data after filtering","value":"filter"}, {"text":"selected row data","value":"selected"}];
                     filterHtml += dataSourceTypeArr.map(d=> {
-                        d = "<option>" + d + "</option>";
+                        d = "<option value='"+d.value+"'>" + d.text + "</option>";
                         return d;
                     }).join("");
                     filterHtml += "</select></div><div class='row xAxis'><label>x axis:</label><select>";
@@ -1327,32 +1344,50 @@
                 node.filter().xPath(".chart>button").delegate("", "click", function () {
                     let chartPanle = $(this).next(".chart-panel");
                     if (chartPanle.is(":hidden")) {
-
-                        let yAxisData = settings.th.filter(d=> {
-                            //checking if data is number
-                            let isNumber = settings.data.every(d1=> {
-                                let v = d1[d.id];
-                                return Number.isNaN(v);
-                            });
-                            console.log(isNumber);
-                            return isNumber;
-                        }).map(d=>{
-                            return d;
-                        });
-                        node.filter().xPath(".chart>.chart-panel>.chart-panel-body>.row>.select").select({
-                            "data": yAxisData
-                        });
-
+                        func.setYAxisSelectData(settings.data);
                         chartPanle.show();
                     } else {
                         chartPanle.hide();
                     }
                 });
 
-                //init y axis select
-                let sourceType = node.filter().xPath(".chart>.chart-panel>.chart-panel-body>.dataSource>.select>option:selected").text();
-
-
+                //listen dataSource type change
+                node.filter().xPath(".chart>.chart-panel>.chart-panel-body>.dataSource>select").delegate("", "change", function () {
+                    let sourceType = node.filter().xPath(".chart>.chart-panel>.chart-panel-body>.dataSource>select>option:selected").val();
+                    let data;
+                    switch (sourceType) {
+                        case "original":
+                            data = settings.data.concat();
+                            break;
+                        case "filter":
+                            data = settings.sortedData.concat();
+                            break;
+                        default:
+                            let selectArr = func.getSelectRowArr();
+                            if (selectArr.length == 0) {
+                                alert("please check at least one box on the left");
+                                node.filter().xPath(".chart>.chart-panel>.chart-panel-body>.dataSource>select").val(settings.chartDataSourceType);
+                                return;
+                            }
+                            let idArr = selectArr.map(d=> {
+                                d = d.children("td[name=id]").text();
+                                return d;
+                            });
+                            data = idArr.map(d=> {
+                                d = settings.data.find(d1=> {
+                                    return d1.id = d;
+                                });
+                                return d;
+                            });
+                            break;
+                    }
+                    data = data.map(d=> {
+                        d.checked = false;
+                        return d;
+                    });
+                    func.setYAxisSelectData(data);
+                    settings.chartDataSourceType = sourceType;
+                });
                 //listen chart refresh button
 
                 //listen chart x axis change
