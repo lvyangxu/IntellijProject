@@ -1,0 +1,33 @@
+body {
+  font-size: 0; }
+  body .top {
+    width: 100%; }
+  body .article {
+    padding-bottom: 50px; }
+    body .article .left {
+      display: inline-block; }
+    body .article .right {
+      margin-left: 40px;
+      vertical-align: top;
+      display: inline-block; }
+      body .article .right .text1 {
+        margin-top: 30px;
+        font-size: 18px;
+        color: white; }
+      body .article .right .text2 {
+        margin-top: 20px;
+        font-size: 16px;
+        color: #8d8d8d; }
+      body .article .right .text3 {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #ddac42; }
+  body .middle {
+    padding-top: 70px;
+    background-color: black; }
+  body .foot {
+    padding-bottom: 500px;
+    background: url("../image/footback.png");
+    background-size: 100%; }
+
+/*# sourceMappingURL=index.css.map */

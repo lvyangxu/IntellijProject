@@ -756,6 +756,7 @@
                     requestHtml += exportHtml;
 
                     let batchAttachHtml = "<button class='batchAttach button-warning' title='download all attachments of selected rows below'><i class='fa fa-paperclip'></i></button>";
+                    batchAttachHtml = settings.attachment ? batchAttachHtml : "";
                     requestHtml += batchAttachHtml;
 
                     let deleteHtml = "<button class='delete button-danger' title='delete selected rows on server'><i class='fa fa-times'></i></button>";
@@ -782,9 +783,15 @@
                     filterHtml += "<button class='button-info' title=''><i class='fa fa-line-chart'></i></button>";
                     filterHtml += "<div class='chart-panel'><div class='chart-panel-head'><button class='button-success'><i class='fa fa-paint-brush'></i></button></div>";
                     filterHtml += "<div class='chart-panel-body'><div class='row dataSource'><label>data source:</label><select>";
-                    let dataSourceTypeArr = [{"text":"all original row data","value":"original"}, {"text":"data after filtering","value":"filter"}, {"text":"selected row data","value":"selected"}];
+                    let dataSourceTypeArr = [{
+                        "text": "all original row data",
+                        "value": "original"
+                    }, {"text": "data after filtering", "value": "filter"}, {
+                        "text": "selected row data",
+                        "value": "selected"
+                    }];
                     filterHtml += dataSourceTypeArr.map(d=> {
-                        d = "<option value='"+d.value+"'>" + d.text + "</option>";
+                        d = "<option value='" + d.value + "'>" + d.text + "</option>";
                         return d;
                     }).join("");
                     filterHtml += "</select></div><div class='row xAxis'><label>x axis:</label><select>";

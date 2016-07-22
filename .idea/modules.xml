@@ -12,6 +12,7 @@
       <module fileurl="file://$PROJECT_DIR$/MaintenceSystemTcpClient/OperationSystemTcpClient.iml" filepath="$PROJECT_DIR$/MaintenceSystemTcpClient/OperationSystemTcpClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/RadiumGamesBIS/RadiumGamesBIS.iml" filepath="$PROJECT_DIR$/RadiumGamesBIS/RadiumGamesBIS.iml" />
       <module fileurl="file://$PROJECT_DIR$/RadiumME/RadiumME.iml" filepath="$PROJECT_DIR$/RadiumME/RadiumME.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Tank/Tank.iml" filepath="$PROJECT_DIR$/Tank/Tank.iml" />
     </modules>
   </component>
 </project>

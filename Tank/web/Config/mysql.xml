@@ -5,9 +5,9 @@
     <!--mysql主机端口-->
     <port>3306</port>
     <!--mysql连接的数据库名称-->
-    <database>radiumgamesbis</database>
+    <database>Tank</database>
     <!--mysql用户名-->
     <username>root</username>
     <!--mysql密码-->
-    <password>root</password>
+    <password>root</password>    
 </root>

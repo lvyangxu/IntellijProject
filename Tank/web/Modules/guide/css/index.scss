@@ -1,0 +1,43 @@
+body{
+    font-size: 0;
+    .top{
+        width: 100%;
+    }
+
+    .article{
+        padding-bottom: 50px;
+        .left{
+            display: inline-block;
+        }
+        .right{
+            margin-left:40px;
+            vertical-align: top;
+            display: inline-block;
+            .text1{
+                margin-top:30px;
+                font-size: 18px;
+                color: white;
+            }
+            .text2{
+                margin-top:20px;
+                font-size: 16px;
+                color: rgba(141,141,141,1);
+            }
+            .text3{
+                margin-top:20px;
+                font-size: 18px;
+                color:rgba(221,172,66,1);
+            }
+        }
+    }
+
+    .middle{
+        padding-top: 70px;
+        background-color: black;
+    }
+    .foot{
+        padding-bottom: 500px;
+        background: url('../image/footback.png');
+        background-size: 100%;
+    }
+}

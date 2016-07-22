@@ -1,0 +1,30 @@
+body {
+  margin: 0px; }
+  body .head {
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    height: 70px;
+    line-height: 68px;
+    background-color: rgba(0, 0, 0, 0.8);
+    font-size: 20px;
+    font-weight: bolder; }
+    body .head .container .page {
+      height: 68px;
+      display: inline-block; }
+      body .head .container .page a {
+        color: #c9c9c9;
+        text-decoration: none;
+        height: 70px; }
+    body .head .container .page.active {
+      border-bottom: 2px solid #ffb400; }
+    body .head .container .page:hover {
+      border-bottom: 2px solid rgba(255, 180, 0, 0.6); }
+    body .head .container .line {
+      display: inline-block;
+      width: 1px;
+      line-height: 68px;
+      height: 16px;
+      background-color: white; }
+
+/*# sourceMappingURL=index.css.map */
