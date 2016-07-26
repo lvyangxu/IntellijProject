@@ -1,0 +1,59 @@
+body {
+  background-color: black;
+  word-wrap: break-word; }
+  body .middle {
+    padding-top: 70px; }
+    body .middle .container {
+      background-image: url("../image/back.png");
+      background-size: 100%;
+      font-size: 0; }
+      body .middle .container .left {
+        margin-top: 35px;
+        font-size: 18px;
+        font-weight: bolder;
+        display: inline-block;
+        width: 25%; }
+        body .middle .container .left .list {
+          padding-top: 65px;
+          background-color: #f7ae00;
+          padding-left: 20px;
+          padding-right: 20px; }
+          body .middle .container .left .list a {
+            color: black;
+            text-decoration: none; }
+          body .middle .container .left .list .row {
+            margin-bottom: 30px; }
+          body .middle .container .left .list .more {
+            padding-right: 20px;
+            padding-bottom: 50px;
+            text-align: right; }
+        body .middle .container .left .bottomImage {
+          width: 100%; }
+          body .middle .container .left .bottomImage svg {
+            fill: #f7ae00;
+            width: 100%; }
+      body .middle .container .right {
+        vertical-align: top;
+        display: inline-block;
+        width: 75%;
+        margin-top: 80px;
+        color: white; }
+        body .middle .container .right .title {
+          font-size: 24px;
+          line-height: 24px;
+          text-align: center; }
+        body .middle .container .right .line {
+          height: 1px;
+          background-color: #f7ae00;
+          margin: 30px 20px 40px; }
+        body .middle .container .right .content {
+          line-height: 25px;
+          padding-left: 80px;
+          padding-right: 80px;
+          font-size: 18px; }
+          body .middle .container .right .content img {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 50%; }
+
+/*# sourceMappingURL=index.css.map */

@@ -1,6 +1,8 @@
 package Dao;
 
 import Models.MyException;
+import Util.MyString;
+import Util.Parameter;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -30,8 +32,18 @@ public class TableMap {
     public static String readMap(HttpServletRequest request, String table) throws MyException {
         String result = "";
         switch (table) {
+            case "article":
+                String name = Parameter.get(request, "name");
+                result = "select * from article where name in ('" + name + "','news1','news2','activity1','activity2')";
+                break;
+            case "manage":
+                result = "select * from article";
+                break;
+            case "guide":
+                result = "select * from article where name like 'guide%'";
+                break;
             default:
-                result = "select * from "+table;
+                result = "select * from " + table;
                 break;
         }
         return result;
@@ -49,6 +61,10 @@ public class TableMap {
         String result = "";
         switch (table) {
             //write the detail map on the main project
+            case "manage":
+            case "guide":
+                result = "article";
+                break;
             default:
                 result = table;
                 break;

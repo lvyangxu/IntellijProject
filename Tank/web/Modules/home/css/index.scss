@@ -138,24 +138,24 @@ body {
             .gameImage {
                 font-size: 0;
                 .line1 {
-                    .leftImage{
+                    .leftImage {
                         width: 33.34%;
                         display: inline-block;
                     }
-                    .rightImage{
+                    .rightImage {
                         width: 66.66%;
                         display: inline-block;
-                        .game1{
+                        .game1 {
                             width: 60.78%;
                         }
-                        .game2{
+                        .game2 {
                             width: 39.22%;
                         }
-                        .game3{
+                        .game3 {
                             width: 100%;
                         }
                     }
-                    img{
+                    img {
                         width: 100%;
                     }
 
@@ -163,13 +163,13 @@ body {
                 .line2 {
                     margin-top: 30px;
                     display: inline-block;
-                    .game4{
+                    .game4 {
                         width: 39.47%;
                     }
-                    .game5{
+                    .game5 {
                         width: 28.35%;
                     }
-                    .game6{
+                    .game6 {
                         width: 32.18%;
                     }
 
@@ -205,17 +205,18 @@ body {
                         width: 100%;
                     }
                 }
-                .article {
-                    .left {
-                        display: inline-block;
-                        margin-left: 140px;
-                    }
-                    .right {
-                        vertical-align: top;
-                        margin-left: 50px;
-                        display: inline-block;
-                        a {
-                            text-decoration: none;
+                a {
+                    text-decoration: none;
+                    .article {
+                        .left {
+                            display: inline-block;
+                            margin-left: 140px;
+                        }
+                        .right {
+                            vertical-align: top;
+                            margin-left: 50px;
+                            display: inline-block;
+
                             .text1 {
                                 font-size: 18px;
                                 color: rgba(255, 255, 255, 1);
@@ -226,11 +227,7 @@ body {
                                 color: rgba(129, 129, 129, 1);
                                 line-height: 20px;
                             }
-                            .text3 {
-                                font-size: 18px;
-                                color: rgba(255, 255, 255, 1);
-                                margin-top: 15px;
-                            }
+
                         }
                     }
                 }
@@ -266,18 +263,18 @@ body {
         .imgFrame {
             width: 40%;
             margin-left: 30%;
-            margin-top:10%;
+            margin-top: 10%;
             background-color: white;
 
             height: auto;
-            .paddingFrame{
-                padding:20px;
+            .paddingFrame {
+                padding: 20px;
                 .bigImage {
                     width: 100%;
                 }
             }
 
-            .closeImage{
+            .closeImage {
                 cursor: pointer;
                 position: absolute;
                 right: 30%;

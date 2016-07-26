@@ -119,6 +119,28 @@ body {
 .button-minus:active {
   background: linear-gradient(to top, #ff9e73 0, #ff7b40 100%) repeat-x; }
 
+.button-dark {
+  display: inline-block;
+  background: linear-gradient(to bottom, #282828 0, #323232 100%) repeat-x;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
+  color: #fff;
+  cursor: pointer;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 1px solid #bebebe;
+  border-radius: 4px;
+  touch-action: manipulation; }
+
+.button-dark:active {
+  background: linear-gradient(to top, #323232 0, #282828 100%) repeat-x; }
+
 .input {
   height: 20px;
   padding: 6px 6px;

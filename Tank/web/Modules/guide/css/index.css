@@ -1,27 +1,29 @@
 body {
+  word-wrap: break-word;
   font-size: 0; }
   body .top {
     width: 100%; }
   body .article {
     padding-bottom: 50px; }
     body .article .left {
-      display: inline-block; }
+      display: inline-block;
+      width: 25%; }
+      body .article .left img {
+        width: 100%; }
     body .article .right {
-      margin-left: 40px;
+      width: 75%;
       vertical-align: top;
       display: inline-block; }
       body .article .right .text1 {
+        padding-left: 40px;
         margin-top: 30px;
         font-size: 18px;
         color: white; }
       body .article .right .text2 {
+        padding-left: 40px;
         margin-top: 20px;
         font-size: 16px;
         color: #8d8d8d; }
-      body .article .right .text3 {
-        margin-top: 20px;
-        font-size: 18px;
-        color: #ddac42; }
   body .middle {
     padding-top: 70px;
     background-color: black; }
@@ -29,5 +31,19 @@ body {
     padding-bottom: 500px;
     background: url("../image/footback.png");
     background-size: 100%; }
+    body .foot .pagination button {
+      vertical-align: top;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      border-radius: 0;
+      height: 40px;
+      min-width: 40px;
+      background-color: black;
+      color: white; }
+    body .foot .pagination input {
+      height: 34px;
+      width: 50px;
+      text-align: center; }
 
 /*# sourceMappingURL=index.css.map */

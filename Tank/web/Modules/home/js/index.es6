@@ -12,6 +12,7 @@
         $(".tab").children(".container").children("div[name=" + name + "]").addClass("active");
     });
 
+    //game image view
     $(".gameImage").find("img").delegate("", "click", function () {
         if ($(this).hasClass("game")) {
             return;
@@ -40,6 +41,7 @@
         $(".modal").fadeIn(1000);
         $(".modal").focus();
     });
+
 
 
 }

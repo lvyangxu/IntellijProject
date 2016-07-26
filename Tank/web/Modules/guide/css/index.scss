@@ -1,43 +1,70 @@
-body{
+body {
+    word-wrap: break-word;
     font-size: 0;
-    .top{
+    .top {
         width: 100%;
     }
 
-    .article{
+    .article {
         padding-bottom: 50px;
-        .left{
+        .left {
             display: inline-block;
+            width: 25%;
+            img {
+                width: 100%;
+            }
         }
-        .right{
-            margin-left:40px;
+        .right {
+            width: 75%;
             vertical-align: top;
             display: inline-block;
-            .text1{
-                margin-top:30px;
+            .text1 {
+                padding-left: 40px;
+                margin-top: 30px;
                 font-size: 18px;
                 color: white;
             }
-            .text2{
-                margin-top:20px;
+            .text2 {
+                padding-left: 40px;
+                margin-top: 20px;
                 font-size: 16px;
-                color: rgba(141,141,141,1);
-            }
-            .text3{
-                margin-top:20px;
-                font-size: 18px;
-                color:rgba(221,172,66,1);
+                color: rgba(141, 141, 141, 1);
             }
         }
     }
 
-    .middle{
+    .middle {
         padding-top: 70px;
         background-color: black;
     }
-    .foot{
+    .foot {
         padding-bottom: 500px;
         background: url('../image/footback.png');
         background-size: 100%;
+        .pagination {
+            button {
+                vertical-align: top;
+                cursor: pointer;
+                border: none;
+                outline: none;
+                border-radius: 0;
+                height: 40px;
+                min-width: 40px;
+                background-color: black;
+                color: white;
+            }
+            .prev {
+                //border-radius: 5px 0 0 5px;
+            }
+            .go {
+                //border-radius: 0 5px 5px 0;
+            }
+            input{
+                height: 34px;
+                width: 50px;
+                text-align: center;
+            }
+        }
     }
+
 }

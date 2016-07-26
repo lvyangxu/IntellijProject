@@ -168,7 +168,8 @@ public class MyMvcObject {
         String id = Parameter.get(this.request, "id");
         id = new MyString(id).base64Decode().toString();
         String filePath = "Data/attachment/" + table + "/" + id + "/";
-        Upload.springMvcFileUpload(this.request, this.response, WebRoot + filePath);
+        String fileName = Upload.springMvcFileUpload(this.request, this.response, WebRoot + filePath);
+        Callback.attachmentUpload(this.request, this.response, this.session, table, WebRoot + filePath, fileName);
         return this;
     }
 

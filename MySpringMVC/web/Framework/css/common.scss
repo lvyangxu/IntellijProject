@@ -42,6 +42,7 @@ body {
 @include button(danger,#d9534f,#c12e2a,#b92c28);
 @include button(warning,#f0ad4e,#eb9316,#e38d13);
 @include button(minus,#ff7b40,#ff9e73,#ff4f00);
+@include button(dark,rgba(40,40,40,1),rgba(50,50,50,1),rgba(190,190,190,1));
 
 .input{
     height: 20px;
