@@ -95,7 +95,8 @@ body {
             font-weight: bolder;
             letter-spacing: 2px;
             border: none;
-            outline: none; }
+            outline: none;
+            cursor: pointer; }
       body .middle .container .gameImage {
         font-size: 0; }
         body .middle .container .gameImage .line1 .leftImage {

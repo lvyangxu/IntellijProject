@@ -43,27 +43,32 @@ body {
         background-size: 100%;
         .pagination {
             button {
+                font-size: 20px;
                 vertical-align: top;
                 cursor: pointer;
-                border: none;
+                border: 1px solid white;
                 outline: none;
                 border-radius: 0;
-                height: 40px;
-                min-width: 40px;
+                height: 60px;
+                min-width: 80px;
                 background-color: black;
                 color: white;
             }
-            .prev {
-                //border-radius: 5px 0 0 5px;
+            button:hover{
+                border: 1px solid rgba(255,180,0,0.6);
+                background-color: rgba(255,180,0,0.6);
+                color: black;
             }
-            .go {
-                //border-radius: 0 5px 5px 0;
+            button.active{
+                border: 1px solid rgba(255,180,0,1);
+                background-color: rgba(255,180,0,1);
+                color: black;
             }
-            input{
-                height: 34px;
-                width: 50px;
-                text-align: center;
+            .start,.end {
+                min-width: 100px;
             }
+
+
         }
     }
 

@@ -2,17 +2,11 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/Tank/web/Modules/detail/js/index.js" />
-        <item url="file://$PROJECT_DIR$/Tank/web/Modules/guide/js/index.js" />
-        <item url="file://$PROJECT_DIR$/Tank/web/Modules/home/js/index.js" />
-        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/select/select.js" />
+        <item url="file://$PROJECT_DIR$/Tank/web/Modules/reserve/js/index.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/Tank/web/Modules/detail/js/index.js" />
-      <root url="file://$PROJECT_DIR$/Tank/web/Modules/guide/js/index.js" />
-      <root url="file://$PROJECT_DIR$/Tank/web/Modules/home/js/index.js" />
-      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/select/select.js" />
+      <root url="file://$PROJECT_DIR$/Tank/web/Modules/reserve/js/index.js" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

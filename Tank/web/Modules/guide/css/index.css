@@ -32,18 +32,25 @@ body {
     background: url("../image/footback.png");
     background-size: 100%; }
     body .foot .pagination button {
+      font-size: 20px;
       vertical-align: top;
       cursor: pointer;
-      border: none;
+      border: 1px solid white;
       outline: none;
       border-radius: 0;
-      height: 40px;
-      min-width: 40px;
+      height: 60px;
+      min-width: 80px;
       background-color: black;
       color: white; }
-    body .foot .pagination input {
-      height: 34px;
-      width: 50px;
-      text-align: center; }
+    body .foot .pagination button:hover {
+      border: 1px solid rgba(255, 180, 0, 0.6);
+      background-color: rgba(255, 180, 0, 0.6);
+      color: black; }
+    body .foot .pagination button.active {
+      border: 1px solid #ffb400;
+      background-color: #ffb400;
+      color: black; }
+    body .foot .pagination .start, body .foot .pagination .end {
+      min-width: 100px; }
 
 /*# sourceMappingURL=index.css.map */
