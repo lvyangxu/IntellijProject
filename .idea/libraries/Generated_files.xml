@@ -5,12 +5,14 @@
         <item url="file://$PROJECT_DIR$/Tank/web/Modules/detail/js/index.js" />
         <item url="file://$PROJECT_DIR$/Tank/web/Modules/guide/js/index.js" />
         <item url="file://$PROJECT_DIR$/Tank/web/Modules/home/js/index.js" />
+        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/select/select.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/Tank/web/Modules/detail/js/index.js" />
       <root url="file://$PROJECT_DIR$/Tank/web/Modules/guide/js/index.js" />
       <root url="file://$PROJECT_DIR$/Tank/web/Modules/home/js/index.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/select/select.js" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -2,7 +2,7 @@
 
 /**
  * demo like below
- * <div class='select' title='xxx'>
+ * <div class='select' name='xxx'>
  * </div>
  */
 (function (factory) {
