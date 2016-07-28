@@ -19,7 +19,7 @@
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 
-    <!--<mvc:resources location="/Modules/" mapping="/**" />-->
+    <mvc:resources mapping="/**" location="/Modules/" />
 
     <!--
     Most controllers will use the ControllerClassNameHandlerMapping above, but

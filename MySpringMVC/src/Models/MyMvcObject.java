@@ -1,5 +1,7 @@
 package Models;
 
+import Dao.Mysql;
+import Init.Init;
 import MiddleWare.*;
 import Util.*;
 import MiddleWare.Response;
@@ -27,6 +29,7 @@ public class MyMvcObject {
     private String sqlCommand = "";
     private String redirectTable;
     private Map<String, String> defaultMap = new HashMap<>();
+    private Mysql.data mysqlData;
 
     /**
      * constructed function
@@ -296,10 +299,10 @@ public class MyMvcObject {
      * @throws MyException
      */
     public MyMvcObject read(String table) throws MyException {
-        table = (this.redirectTable == "") ? table : this.redirectTable;
-        this.responseMessage = Table.read(table, this.sqlCommand);
+        this.responseMessage = Table.read(this.sqlCommand);
         return this;
     }
+
 
     /**
      * mysql delete map
@@ -349,6 +352,38 @@ public class MyMvcObject {
         Poi.creatExcel(filePath + fileName, title, StringBuilder1);
         this.responseMessage = fileName;
         return this;
+    }
+
+    /**
+     * mysql update with given sqlCommand
+     * @param sqlCommand
+     * @return
+     * @throws MyException
+     */
+    public MyMvcObject executeUpdate(String sqlCommand) throws MyException{
+        Init.log4j.database("try executeUpdate:" + sqlCommand);
+        mysql.update(sqlCommand);
+        return this;
+    }
+
+    /**
+     * read table with given sqlCommand
+     * @param table
+     * @param sqlCommand
+     * @return
+     * @throws MyException
+     */
+    public MyMvcObject executeQuery(String sqlCommand) throws MyException{
+        this.sqlCommand = sqlCommand;
+        Init.log4j.database("try executeQuery:" + sqlCommand);
+        Mysql.data data = mysql.select(sqlCommand);
+        this.mysqlData = data;
+        this.responseMessage = data.toJson();
+        return this;
+    }
+
+    public Mysql.data getMysqlData(){
+        return this.mysqlData;
     }
 
 }

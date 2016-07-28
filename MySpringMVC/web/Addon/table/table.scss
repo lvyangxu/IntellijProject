@@ -373,6 +373,31 @@
         }
     }
 
+    .svg{
+        margin-top:20px;
+        font-size: 0;
+        svg{
+            display: inline-block;
+            width: 80%;
+        }
+        .symbol{
+            vertical-align: top;
+            display: inline-block;
+            width: 20%;
+            .row{
+                margin-top:5px;
+                font-size: 16px;
+                margin-left:20px;
+                .line{
+                    display: inline-block;
+                    height: 15px;
+                    width: 50px;
+                    margin-right: 5px;
+                }
+            }
+
+        }
+    }
 }
 
 .addon-modal[name=table] {

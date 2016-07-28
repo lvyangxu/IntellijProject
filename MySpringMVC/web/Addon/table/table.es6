@@ -59,6 +59,9 @@
                 table(){
                     return element.children("table");
                 },
+                svg(){
+                    return element.children(".svg");
+                },
                 thead(){
                     return element.xPath("table>thead");
                 },
@@ -627,6 +630,7 @@
                         });
                         return isNumber;
                     }).map(d=> {
+                        d.checked = true;
                         return d;
                     });
                     node.filter().xPath(".chart>.chart-panel>.chart-panel-body>.row>.select").select({
@@ -823,7 +827,7 @@
 
                     let tableHtml = "<table>" + theadHtml + "<tbody></tbody></table>";
 
-                    let chartHtml = "<div class='chart'></div>";
+                    let chartHtml = "<div class='svg'></div>";
 
                     return leftHtml + rightHtml + tableHtml + chartHtml;
                 });
@@ -1325,13 +1329,14 @@
                 node.filter().children(".singleFilter").delegate("", "input", function () {
                     let filterStr = $(this).val();
                     settings.sortedData = settings.data.filter(d=> {
-                        let isMatched = false;
-                        for (let k in d) {
-                            if (d[k].includes(filterStr)) {
-                                isMatched = true;
-                                break;
+                        let isMatched = Object.keys(d).some(d1=> {
+                            if (typeof (d[d1]) == "string" || typeof (d[d1]) == "number") {
+                                d1 = d[d1].includes(filterStr);
+                            } else {
+                                d1 = false;
                             }
-                        }
+                            return d1;
+                        });
                         return isMatched;
                     }).concat();
                     settings.pageIndex = 0;
@@ -1395,6 +1400,25 @@
                     func.setYAxisSelectData(data);
                     settings.chartDataSourceType = sourceType;
                 });
+
+                //listen chart brush button
+                node.filter().xPath(".chart>.chart-panel>.chart-panel-head>button").delegate("", "click", function () {
+                    let selectedYAxis = node.filter().xPath(".chart>.chart-panel>.chart-panel-body>.yAxis>.select").data("data");
+
+                    node.svg().html(()=> {
+                        let chartHtml = "<svg></svg>";
+                        chartHtml += "<div class='symbol'>" + selectedYAxis.map(d=> {
+                                let c1 = Math.random() * 255;
+                                let c2 = Math.random() * 255;
+                                let c3 = Math.random() * 255;
+                                let c = "rgba(" + Math.floor(c1) + "," + Math.floor(c2) + "," + Math.floor(c3) + ",1)";
+                                d = "<div class='row'><div class='line' style='background-color:" + c + "'></div>" + d.name + "</div>";
+                                return d;
+                            }).join("") + "</div>";
+                        return chartHtml;
+                    });
+                });
+
                 //listen chart refresh button
 
                 //listen chart x axis change

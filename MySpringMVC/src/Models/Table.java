@@ -80,7 +80,7 @@ public class Table {
 
     }
 
-    public static String read(String table, String sqlCommand) throws MyException {
+    public static String read(String sqlCommand) throws MyException {
         Init.log4j.database("try read:" + sqlCommand);
         return mysql.select(sqlCommand).toJson();
     }

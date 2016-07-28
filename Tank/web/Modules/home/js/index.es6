@@ -23,7 +23,7 @@
             "height": h + "px"
         });
         $(".modal").html(()=> {
-            let d = "<div class='imgFrame'><div class='close'><img class='closeImage' src='../Modules/home/image/close.png'></div>";
+            let d = "<div class='imgFrame'><div class='close'><img class='closeImage' src='../home/image/close.png'></div>";
             d += "<div class='paddingFrame'><img class='bigImage' src='" + src + "'></div></div>";
             return d;
         });
