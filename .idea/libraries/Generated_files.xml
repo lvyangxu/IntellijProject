@@ -3,14 +3,22 @@
     <properties>
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/Tank/web/Modules/reserve/js/index.js" />
+        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/upload.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/table/table.js" />
+        <item url="file://$PROJECT_DIR$/MaintenceSystem/web/Modules/manage/js/index.js" />
         <item url="file://$PROJECT_DIR$/Tank/web/Modules/home/js/index.js" />
+        <item url="file://$PROJECT_DIR$/Tank/web/Modules/manage/js/index.js" />
+        <item url="file://$PROJECT_DIR$/Tank/web/Modules/manage/js/init.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/Tank/web/Modules/reserve/js/index.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/upload.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/table/table.js" />
+      <root url="file://$PROJECT_DIR$/MaintenceSystem/web/Modules/manage/js/index.js" />
       <root url="file://$PROJECT_DIR$/Tank/web/Modules/home/js/index.js" />
+      <root url="file://$PROJECT_DIR$/Tank/web/Modules/manage/js/index.js" />
+      <root url="file://$PROJECT_DIR$/Tank/web/Modules/manage/js/init.js" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

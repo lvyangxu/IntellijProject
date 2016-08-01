@@ -50,7 +50,7 @@
         /**
          * load util
          */
-        var utilArr = ["cookie.js", "date.js", "http.js", "math.js", "myString.js", "websocket.js", "spring.js"];
+        var utilArr = ["cookie.js", "date.js", "http.js", "math.js", "myString.js", "websocket.js", "spring.js", "upload.js"];
         refernceString += refernce("util/", utilArr);
 
         /**

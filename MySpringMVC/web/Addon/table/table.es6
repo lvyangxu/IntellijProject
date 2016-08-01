@@ -511,7 +511,6 @@
                         func.listenTbodyCheckbox();
                     }).catch(result=> {
                         func.errorData();
-                        throw result;
                     });
                 },
                 sort(cell){

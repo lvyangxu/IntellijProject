@@ -24,7 +24,9 @@
         <div key="company">公司信息</div>
     </div>
     <div key="serverApply" title="服务器申请"></div>
-    <div key="finance" title="财务管理"></div>
+    <div key="finance" title="财务管理">
+        <div key="manage">财务模块</div>
+    </div>
     <div key="user" title="系统管理">
         <div key="login">登录日志</div>
     </div>
@@ -40,7 +42,10 @@
         <div class="table" table-id="server_info" table-title="服务器管理">
             <div key="serverRoom">区域</div>
             <div key="game">游戏名称</div>
-            <div key="instance">实例名称</div>
+            <div key="instanceType">实例类型</div>
+            <div key="instanceId">实例id</div>
+            <div key="instanceName">实例名称</div>
+            <div key="area">可用区</div>
             <div key="supplier">云平台名称</div>
             <div key="internetIp">公网ip</div>
             <div key="intranetIp">内网ip</div>
@@ -63,6 +68,15 @@
             <div key="secretKey">密钥值</div>
             <div key="safeGroup">安全组</div>
             <div key="note" hide>备注</div>
+        </div>
+    </div>
+    <div tree-key="finance_manage">
+        <div class="table" table-id="finance" curd="r" table-title="财务模块">
+            <div key="game">游戏</div>
+            <div key="dept">部门</div>
+            <div key="name">姓名</div>
+            <div key="email">邮箱</div>
+            <div key="phone">联系电话</div>
         </div>
     </div>
     <div tree-key="server_info_game">
@@ -96,7 +110,15 @@
             <div key="login_time">登录时间</div>
         </div>
     </div>
-    <div tree-key="monitor_list"></div>
+    <div tree-key="monitor_list">
+        <div class="table" table-id="monitor_contact" curd="r" table-title="报警名单">
+            <div key="game">游戏</div>
+            <div key="dept">部门</div>
+            <div key="name">姓名</div>
+            <div key="email">邮箱</div>
+            <div key="phone">联系电话</div>
+        </div>
+    </div>
     <div tree-key="monitor_zabbix"></div>
 
 </div>
