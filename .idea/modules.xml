@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/IntellijProject.iml" filepath="$PROJECT_DIR$/.idea/IntellijProject.iml" />
-      <module fileurl="file://$PROJECT_DIR$/IpListTool/IpListTool.iml" filepath="$PROJECT_DIR$/IpListTool/IpListTool.iml" />
       <module fileurl="file://$PROJECT_DIR$/MaintenceSystem/MaintenceSystem.iml" filepath="$PROJECT_DIR$/MaintenceSystem/MaintenceSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/MaintenceTcpClient/MaintenceTcpClient.iml" filepath="$PROJECT_DIR$/MaintenceTcpClient/MaintenceTcpClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/MyJavaLibrary/MyJavaLibrary.iml" filepath="$PROJECT_DIR$/MyJavaLibrary/MyJavaLibrary.iml" />

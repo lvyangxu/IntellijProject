@@ -17,14 +17,24 @@
 </head>
 <body>
 
-<div class="table" table-title="article" table-id="manage" detail="false">
-    <div key="name">名称</div>
-    <div key="title">标题</div>
-    <div key="content">正文</div>
+<div class="article">
+    <div class="table" table-title="article" table-id="manage" detail="false">
+        <div key="name">名称</div>
+        <div key="title">标题</div>
+        <div key="content">正文</div>
+    </div>
 </div>
 
-<input class="input" type="file">
-<button class="upload">upload</button>
+<div class="import">
+    <input class="input" type="file">
+    <button class="upload button-info">upload</button>
+</div>
+
+<div class="reserve">
+    <input class="input">
+    <button class="button-info">send input email split by dots</button>
+    <button class="all button-info">send all email</button>
+</div>
 
 <script src="../manage/js/index.js"></script>
 </body>

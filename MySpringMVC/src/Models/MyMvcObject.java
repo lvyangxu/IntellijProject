@@ -64,6 +64,11 @@ public class MyMvcObject {
         Response.success(this.response, this.responseMessage);
     }
 
+    public void success(String message) {
+        this.responseMessage = message;
+        Response.success(this.response, this.responseMessage);
+    }
+
     /**
      * response fail json message
      *

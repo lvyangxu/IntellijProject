@@ -11,6 +11,8 @@
 
     @include disableSelect;
 
+    color: black;
+
     input{
         height: 24px;
         width: 70px !important;
@@ -74,15 +76,32 @@
                     line-height: 30px;
                     cursor: pointer;
                 }
-                div:hover{
-                    background-color: #97cbff;
-                }
+
                 div.active{
                     background-color: rgba(65,132,243,1);
                 }
 
                 div.disabled{
                     opacity: 0.5;
+                }
+            }
+        }
+
+        .datepicker-panel-body[type=day]{
+            .row{
+                div:hover{
+                    background-color: #97cbff;
+                }
+            }
+        }
+
+        .datepicker-panel-body[type=month]:hover{
+            .row{
+                div{
+                    background-color: rgba(65,132,243,1);
+                }
+                .disabled{
+                    background-color: #c4e1ff;
                 }
 
             }

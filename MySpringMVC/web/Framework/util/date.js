@@ -31,7 +31,7 @@ var date = function () {
 
     _createClass(date, [{
         key: "toString",
-        value: function toString() {
+        value: function toString(type) {
             var d = new Date(this.value.getTime());
             var year = d.getFullYear();
             var month = d.getMonth() + 1;
@@ -39,7 +39,18 @@ var date = function () {
 
             month = month < 10 ? "0" + month : month;
             day = day < 10 ? "0" + day : day;
-            return year + "-" + month + "-" + day;
+            var result = "";
+            switch (type) {
+                case "month":
+                    result = year + "-" + month;
+                    break;
+                case "week":
+                default:
+                    result = year + "-" + month + "-" + day;
+                    break;
+            }
+
+            return result;
         }
 
         /**

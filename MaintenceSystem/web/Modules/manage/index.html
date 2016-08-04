@@ -25,7 +25,8 @@
     </div>
     <div key="serverApply" title="服务器申请"></div>
     <div key="finance" title="财务管理">
-        <div key="manage">财务模块</div>
+        <div key="source">费用登记</div>
+        <div key="analysis">统计分析</div>
     </div>
     <div key="user" title="系统管理">
         <div key="login">登录日志</div>
@@ -70,15 +71,32 @@
             <div key="note" hide>备注</div>
         </div>
     </div>
-    <div tree-key="finance_manage">
-        <div class="table" table-id="finance" curd="r" table-title="财务模块">
-            <div key="game">游戏</div>
-            <div key="dept">部门</div>
-            <div key="name">姓名</div>
-            <div key="email">邮箱</div>
-            <div key="phone">联系电话</div>
+    <div tree-key="finance_source">
+        <div class="table" table-id="finance" curd="curd" table-title="费用登记">
+            <div key="client">平台名称</div>
+            <div key="month" type="month">month</div>
+            <div key="game">游戏名称</div>
+            <div key="machineNum">机器数量</div>
+            <div key="cloudFront">CloudFront</div>
+            <div key="dataTransfer">Data Transfer</div>
+            <div key="elasticCompute">Elastic Compute Cloud</div>
+            <div key="keyManagement">Key Management Service</div>
+            <div key="simpleEmail">Simple Email Service</div>
+            <div key="simpleNotification">Simple Notification Service</div>
+            <div key="simpleQueue">Simple Queue Service</div>
+            <div key="simpleStorage">Simple Storage Service</div>
+            <div key="support">Support (Business)</div>
         </div>
     </div>
+    <div tree-key="finance_analysis">
+        <div class="table" table-id="finance_analysis" curd="r" table-title="统计分析">
+            <div key="month" type="month">month</div>
+            <div key="client">平台名称</div>
+            <div key="game">游戏名称</div>
+            <div key="price">费用</div>
+        </div>
+    </div>
+
     <div tree-key="server_info_game">
         <div class="table" table-id="game" table-title="运营游戏">
             <div key="game">游戏</div>

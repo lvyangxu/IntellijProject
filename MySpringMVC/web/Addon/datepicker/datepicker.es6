@@ -38,7 +38,7 @@
 
         let func = {
             setData(){
-                let dataStr = new date(settings.data).toString();
+                let dataStr = new date(settings.data).toString(element.property("type", "day"));
                 element.children("input").val(dataStr);
                 node.panel().xPath(".datepicker-panel-head>.text").text(dataStr);
                 element.data("data", settings.data);
@@ -109,7 +109,7 @@
 
         element.addonInit("datepicker", ()=> {
             let dateStr = date.getLocalDay(settings.addNum);
-            dateStr = (settings.type == "month") ? dateStr.substr(0, 7) : dateStr;
+            dateStr = new date(dateStr).toString(settings.type);
             let dataStr = (element.text() == "") ? dateStr : element.text();
             settings.data = new date(dataStr).value;
 
@@ -119,7 +119,7 @@
                 datepickerHtml += "<div class='datepicker-panel'>";
                 datepickerHtml += "<div class='datepicker-panel-head'><i class='fa fa-arrow-circle-left'></i><div class='text'>";
                 datepickerHtml += dataStr + "</div><i class='fa fa-arrow-circle-right'></i></div>";
-                datepickerHtml += "<div class='datepicker-panel-body'></div>";
+                datepickerHtml += "<div class='datepicker-panel-body' type='"+settings.type+"'></div>";
                 datepickerHtml += "</div>";
                 return datepickerHtml;
             });
@@ -147,7 +147,7 @@
 
             element.children("input").delegate("", "blur", function () {
                 let arr = $(this).val().split("-");
-                let lastValue = new date(settings.data).toString();
+                let lastValue = new date(settings.data).toString(settings.type);
                 if (arr.length != 3) {
                     $(this).val(lastValue);
                     return;
@@ -157,13 +157,22 @@
                 let monthRegex = /(^[1][0-2]$)|(^[0][1-9]$)|(^[1-9]$)/g;
                 let dayRegex = /(^[1-2][0-9]$)|(^[3][0-1]$)|(^[0][1-9]$)|(^[1-9]$)/g;
 
-
-                if (yearRegex.test(year) && monthRegex.test(month) && dayRegex.test(day)) {
-                    settings.data = new date($(this).val()).value;
-                    func.setData();
+                if(settings.type=="month"){
+                    if (yearRegex.test(year) && monthRegex.test(month)) {
+                        settings.data = new date($(this).val()).value;
+                        func.setData();
+                    }else {
+                        $(this).val(lastValue);
+                    }
                 }else {
-                    $(this).val(lastValue);
+                    if (yearRegex.test(year) && monthRegex.test(month) && dayRegex.test(day)) {
+                        settings.data = new date($(this).val()).value;
+                        func.setData();
+                    }else {
+                        $(this).val(lastValue);
+                    }
                 }
+
 
             });
 

@@ -16,12 +16,23 @@ class date {
         }
     }
 
-    toString() {
+    toString(type) {
         let d = new Date(this.value.getTime());
         let [year,month,day] = [d.getFullYear(), d.getMonth() + 1, d.getDate()];
         month = month < 10 ? ("0" + month) : month;
         day = day < 10 ? ("0" + day) : day;
-        return year + "-" + month + "-" + day;
+        let result = "";
+        switch (type){
+            case "month":
+                result = year + "-" + month;
+                break;
+            case "week":
+            default:
+                result = year + "-" + month + "-" + day;
+                break;
+        }
+
+        return result;
     }
 
     /**

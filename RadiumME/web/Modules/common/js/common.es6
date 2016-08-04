@@ -4,7 +4,7 @@
     $(".top_img").fullFit(70, function () {
         $(".top").css({"overflow": "hidden"});
         $(".top").height($(window).height() - 70);
-    }, noLeft);
+    }, noLeft); 
 
     //top img overlay auto fit full screen
     $(".top .overlay").fit(()=> {

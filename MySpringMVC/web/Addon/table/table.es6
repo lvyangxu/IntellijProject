@@ -591,10 +591,13 @@
                     let tdValue;
                     switch (type) {
                         case "day":
-                        case "month":
                         case "week":
                             tdValue = td.children(".datepicker").data("data");
                             tdValue = new date(tdValue).toString();
+                            break;
+                        case "month":
+                            tdValue = td.children(".datepicker").data("data");
+                            tdValue = new date(tdValue).toString("month") + "-01";
                             break;
                         case "input":
                         default:
@@ -675,6 +678,11 @@
 
                 //append html
                 element.append(()=> {
+                    let headHtml = "<div class='switch'>";
+                    headHtml += "<div><i class='fa fa-table'></i></div>";
+                    headHtml += "<div><i class='fa fa-line-chart'></i></div>";
+                    headHtml += "</div>";
+
                     let requestHtml = "<div class='request'>";
                     let readHtml = "<button class='read button-warning' title='refresh data from server'><i class='fa fa-refresh'></i></button>";
                     readHtml = settings.curd.r ? readHtml : "";
@@ -828,8 +836,10 @@
 
                     let chartHtml = "<div class='svg'></div>";
 
-                    return leftHtml + rightHtml + tableHtml + chartHtml;
+                    return headHtml + leftHtml + rightHtml + tableHtml + chartHtml;
                 });
+
+                element.children(".switch").switch();
 
                 //listen unify table
                 let createUnifyTd = node.request().xPath(".create>.create-panel>.create-panel-body>.unify>.unify-table>tbody>tr>td");

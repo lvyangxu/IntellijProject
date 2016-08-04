@@ -8,6 +8,8 @@
  *     <div key='xxx' title='xxx'>
  *     </div>
  * </div>
+ * <div class='tree-panel'>
+ * </div>
  */
 (function (factory) {
     'use strict';
@@ -79,10 +81,52 @@
                 let name = $(this).parent().attr("name");
                 let childName = $(this).attr("name");
                 name = name + "_" + childName;
+                window.location.hash = "#"+name;
                 $(this).addClass("active");
                 $("div[tree-key]").hide();
                 $("div[tree-key="+name+"]").show();
             })
+
+            let hash = window.location.hash;
+            let find = element.children(".level1").children(".level2").toArray().find(d=> {
+                d = (("#" + d.parent().attr("name") +"_" + d.attr("name")) == hash);
+                return d;
+            });
+            if (find != undefined) {
+                let level1Name = find.parent().attr("name");
+                let level2Name = find.attr("name");
+
+                let thisLevel1 = element.children(".level1[name="+level1Name+"]");
+                let thisLevel2 = element.children(".level1[name="+level1Name+"]").children(".level2[name="+level2Name+"]");
+                let otherLevel1 = thisLevel1.siblings(".level1");
+                let otherLevel1Level2 = otherLevel1.children(".level2");
+                let thisLevel1OtherLevel2 =thisLevel1.children(".level2[name!="+level2Name+"]");
+                
+                //active
+                otherLevel1Level2.removeClass("active");
+                thisLevel1OtherLevel2.removeClass("active");
+                thisLevel2.addClass("active");
+
+                //i class
+                otherLevel1.children("i").removeClass("fa-minus");
+                otherLevel1.children("i").addClass("fa-plus");
+                thisLevel1.children("i").removeClass("fa-plus");
+                if(!thisLevel1.children("i").hasClass("fa-minus")){
+                    thisLevel1.children("i").addClass("fa-minus");
+                }
+
+                //hide and show
+                otherLevel1Level2.hide();
+                thisLevel1.children(".level2").show();
+
+
+                let name = level1Name+"_"+level2Name;
+                element.next(".tree-panel").children("div[tree-key="+name+"]").siblings().hide();
+                element.next(".tree-panel").children("div[tree-key="+name+"]").show();
+
+
+
+            }
 
         });
 

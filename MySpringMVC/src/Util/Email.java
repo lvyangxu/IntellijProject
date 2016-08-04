@@ -15,6 +15,9 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static Init.Init.WebRoot;
 
@@ -24,7 +27,7 @@ import static Init.Init.WebRoot;
  */
 public class Email {
 
-    public static void send(String sendTo, String sendFrom, String title, String htmlMessage, String attachmentPath) throws MyException {
+    public static void send(String[] sendTo, String sendFrom, String title, String htmlMessage, String attachmentPath) throws MyException {
         ApplicationContext ApplicationContext1 = null;
         try {
             ApplicationContext1 = new FileSystemXmlApplicationContext(WebRoot + "/WEB-INF/dispatcher-servlet.xml");
@@ -58,5 +61,8 @@ public class Email {
 
     }
 
+    public static void send(String sendTo, String sendFrom, String title, String htmlMessage, String attachmentPath) throws MyException {
+        send(new String[]{sendTo},sendFrom,title,htmlMessage,attachmentPath);
+    }
 
 }

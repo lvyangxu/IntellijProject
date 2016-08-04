@@ -12,32 +12,32 @@ import java.util.stream.Collectors;
  */
 public class Parameter {
 
-    public static String get(HttpServletRequest request,String name){
+    public static String get(HttpServletRequest request, String name) {
         String result = request.getParameter(name);
         return result;
     }
 
-    public static String getDecode(HttpServletRequest request,String name) throws MyException {
-        String result = request.getParameter(name);
-        result = new MyString(result).base64Decode().toString();
-        return result;
-    }
-
-    public static String getStringSql(HttpServletRequest request,String name) throws MyException {
+    public static String getDecode(HttpServletRequest request, String name) throws MyException {
         String result = request.getParameter(name);
         result = new MyString(result).base64Decode().toString();
-        result = name + "='"+result+"'";
         return result;
     }
 
-    public static String getIntSql(HttpServletRequest request,String name) throws MyException {
+    public static String getStringSql(HttpServletRequest request, String name) throws MyException {
         String result = request.getParameter(name);
         result = new MyString(result).base64Decode().toString();
-        result = name + "="+result+"";
+        result = name + "='" + result + "'";
         return result;
     }
 
-    public static String getArraySql(HttpServletRequest request,String name) throws MyException {
+    public static String getIntSql(HttpServletRequest request, String name) throws MyException {
+        String result = request.getParameter(name);
+        result = new MyString(result).base64Decode().toString();
+        result = name + "=" + result + "";
+        return result;
+    }
+
+    public static String getArraySql(HttpServletRequest request, String name) throws MyException {
         String result = request.getParameter(name);
         result = new MyString(result).base64Decode().toString();
         String[] arr = new MyString(result).split(",");
@@ -46,7 +46,7 @@ public class Parameter {
             return d;
         }).collect(Collectors.joining(","));
 
-        result = name + "in ("+result+")";
+        result = name + "in (" + result + ")";
         return result;
     }
 

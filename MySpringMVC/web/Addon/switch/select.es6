@@ -1,6 +1,6 @@
 /**
  * demo like below
- * <div class='select' name='xxx'>
+ * <div class='switch' name='xxx'>
  * </div>
  */
 (function (factory) {
@@ -15,13 +15,13 @@
 
 }(function ($) {
     "use strict";
-    $.fn.select = function (options) {
+    $.fn.switch = function (options) {
         return $(this).each(function () {
-            select($(this), options);
+            switchFunc($(this), options);
         });
     };
 
-    let select = function (element, options) {
+    let switchFunc = function (element, options) {
 
         let settings = element.addonSettingExtend(options, {
             "name": element.property("name", "select"),

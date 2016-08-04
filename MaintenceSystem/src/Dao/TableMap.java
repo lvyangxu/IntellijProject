@@ -1,6 +1,7 @@
 package Dao;
 
 import Models.MyException;
+import Util.Parameter;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -30,6 +31,10 @@ public class TableMap {
     public static String readMap(HttpServletRequest request, String table) throws MyException {
         String result = "";
         switch (table) {
+            case "finance_analysis":
+                result = "select client,game,month,sum(cloudFront+dataTransfer+elasticCompute+keyManagement+simpleEmail" +
+                        "+simpleNotification+simpleQueue+simpleStorage+support) as price from finance group by client,month,game";
+                break;
             default:
                 result = "select * from "+table;
                 break;
