@@ -50,7 +50,7 @@
                 //a tbody row height
                 rowHeight: 40,
                 pageIndex: 0,
-                chartDataSourceType: "all original row data"
+                chartDataSourceType: "original"
 
             });
 
@@ -627,8 +627,11 @@
                         //checking if data is number
                         let isNumber = (data.length == 0) ? false : data.every(d1=> {
                             let v = d1[d.id];
-                            v = Number.parseFloat(v);
-                            return !Number.isNaN(v);
+                            if (v == undefined) {
+                                return false;
+                            }
+                            let regex = /(^\d+$)|(^\d+.\d+$)/g;
+                            return v.match(regex);
                         });
                         return isNumber;
                     }).map(d=> {
@@ -807,7 +810,7 @@
                     }).join("");
                     filterHtml += "</select></div><div class='row xAxis'><label>x axis:</label><select>";
                     filterHtml += settings.th.map(d=> {
-                        d = "<option>" + d.name + "</option>";
+                        d = "<option value='" + d.id + "'>" + d.name + "</option>";
                         return d;
                     }).join("");
                     filterHtml += "</select></div>";
@@ -835,11 +838,11 @@
                     let tableHtml = "<table>" + theadHtml + "<tbody></tbody></table>";
 
                     let chartHtml = "<div class='svg'></div>";
-
-                    return headHtml + leftHtml + rightHtml + tableHtml + chartHtml;
+                    // return headHtml + leftHtml + rightHtml + tableHtml + chartHtml;
+                    return leftHtml + rightHtml + tableHtml + chartHtml;
                 });
 
-                element.children(".switch").switch();
+                // element.children(".switch").switch();
 
                 //listen unify table
                 let createUnifyTd = node.request().xPath(".create>.create-panel>.create-panel-body>.unify>.unify-table>tbody>tr>td");
@@ -1396,7 +1399,7 @@
                             });
                             data = idArr.map(d=> {
                                 d = settings.data.find(d1=> {
-                                    return d1.id = d;
+                                    return d1.id == d;
                                 });
                                 return d;
                             });
@@ -1413,9 +1416,128 @@
                 //listen chart brush button
                 node.filter().xPath(".chart>.chart-panel>.chart-panel-head>button").delegate("", "click", function () {
                     let selectedYAxis = node.filter().xPath(".chart>.chart-panel>.chart-panel-body>.yAxis>.select").data("data");
+                    let data;
+                    switch (settings.chartDataSourceType) {
+                        case "original":
+                            data = settings.data.concat();
+                            break;
+                        case "filter":
+                            data = settings.sortedData.concat();
+                            break;
+                        default:
+                            let selectArr = func.getSelectRowArr();
+                            if (selectArr.length == 0) {
+                                alert("please check at least one box on the left");
+                                node.filter().xPath(".chart>.chart-panel>.chart-panel-body>.dataSource>select").val(settings.chartDataSourceType);
+                                return;
+                            }
+                            let idArr = selectArr.map(d=> {
+                                d = d.children("td[name=id]").text();
+                                return d;
+                            });
+                            data = idArr.map(d=> {
+                                d = settings.data.find(d1=> {
+                                    return d1.id == d;
+                                });
+                                return d;
+                            });
+                            break;
+                    }
+                    let xId = node.filter().xPath(".chart>.chart-panel>.chart-panel-body>.xAxis>select").val();
+                    let xData = data.map(d=> {
+                        d = d[xId];
+                        return d;
+                    });
+
+                    let yDataArr = selectedYAxis.filter(d=> {
+                        return d.checked;
+                    }).map(d=> {
+                        return d.id;
+                    }).map(d=> {
+                        let yData = data.map(d1=> {
+                            d1 = d1[d];
+                            return d1;
+                        });
+                        return yData;
+                    });
+
+                    if(yDataArr.length == 0){
+                        return;
+                    }
 
                     node.svg().html(()=> {
-                        let chartHtml = "<svg></svg>";
+                        let svgW = node.svg().width();
+                        //get max y of series
+                        let maxValue = Math.max(...yDataArr.map(d=> {
+                            d = d.map(d1=> {
+                                d1 = Number.parseFloat(d1);
+                                return d1;
+                            });
+                            return Math.max(...d);
+                        }));
+                        let yMax = maxValue;
+                        if (maxValue > 1) {
+                            let n = 0;
+                            while ((yMax / 10) > 1) {
+                                yMax = Math.floor(yMax / 10);
+                                n++;
+                            }
+                            yMax = (yMax + 1) * Math.pow(10, n);
+                        } else {
+                            let n = 1;
+                            while ((yMax * 10) < 1) {
+                                yMax = yMax * 10;
+                                n++;
+                            }
+                            yMax = (Math.floor(yMax*10)+1) * Math.pow(10, -n);
+                        }
+                        console.log(yMax);
+
+                        //css setting
+                        let svgWidthPercent = 0.8;
+                        let svgHeight = 500;
+                        let svgTopPadding = 50;
+                        let svgBottomPadding = 50;
+                        let svgLeftPadding = 80;
+                        let svgRightPadding = 80;
+                        let w = ((svgW * svgWidthPercent - svgLeftPadding - svgRightPadding) / (xData.length - 1) ).toFixed(2);
+
+                        //draw xAxis
+                        let xAxisHtml = "<path class='axis' d='";
+                        xAxisHtml += xData.map((d, i)=> {
+                            let x = (svgLeftPadding + i * w).toFixed(2);
+                            let y = (svgHeight - svgBottomPadding);
+                            d = "L" + x + " " + y;
+                            return d;
+                        }).join(" ").replace("L", "M");
+                        xAxisHtml += "'/>";
+                        xAxisHtml += "<g class='xText'>";
+                        xAxisHtml += xData.map((d, i)=> {
+                            let x = (svgLeftPadding + i * w).toFixed(2);
+                            let y = (svgHeight - svgBottomPadding);
+                            let line = "<path d='M" + x + " " + y + " L" + x + " " + (y + 10) + "'/>";
+                            let text = "<text x='" + x + "' y='" + (y + 30) + "'>" + d + "</text>";
+                            return line + text;
+                        }).join("");
+                        xAxisHtml += "</g>";
+
+                        //draw yAxis
+                        let yAxisHtml = "<path class='axis' d='";
+                        yAxisHtml += "M" + svgLeftPadding + " " + svgTopPadding + " L" + svgLeftPadding + " " + (svgHeight - svgBottomPadding);
+                        yAxisHtml += "'/>";
+                        yAxisHtml += "<g class='yText'>";
+                        let yArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                        yAxisHtml += yArr.map((d, i)=> {
+                            let x = svgLeftPadding;
+                            let y = svgTopPadding + i * (svgHeight - svgBottomPadding - svgTopPadding) / (yArr.length - 1);
+                            let line = "<path d='M" + x + " " + y + " L" + (x - 10) + " " + y + "'/>";
+
+                            return line;
+                        }).join("");
+                        yAxisHtml += "</g>";
+
+                        let chartHtml = "<svg>" + xAxisHtml + yAxisHtml + "</svg>";
+
                         chartHtml += "<div class='symbol'>" + selectedYAxis.map(d=> {
                                 let c1 = Math.random() * 255;
                                 let c2 = Math.random() * 255;

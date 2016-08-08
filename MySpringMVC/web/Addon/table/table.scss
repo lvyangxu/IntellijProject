@@ -3,7 +3,7 @@
         cursor: pointer;
     }
 
-    .rotate{
+    .rotate {
         animation: rotate 3s infinite linear;
         @keyframes rotate {
             from {
@@ -68,7 +68,7 @@
                                         width: 100px;
                                         text-align: center;
                                     }
-                                    .datepicker{
+                                    .datepicker {
                                         width: 120px;
                                     }
                                 }
@@ -90,12 +90,11 @@
                 }
             }
 
-
         }
 
         .filter {
             margin-bottom: 10px;
-            .row-filter{
+            .row-filter {
                 display: inline-block;
                 margin-left: 10px;
                 margin-right: 10px;
@@ -135,29 +134,29 @@
                     }
                 }
             }
-            .singleFilter{
+            .singleFilter {
                 width: 100px;
                 margin-right: 10px;
             }
-            .revert{
+            .revert {
                 margin-right: 10px;
             }
-            .chart{
+            .chart {
                 display: inline-block;
-                .chart-panel{
+                .chart-panel {
                     @include panel;
-                    .row{
+                    .row {
                         font-size: 14px;
                         line-height: 34px;
                         margin-top: 10px;
-                        select{
+                        select {
                             height: 34px;
                             width: 150px;
                             margin-right: 100px;
                         }
 
-                        label{
-                            display:inline-block ;
+                        label {
+                            display: inline-block;
                             width: 100px;
                         }
 
@@ -320,9 +319,9 @@
                                 display: none;
                                 @include panel;
                                 table {
-                                    margin-top:10px;
-                                    thead{
-                                        th{
+                                    margin-top: 10px;
+                                    thead {
+                                        th {
                                             min-width: 150px;
                                         }
                                     }
@@ -332,13 +331,13 @@
                                             input[type=file] {
                                                 display: none;
                                             }
-                                            input[type=text]{
-                                                width:136px;
+                                            input[type=text] {
+                                                width: 136px;
                                             }
                                             .progress {
                                                 background-color: #46b8da;
                                                 height: 30px;
-                                                .percent{
+                                                .percent {
                                                     position: absolute;
                                                     height: 30px;
                                                     width: 150px;
@@ -373,22 +372,40 @@
         }
     }
 
-    .svg{
-        margin-top:20px;
+    .svg {
+        margin-top: 20px;
         font-size: 0;
-        svg{
+        svg {
             display: inline-block;
             width: 80%;
+            height: 500px;
+            .axis {
+                width: 100%;
+                stroke: black;
+                stroke-width: 2px;
+            }
+            .xText,.yText{
+                fill: white;
+                stroke: black;
+                stroke-width: 2px;
+                text{
+                    font-weight: normal;
+                    text-anchor: middle;
+                    font-size: 8px;
+                    stroke-width: 1px;
+                }
+            }
+
         }
-        .symbol{
+        .symbol {
             vertical-align: top;
             display: inline-block;
             width: 20%;
-            .row{
-                margin-top:5px;
+            .row {
+                margin-top: 5px;
                 font-size: 16px;
-                margin-left:20px;
-                .line{
+                margin-left: 20px;
+                .line {
                     display: inline-block;
                     height: 15px;
                     width: 50px;

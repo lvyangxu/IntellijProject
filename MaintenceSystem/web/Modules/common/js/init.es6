@@ -61,7 +61,7 @@
         }).join("");
         return result;
     }
-    refernceString += loadAddon(["table","nav","select","datepicker","tree","modal"]);
+    refernceString += loadAddon(["switch","table","nav","select","datepicker","tree","modal"]);
 
     /**
      * output all reference

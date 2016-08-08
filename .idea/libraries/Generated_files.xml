@@ -7,17 +7,19 @@
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/datepicker/datepicker.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/table/table.js" />
         <item url="file://$PROJECT_DIR$/RadiumME/web/Modules/common/js/common.js" />
+        <item url="file://$PROJECT_DIR$/MaintenceSystem/web/Modules/common/js/init.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/select/select.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/tree/tree.js" />
         <item url="file://$PROJECT_DIR$/MaintenceSystem/web/Modules/manage/js/index.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/switch/select.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/switch/switch.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/date.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/datepicker/datepicker.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/table/table.js" />
       <root url="file://$PROJECT_DIR$/RadiumME/web/Modules/common/js/common.js" />
+      <root url="file://$PROJECT_DIR$/MaintenceSystem/web/Modules/common/js/init.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/select/select.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/tree/tree.js" />
       <root url="file://$PROJECT_DIR$/MaintenceSystem/web/Modules/manage/js/index.js" />

@@ -10,8 +10,8 @@ var rename = require('gulp-rename');
 
 gulp.task('default', function() {
     // place code for your default task here
-    gulp.src("MaintenceSystem/*.js")
+    gulp.src("web/Modules/**/js/*.js")
         .pipe(uglify())
-        .pipe(gulp.dest('build/minified_templates'));
+        .pipe(gulp.dest('dist'));
 
 });
