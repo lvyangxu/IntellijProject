@@ -2,10 +2,10 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/switch/select.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/date.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/datepicker/datepicker.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/table/table.js" />
+        <item url="file://$PROJECT_DIR$/MaintenceSystem/gulpfile.js" />
         <item url="file://$PROJECT_DIR$/RadiumME/web/Modules/common/js/common.js" />
         <item url="file://$PROJECT_DIR$/MaintenceSystem/web/Modules/common/js/init.js" />
         <item url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/select/select.js" />
@@ -14,10 +14,11 @@
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/switch/switch.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Framework/util/date.js" />
+      <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/switch/switch.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/datepicker/datepicker.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/table/table.js" />
+      <root url="file://$PROJECT_DIR$/MaintenceSystem/gulpfile.js" />
       <root url="file://$PROJECT_DIR$/RadiumME/web/Modules/common/js/common.js" />
       <root url="file://$PROJECT_DIR$/MaintenceSystem/web/Modules/common/js/init.js" />
       <root url="file://$PROJECT_DIR$/MySpringMVC/web/Addon/select/select.js" />

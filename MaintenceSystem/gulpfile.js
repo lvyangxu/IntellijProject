@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Created by karl on 2016/8/1.
  */
@@ -7,11 +9,18 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 
+var modules = ['common', 'manage'];
+gulp.task('default', modules);
 
-gulp.task('default', function() {
-    // place code for your default task here
-    gulp.src("web/Modules/**/js/*.js")
-        .pipe(uglify())
-        .pipe(gulp.dest('dist'));
-
+modules.map(function (d) {
+    gulp.task(d, function () {
+        gulp.src("web/Modules/" + d + "/js/*.js").pipe(uglify()).pipe(gulp.dest("../out/artifacts/MaintenceSystem_war_exploded/Modules/" + d + "/js"));
+    });
 });
+
+gulp.watch("web/**/*.js", function (event) {
+    gulp.task('default');
+    console.log("watcher done");
+});
+
+//# sourceMappingURL=gulpfile.js.map
