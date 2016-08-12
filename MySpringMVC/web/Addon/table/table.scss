@@ -375,6 +375,15 @@
     .svg {
         margin-top: 20px;
         font-size: 0;
+        .chartType{
+            width: 80%;
+            font-size: 16px;
+            text-align: center;
+            input{
+                margin-left: 50px;
+            }
+        }
+
         svg {
             display: inline-block;
             width: 80%;

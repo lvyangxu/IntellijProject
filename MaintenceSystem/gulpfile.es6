@@ -12,14 +12,14 @@ gulp.task('default', modules);
 
 modules.map(d=> {
     gulp.task(d, ()=> {
-        gulp.src("web/Modules/" + d + "/js/*.js")
+        gulp.src("web/Modules/" + d + "/js/bundle.js")
             .pipe(uglify())
             .pipe(gulp.dest("../out/artifacts/MaintenceSystem_war_exploded/Modules/"+d+"/js"));
     }); 
 });
 
-gulp.watch("web/**/*.js",(event)=>{
-    gulp.task('default');
-    console.log("watcher done");
-});
+// gulp.watch("web/**/*.js",(event)=>{
+//     gulp.task('default');
+//     console.log("watcher done");
+// });
 

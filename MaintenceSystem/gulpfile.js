@@ -14,13 +14,13 @@ gulp.task('default', modules);
 
 modules.map(function (d) {
     gulp.task(d, function () {
-        gulp.src("web/Modules/" + d + "/js/*.js").pipe(uglify()).pipe(gulp.dest("../out/artifacts/MaintenceSystem_war_exploded/Modules/" + d + "/js"));
+        gulp.src("web/Modules/" + d + "/js/bundle.js").pipe(uglify()).pipe(gulp.dest("../out/artifacts/MaintenceSystem_war_exploded/Modules/" + d + "/js"));
     });
 });
 
-gulp.watch("web/**/*.js", function (event) {
-    gulp.task('default');
-    console.log("watcher done");
-});
+// gulp.watch("web/**/*.js",(event)=>{
+//     gulp.task('default');
+//     console.log("watcher done");
+// });
 
 //# sourceMappingURL=gulpfile.js.map

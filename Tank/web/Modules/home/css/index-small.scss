@@ -1,3 +1,17 @@
 body{
+    .banner {
+        .tab {
+            .container {
+                div[name]:first-child {
+                    margin-left: 10px !important;
+                }
+                div[name] {
+                    padding-left: 0px;
+                    padding-right: 0px;
+                }
+            }
+
+        }
+    }
 
 }

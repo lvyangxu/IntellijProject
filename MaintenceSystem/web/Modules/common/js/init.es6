@@ -33,6 +33,8 @@
      */
     refernceString += refernce("fontawesome/css/", ["font-awesome.min.css"]);
 
+    refernceString += refernce("react/", ["react.js","react-dom.js"]);
+
     /**
      * load common css
      */

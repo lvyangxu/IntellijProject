@@ -1,7 +1,13 @@
 /**
  * Created by karl on 2016/7/22.
  */
+let recaptchaStr = "";
+let setRecaptcha = (d)=>{
+    recaptchaStr = d;
+}
+
 {
+    
     $(".input input").delegate("","input",function () {
         let email = $(".input input").val();
         let regex = /[^@]+@.+\..+/;
@@ -24,8 +30,15 @@
             alert("your email format is not correct");
             return;
         }
+        if(recaptchaStr==""){
+            alert("please complete the recaptcha first");
+            return;
+        }
+
         email = new myString(email).base64UrlEncode().value;
-        let requestData = "email=" + email;
+        recaptchaStr = new myString(recaptchaStr).base64UrlEncode().value;
+
+        let requestData = "email=" + email+"&recaptcha="+recaptchaStr;
         http.doAjaxInJquery("../Reserve/Check", "post", 30, requestData, result=> {
             let json = new myString(result).toJson();
             if (json.success == "true") {
@@ -42,5 +55,5 @@
             alert("network error");
         });
     });
-
 }
+

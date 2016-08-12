@@ -1461,7 +1461,7 @@
                         return yData;
                     });
 
-                    if(yDataArr.length == 0){
+                    if (yDataArr.length == 0) {
                         return;
                     }
 
@@ -1489,7 +1489,7 @@
                                 yMax = yMax * 10;
                                 n++;
                             }
-                            yMax = (Math.floor(yMax*10)+1) * Math.pow(10, -n);
+                            yMax = (Math.floor(yMax * 10) + 1) * Math.pow(10, -n);
                         }
                         console.log(yMax);
 
@@ -1501,6 +1501,14 @@
                         let svgLeftPadding = 80;
                         let svgRightPadding = 80;
                         let w = ((svgW * svgWidthPercent - svgLeftPadding - svgRightPadding) / (xData.length - 1) ).toFixed(2);
+
+                        //draw chart type radio
+                        let chartTypeRadioHtml = "<div class='chartType'>";
+                        chartTypeRadioHtml += "<input type='radio' name='chartType'><i class='fa fa-line-chart'></i>";
+                        chartTypeRadioHtml += "<input type='radio' name='chartType'><i class='fa fa-bar-chart'></i>";
+                        chartTypeRadioHtml += "<input type='radio' name='chartType'><i class='fa fa-area-chart'></i>";
+                        chartTypeRadioHtml += "<input type='radio' name='chartType'><i class='fa fa-pie-chart'></i>";
+                        chartTypeRadioHtml += "</div>";
 
                         //draw xAxis
                         let xAxisHtml = "<path class='axis' d='";
@@ -1536,7 +1544,7 @@
                         }).join("");
                         yAxisHtml += "</g>";
 
-                        let chartHtml = "<svg>" + xAxisHtml + yAxisHtml + "</svg>";
+                        let chartHtml = chartTypeRadioHtml + "<svg>" + xAxisHtml + yAxisHtml + "</svg>";
 
                         chartHtml += "<div class='symbol'>" + selectedYAxis.map(d=> {
                                 let c1 = Math.random() * 255;

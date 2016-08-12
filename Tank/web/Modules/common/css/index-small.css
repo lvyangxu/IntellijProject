@@ -1,6 +1,8 @@
 body .container {
   width: 100%; }
-body .head .container .page {
-  margin-left: 100px; }
+body .head {
+  font-size: 14px; }
+  body .head .container .page {
+    margin-left: 20px; }
 
 /*# sourceMappingURL=index-small.css.map */

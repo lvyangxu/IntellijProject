@@ -3,7 +3,13 @@
 /**
  * Created by karl on 2016/7/22.
  */
+var recaptchaStr = "";
+var setRecaptcha = function setRecaptcha(d) {
+    recaptchaStr = d;
+};
+
 {
+
     $(".input input").delegate("", "input", function () {
         var email = $(".input input").val();
         var regex = /[^@]+@.+\..+/;
@@ -26,8 +32,15 @@
             alert("your email format is not correct");
             return;
         }
+        if (recaptchaStr == "") {
+            alert("please complete the recaptcha first");
+            return;
+        }
+
         email = new myString(email).base64UrlEncode().value;
-        var requestData = "email=" + email;
+        recaptchaStr = new myString(recaptchaStr).base64UrlEncode().value;
+
+        var requestData = "email=" + email + "&recaptcha=" + recaptchaStr;
         http.doAjaxInJquery("../Reserve/Check", "post", 30, requestData, function (result) {
             var json = new myString(result).toJson();
             if (json.success == "true") {

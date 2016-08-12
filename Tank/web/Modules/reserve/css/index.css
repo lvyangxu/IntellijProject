@@ -33,27 +33,28 @@ body .reserve {
       body .reserve .frame .content .line img {
         margin-left: 20%;
         width: 60%; }
-      body .reserve .frame .content .paragraph {
-        margin-left: 20%;
-        width: 60%;
-        margin-top: 20px;
-        margin-bottom: 20px; }
       body .reserve .frame .content .result {
         margin-left: 20%;
         width: 60%;
         padding-top: 20px;
         padding-bottom: 20px; }
-      body .reserve .frame .content input {
-        margin-left: 10%;
-        width: 80%;
-        background-color: #888888;
-        height: 45px;
-        color: white;
-        outline: none;
-        padding-left: 20px;
-        padding-right: 20px;
-        border: 1px solid transparent;
-        box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.6); }
+        body .reserve .frame .content .result .paragraph {
+          margin: 20px 20px; }
+        body .reserve .frame .content .result .input {
+          padding: 20px 10%; }
+          body .reserve .frame .content .result .input input {
+            width: 80%;
+            margin: auto;
+            background-color: #888888;
+            height: 45px;
+            color: white;
+            outline: none;
+            padding-left: 20px;
+            padding-right: 20px;
+            border: 1px solid transparent;
+            box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.6); }
+        body .reserve .frame .content .result .g-recaptcha > div {
+          margin: auto; }
       body .reserve .frame .content .button {
         text-align: center;
         margin-top: 30px;
