@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACI,eAAW;EACP,KAAK,EAAE,IAAI;AAEf,UAAK;EACD,SAAS,EAAE,IAAI;EAEX,2BAAM;IACF,WAAW,EAAE,IAAI",
-"sources": ["index-small.scss"],
-"names": [],
-"file": "index-small.css"
-}

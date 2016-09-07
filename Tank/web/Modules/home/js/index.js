@@ -4,45 +4,50 @@
  * Created by karl on 2016/7/18.
  */
 {
-    //tab
-    $(".middle").children(".container").children(".left").children("div[tab]").first().show();
-    $(".tab").children(".container").children("div[name]").delegate("", "click", function () {
-        var name = $(this).attr("name");
-        $(".middle").children(".container").children(".left").children("div[tab]").hide();
-        $(".tab").children(".container").children("div[name]").removeClass("active");
-        $(".middle").children(".container").children(".left").children("div[tab=" + name + "]").show();
-        $(".tab").children(".container").children("div[name=" + name + "]").addClass("active");
-    });
-
-    //game image view
-    $(".gameImage").find("img").delegate("", "click", function () {
-        if ($(this).hasClass("game")) {
-            return;
-        }
-        var src = $(this).attr("src").replace(".png", "") + "-big.jpg";
-        var h = $(window).height();
-        $(".modal").css({
-            "height": h + "px"
-        });
-        $(".modal").html(function () {
-            var d = "<div class='imgFrame'><div class='close'><img class='closeImage' src='../home/image/close.png'></div>";
-            d += "<div class='paddingFrame'><img class='bigImage' src='" + src + "'></div></div>";
-            return d;
+    (function () {
+        //tab
+        $(".middle").children(".container").children(".left").children("div[tab]").first().show();
+        $(".tab").children("div[name]").delegate("", "click", function () {
+            var name = $(this).attr("name");
+            $(".middle").children(".container").children(".left").children("div[tab]").hide();
+            $(".tab").children("div[name]").removeClass("active");
+            $(".middle").children(".container").children(".left").children("div[tab=" + name + "]").show();
+            $(".tab").children("div[name=" + name + "]").addClass("active");
         });
 
-        //modal close
-        $(".modal").delegate("", "keydown", function (e) {
-            if (e.keyCode == 27) {
-                $(".modal").fadeOut(1000);
+        var articleText2 = [];
+        $(".article").children(".right").children(".text2").each(function () {
+            articleText2.push($(this).html());
+        });
+
+        var setFoot = function setFoot() {
+            if ($(window).width() < 768 && $(window).width() >= 480) {
+                $(".article").children(".right").children(".text2").each(function (index) {
+                    var short = $(this).text().substr(0, 100) + "...";
+                    $(this).text(short);
+                });
+            } else if ($(window).width() < 480) {
+                $(".article").children(".right").children(".text2").each(function (index) {
+                    var short = $(this).text().substr(0, 50) + "...";
+                    $(this).text(short);
+                });
+            } else {
+                $(".article").children(".right").children(".text2").each(function (index) {
+                    $(this).html(articleText2[index]);
+                });
             }
-        });
-        $(".modal").children(".imgFrame").children(".close").children("img").delegate("", "click", function () {
-            $(".modal").fadeOut(1000);
+
+            $(".foot2").height();
+        };
+
+        $(document).ready(function () {
+            setFoot();
         });
 
-        $(".modal").fadeIn(1000);
-        $(".modal").focus();
-    });
+        $(window).resize(function () {
+            setFoot();
+        });
+    })();
 }
 
 //# sourceMappingURL=index.js.map

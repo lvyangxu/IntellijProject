@@ -1,0 +1,73 @@
+$min-width:480px;
+$max-width:640px;
+@media screen and (max-width:$max-width) and (min-width: $min-width){
+    body{
+        .middle .container {
+            .right{
+                margin-right: 25%;
+                width: 50%;
+            }
+            .left{
+                width: 100%;
+                .text2{
+                    display: none;
+                }
+            }
+
+            .gameImage{
+                .game-left{
+                    width: 100%;
+                }
+                .game-right{
+                    width: 100%;
+                }
+            }
+        }
+
+        .banner {
+            .download {
+                position: inherit !important;
+                bottom: 0 !important;
+                background-color: black;
+
+                .container{
+
+                    .apple{
+                        margin-right: 0 !important;
+                        width: 50%;
+                        float: left;
+                        text-align: center !important;
+                        padding-bottom: 50px;
+                        img{
+                            width: 150px !important;
+                        }
+                    }
+
+                    .google{
+                        margin-right: 0 !important;
+                        width: 50%;
+                        float: right;
+                        margin-top: 0 !important;
+                        text-align: center !important;
+                        img{
+                            width: 150px !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        .foot1,.foot2{
+            .container .guide a .article{
+                .left{
+                    margin-left: 0 !important;
+                    width: 25% !important;
+                }
+            }
+        }
+
+        .foot2{
+            background: black !important;
+        }
+    }
+}

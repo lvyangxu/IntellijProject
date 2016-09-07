@@ -2,6 +2,9 @@
  * Created by karl on 2016/7/22.
  */
 {
+    let articleText2 = [];
+
+
     http.doAjaxInJquery("../Table/guide/Read", "post", 30, "", result=> {
         let json = new myString(result).toJson();
         if (json.success == "true") {
@@ -9,25 +12,33 @@
 
             let currentPage = 0;
             let start = 0;
-            let end = Math.floor((data.length - 1) / 5);
+            let rouPerPage = 4;
+            let end = Math.floor((data.length - 1) / rouPerPage);
 
             let drawArticle = ()=> {
                 //draw first five article
-                let displayData = data.map(d=> {
+                let displayData = data.map((d,i)=> {
                     let id = d.name.replace("guide", "");
                     let content = d.content;
                     content = content.replace(/\{img:[^{}]+}/g, "");
-                    content = (content > 200) ? (content.substr(0, 200) + "...") : content;
+
+                    let maxLength = 600;
+                    if ($(window).width() < 768 && $(window).width() >= 480) {
+                        maxLength = 100;
+                    } else if($(window).width() < 480){
+                        maxLength = 50;
+                    }
+                    content = (content.length > maxLength) ? (content.substr(0, maxLength) + "...") : content;
                     let rowHtml = "<div class='article'><a href='../detail/?name=" + d.name + "'><div class='left'>";
-                    rowHtml += "<img src='../Images/manage/guide" + id + "_0.png'>";
+                    rowHtml += "<img src='../home/image/guideImage" + id + ".png'>";
                     rowHtml += "</div><div class='right'>";
                     rowHtml += "<div class='text1'>" + d.title + "</div>";
                     rowHtml += "<div class='text2'>" + content + "</div>";
                     rowHtml += "</div></a></div>";
                     return rowHtml;
-                }).slice(currentPage * 5, currentPage * 5 + 5);
+                }).slice(currentPage * rouPerPage, currentPage * rouPerPage + rouPerPage);
                 $(".middle").children(".container").html(displayData.slice(0, 3).join(""));
-                $(".foot").children(".container").html(displayData.slice(3, 5).join(""));
+                $(".foot").children(".container").html(displayData.slice(3, rouPerPage).join(""));
             }
 
             let drawPagination = ()=> {
@@ -58,7 +69,7 @@
 
 
                     let paginationHtml = "<div class='pagination'>";
-                    paginationHtml += "<button class='start'> << First</button>";
+                    paginationHtml += "<button class='start'> << В начало</button>";
                     paginationHtml += "<button class='prev'><</button>";
 
                     for (let i = pageStart; i <= pageEnd; i++) {
@@ -66,7 +77,7 @@
                         paginationHtml += "<button class='number" + classHtml + "'>" + (i + 1) + "</button>";
                     }
                     paginationHtml += "<button class='next'>></button>";
-                    paginationHtml += "<button class='end'>Last >> </button>";
+                    paginationHtml += "<button class='end'>До конца >> </button>";
                     paginationHtml += "</div>";
                     return paginationHtml;
                 });
@@ -105,8 +116,36 @@
             drawPagination();
 
 
+
         }
     }, result=> {
         alert("network error:" + result);
     });
+
+
+
+    let setFoot = ()=> {
+        if ($(window).width() < 768 && $(window).width() >= 480) {
+            $(".article").children("a").children(".right").children(".text2").each(function (index) {
+                let short = $(this).text().substr(0, 100) + "...";
+                $(this).text(short);
+            });
+        } else if($(window).width() < 480){
+            $(".article").children("a").children(".right").children(".text2").each(function (index) {
+                let short = $(this).text().substr(0, 50) + "...";
+                $(this).text(short);
+            });
+        } else {
+            $(".article").children("a").children(".right").children(".text2").each(function (index) {
+                $(this).html(articleText2[index]);
+            });
+        }
+
+        $(".foot2").height();
+    };
+
+    $(window).resize(()=> {
+        setFoot();
+    });
+
 }

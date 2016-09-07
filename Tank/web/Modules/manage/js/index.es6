@@ -24,12 +24,26 @@
                     return d; 
                 }).join(",");
         }
-        http.request("../Broadcast/SendMail", requestData).then(result=> {
+
+        http.doAjaxInJquery("../Broadcast/SendMail","post",12000,requestData,result=> {
+            try {
+                result = new myString(result).toJson();
+                if(result.success == "false"){
+                    alert(result.message);
+                    return;
+                }
+                result = result.message;
+            }catch (e){
+                alert("invalid json message");
+                return;
+            }
+
             let message = "all:" + result.all + ",success:" + result.success;
             alert(message);
-        }).catch(result=> {
+        },result=> {
             alert(result);
         });
+
     });
 
 }

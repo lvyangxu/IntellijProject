@@ -33,7 +33,7 @@ public class TableMap {
         switch (table) {
             case "finance":
                 result = "select *,sum(cloudFront+dataTransfer+elasticCompute+keyManagement+simpleEmail" +
-                        "+simpleNotification+simpleQueue+simpleStorage+support+supportDev) as total from finance";
+                        "+simpleNotification+simpleQueue+simpleStorage+support+supportDev) as total from finance group by id";
                 break;
             case "finance_analysis":
                 result = "select client,game,month,sum(cloudFront+dataTransfer+elasticCompute+keyManagement+simpleEmail" +

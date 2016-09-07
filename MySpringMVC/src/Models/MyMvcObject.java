@@ -372,6 +372,18 @@ public class MyMvcObject {
     }
 
     /**
+     * mysql batch with given sqlCommandList
+     * @param sqlCommandList
+     * @return
+     * @throws MyException
+     */
+    public MyMvcObject executeBatch(List<String> sqlCommandList) throws MyException{
+        Init.log4j.database("try executeBatch:" + sqlCommandList.toString());
+        mysql.batch(sqlCommandList);
+        return this;
+    }
+
+    /**
      * read table with given sqlCommand
      * @param table
      * @param sqlCommand

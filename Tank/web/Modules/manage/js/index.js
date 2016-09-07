@@ -25,10 +25,23 @@
                 return d;
             }).join(",");
         }
-        http.request("../Broadcast/SendMail", requestData).then(function (result) {
+
+        http.doAjaxInJquery("../Broadcast/SendMail", "post", 12000, requestData, function (result) {
+            try {
+                result = new myString(result).toJson();
+                if (result.success == "false") {
+                    alert(result.message);
+                    return;
+                }
+                result = result.message;
+            } catch (e) {
+                alert("invalid json message");
+                return;
+            }
+
             var message = "all:" + result.all + ",success:" + result.success;
             alert(message);
-        }).catch(function (result) {
+        }, function (result) {
             alert(result);
         });
     });

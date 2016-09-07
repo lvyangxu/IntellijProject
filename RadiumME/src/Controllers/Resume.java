@@ -46,7 +46,8 @@ public class Resume {
         }
 
         try {
-            Email.send("285672259@qq.com","karl.lv@radiumme.com",title,"",WebRoot+"/Data/"+fileName);
+            //todo
+            Email.send("karl.lv@radiumme.com","285672259@qq.com","smtp.exmail.qq.com",title,"",WebRoot+"/Data/"+fileName);
         } catch (MyException e) {
             Response.fail(response,"send email error");
             log4j.error("resume send email error:"+e.getMessage());

@@ -47,7 +47,7 @@ var http = function () {
         key: "request",
 
 
-        /**
+        /** 
          * do http with self defined result,only 'success = true' will resolve
          * @param url
          * @param requestParaData

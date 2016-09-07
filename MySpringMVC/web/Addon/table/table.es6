@@ -654,7 +654,9 @@
                         id: $(this).attr("key"),
                         name: $(this).text(),
                         type: $(this).property("type", "input"),
-                        hide: $(this).has("hide")
+                        hide: $(this).has("hide"),
+                        excludeC:$(this).has("excludeC"),
+                        excludeU:$(this).has("excludeU")
                     });
                 });
                 let theadContentHtml = settings.th.map(d=> {
@@ -699,7 +701,9 @@
                     createHtml += "<button class='submit-button button-warning' title='add the data below to server'>Submit</button>";
                     createHtml += "</div><div class='create-panel-body'>";
                     createHtml += "<table class='submit-table'><thead>";
-                    createHtml += settings.th.map(d=> {
+                    createHtml += settings.th.filter(d=>{
+                        return !d.excludeC;
+                    }).map(d=> {
                         d = "<th>" + d.name + "</th>";
                         return d;
                     }).join("");
@@ -707,12 +711,16 @@
                     //create unify table
                     createHtml += "<div class='unify'>you can unify all rows data at the below table";
                     createHtml += "<table class='unify-table'><thead>";
-                    createHtml += settings.th.map(d=> {
+                    createHtml += settings.th.filter(d=>{
+                        return !d.excludeC;
+                    }).map(d=> {
                         d = "<th>" + d.name + "</th>";
                         return d;
                     }).join("");
                     createHtml += "</thead><tbody><tr>";
-                    createHtml += settings.th.map(d=> {
+                    createHtml += settings.th.filter(d=>{
+                        return !d.excludeC;
+                    }).map(d=> {
                         d = "<td name='" + d.id + "'>" + func.getTdHtml(d.type) + "</td>";
                         return d;
                     }).join("");
@@ -728,7 +736,9 @@
                     updateHtml += "<button class='submit-button button-warning' title='update the data below on server'>Submit</button>";
                     updateHtml += "</div><div class='update-panel-body'>";
                     updateHtml += "<table class='submit-table'><thead>";
-                    updateHtml += settings.th.map(d=> {
+                    updateHtml += settings.th.filter(d=>{
+                        return !d.excludeU;
+                    }).map(d=> {
                         d = "<th>" + d.name + "</th>";
                         return d;
                     }).join("");
@@ -736,12 +746,16 @@
                     //update unify table
                     updateHtml += "<div class='unify'>you can unify all rows data at the below table";
                     updateHtml += "<table class='unify-table'><thead>";
-                    updateHtml += settings.th.map(d=> {
+                    updateHtml += settings.th.filter(d=>{
+                        return !d.excludeU;
+                    }).map(d=> {
                         d = "<th>" + d.name + "</th>";
                         return d;
                     }).join("");
                     updateHtml += "</thead><tbody><tr>";
-                    updateHtml += settings.th.map(d=> {
+                    updateHtml += settings.th.filter(d=>{
+                        return !d.excludeU;
+                    }).map(d=> {
                         d = "<td name='" + d.id + "'>" + func.getTdHtml(d.type) + "</td>";
                         return d;
                     }).join("");
@@ -932,7 +946,9 @@
                     let createPanelTbody = node.request().xPath(".create>.create-panel>.create-panel-body>.submit-table>tbody");
                     createPanelTbody.append(()=> {
                         let newRowHtml = "<tr>";
-                        newRowHtml += settings.th.map(d=> {
+                        newRowHtml += settings.th.filter(d=>{
+                            return !d.excludeC;
+                        }).map(d=> {
                             d = "<td name='" + d.id + "'>" + func.getTdHtml(d.type) + "</td>";
                             return d;
                         }).join("");
@@ -961,7 +977,9 @@
                     }
 
                     if (confirm("do you want to create the " + tr.length + " row data below ?")) {
-                        let requestData = settings.th.map(d=> {
+                        let requestData = settings.th.filter(d=>{
+                            return !d.excludeC;
+                        }).map(d=> {
                             let data = d.id + "=";
                             data += tr.toArray().map(d1=> {
                                 d1 = d1.children("td[name=" + d.id + "]");
@@ -995,8 +1013,10 @@
                         updatePanelTbody.html(()=> {
                             let updatePanelTbodyHtml = selectedRowArr.map(row=> {
                                 let rowHtml = "<tr>";
-                                rowHtml += "<td name='id'>" + row.children("td[name=id]").text() + "</td>";
-                                rowHtml += settings.th.map(d=> {
+                                rowHtml += "<td name='id'>" + row.children("td[name=id]").html() + "</td>";
+                                rowHtml += settings.th.filter(d=>{
+                                    return !d.excludeU;
+                                }).map(d=> {
                                     d = "<td name='" + d.id + "'>" + func.getTdHtml(d.type) + "</td>";
                                     return d;
                                 }).join("");
@@ -1020,7 +1040,7 @@
                                         });
                                         break;
                                     default:
-                                        updateTr.xPath("td[name=" + name + "]>input").val($(this).text());
+                                        updateTr.xPath("td[name=" + name + "]>input").val($(this).html());
                                         break;
                                 }
 
@@ -1052,7 +1072,9 @@
                                 return id;
                             }).join(",");
                         requestData += "&";
-                        requestData += settings.th.map(d=> {
+                        requestData += settings.th.filter(d=>{
+                            return !d.excludeU;
+                        }).map(d=> {
                             let data = d.id + "=";
                             data += tr.toArray().map(d1=> {
                                 d1 = d1.children("td[name=" + d.id + "]");

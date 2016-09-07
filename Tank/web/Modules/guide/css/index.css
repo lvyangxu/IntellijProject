@@ -16,7 +16,6 @@ body {
       display: inline-block; }
       body .article .right .text1 {
         padding-left: 40px;
-        margin-top: 30px;
         font-size: 18px;
         color: white; }
       body .article .right .text2 {
@@ -28,29 +27,31 @@ body {
     padding-top: 70px;
     background-color: black; }
   body .foot {
-    padding-bottom: 500px;
-    background: url("../image/footback.png");
+    background: black url("../image/footback.png") no-repeat;
     background-size: 100%; }
-    body .foot .pagination button {
-      font-size: 20px;
-      vertical-align: top;
-      cursor: pointer;
-      border: 1px solid white;
-      outline: none;
-      border-radius: 0;
-      height: 60px;
-      min-width: 80px;
-      background-color: black;
-      color: white; }
-    body .foot .pagination button:hover {
-      border: 1px solid rgba(255, 180, 0, 0.6);
-      background-color: rgba(255, 180, 0, 0.6);
-      color: black; }
-    body .foot .pagination button.active {
-      border: 1px solid #ffb400;
-      background-color: #ffb400;
-      color: black; }
-    body .foot .pagination .start, body .foot .pagination .end {
-      min-width: 100px; }
+    body .foot .pagination {
+      text-align: center;
+      padding-bottom: 30px; }
+      body .foot .pagination button {
+        font-size: 16px;
+        vertical-align: top;
+        cursor: pointer;
+        border: 1px solid white;
+        outline: none;
+        border-radius: 0;
+        height: 30px;
+        min-width: 60px;
+        background-color: black;
+        color: white; }
+      body .foot .pagination button:hover {
+        border: 1px solid rgba(255, 180, 0, 0.6);
+        background-color: rgba(255, 180, 0, 0.6);
+        color: black; }
+      body .foot .pagination button.active {
+        border: 1px solid #ffb400;
+        background-color: #ffb400;
+        color: black; }
+      body .foot .pagination .start, body .foot .pagination .end {
+        min-width: 100px; }
 
 /*# sourceMappingURL=index.css.map */

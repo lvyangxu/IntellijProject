@@ -8,69 +8,78 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
-    <title>Tank</title>
+    <title>War Machine</title>
     <link rel="icon" href="../Images/favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="../Images/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="../common/css/index.css">
-    <link rel="stylesheet" media="screen and (min-width:1330px)" href="../common/css/index-big.css">
-    <link rel="stylesheet" media="screen and (max-width:1330px) and (min-width:800px)"
-          href="../common/css/index-middle.css">
-    <link rel="stylesheet" media="screen and (max-width:800px)" href="../common/css/index-small.css">
-    <link rel="stylesheet" href="../home/css/index.css">
-    <link rel="stylesheet" media="screen and (min-width:1330px)" href="../home/css/index-big.css">
-    <link rel="stylesheet" media="screen and (max-width:1330px) and (min-width:800px)"
-          href="../home/css/index-middle.css">
-    <link rel="stylesheet" media="screen and (max-width:800px)" href="../home/css/index-small.css">
+    <link rel="stylesheet" href="../common/css/bundle.css">
+    <link rel="stylesheet" href="../home/css/bundle.css">
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-82375835-1', 'auto');
         ga('send', 'pageview');
     </script>
 </head>
 <body>
-<div class="modal" tabindex="1"></div>
 <div class="head">
     <div class="container">
-        <div class="page active"><a href="../home/">官网首页</a></div>
+        <div class="page active"><a href="../home/">ГЛАВНОЕ</a></div>
         <div class="line"></div>
-        <div class="page"><a href="../guide/">资料攻略</a></div>
+        <div class="page"><a href="../guide/">ГАЙДЫ</a></div>
         <div class="line"></div>
-        <div class="page"><a href="">VK</a></div>
+        <div class="page"><a target="_blank" href="https://www.vk.com/warmachine2016">VK</a></div>
         <div class="line"></div>
-        <div class="page"><a href="../detail/?name=support">Support</a></div>
+        <div class="page"><a href="../detail/?name=support">ТЕХПОДДЕРЖКА</a></div>
         <div class="line"></div>
     </div>
 </div>
 <div class="banner">
+    <img class="back" src="../home/image/top.png">
     <div class="download">
         <div class="container">
-            <div class="apple"><a href=""><img src="../home/image/apple.png"></a></div>
-            <div class="google"><a href=""><img src="../home/image/google.png"></a></div>
+            <div class="apple"><a href="../reserve/"><img src="../home/image/apple.png"></a></div>
+            <div class="google"><a href="../reserve/"><img src="../home/image/google.png"></a></div>
         </div>
     </div>
-    <div class="tab">
-        <div class="container">
-            <div name="news" class="active">新闻公告</div>
-            <div name="activity">精彩活动</div>
-            <div name="faq">FAQ</div>
-        </div>
-    </div>
-    <img class="back" src="../home/image/top.png">
+
 </div>
 <div class="middle">
     <div class="container">
+        <div class="right">
+            <div class="subscripeBottom">
+                <a href="../reserve/">
+                    <img src="../home/image/subscripeButton.png">
+                </a>
+            </div>
+            <img class="subscripe" src="../home/image/subscripe.png">
+        </div>
         <div class="left">
+            <div class="tab">
+                <div name="news" class="active">НОВОСТИ</div>
+                <div name="activity">СОБЫТИЯ</div>
+                <div name="faq">FAQ</div>
+            </div>
             <div tab="news">
                 <a href="../detail/?name=news1">
                     <div class="row">
                         <div class="newsImg"><img src="../home/image/news1.png"></div>
                         <div class="newsText">
-                            <div class="text1">大厦阿飞撒</div>
-                            <div class="text2">asfafs</div>
+                            <div class="text1">Подарок за предзаказ открыт!</div>
+                            <div class="text2">Игра полностью посвященная бронированным машинам военного времени. Новая
+                                машина достаётся вам в базовой комплектации, но её боевой потенциал можно повысить,
+                                установив более мощное орудие, лучший двигатель и заменив ходовую часть. Различное
+                                оборудование и снаряжение также расширят возможности вашего танка на поле боя.
+                            </div>
                         </div>
                     </div>
                 </a>
@@ -78,8 +87,11 @@
                     <div class="row">
                         <div class="newsImg"><img src="../home/image/news2.png"></div>
                         <div class="newsText">
-                            <div class="text1">大厦sagfasfgasga阿飞撒</div>
-                            <div class="text2">asfafs</div>
+                            <div class="text1">Битва легионов</div>
+                            <div class="text2">Игроки получат возможность плечом к плечу сражаться с поклонниками
+                                стальных гигантов со всех уголков планеты, отстаивая свои интересы на мировое
+                                господство. Это ваша война!
+                            </div>
                         </div>
                     </div>
                 </a>
@@ -87,8 +99,12 @@
                     <div class="row">
                         <div class="newsImg"><img src="../home/image/news3.png"></div>
                         <div class="newsText">
-                            <div class="text1">大厦sdagd34343阿飞撒</div>
-                            <div class="text2">asfafs</div>
+                            <div class="text1">Красный комплект уже близко!</div>
+                            <div class="text2">
+                                С помощью красного комплекта, ваша мощь повысится до предела!
+                                <br>
+                                Думаете ли вы, что ваше снаряжение не подходит к красному танку?
+                            </div>
                         </div>
                     </div>
                 </a>
@@ -103,8 +119,13 @@
                     <div class="row">
                         <div class="faqImg"><img src="../home/image/faq1.png"></div>
                         <div class="faqText">
-                            <div class="text1">大厦阿飞撒</div>
-                            <div class="text2">asfafs</div>
+                            <div class="text1">Руководство для новичков</div>
+                            <div class="text2">Вы сможете использовать 8 танков в отряде. Формат таков: в переднем 4 и в
+                                заднем 4 места. Танк стреляет в цель, которая находится перед ним. После разгрома
+                                передних танков, он стреляет в близжайшего врага. Если два танка противника находятся
+                                рядом, то в первую очередь ваш танк стреляет в высшую цель. После разгрома первых
+                                враждебнных танков выстрел будет дан задним танкам.
+                            </div>
                         </div>
                     </div>
                 </a>
@@ -112,8 +133,11 @@
                     <div class="row">
                         <div class="faqImg"><img src="../home/image/faq2.png"></div>
                         <div class="faqText">
-                            <div class="text1">大厦阿飞撒</div>
-                            <div class="text2">asfafs</div>
+                            <div class="text1">Формация и Тренировка</div>
+                            <div class="text2">Так как в этом составе много танков на атаку, легко победить в кампании,
+                                особенно в обычной и элитной кампании. Недостатки: если невозможно разгромить противника
+                                с первых ударов, то тогда его будет трудно победить.
+                            </div>
                         </div>
                     </div>
                 </a>
@@ -121,36 +145,29 @@
                     <div class="row">
                         <div class="faqImg"><img src="../home/image/faq3.png"></div>
                         <div class="faqText">
-                            <div class="text1">大厦阿飞撒</div>
-                            <div class="text2">asfafs</div>
+                            <div class="text1">Описание вызовов</div>
+                            <div class="text2">Борьба на арене дает вам смелость и славу. Можно обменять смелость и
+                                славу на чертежы и справочники в магазине обмена. В нём ещё есть боеприпасы!
+                            </div>
                         </div>
                     </div>
                 </a>
             </div>
         </div>
-        <div class="right">
-            <img class="subscripe" src="../home/image/subscripe.png">
-            <div class="subscripeBottom">
-                <div class="text">ttttttttttttttttt</div>
-                <a href="../reserve/"><button>我要预约>></button></a>
-            </div>
-        </div>
         <div class="gameImage">
-            <div class="line1">
-                <div class="leftImage">
-                    <img class="game" src="../home/image/game.png">
+            <div class="game-left">
+                <div class="logo">
+                    <img src="../home/image/game_logo.png">
                 </div>
-                <div class="rightImage">
-                    <img class="game1" src="../home/image/game1.png">
-                    <img class="game2" src="../home/image/game2.png">
-                    <img class="game3" src="../home/image/game3.png">
+                <div class="text">
+                    Приветствую, уважаемый командир! Много классических танков являются основой этой игры. Для того,
+                    чтоб произвести выстрел и победить, вам нужно набрать мощности, по силе схожей с целой армией.
+                    Возглавьте танковую дивизию и станьте командиром мощного отряда. Передвигайтесь по опасной пустыне,
+                    джунглям и горам, преодолевая препятствия и уничтожая вражеские войска.
                 </div>
-
             </div>
-            <div class="line2">
-                <img class="game4" src="../home/image/game4.png">
-                <img class="game5" src="../home/image/game5.png">
-                <img class="game6" src="../home/image/game6.png">
+            <div class="game-right">
+                <img src="../home/image/game.png">
             </div>
         </div>
     </div>
@@ -158,14 +175,23 @@
 <div class="foot1">
     <div class="container">
         <div class="guide">
-            <div class="title">攻略资料</div>
+            <div class="title">Гайды</div>
             <div class="shortLine"><img src="../home/image/shortLine.png"></div>
             <a href="../detail/?name=guide1">
                 <div class="article">
                     <div class="left"><img src="../home/image/guideImage1.png"></div>
                     <div class="right">
-                        <div class="text1">1111</div>
-                        <div class="text2">2222</div>
+                        <div class="text1">Описание битвы</div>
+                        <div class="text2">
+                            Вы можете использовать 8 танков в отряде. Формат такой: в первом ряду 4 танка и в заднем 4.
+                            Танк стреляет в цель, которая находится перед ним. После разгрома передних танков, он
+                            стреляет в ближайшую цель. Если два танка противника находятся рядом, то в первую очередь
+                            ваш танк стреляет в высшую цель. После разгрома первых враждебнных танков выстрел будет дан
+                            по задним танкам.
+                            <br>
+                            Каждый танк имеет свои способности - навыки. Используя навыки можно сильно влиять на
+                            результат битвы...
+                        </div>
                     </div>
                 </div>
             </a>
@@ -174,8 +200,16 @@
                 <div class="article">
                     <div class="left"><img src="../home/image/guideImage2.png"></div>
                     <div class="right">
-                        <div class="text1">1111</div>
-                        <div class="text2">2222</div>
+                        <div class="text1">Описание о Снаряжении</div>
+                        <div class="text2">
+                            Повышение уровня вещей похоже на повышение уровня танков. Однако масимальный уровень
+                            снаряжения равен масимальному уровню персонажа*3.
+                            <br>
+                            Внимание: для VIP можно получить привилегию - крит при повышении снаряжения. Если вам
+                            повезет, возникает 8 или 9-кратная выгода.
+                            <br>
+                            На один танк можно экипировать до 4 видов снаряжения, которое использует только 1 слот...
+                        </div>
                     </div>
                 </div>
             </a>
@@ -190,8 +224,17 @@
                 <div class="article">
                     <div class="left"><img src="../home/image/guideImage3.png"></div>
                     <div class="right">
-                        <div class="text1">1111</div>
-                        <div class="text2">2222</div>
+                        <div class="text1">Повышение уровня персонажа</div>
+                        <div class="text2">
+                            В обычной и элитной кампании можно получить опыт персонажа.
+                            <br>
+                            Во-первых, в обычной кампании помогает многое, поэтому после получения 3 звезд даётся
+                            3-кратный опыт в подарок! Советуем получать 3 звезды в каждой битве.
+                            <br>
+                            Во-вторых, набравшись опыта и перейдя в элитную кампанию 3 звезды тоже играют важную роль. В
+                            них можно получить важные сундуки и ключи. Открыв сундуки, есть шанс получить легендарную
+                            экипировку и 1000 геммов(алмазов)...
+                        </div>
                     </div>
                 </div>
             </a>
@@ -200,8 +243,20 @@
                 <div class="article">
                     <div class="left"><img src="../home/image/guideImage4.png"></div>
                     <div class="right">
-                        <div class="text1">1111</div>
-                        <div class="text2">2222</div>
+                        <div class="text1">Описание составов</div>
+                        <div class="text2">
+                            Состав в кампании:
+                            <br>
+                            3*на атаку + 1*универсальный + 2*здоровье + 2*задние + 1*случайный
+                            <br>
+                            Так как в этом составе много танков на атаку, легко победить в кампании, особенно в обычной
+                            и элитной кампании. Недостатки: если невозможно разгромить противника с первых ударов, то
+                            тогда его будет трудно победить.
+                            <br>
+                            Итак, советуем, выбирать 2-3 танка со случайными ударами.
+                            <br>
+                            Состав на арене:...
+                        </div>
                     </div>
                 </div>
             </a>
@@ -210,20 +265,31 @@
                 <div class="article">
                     <div class="left"><img src="../home/image/guideImage5.png"></div>
                     <div class="right">
-                        <div class="text1">1111</div>
-                        <div class="text2">2222</div>
+                        <div class="text1">Ежедневные задачи</div>
+                        <div class="text2">
+                            Можно получить много наград за выполнение ежедневных задач. Награда за выполненную задачу
+                            также даёт вам очки активности. За необходимые единицы активности можно получить
+                            долнительные награды, такие как геммы(алмазы), золото, приказы и т.п.
+                            <br>
+                            Кампания (Обычная и Элитная)
+                            <br>
+                            Элитная кампания играет важную роль в игре, потому что в этих миссиях можно получить
+                            Легендарные фрагменты, и даже приказы Агентам. Что касается обычной кампании, если вам нужен
+                            опыт для развития, надо проходить все битвы каждый день...
+                        </div>
                     </div>
                 </div>
             </a>
             <div class="longLine"><img src="../home/image/longLine.png"></div>
-            <div class="more"><a href="../guide/">更多</a></div>
+            <div class="more"><a href="../guide/">Ещё</a></div>
             <div class="shortLine"><img src="../home/image/shortLine.png"></div>
         </div>
     </div>
 </div>
-
+<div class="back-to-top"></div>
 
 <script src="../Framework/jquery/jquery-2.1.4.min.js"></script>
 <script src="../home/js/index.js"></script>
+<script src="../common/js/index.js"></script>
 </body>
 </html>

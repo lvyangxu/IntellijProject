@@ -1,0 +1,19 @@
+$min-width: 1024px;
+$max-width: 1280px;
+@media screen and (max-width: $max-width) and (min-width: $min-width) {
+    body {
+        .banner .container .order .content {
+            .email {
+                margin-top: 20px !important;
+            }
+
+            .g-recaptcha {
+                margin-top: 40px;
+            }
+
+            .submit {
+                margin-top: 40px;
+            }
+        }
+    }
+}

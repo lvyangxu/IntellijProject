@@ -1,5 +1,13 @@
 body {
     margin: 0px;
+    font-family: "Arial";
+    button{
+        font-family: "Arial" !important;
+    }
+
+    .container{
+        margin: auto;
+    }
     .head {
         position: fixed;
         z-index: 2;
@@ -9,12 +17,13 @@ body {
         height: $height;
         line-height: ($height)-($border-height);
         background-color: rgba(0, 0, 0, 0.8);
-        font-size: 20px;
         font-weight: bolder;
         .container {
+            font-size: 0px;
+            font-family: "Times New Roman";
             .page {
                 height: ($height)-($border-height);
-
+                font-size: 20px;
                 display: inline-block;
                 a {
                     color: rgba(201, 201, 201, 1);
@@ -29,6 +38,7 @@ body {
                 border-bottom: $border-height solid rgba(255, 180, 0, 0.6);
             }
             .line {
+                margin-left:10px;
                 display: inline-block;
                 width: 1px;
                 line-height: ($height)-($border-height);
@@ -36,5 +46,20 @@ body {
                 background-color: white;
             }
         }
+    }
+    .banner {
+        padding-top: 70px;
+    }
+    .back-to-top {
+        position: fixed;
+        top: 50%;
+        right: 5%;
+        width: 60px;
+        height: 60px;
+        opacity: 0.5;
+        z-index: 60;
+        background-image: url('../image/arrow.png');
+        background-size: 100% 100%;
+        cursor: pointer;
     }
 }

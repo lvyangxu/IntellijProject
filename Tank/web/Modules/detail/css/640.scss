@@ -1,0 +1,20 @@
+$min-width:480px;
+$max-width:640px;
+@media screen and (max-width:$max-width) and (min-width: $min-width){
+    body{
+        .middle .container {
+            background: black !important;
+            .left{
+                display: none !important;
+            }
+
+            .right {
+                width: 100% !important;
+                .content{
+                    padding-left: 30px !important;
+                    padding-right: 30px !important;
+                }
+            }
+        }
+    }
+}

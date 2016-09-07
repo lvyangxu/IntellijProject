@@ -1,0 +1,19 @@
+$min-width:480px;
+$max-width:640px;
+@media screen and (max-width:$max-width) and (min-width: $min-width){
+    body{
+
+        .container {
+            width: 480px !important;
+        }
+
+        .head{
+            .container{
+                width: 100% !important;
+                .line{
+                    display: none !important;
+                }
+            }
+        }
+    }
+}

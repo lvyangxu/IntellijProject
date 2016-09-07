@@ -4,44 +4,46 @@
 {
     //tab
     $(".middle").children(".container").children(".left").children("div[tab]").first().show();
-    $(".tab").children(".container").children("div[name]").delegate("", "click", function () {
+    $(".tab").children("div[name]").delegate("", "click", function () {
         let name = $(this).attr("name");
         $(".middle").children(".container").children(".left").children("div[tab]").hide();
-        $(".tab").children(".container").children("div[name]").removeClass("active");
+        $(".tab").children("div[name]").removeClass("active");
         $(".middle").children(".container").children(".left").children("div[tab=" + name + "]").show();
-        $(".tab").children(".container").children("div[name=" + name + "]").addClass("active");
+        $(".tab").children("div[name=" + name + "]").addClass("active");
     });
 
-    //game image view
-    $(".gameImage").find("img").delegate("", "click", function () {
-        if ($(this).hasClass("game")) {
-            return;
+    let articleText2 = [];
+    $(".article").children(".right").children(".text2").each(function () {
+        articleText2.push($(this).html());
+    });
+
+    let setFoot = ()=> {
+        if ($(window).width() < 768 && $(window).width() >= 480) {
+            $(".article").children(".right").children(".text2").each(function (index) {
+                let short = $(this).text().substr(0, 100) + "...";
+                $(this).text(short);
+            });
+        } else if($(window).width() < 480){
+            $(".article").children(".right").children(".text2").each(function (index) {
+                let short = $(this).text().substr(0, 50) + "...";
+                $(this).text(short);
+            });
+        } else {
+            $(".article").children(".right").children(".text2").each(function (index) {
+                $(this).html(articleText2[index]);
+            });
         }
-        let src = $(this).attr("src").replace(".png", "") + "-big.jpg";
-        let h = $(window).height();
-        $(".modal").css({
-            "height": h + "px"
-        });
-        $(".modal").html(()=> {
-            let d = "<div class='imgFrame'><div class='close'><img class='closeImage' src='../home/image/close.png'></div>";
-            d += "<div class='paddingFrame'><img class='bigImage' src='" + src + "'></div></div>";
-            return d;
-        });
 
-        //modal close
-        $(".modal").delegate("","keydown",function (e) {
-            if (e.keyCode == 27) {
-                $(".modal").fadeOut(1000);
-            }
-        });
-        $(".modal").children(".imgFrame").children(".close").children("img").delegate("","click",function () {
-            $(".modal").fadeOut(1000);
-        });
+        $(".foot2").height();
+    };
 
-        $(".modal").fadeIn(1000);
-        $(".modal").focus();
+    $(document).ready(()=> {
+        setFoot();
     });
 
-
+    $(window).resize(()=> {
+        setFoot();
+    });
+    
 
 }

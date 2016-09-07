@@ -1,8 +1,8 @@
-body .container {
+body .head .container {
   width: 100%; }
-body .head {
-  font-size: 14px; }
   body .head .container .page {
-    margin-left: 20px; }
+    font-size: 12px; }
+body .banner {
+  padding-top: 70px; }
 
 /*# sourceMappingURL=index-small.css.map */

@@ -1,6 +1,6 @@
 /**
  * Created by karl on 2016/7/29.
- */
+ */ 
 class upload {
 
     static do(url,input, progressCallback) {

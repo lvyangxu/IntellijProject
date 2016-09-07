@@ -1,0 +1,27 @@
+$min-width: 768px;
+$max-width: 1024px;
+@media screen and (max-width: $max-width) and (min-width: $min-width) {
+    body {
+        .banner .container .order .content {
+            .email {
+                margin-top: 15px !important;
+                input{
+                    height: 30px !important;
+                }
+            }
+
+            .g-recaptcha {
+                margin-top: 25px;
+                text-align: left;
+                margin-left: 10%;
+                iframe {
+                    width: 150px !important;
+                }
+            }
+
+            .submit {
+                margin-top: 25px;
+            }
+        }
+    }
+}

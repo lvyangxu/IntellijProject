@@ -10,7 +10,7 @@
     } else {
         factory(jQuery);
     }
-
+ 
 }(function ($) {
     "use strict";
     $.fn.carousel = function (options) {

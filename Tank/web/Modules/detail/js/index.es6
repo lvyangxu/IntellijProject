@@ -65,7 +65,7 @@
                     if(matchArr!=null){
                         matchArr.map(d=> {
                             d = d.replace("{img:", "").replace("}", "");
-                            d = "<div><img src='../Images/manage/" + d + "'></div>";
+                            d = "<div class='detail-img'><img src='../detail/image/" + d + "'></div>";
                             return d;
                         }).forEach(d=>{
                             content = content.replace(/\{img:[^{}]+}/,d);

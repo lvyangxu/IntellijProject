@@ -23,6 +23,7 @@
           <element id="library" level="application" name="java-mail" />
           <element id="library" level="application" name="appache-common-io" />
           <element id="library" level="application_server_libraries" name="Tomcat 8.0.30" />
+          <element id="library" level="application" name="appache-common-email" />
         </element>
       </element>
     </root>

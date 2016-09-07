@@ -20,7 +20,7 @@ body {
             display: inline-block;
             .text1 {
                 padding-left: 40px;
-                margin-top: 30px;
+
                 font-size: 18px;
                 color: white;
             }
@@ -38,19 +38,20 @@ body {
         background-color: black;
     }
     .foot {
-        padding-bottom: 500px;
-        background: url('../image/footback.png');
+        background: black url('../image/footback.png') no-repeat;
         background-size: 100%;
         .pagination {
+            text-align: center;
+            padding-bottom: 30px;
             button {
-                font-size: 20px;
+                font-size: 16px;
                 vertical-align: top;
                 cursor: pointer;
                 border: 1px solid white;
                 outline: none;
                 border-radius: 0;
-                height: 60px;
-                min-width: 80px;
+                height: 30px;
+                min-width: 60px;
                 background-color: black;
                 color: white;
             }

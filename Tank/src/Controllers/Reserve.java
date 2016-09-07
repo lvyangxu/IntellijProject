@@ -32,7 +32,7 @@ public class Reserve {
         try {
             //check recaptcha with google api
             recaptcha = new MyString(recaptcha).base64Decode().toString();
-            String param = "secret=6LcYWCcTAAAAABcaGPDjj4duTAquj8do8NkHfVN2&response=" + recaptcha + "&remoteip=" + request.getRemoteAddr();
+            String param = "secret=6LfykygTAAAAABpgsEwos5BBjtwmQL8yEjl_0D9r&response=" + recaptcha + "&remoteip=" + request.getRemoteAddr();
             String recaptchaResult = Http.post("https://www.google.com/recaptcha/api/siteverify", param);
             JSONObject JSONObject1 = new JSONObject(recaptchaResult);
             Boolean isSuccess = (Boolean) JSONObject1.get("success");
@@ -47,8 +47,10 @@ public class Reserve {
             Mysql.data data = MyMvcObject1.getMysqlData();
             if (data.rows().size() == 0) {
                 //not found,then insert
+                String channel = Parameter.get(request, "channel");
+                channel = (channel == null) ? "null" : channel;
                 sqlCommand = "insert into reserve set email='" + email + "',ip='" + request.getRemoteAddr() +
-                        "',createTime=now(),port='"+request.getRemotePort()+"'";
+                        "',createTime=now(),port='" + request.getRemotePort() + "',channel='" + channel + "'";
                 MyMvcObject1.executeUpdate(sqlCommand).success();
             } else {
                 MyMvcObject1.fail("reserved");

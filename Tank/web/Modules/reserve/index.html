@@ -8,82 +8,286 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
-    <title></title>
+    <title>War Machine</title>
     <link rel="icon" href="../Images/favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="../Images/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="../common/css/index.css">
-    <link rel="stylesheet" media="screen and (min-width:1330px)" href="../common/css/index-big.css">
-    <link rel="stylesheet" media="screen and (max-width:1330px) and (min-width:800px)"
-          href="../common/css/index-middle.css">
-    <link rel="stylesheet" media="screen and (max-width:800px)" href="../common/css/index-small.css">
-    <link rel="stylesheet" href="../reserve/css/index.css">
-    <link rel="stylesheet" media="screen and (min-width:1330px)" href="../reserve/css/index-big.css">
-    <link rel="stylesheet" media="screen and (max-width:1330px) and (min-width:800px)"
-          href="../reserve/css/index-middle.css">
-    <link rel="stylesheet" media="screen and (max-width:800px)" href="../reserve/css/index-small.css">
-    <script src="https://www.google.com/recaptcha/api.js"  async defer></script>
+    <link rel="stylesheet" href="../common/css/bundle.css">
+    <link rel="stylesheet" href="../reserve/css/bundle.css">
+
+    <script src="https://www.google.com/recaptcha/api.js?hl=ru" async defer></script>
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-82375835-1', 'auto');
         ga('send', 'pageview');
     </script>
 </head>
 <body>
-<div class="head">
+
+
+<div class="banner">
+    <div class="back"><img src="../reserve/image/top.png"></div>
     <div class="container">
-        <div class="page"><a href="../home/">官网首页</a></div>
-        <div class="line"></div>
-        <div class="page active"><a href="../guide/">资料攻略</a></div>
-        <div class="line"></div>
-        <div class="page"><a href="">VK</a></div>
-        <div class="line"></div>
-        <div class="page"><a href="../detail/?name=support">Support</a></div>
-        <div class="line"></div>
+        <div id="player" class="video">
+            <!--<video loop="loop" poster="../reserve/image/video.png" controls="controls" src="../reserve/image/game.mp4"></video>-->
+            <!--<iframe id="video"  height="315" src="https://www.youtube.com/embed/f5zNA0VmbDQ" frameborder="0" allowfullscreen></iframe>-->
+        </div>
+        <script>
+
+                var tag = document.createElement('script');
+                tag.src = "https://www.youtube.com/iframe_api";
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+                var player;
+                function onYouTubeIframeAPIReady() {
+                    var json = {
+                        videoId: '3ndbCBGSjSo',
+                        events: {
+                            'onStateChange': onPlayerStateChange
+                        }
+                    };
+                    if($(window).width()>768){
+                        json.height = $(".banner").children(".container").height();
+                    }else{
+                        json.height = $(window).width()*0.8*197/350;
+                    }
+                    player = new YT.Player('player',json );
+                }
+
+                var done = false;
+                function onPlayerStateChange(event) {
+                    if(event.data == 0){
+                        player.playVideo();
+                        player.pauseVideo();
+                    }
+                }
+
+
+        </script>
+
+        <div class="order">
+            <!--<div class="orderBack"><img src="../reserve/image/orderBack.png"></div>-->
+            <div class="content">
+                <div class="before">
+                    <div class="email"><input placeholder="Вводите вашу почту"></div>
+                    <div class="g-recaptcha" data-theme="dark"
+                         data-sitekey="6LfykygTAAAAAD8nk4rwyF2uHyS0tdfy1pH8xM1i"
+                         data-callback="setRecaptcha"></div>
+                    <div class="submit"><img src="../reserve/image/order.png"></div>
+                </div>
+                <div class="after"></div>
+            </div>
+        </div>
     </div>
 </div>
-<div>
 
-    <div class="reserve">
+<div class="middle">
 
-
-        <div class="frame">
-            <div class="border">
-                <div class="left"></div>
-                <div class="right"></div>
+    <div class="screenshot">
+        <div class="container">
+            <div class="slick" data-slick='{"slidesToShow": 3, "slidesToScroll": 3}'>
+                <div><img src="../reserve/image/slick1.png"></div>
+                <div><img src="../reserve/image/slick2.png"></div>
+                <div><img src="../reserve/image/slick3.png"></div>
+                <div><img src="../reserve/image/slick4.png"></div>
+                <div><img src="../reserve/image/slick5.png"></div>
+                <div><img src="../reserve/image/slick6.png"></div>
             </div>
-            <div class="content">
-                <div class="title">ao6po sfsf!</div>
-                <div class="line"><img src="../reserve/image/line.png"></div>
-                <div class="result">
-                    <div class="paragraph">balalalala</div>
-                    <div class="input">
-                        <input spellcheck="false">
+        </div>
+    </div>
+
+    <div class="bottom">
+        <div class="pc">
+            <div class="container">
+                <div class="content">
+
+                    <div class="reward">
+                        <img src="../reserve/image/reward.png">
+                        <div class="text">
+                            Будь в числе первых и получи гемы и золото для своих танков.
+                        </div>
                     </div>
-                    <div class="g-recaptcha" data-theme="dark" data-sitekey="6LcYWCcTAAAAACr0HqR-OWoekD_Ck4_G5RDEMZ_e" data-callback="setRecaptcha"></div>
-                    <div class="button">
-                        <button>6poh</button>
+                    <div class="gem">
+                        <div class="gem1"><img src="../reserve/image/gem1.png"></div>
+                        <div class="gem2"><img src="../reserve/image/gem2.png"></div>
+                    </div>
+                    <div class="footTitle">
+                        Война начинается — борись за то, во что веришь!
                     </div>
 
+                    <div class="footText">
+                        Скоро в России выходит “War Machine: Танковая Армия”. Это уникальная танковая стратегия,
+                        покорившая
+                        Китай, США и Германию. Выбери одну из трех фракций, которую будешь отстаивать: мародерство,
+                        честь
+                        или справедливость. Разблокируй самые мощные танки, чтобы сформировать собственную
+                        разрушительную
+                        армию! Зарегистрируйся и получи ранний доступ, а так же подарки от сети! Отстаивай свою честь,
+                        сражайся и покоряй мир!
+                        <br>
+                        Играй бесплатно!
+                    </div>
                 </div>
             </div>
-            <div class="border">
-                <div class="left"></div>
-                <div class="right"></div>
+        </div>
+        <div class="phone">
+            <div class="container">
+                <div class="content">
+
+                    <div class="reward">
+                        <img src="../reserve/image/reward.png">
+                    </div>
+                    <div class="gem">
+                        <div class="gem1"><img src="../reserve/image/gem1.png"></div>
+                        <div class="gem2"><img src="../reserve/image/gem2.png"></div>
+                        <div class="text">
+                            Будь в числе первых и получи гемы и золото для своих танков.
+                        </div>
+                    </div>
+                    <div class="footTitle">
+                        Война начинается — борись за то, во что веришь!
+                    </div>
+
+                    <div class="footText">
+                        Скоро в России выходит “War Machine: Танковая Армия”. Это уникальная танковая стратегия,
+                        покорившая
+                        Китай, США и Германию. Выбери одну из трех фракций, которую будешь отстаивать: мародерство,
+                        честь
+                        или справедливость. Разблокируй самые мощные танки, чтобы сформировать собственную
+                        разрушительную
+                        армию! Зарегистрируйся и получи ранний доступ, а так же подарки от сети! Отстаивай свою честь,
+                        сражайся и покоряй мир!
+                        <br>
+                        Играй бесплатно!
+                    </div>
+                </div>
             </div>
         </div>
 
 
     </div>
-    <img class="back" src="../reserve/image/back.png">
+    <!--</div>-->
+
+    <!--<div class="phone">-->
+    <!--<div class="banner">-->
+    <!--<div class="back"><img src="../reserve/image/top.png"></div>-->
+    <!--<div class="container">-->
+    <!--<div class="video">-->
+    <!--<video loop="loop" controls="controls" src="../reserve/image/game.mp4"></video>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="bottom">-->
+    <!--<div class="container">-->
+    <!--<div class="content">-->
+    <!--<div class="reward">-->
+    <!--<img src="../reserve/image/reward.png">-->
+    <!--</div>-->
+    <!--<div class="gem">-->
+    <!--<div class="gem1"><img src="../reserve/image/gem1.png"></div>-->
+    <!--<div class="gem2"><img src="../reserve/image/gem2.png"></div>-->
+    <!--<div class="text">-->
+    <!--Будь в числе первых и получи гемы и золото для своих танков.-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="order">-->
+    <!--<div class="orderBack"><img src="../reserve/image/orderBack.png"></div>-->
+    <!--<div class="content">-->
+    <!--<div class="email"><input placeholder="Вводите вашу почту"></div>-->
+    <!--&lt;!&ndash;<div class="g-recaptcha" data-theme="dark"&ndash;&gt;-->
+    <!--&lt;!&ndash;data-sitekey="6LfykygTAAAAAD8nk4rwyF2uHyS0tdfy1pH8xM1i"&ndash;&gt;-->
+    <!--&lt;!&ndash;data-callback="setRecaptcha"></div>&ndash;&gt;-->
+    <!--<div class="submit"><img src="../reserve/image/order.png"></div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="footTitle">-->
+    <!--Война начинается — борись за то, во что веришь!-->
+    <!--</div>-->
+
+    <!--<div class="footText">-->
+    <!--Скоро в России выходит “War Machine: Танковая Армия”. Это уникальная танковая стратегия,-->
+    <!--покорившая-->
+    <!--Китай, США и Германию. Выбери одну из трех фракций, которую будешь отстаивать: мародерство,-->
+    <!--честь-->
+    <!--или справедливость. Разблокируй самые мощные танки, чтобы сформировать собственную-->
+    <!--разрушительную-->
+    <!--армию! Зарегистрируйся и получи ранний доступ, а так же подарки от сети! Отстаивай свою честь,-->
+    <!--сражайся и покоряй мир!-->
+    <!--<br>-->
+    <!--Играй бесплатно!-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--</div>-->
+
+    <!--<div class="screenshot">-->
+    <!--<div class="container">-->
+    <!--<div class="slick" data-slick='{"slidesToShow": 3, "slidesToScroll": 3}'>-->
+    <!--<div><img src="../reserve/image/slick1.png"></div>-->
+    <!--<div><img src="../reserve/image/slick2.png"></div>-->
+    <!--<div><img src="../reserve/image/slick3.png"></div>-->
+    <!--<div><img src="../reserve/image/slick4.png"></div>-->
+    <!--<div><img src="../reserve/image/slick5.png"></div>-->
+    <!--<div><img src="../reserve/image/slick6.png"></div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <!--</div>-->
+    <!--<div class="reserve">-->
+    <!--<div class="frame">-->
+    <!--<div class="border">-->
+    <!--<div class="left"></div>-->
+    <!--<div class="right"></div>-->
+    <!--</div>-->
+    <!--<div class="content">-->
+    <!--<div class="title">ao6po sfsf!</div>-->
+    <!--<div class="line"><img src="../reserve/image/line.png"></div>-->
+    <!--<div class="result">-->
+    <!--<div class="paragraph">Вводите вашу почту</div>-->
+    <!--<div class="input">-->
+    <!--<input spellcheck="false">-->
+    <!--</div>-->
+    <!--<div class="g-recaptcha" data-theme="dark" data-sitekey="6LfykygTAAAAAD8nk4rwyF2uHyS0tdfy1pH8xM1i"-->
+    <!--data-callback="setRecaptcha" data-size="compact"></div>-->
+    <!--<div class="button">-->
+    <!--<button>6poh</button>-->
+    <!--</div>-->
+
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="border">-->
+    <!--<div class="left"></div>-->
+    <!--<div class="right"></div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <!--</div>-->
+
 
 </div>
+<div class="back-to-top"></div>
 <script src="../Framework/jquery/jquery-2.1.4.min.js"></script>
+<script src="../reserve/js/slick.min.js"></script>
 <script src="../Framework/util/myString.js"></script>
 <script src="../Framework/util/http.js"></script>
 <script src="../reserve/js/index.js"></script>
+<script src="../common/js/index.js"></script>
+
 </body>
 </html>

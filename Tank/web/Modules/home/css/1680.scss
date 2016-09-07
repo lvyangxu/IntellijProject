@@ -1,0 +1,23 @@
+$min-width:1280px;
+$max-width:1680px;
+@media screen and (max-width:$max-width) and (min-width: $min-width){
+    body{
+        .middle .container {
+            .right{
+                width: 30%;
+            }
+            .left{
+                width: 70%;
+            }
+
+            .gameImage{
+                .game-left{
+                    width: 50%;
+                }
+                .game-right{
+                    width: 50%;
+                }
+            }
+        }
+    }
+}

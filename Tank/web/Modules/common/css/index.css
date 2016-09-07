@@ -1,5 +1,10 @@
 body {
-  margin: 0px; }
+  margin: 0px;
+  font-family: "Arial"; }
+  body button {
+    font-family: "Arial" !important; }
+  body .container {
+    margin: auto; }
   body .head {
     position: fixed;
     z-index: 2;
@@ -7,24 +12,41 @@ body {
     height: 70px;
     line-height: 68px;
     background-color: rgba(0, 0, 0, 0.8);
-    font-size: 20px;
     font-weight: bolder; }
-    body .head .container .page {
-      height: 68px;
-      display: inline-block; }
-      body .head .container .page a {
-        color: #c9c9c9;
-        text-decoration: none;
-        height: 70px; }
-    body .head .container .page.active {
-      border-bottom: 2px solid #ffb400; }
-    body .head .container .page:hover {
-      border-bottom: 2px solid rgba(255, 180, 0, 0.6); }
-    body .head .container .line {
-      display: inline-block;
-      width: 1px;
-      line-height: 68px;
-      height: 16px;
-      background-color: white; }
+    body .head .container {
+      font-size: 0px;
+      font-family: "Times New Roman"; }
+      body .head .container .page {
+        height: 68px;
+        font-size: 20px;
+        display: inline-block; }
+        body .head .container .page a {
+          color: #c9c9c9;
+          text-decoration: none;
+          height: 70px; }
+      body .head .container .page.active {
+        border-bottom: 2px solid #ffb400; }
+      body .head .container .page:hover {
+        border-bottom: 2px solid rgba(255, 180, 0, 0.6); }
+      body .head .container .line {
+        margin-left: 10px;
+        display: inline-block;
+        width: 1px;
+        line-height: 68px;
+        height: 16px;
+        background-color: white; }
+  body .banner {
+    padding-top: 70px; }
+  body .back-to-top {
+    position: fixed;
+    top: 50%;
+    right: 5%;
+    width: 60px;
+    height: 60px;
+    opacity: 0.5;
+    z-index: 60;
+    background-image: url("../image/arrow.png");
+    background-size: 100% 100%;
+    cursor: pointer; }
 
 /*# sourceMappingURL=index.css.map */

@@ -4,7 +4,7 @@ body {
     .middle {
         padding-top: 70px;
         .container {
-            background-image: url("../image/back.png");
+            background: black url("../image/footback.png") no-repeat;
             background-size: 100%;
             font-size: 0;
             .left {
@@ -57,14 +57,21 @@ body {
                     margin: 30px 20px 40px;
                 }
                 .content{
+                    text-indent: 20px;
                     line-height: 25px;
                     padding-left: 80px;
                     padding-right: 80px;
                     font-size: 18px;
-                    img{
-                        margin-top:10px;
-                        margin-bottom: 10px;
-                        width: 50%;
+                    .detail-img{
+                        text-indent:0;
+                        img{
+                            margin-top:10px;
+                            margin-bottom: 10px;
+                            max-width: 100%;
+                        }
+                    }
+                    a{
+                        color: white;
                     }
                 }
             }

@@ -1,0 +1,98 @@
+$max-width: 480px;
+@media screen and (max-width: $max-width) {
+    body {
+        .banner {
+
+            .download {
+                .container {
+                    .apple, .google {
+                        img {
+                            width: 15%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .banner {
+            .download {
+                position: inherit !important;
+                bottom: 0 !important;
+                background-color: black;
+
+                .container {
+
+                    .apple {
+                        margin-right: 0 !important;
+                        width: 50%;
+                        float: left;
+                        text-align: center !important;
+                        padding-bottom: 50px;
+                        img {
+                            width: 80% !important;
+                        }
+                    }
+
+                    .google {
+                        margin-right: 0 !important;
+                        width: 50%;
+                        float: right;
+                        margin-top: 0 !important;
+                        text-align: center !important;
+                        img {
+                            width: 80% !important;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        .middle .container {
+            .right {
+                margin-right: 25%;
+                width: 50%;
+            }
+            .left {
+                width: 100%;
+                .text2 {
+                    display: none;
+                }
+                .tab {
+                    font-size: 9px !important;
+                    height: 30px;
+                    div[name]:first-child {
+                        margin-left: 10px !important;
+                    }
+                    div[name] {
+                        padding-left: 0px;
+                        padding-right: 0px;
+                    }
+
+                }
+            }
+
+            .gameImage {
+                .game-left {
+                    width: 100%;
+                }
+                .game-right {
+                    width: 100%;
+                }
+            }
+        }
+
+        .foot1, .foot2 {
+            .container .guide a .article {
+                .left {
+                    margin-left: 0 !important;
+                    width: 25% !important;
+                }
+            }
+        }
+
+        .foot2{
+            background: black !important;
+        }
+    }
+}

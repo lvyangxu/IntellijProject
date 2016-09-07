@@ -4,7 +4,7 @@ body {
   body .middle {
     padding-top: 70px; }
     body .middle .container {
-      background-image: url("../image/back.png");
+      background: black url("../image/footback.png") no-repeat;
       background-size: 100%;
       font-size: 0; }
       body .middle .container .left {
@@ -47,13 +47,18 @@ body {
           background-color: #f7ae00;
           margin: 30px 20px 40px; }
         body .middle .container .right .content {
+          text-indent: 20px;
           line-height: 25px;
           padding-left: 80px;
           padding-right: 80px;
           font-size: 18px; }
-          body .middle .container .right .content img {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            width: 50%; }
+          body .middle .container .right .content .detail-img {
+            text-indent: 0; }
+            body .middle .container .right .content .detail-img img {
+              margin-top: 10px;
+              margin-bottom: 10px;
+              max-width: 100%; }
+          body .middle .container .right .content a {
+            color: white; }
 
 /*# sourceMappingURL=index.css.map */
